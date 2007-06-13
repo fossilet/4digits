@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-04-02 14:23+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 4digits:99
+msgid "Must input something."
+msgstr ""
+
+#: 4digits:102
+msgid "First digit cannot be zero."
+msgstr ""
+
+#: 4digits:107
+msgid "Must input a number."
+msgstr ""
+
+#: 4digits:110
+msgid "Must input four digits."
+msgstr ""
+
+#: 4digits:113
+msgid "Four digits must be unique."
+msgstr ""
+
+#: 4digits:116
+msgid "You've guessed it."
+msgstr ""
+
+#: 4digits:134
+msgid "You win! :)"
+msgstr ""
+
+#: 4digits:136
+#, python-format
+msgid "Used %s s."
+msgstr ""
+
+#: 4digits:144
+#, python-format
+msgid "Haha, you lose. It is %s."
+msgstr ""
+
+#: 4digits:146
+#, python-format
+msgid "Wasted %s s."
+msgstr ""
+
+#: 4digits:155
+msgid "Timer started..."
+msgstr ""
+
+#: 4digits:184 4digits.glade.h:24
+msgid "Ready"
+msgstr ""
+
+#: 4digits:206 4digits.glade.h:19
+msgid "About 4digits"
+msgstr ""
+
+#: 4digits.glade.h:2
+msgid "1"
+msgstr ""
+
+#: 4digits.glade.h:3
+msgid "2"
+msgstr ""
+
+#: 4digits.glade.h:4
+msgid "3"
+msgstr ""
+
+#: 4digits.glade.h:5
+msgid "4"
+msgstr ""
+
+#: 4digits.glade.h:6
+msgid "4digits"
+msgstr ""
+
+#: 4digits.glade.h:7
+msgid ""
+"4digits is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+"\n"
+"4digits is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA  02110-1301, USA.\n"
+msgstr ""
+
+#: 4digits.glade.h:13
+msgid "5"
+msgstr ""
+
+#: 4digits.glade.h:14
+msgid "6"
+msgstr ""
+
+#: 4digits.glade.h:15
+msgid "7"
+msgstr ""
+
+#: 4digits.glade.h:16
+msgid "8"
+msgstr ""
+
+#: 4digits.glade.h:17
+msgid "<span size=\"large\" style=\"italic\" weight=\"bold\">You win!</span>"
+msgstr ""
+
+#: 4digits.glade.h:18
+msgid "A guess-the-number puzzle game"
+msgstr ""
+
+#: 4digits.glade.h:20
+msgid "Close this window"
+msgstr ""
+
+#: 4digits.glade.h:21
+msgid "Copyright © 2004-2007 Pan Yongzhi"
+msgstr ""
+
+#: 4digits.glade.h:22
+msgid "Guess"
+msgstr ""
+
+#: 4digits.glade.h:23
+msgid "High Scores"
+msgstr ""
+
+#: 4digits.glade.h:25
+msgid "Result"
+msgstr ""
+
+#: 4digits.glade.h:26
+msgid "See your browser"
+msgstr ""
+
+#: 4digits.glade.h:27
+msgid "Start a new game"
+msgstr ""
+
+#: 4digits.glade.h:28
+msgid "_Game"
+msgstr ""
+
+#: 4digits.glade.h:29
+msgid "_Help"
+msgstr ""
+
+#: 4digits.glade.h:30
+msgid "_High Scores"
+msgstr ""
+
+#: 4digits.glade.h:31
+msgid "_Input:"
+msgstr ""
+
+#: 4digits.glade.h:32
+msgid "_Toolbar"
+msgstr ""
+
+#: 4digits.glade.h:33
+msgid "_View"
+msgstr ""
+
+#: 4digits.glade.h:34
+msgid "gtk-about"
+msgstr ""
+
+#: 4digits.glade.h:35
+msgid "gtk-help"
+msgstr ""
+
+#: 4digits.glade.h:36
+msgid "gtk-new"
+msgstr ""
+
+#: 4digits.glade.h:37
+msgid "gtk-ok"
+msgstr ""
+
+#: 4digits.glade.h:38
+msgid "gtk-quit"
+msgstr ""
