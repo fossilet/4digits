@@ -4,7 +4,7 @@
  *
  * gcc -Wall -std=c99 -pedantic -o 4digits 4digits.c
  *
- * Copyright (C) 2005, 2006 Pan Yongzhi
+ * Copyright (C) 2004, 2005, 2006, 2007 Pan Yongzhi
  * panyongzhi [at] gmail [dot] com
  *
  * This program is free software; you can redistribute it and/or
