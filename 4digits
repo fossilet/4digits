@@ -6,7 +6,6 @@ import gtk
 import gtk.glade
 import locale
 import os
-from operator import itemgetter
 import pygtk
 pygtk.require('2.0')
 import pprint
@@ -18,6 +17,7 @@ import webbrowser
 gladefile = os.path.join(os.path.dirname(__file__), '4digits.glade')
 helpfile = os.path.join(os.path.dirname(__file__), 'doc/index.html')
 helpfile = 'file:///' + helpfile
+score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
 def _(arg):
     return arg
 
@@ -29,6 +29,10 @@ class fourDigits:
 
         self.toolbar = self.wTree.get_widget('toolbar')
         self.view_toolbar = self.wTree.get_widget('view_toolbar')
+
+        self.hint_table = self.wTree.get_widget('box_hints')
+        self.hseparator2 = self.wTree.get_widget('hseparator2')
+        self.view_hint_table = self.wTree.get_widget('view_hint_table')
 
         self.entry = self.wTree.get_widget('entry')
         self.entry.grab_focus()
@@ -45,12 +49,14 @@ class fourDigits:
         self.time_label = self.wTree.get_widget('time_label')
         
         self.score_view = self.wTree.get_widget('score_view')
+	self.build_hint_grid()
         dic = {"on_window1_destroy": gtk.main_quit,
                 "on_btQuit_clicked": gtk.main_quit,
                 "on_mQuit_activate": gtk.main_quit,
                 "on_btOK_clicked": self.on_entry_activate,
                 'on_new_game': self.on_new_game,
                 'on_view_toolbar_toggled': self.on_view_toolbar_toggled,
+                'on_view_hint_table_toggled': self.on_view_hint_table_toggled,
                 'on_entry_activate': self.on_entry_activate,
                 'on_entry_changed': self.on_entry_changed,
                 'on_mHelp_activate' : self.on_mHelp_activate,
@@ -59,6 +65,34 @@ class fourDigits:
         self.wTree.signal_autoconnect(dic)
         # new game initialization
         self.game = newRound()
+
+    def build_hint_grid(self):
+    	box_hints = self.wTree.get_widget('box_hints')
+    	self.cb_hint = []
+	self.label_hint = []
+        for name in (0, 40):
+	    table = gtk.Table(rows=11, columns=6)
+	    box_hints.pack_start(table)
+	    for y in range(0, 10):
+	    	label = gtk.CheckButton(str(y))
+		label.set_active(True)
+		table.attach(label, 0, 1, y+1, y+2)
+		label.connect('toggled', self.change_row, y+name)
+		self.label_hint.append(label)
+	    for x in range(1, 5):
+	    	label = gtk.Label(str(x))
+		table.attach(label, x, x+1, 0, 1)
+		for y in range(0,10):
+		    checkbutton = gtk.CheckButton()
+		    table.attach(checkbutton, x, x+1, y+1, y+2)
+		    self.cb_hint.append(checkbutton)
+	    if name == 0:
+	    	box_hints.pack_start(gtk.VSeparator())
+
+    def change_row(self, widget, row):
+	enable = widget.get_active()
+	for i in range(0,4):
+	    self.cb_hint[10*i+row].set_sensitive(enable)
 
     def on_entry_activate(self, widget):
         """when input is accepted"""
@@ -138,6 +172,15 @@ class fourDigits:
         else:
             self.toolbar.hide()
 
+    def on_view_hint_table_toggled(self, widget):
+        """Toggle hint table visibility"""
+        if self.view_hint_table.get_active():
+            self.hint_table.show_all()
+            self.hseparator2.show()
+        else:
+            self.hint_table.hide_all()
+            self.hseparator2.hide()
+
     def on_mHelp_activate(self, widget):
         webbrowser.open(helpfile)
 
@@ -146,9 +189,10 @@ class fourDigits:
         about.run()
         about.destroy()
     
-    def on_score_menu_activate(self):
-        dlg = scoreDialog().dScore
-        sv = scoreDialog().score_view
+    def on_score_menu_activate(self, widget):
+        sd = scoreDialog()
+        dlg = sd.dScore
+        sv = sd.score_view
         column = gtk.TreeViewColumn('Name', gtk.CellRendererText(), text = 0)
         sv.append_column(column)
         column = gtk.TreeViewColumn('Score', gtk.CellRendererText(), text = 1)
@@ -157,7 +201,12 @@ class fourDigits:
         sv.append_column(column)
         dlg.scoreList = gtk.ListStore(str, str, str)
         sv.set_model(dlg.scoreList)
-        dlg.scoreList.append(('Pan Yongzhi', '23.0s', 'Mar'))
+
+        scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+        scores = sorted(scores, key = lambda x: float(x[1][:-1]))
+        for line in scores:
+            score_tup = line[0], line[1], ' '.join(line[2:]).rstrip('\n')
+            dlg.scoreList.append(score_tup)
         dlg.run()
         dlg.destroy()
 
@@ -178,6 +227,12 @@ class fourDigits:
             getattr(self, 'g' + repr(i)).set_text('')
             getattr(self, 'r' + repr(i)).set_text('')
         
+        for i in range(0, 80):
+	    self.cb_hint[i].set_active(False)
+#	    self.cb_hint[i].set_sensitive(True)
+	for i in range(0, 20):
+	    self.label_hint[i].set_active(True)
+
     def error_process(self, msg):
         self.info_label.set_text(msg)
         self.entry.grab_focus()
@@ -188,28 +243,35 @@ class fourDigits:
         self.game.time_taken = round(self.game.time_taken, 1)
 
     def is_high_score(self, time_taken):
-        if time_taken < 20:
+        scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+        if len(scores) < 10:
+            return True
+        scores = sorted(scores, key = lambda x: float(x[1][:-1]))
+        if time_taken < float(scores[-1][1][:-1]):
             return True
         else:
             return False
 
     def write_score(self, time_taken):
-        score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
-        fp = open(score_file, 'a+')
         date = time.strftime("%a %b %d %H:%M:%S %Y"); 
-        line = {'user': os.getlogin(), 'score': time_taken, 'date': date }
-        line.rsplit(' ', 6)
-        #fp.write("%s %ss %s\n" % (os.getlogin(), time_taken, date));
-        sorted(lines, key=itemgetter(1), reverse=reverse)
-        pprint.pprint(line, fp)
+        new_score = "%s %ss %s\n" % (os.getlogin(), time_taken, date)
+        print new_score
+        saved_scores = file(score_file, 'r').readlines()
+        print saved_scores
+        saved_scores.append(new_score)
+        print saved_scores
+        scores = [line.split(' ', 6) for line in saved_scores]
+        print scores
+        scores = sorted(scores, key = lambda x: float(x[1][:-1]))
+        scores = scores[:10]
+        print scores
+        fp = open(score_file, 'w')
+        for score in scores:
+            fp.write(' '.join(score))
         fp.close()
 
     def show_score(self):
-        # read score file
-        score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
-        fp = open(score_file, 'r')
-        fp.close()
-        self.on_score_menu_activate()
+        self.on_score_menu_activate(self)
 
 class aboutDialog:
     """the about dialog"""
