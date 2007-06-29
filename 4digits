@@ -27,6 +27,7 @@ import gtk.glade
 import os
 import pygtk
 pygtk.require('2.0')
+import pwd
 import random
 import time
 import webbrowser
@@ -161,7 +162,6 @@ class fourDigits:
                 self.btOK.set_sensitive(False)
                 self.entry.set_sensitive(False)
                 if self.is_high_score(self.game.time_taken):
-                    os.system('zenity --info')
                     new_score_rank = self.write_score(self.game.time_taken)
                     self.show_score(new_score_rank)
             # lose
@@ -283,7 +283,7 @@ class fourDigits:
 
     def write_score(self, time_taken):
         date = time.strftime("%a %b %d %H:%M:%S %Y"); 
-        new_score = "%s %ss %s\n" % (os.getuid(), time_taken, date)
+        new_score = "%s %ss %s\n" % (pwd.getpwuid(os.getuid())[0], time_taken, date)
         saved_scores = file(score_file, 'r').readlines()
         saved_scores.append(new_score)
         # print saved_scores
