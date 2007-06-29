@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Thu Jun 28 20:37:34 2007 by tux@Paradise-->
+<!--Generated with glade3 3.2.0 on Fri Jun 29 11:11:07 2007 by tux@Paradise-->
 <glade-interface>
   <widget class="GtkWindow" id="window1">
     <property name="visible">True</property>
@@ -622,10 +622,12 @@
 
 You should have received a copy of the GNU General Public License along with 4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 </property>
-    <property name="authors">Pan Yongzhi
+    <property name="authors">Pan Yongzhi: developer
 
-mirror@smth
-Hermann Kraus</property>
+Cai Qian: debian maintainer
+
+mirror@smth: several one-liners
+Hermann Kraus: hint table</property>
     <property name="documenters">Pan Yongzhi</property>
     <property name="artists">Pan Yongzhi</property>
     <property name="logo">4digits_logo.png</property>
@@ -655,9 +657,9 @@ Hermann Kraus</property>
   <widget class="GtkDialog" id="score_dlg">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">4digits Scores</property>
-    <property name="resizable">False</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ALWAYS</property>
     <property name="destroy_with_parent">True</property>
+    <property name="icon">4digits_logo.png</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>

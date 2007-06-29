@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=4digits
+Name[zh_CN]=猜数字
+Name[zh_HK]=猜數字
+Name[zh_TW]=猜數字
+Comment=Guess the number!
+Comment[zh_CN]=4A0B的猜数字游戏
+Comment[zh_HK]=4A0B的猜數字游戲
+Comment[zh_TW]=4A0B的猜數字游戲
+Exec=/usr/games/4digits
+Icon=4digits_logo.png
+Terminal=false
+Type=Application
+Categories=Game;LogicGame;GTK

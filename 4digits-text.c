@@ -1,16 +1,25 @@
 /*
- * 4digits - This program make the interactive game 
- * number guessing game available on your computer.
- *
- * gcc -Wall -std=c99 -pedantic -o 4digits 4digits.c
- *
- * Copyright (C) 2004, 2005, 2006, 2007 Pan Yongzhi
- * panyongzhi [at] gmail [dot] com
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version. 
+ 4digits - A guess-the-number game, aka Bulls and Cows
+ Copyright (c) 2004-2007 Pan Yongzhi <http://pan.cdut.cn/4digits>
+                                                                       
+ 4digits is a guess-the-number puzzle game. You are given eight times
+ to guess a four-digit number. One digit is marked A if its value and
+ position are both correct, and marked B if only its value is correct.
+ You win the game when you get 4A0B. Good luck!
+                                                                       
+ 4digits is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation; either version 2 of
+ the License, or (at your option) any later version.
+ 
+ 4digits is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+                                                                       
+ You should have received a copy of the GNU General Public License
+ along with 4digits; if not, write to the Free Software Foundation,
+ Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
 
 #include <stdio.h>
@@ -23,8 +32,8 @@
 #include <getopt.h>
 #include <unistd.h>
 
-//#define DEBUG
-#define VERSION_STRING "0.3, Aug 2006"
+#define DEBUG
+#define VERSION_STRING "0.5, Jul 2007"
 
 const char AUTHOR[] = "Written by Pan Yongzhi.\n";
 const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
@@ -33,9 +42,10 @@ const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
 "modify it under the terms of the GNU General Public License as\n"
 "published by the Free Software Foundation - version 2. For more\n"
 "information about these matters, see the file named COPYING.\n";
+
 const char HELP[] = 
-"4digits 0.3, a guess-the-number game.\n"
-"Usage: 4digits [OPTION]...\n"
+"4digits 0.5, a guess-the-number game.\n"
+"Usage: 4digits [OPTION] ...\n"
 "\n"
 "You have eight times to guess a 4-digit number. You get one A \n"
 "if its value and position are both correct, and one B \n"
@@ -45,10 +55,11 @@ const char HELP[] =
 "-v, --version \t display the version of 4digits and exit.\n"
 "-h, -?, --help \t print this help.\n"      
 "\n"
-"Report bugs to <fossilet@@163.com>.";
+"Report bugs at <http://sourceforge.net/projects/fourdigits/>.";
+
 static const char *optString = "vh?";
 struct globalArgs_t {
-    char *version;              // version option
+    char *version; // version option
 } globalArgs;
 
 static const struct option longOpts[] = {
@@ -189,6 +200,7 @@ void save_score(const int time_taken) {
 
 /* show high scores */
 void show_high_score(void) {
+    // FIXME
     // open sfp
     // read scores
     // sort lines according to scores
@@ -203,14 +215,13 @@ int tenpow(int exponent) {
 }
 
 int main(int argc, char *argv[]) {
-    // puts(COPYRIGHT); 
     int opt = 0;
     int longIndex = 0;
 
     /* Initialize globalArgs before we get to work. */
     globalArgs.version = NULL;    /* false */
 
-    // Process the arguments with getopt_long(), then populate globalArgs. 
+    // Process the arguments with getopt_long(), then populate globalArgs
     opt = getopt_long(argc, argv, optString, longOpts, &longIndex);
     while(opt != -1) {
         switch(opt) {
@@ -237,45 +248,45 @@ int main(int argc, char *argv[]) {
 #ifdef DEBUG
     showopt();
 #endif
-    //return EXIT_SUCCESS;
 
-    // while(1) {
     int answerdgts[4];
     gen_rand(answerdgts); /* array for the 4 digits of n*/
     time_t temp = time(NULL);
     time_t tic = temp;
-    int lastinput = 0;
-    // int guessed[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int guessed[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     int i;
+    bool dup = false;
+
     for (int num_guess = 0; num_guess < 8; num_guess++) {
         int A = 0, B = 0;
         int input = enter_number();
-        //  guessed[num_guess] = input;
-        //#ifdef DEBUG
-        ////    printf("I guessed: %d\n", guessed[num_guess]);
-        ////#endif
-        /*    for(i = 0; i < num_guess; ++i) 
-              if (input == guessed[i]) { // duplicated input
-              fprintf(stderr, "%d: You have entered that number!\n", input);
-              break;
-              }
-              --num_guess;
-              continue;
-              */
-        if (input == lastinput) { // duplicated input
-            fprintf(stderr, "%d: You have entered that number!\n", input);
-            --num_guess;
+
+        for(int i=0; i < num_guess; i++)
+            // duplicated input
+            if (input == guessed[i]) {
+                fprintf(stderr, 
+                        "%d: You have entered that number!\n", input);
+                --num_guess;
+                dup = true;
+                break;
+            }
+
+        if (dup == true) {
+            dup = false;
             continue;
         }
+
         int inputdgts[4]; /* arrays for the 4 digits of input*/
         for(i=0; i<4; i++) {
             inputdgts[i]=(int) (input / tenpow(3-i) )%10;
         }
+
         compare(inputdgts, answerdgts, &A, &B);
         printf("%dA%dB    ", A, B);
         if (num_guess != 7)
             printf("\t %d times left.\n", 7-num_guess);
-        lastinput = input;
+        guessed[num_guess] = input;
+
         if(A == 4) {
             time_t toc = time(NULL);
             int score = (int)(toc-tic);
@@ -289,5 +300,4 @@ int main(int argc, char *argv[]) {
         printf("%d", answerdgts[i]);
     printf(".\n");
     return 0;
-    //  }
 }
