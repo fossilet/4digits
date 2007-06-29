@@ -32,7 +32,7 @@
 #include <getopt.h>
 #include <unistd.h>
 
-#define DEBUG
+//#define DEBUG
 #define VERSION_STRING "0.5, Jul 2007"
 
 const char AUTHOR[] = "Written by Pan Yongzhi.\n";

@@ -1,0 +1,16 @@
+4digits 0.5
+
+    - Added high score function. The top ten scores can be saved and reviewed.
+
+    - Added a hint table, which can help user to mark possible digits and
+    positions.
+
+    - Text version can now handle duplicate input correctly.
+
+    - Added freedesktop.org desktop entry file. Now 4digits will appear in
+    Game menu.
+
+    - Added a python install script(copied from Comix), which will make
+    installation easier.
+
+    - Several minor improvements.

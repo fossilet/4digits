@@ -8,7 +8,7 @@ SHELL = /bin/sh
 4digits-text: 4digits-text.c
 	$(CC) $(CFLAGS) 4digits-text.c -o 4digits-text
 
-install: 4digits.6.gz 4digits.glade 4digits_logo.png 4digits_logo.xcf 4digits-text 4digits doc/ COPYING TODO 4digits.desktop
+install: 4digits.6.gz 4digits.glade 4digits_logo.png 4digits_logo.xcf 4digits-text 4digits doc/ COPYING 4digits.desktop
 	install -d /usr/share/man/man6/ /usr/share/4digits/ /usr/games/ /usr/share/doc/4digits/ /usr/share/pixmaps/ /usr/share/icons/hicolor/48x48/apps/
 	install 4digits /usr/games/
 	install 4digits.glade /usr/share/4digits/
