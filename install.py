@@ -113,7 +113,6 @@ if args == ["install"]:
     install("4digits_logo.png", "share/pixmaps/4digits_logo.png")
     install("4digits_logo.png", "share/icons/hicolor/48x48/apps/4digits_logo.png")
     install("4digits_logo.xcf", "share/4digits/4digits_logo.xcf")
-    install("TODO", "share/doc/4digits/TODO")
     for file in os.listdir('doc'):
         if os.path.isfile(os.path.join('doc', file)):
             install(os.path.join('doc', file),

@@ -1,0 +1,13 @@
+First invoke make to get 4digits-text excutable.
+
+To install 4digits, do
+
+    ./install.py install --installdir <install_dir>
+
+to install 4digits.
+
+If you want to make deb package, you can do 
+    
+    sudo checkinstall
+
+to install 4digits as deb package.
