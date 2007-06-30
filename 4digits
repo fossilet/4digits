@@ -32,9 +32,8 @@ import random
 import time
 import webbrowser
 
-gladefile = os.path.join(os.path.dirname(__file__), '4digits.glade')
-helpfile = os.path.join(os.path.dirname(__file__), 'doc/index.html')
-helpfile = 'file:///' + helpfile
+gladefile = os.path.normpath(os.path.join(os.path.dirname(__file__), '../share/4digits/4digits.glade'))
+helpfile = os.path.normpath(os.path.join(os.path.dirname(__file__), '../share/doc/4digits/index.html'))
 score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
 
 def _(arg):
@@ -249,7 +248,7 @@ class fourDigits:
         self.entry.set_text('')
         self.game.on_entry_cb_first_called_in_this_round = True
         self.info_label.set_text(_('Ready'))
-        self.info_label.set_text(_(str(self.game.answer)))
+        #self.info_label.set_text(_(str(self.game.answer)))
         self.time_label.set_text('')
 
         for i in xrange(8):
@@ -258,7 +257,6 @@ class fourDigits:
         
         for i in range(0, 80):
 	    self.cb_hint[i].set_active(False)
-#	    self.cb_hint[i].set_sensitive(True)
 	for i in range(0, 20):
 	    self.label_hint[i].set_active(True)
 
@@ -286,16 +284,13 @@ class fourDigits:
         new_score = "%s %ss %s\n" % (pwd.getpwuid(os.getuid())[0], time_taken, date)
         saved_scores = file(score_file, 'r').readlines()
         saved_scores.append(new_score)
-        # print saved_scores
         scores = [line.split(' ', 6) for line in saved_scores]
         scores = sorted(scores, key = lambda x: float(x[1][:-1]))
         scores = scores[:10]
-        #print scores
 
         # find the index of the new score
         new_score = new_score.split(' ', 6)
         new_score_rank = scores.index(new_score)
-        #print new_score_rank
 
         fp = open(score_file, 'w')
         for score in scores:

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head><title>4digit - Hinttable</title>
+<style type="text/css">
+td {
+/*border: solid black 1px;*/
+width:50%;
+vertical-align:top;
+text-align:justify;
+}
+.desc {
+/*border: solid black 1px;*/
+    width: 50%;
+}
+table {
+/*border: solid black 1px;*/
+width: 50%;
+}
+img {
+    border: solid black 1px;
+}
+.head {
+    font-style: italic;
+}
+</style>
+</head><body>
+<h1>Hinttable</h1>
+<p>This is an example how to solve your game with the hinttable.
+<h2>Step 1</h2>
+<table><tr>
+<td><img src="step1.png" alt="Step 1"><td>
+<p class="head">We don't have any information yet, so we start with some random numbers. <p>
+There is not much we can conclude from this. But the information that one number is at the right place will be helpful later.
+</table>
+<h2>Step 2</h2>
+<table><tr>
+<td>
+<p class="head">So let's try some more random numbers, but different ones than in the first try.
+<p>
+Now this gives us some real hints.<ul>
+<li> Because there were no correct numbers in the second try we can conclude that the frist digit can't be 5, the second can't be 6, ...<br> Add this to the frist grid.
+<li> Then there is another number which we always know something about: Zero can't be the first digit (forbidden by gamerules). <br>Also add this to the first grid.
+<li> We have tried the numbers 1, 2, 3, 4, 5, 6, 7, 8 but only two of them are in the final number. As we need another two digits and only two are left, we are sure that 0 and 9 are somewhere in the number. <br>Add this to the second grid.
+</ul>
+<td><img src="step2.png" alt="Step 2">
+<tr><td><img src="step3.png" alt="Step 3"><td>This is how your screen should look now.
+</table>
+<h2>Step 3</h2>
+<table><tr><td>
+<p class="head">Now we try to gather some more information about the numbers 1 to 9.<p> I tried 3456 and the answer was 0A0B. So we can be sure that none of these digits is valid!
+<td><img src="step4.png" alt="Step 4">
+</table>
+<h2>Step 4</h2>
+<table><tr><td>
+<img src="step5.png" alt="Step 5"><td>
+<p class="head">Next I tried 9027 and got 0A4B.<p> So we have found all valid digits! Mark them in both tables.
+<tr><td>
+As in step 2 we can again exclude some places for the valid digits and mark them in the first table:
+<p class="head">I also tried 9072 which gave me the hint that 2 is not at the last place.
+<td><img src="step6.png" alt="Step 6">
+</table>
+<h2>Step 5</h2>
+<table><tr><td>
+<img src="step7.png" alt="Step 7">
+<td>Now we have the situation that both 2 and 7 can only go to places 1 and 2. This implies that no other digit can go to these places. So we can exclude the digit 9 from place 2.
+</table>
+<h2>Step 6</h2>
+<table><tr><td>
+<p class="head">Now we use the information we got in step 1<p>
+The first result was that there is one digit in the right place. Obviously this can only be the 2. <br>
+Mark this in the second table.
+<p>
+Now the 2 can't go to place 1 (because it's already at place 2 and no duplicates are allowed). Therefore 7 must go to place 1. <br>
+Mark this in the second table.
+
+<td><img src="step8.png" alt="Step 8">
+</table>
+<h2>Step 7</h2>
+<table><tr><td><img src="step9.png" alt="Step 9">
+<td><p class="head">Only two possible solutions left: 7209 and 7290. I choose 7209...<p>...and win!
+</table>
+<p>Written by Hermann Kraus.<br>
+<a rel="license" href="http://creativecommons.org/licenses/by/2.0/de/">
+<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/de/88x31.png" />
+</a>
+<br>This work is licenced under a 
+<a rel="license" href="http://creativecommons.org/licenses/by/2.0/de/">Creative Commons Licence</a>.
+
+</body>
+</html>
