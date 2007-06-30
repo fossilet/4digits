@@ -1,39 +1,51 @@
 #!/usr/bin/env python
-#
-# 4digits - A guess-the-number game, aka Bulls and Cows
-# Copyright (c) 2004-2007 Pan Yongzhi <http://pan.cdut.cn/4digits>
-#
-# 4digits is a guess-the-number puzzle game. You are given eight times
-# to guess a four-digit number. One digit is marked A if its value and
-# position are both correct, and marked B if only its value is correct.
-# You win the game when you get 4A0B. Good luck!
-#
-# 4digits is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License as
-# published by the Free Software Foundation; either version 2 of
-# the License, or (at your option) any later version.
-# 
-# 4digits is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# -*- coding: utf-8 -*-
 
-# You should have received a copy of the GNU General Public License
-# along with 4digits; if not, write to the Free Software Foundation,
-# Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+"""
+    4digits - A guess-the-number game, aka Bulls and Cows
+    Copyright (c) 2004-2007 Pan Yongzhi <http://pan.cdut.cn/4digits>
 
-import gtk
-import gtk.glade
+    4digits is a guess-the-number puzzle game. You are given eight times
+    to guess a four-digit number. One digit is marked A if its value and
+    position are both correct, and marked B if only its value is correct.
+    You win the game when you get 4A0B. Good luck!
+
+    4digits is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of
+    the License, or (at your option) any later version.
+
+    4digits is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with 4digits; if not, write to the Free Software Foundation,
+    Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+"""
+import sys
+
+try:
+    import pygtk
+    pygtk.require('2.0')
+    import gtk
+    import gtk.glade
+except:
+    print 'PyGTK is required to run 4digits.'
+    print 'No PyGTK was found on your system.'
+    sys.exit(1)
+
 import os
-import pygtk
-pygtk.require('2.0')
 import pwd
 import random
 import time
 import webbrowser
 
-gladefile = os.path.normpath(os.path.join(os.path.dirname(__file__), '../share/4digits/4digits.glade'))
-helpfile = os.path.normpath(os.path.join(os.path.dirname(__file__), '../share/doc/4digits/index.html'))
+gladefile = os.path.normpath(os.path.join(
+    os.path.dirname(__file__), '../share/4digits/4digits.glade'))
+helpfile = os.path.normpath(os.path.join(
+    os.path.dirname(__file__), '../share/doc/4digits/index.html'))
 score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
 
 def _(arg):
@@ -281,7 +293,8 @@ class fourDigits:
 
     def write_score(self, time_taken):
         date = time.strftime("%a %b %d %H:%M:%S %Y"); 
-        new_score = "%s %ss %s\n" % (pwd.getpwuid(os.getuid())[0], time_taken, date)
+        new_score = "%s %ss %s\n" % (
+                pwd.getpwuid(os.getuid())[0], time_taken, date)
         saved_scores = file(score_file, 'r').readlines()
         saved_scores.append(new_score)
         scores = [line.split(' ', 6) for line in saved_scores]
@@ -308,7 +321,8 @@ class aboutDialog:
         self.dAbout = self.wTree.get_widget("dAbout")
         self.dAbout.set_name('4digits')
         self.dAbout.set_title(_('About 4digits'))
-        gtk.about_dialog_set_url_hook(lambda about_dialog, url: webbrowser.open(url))
+        gtk.about_dialog_set_url_hook(
+                lambda about_dialog, url: webbrowser.open(url))
         self.dAbout.set_website('http://pan.cdut.cn/4digits')
         self.dAbout.set_website_label('http://pan.cdut.cn/4digits')
 
