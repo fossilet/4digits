@@ -1,11 +1,15 @@
 Below is the todo list for 4digits. Contributions are greatly appreciated.
 
-1. internationalization using gettext
-2. translate documentation
-3. improve text version
-4. save preferences
-5. game for 3, 4, 5, 6 digits
-6. big font for input
-7. keyboard for mouse input like in gnome sudoku
-8. ai for playing versus computre
-9. more and more......
+*. internationalization using gettext
+*. translate documentation
+
+*. improve text version
+*. game for 3, 4, 5, 6 digits
+*. ai for playing versus computre
+
+*. big font for input box
+*. keyboard for mouse input like in gnome sudoku
+*. save preferences
+*. save game process in high score record ;)
+
+*. more and more......

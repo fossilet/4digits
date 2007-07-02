@@ -1,40 +1,73 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head><title>4digit - Hinttable</title>
-<style type="text/css">
-td {
-/*border: solid black 1px;*/
-width:50%;
-vertical-align:top;
-text-align:justify;
-}
-.desc {
-/*border: solid black 1px;*/
-    width: 50%;
-}
-table {
-/*border: solid black 1px;*/
-width: 50%;
-}
-img {
-    border: solid black 1px;
-}
-.head {
-    font-style: italic;
-}
-</style>
-</head><body>
-<h1>Hinttable</h1>
+    <head>
+        <title>4digit - Hinttable</title>
+        <meta http-equiv="content-type" content='text/html; charset=utf-8'>
+        <link rel="stylesheet" type="text/css" href="4digits_manual.css">
+        <style type="text/css">
+            table.twocolumns td {
+                width:50%;
+                vertical-align:top;
+                text-align:justify;
+            }
+            table.twocolumns {
+                width: 600px; /* 276(image width)*2 + some padding */
+            }
+            table.twocolumns td.rimg {
+                text-align: right;
+            }
+            img {
+                border: solid black 1px;
+            }
+            p.head {
+                font-style: italic;
+            }
+            #Content>p {text-indent:0em; margin:0;}
+
+            hr.heading {
+                width: 600px; /*see above*/
+                text-align: left;
+            }
+        </style>
+</head>
+<body>
+        <div id="Header">
+            <table summary="Canned page header" cellpadding="0" style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td style="width: 80%">
+                            Playing with the hinttable
+                        <td align="right" style="width: 20%">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="Menu">
+            <a href="#intro" name="intro-toc">Introduction</a><br /><br />
+            <a href="#intall" name="install-toc">Installation</a><br /><br />
+            <a href="#play" name='play-toc'>Playing 4digits</a><br /><br />
+            <a href="#tutorial" name='tutorial-toc'>Tutorial</a><br /><br />
+            <a href="#author" name='author-toc'>Authors</a><br /> <br />
+            <a href="#license" name='license-toc'>License</a><br /> <br />
+            <a href="http://pan.cdut.cn/4digits">Homepage</a><br /> <br />
+            <a href="http://sourceforge.net/projects/fourdigits">Sourceforge Project Page</a><br /> 
+        </div>
+        <div id="Content">
+
 <p>This is an example how to solve your game with the hinttable.
 <h2>Step 1</h2>
-<table><tr>
+<hr class="heading">
+<table class="twocolumns"><tr>
 <td><img src="step1.png" alt="Step 1"><td>
 <p class="head">We don't have any information yet, so we start with some random numbers. <p>
 There is not much we can conclude from this. But the information that one number is at the right place will be helpful later.
 </table>
+<br><br>
 <h2>Step 2</h2>
-<table><tr>
+<hr class="heading">
+<table class="twocolumns"><tr>
 <td>
 <p class="head">So let's try some more random numbers, but different ones than in the first try.
 <p>
@@ -43,30 +76,34 @@ Now this gives us some real hints.<ul>
 <li> Then there is another number which we always know something about: Zero can't be the first digit (forbidden by gamerules). <br>Also add this to the first grid.
 <li> We have tried the numbers 1, 2, 3, 4, 5, 6, 7, 8 but only two of them are in the final number. As we need another two digits and only two are left, we are sure that 0 and 9 are somewhere in the number. <br>Add this to the second grid.
 </ul>
-<td><img src="step2.png" alt="Step 2">
+<td class="rimg"><img src="step2.png" alt="Step 2">
 <tr><td><img src="step3.png" alt="Step 3"><td>This is how your screen should look now.
 </table>
 <h2>Step 3</h2>
-<table><tr><td>
+<hr class="heading">
+<table class="twocolumns"><tr><td>
 <p class="head">Now we try to gather some more information about the numbers 1 to 9.<p> I tried 3456 and the answer was 0A0B. So we can be sure that none of these digits is valid!
-<td><img src="step4.png" alt="Step 4">
+<td class="rimg"><img src="step4.png" alt="Step 4">
 </table>
 <h2>Step 4</h2>
-<table><tr><td>
+<hr class="heading">
+<table class="twocolumns"><tr><td>
 <img src="step5.png" alt="Step 5"><td>
 <p class="head">Next I tried 9027 and got 0A4B.<p> So we have found all valid digits! Mark them in both tables.
 <tr><td>
 As in step 2 we can again exclude some places for the valid digits and mark them in the first table:
 <p class="head">I also tried 9072 which gave me the hint that 2 is not at the last place.
-<td><img src="step6.png" alt="Step 6">
+<td class="rimg"><img src="step6.png" alt="Step 6">
 </table>
 <h2>Step 5</h2>
-<table><tr><td>
+<hr class="heading">
+<table class="twocolumns"><tr><td>
 <img src="step7.png" alt="Step 7">
 <td>Now we have the situation that both 2 and 7 can only go to places 1 and 2. This implies that no other digit can go to these places. So we can exclude the digit 9 from place 2.
 </table>
 <h2>Step 6</h2>
-<table><tr><td>
+<hr class="heading">
+<table class="twocolumns"><tr><td>
 <p class="head">Now we use the information we got in step 1<p>
 The first result was that there is one digit in the right place. Obviously this can only be the 2. <br>
 Mark this in the second table.
@@ -74,18 +111,23 @@ Mark this in the second table.
 Now the 2 can't go to place 1 (because it's already at place 2 and no duplicates are allowed). Therefore 7 must go to place 1. <br>
 Mark this in the second table.
 
-<td><img src="step8.png" alt="Step 8">
+<td class="rimg"><img src="step8.png" alt="Step 8">
 </table>
 <h2>Step 7</h2>
-<table><tr><td><img src="step9.png" alt="Step 9">
+<hr class="heading">
+<table class="twocolumns"><tr><td><img src="step9.png" alt="Step 9">
 <td><p class="head">Only two possible solutions left: 7209 and 7290. I choose 7209...<p>...and win!
 </table>
-<p>Written by Hermann Kraus.<br>
-<a rel="license" href="http://creativecommons.org/licenses/by/2.0/de/">
-<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/de/88x31.png" />
-</a>
-<br>This work is licenced under a 
-<a rel="license" href="http://creativecommons.org/licenses/by/2.0/de/">Creative Commons Licence</a>.
+</div>
 
+<hr>
+<table><tr><td>
+<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/de/88x31.png" />
+<td>
+<p>Tutorial written by Hermann Kraus.<br>
+<a rel="license" href="http://creativecommons.org/licenses/by/2.0/de/"></a>
+This work is licenced under a 
+<a rel="license" href="http://creativecommons.org/licenses/by/2.0/de/">Creative Commons Licence</a>.
+</table>
 </body>
 </html>

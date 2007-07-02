@@ -24,6 +24,7 @@
     along with 4digits; if not, write to the Free Software Foundation,
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 """
+
 import sys
 
 try:
@@ -42,8 +43,9 @@ import random
 import time
 import webbrowser
 
-gladefile = os.path.normpath(os.path.join(
-    os.path.dirname(__file__), '../share/4digits/4digits.glade'))
+gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
+    os.path.normpath(os.path.join(
+    os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
 helpfile = os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))
 score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
@@ -51,12 +53,22 @@ score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
 def _(arg):
     return arg
 
+def load_glade(dialog = None):
+        for gladefile in gladefiles:
+            try:
+                return gtk.glade.XML(gladefile, dialog) 
+            except RuntimeError:
+                pass #Just ignore the error, the next file will be tested
+        #Still here?
+        print "Gladefile not found! Checked pathes were:"
+        print gladefiles
+        sys.exit(2)
+    
 class fourDigits:
     """This is the main class"""
     def __init__(self):
         """GUI initialization"""
-        self.wTree = gtk.glade.XML(gladefile) 
-
+        self.wTree = load_glade()
         self.toolbar = self.wTree.get_widget('toolbar')
         self.view_toolbar = self.wTree.get_widget('view_toolbar')
 
@@ -317,7 +329,7 @@ class fourDigits:
 class aboutDialog:
     """the about dialog"""
     def __init__(self):
-        self.wTree = gtk.glade.XML(gladefile, 'dAbout') 
+        self.wTree = load_glade('dAbout') 
         self.dAbout = self.wTree.get_widget("dAbout")
         self.dAbout.set_name('4digits')
         self.dAbout.set_title(_('About 4digits'))
@@ -329,7 +341,7 @@ class aboutDialog:
 class scoreDialog:
     """the score dialog"""
     def __init__(self):
-        self.wTree = gtk.glade.XML(gladefile, 'score_dlg')
+        self.wTree = load_glade('score_dlg')
         self.dScore = self.wTree.get_widget("score_dlg")
         self.score_view = self.wTree.get_widget('score_view')
 

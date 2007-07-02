@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Fri Jun 29 11:11:07 2007 by tux@Paradise-->
+<!--Generated with glade3 3.2.0 on Sun Jul  1 19:41:16 2007 by tux@Paradise-->
 <glade-interface>
   <widget class="GtkWindow" id="window1">
     <property name="visible">True</property>
@@ -628,7 +628,9 @@ Cai Qian: debian maintainer
 
 mirror@smth: several one-liners
 Hermann Kraus: hint table</property>
-    <property name="documenters">Pan Yongzhi</property>
+    <property name="documenters">Pan Yongzhi
+
+Hermann Kraus: hint table</property>
     <property name="artists">Pan Yongzhi</property>
     <property name="logo">4digits_logo.png</property>
     <property name="wrap_license">True</property>
