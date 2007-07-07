@@ -44,10 +44,11 @@ import time
 import webbrowser
 
 gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
-    os.path.normpath(os.path.join(
+    os.path.normpath(os.path.join( # ??
     os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
 helpfile = os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))
+# FIXME won't work for windows
 score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
 
 def _(arg):
@@ -281,7 +282,7 @@ class fourDigits:
         
         for i in range(0, 80):
 	    self.cb_hint[i].set_active(False)
-	for i in range(0, 20):
+	for i in range(0, 10):
 	    self.label_hint[i].set_active(True)
 
     def error_process(self, msg):
@@ -306,7 +307,10 @@ class fourDigits:
     def write_score(self, time_taken):
         date = time.strftime("%a %b %d %H:%M:%S %Y"); 
         new_score = "%s %ss %s\n" % (
+                # FIXME unix only
+                # it's better to get the realname from pw_gecos field
                 pwd.getpwuid(os.getuid())[0], time_taken, date)
+                #os.getlogin(), time_taken, date)
         saved_scores = file(score_file, 'r').readlines()
         saved_scores.append(new_score)
         scores = [line.split(' ', 6) for line in saved_scores]
@@ -354,6 +358,7 @@ class newRound:
                 break
         if self.answer == 4619:
             print 'You are the luckiest guy on the planet!'
+        self.answer = [7, 2, 0, 9]
         print self.answer
         self.guess = 0
         self.guesses = []
