@@ -61,7 +61,7 @@ def load_glade(dialog = None):
             except RuntimeError:
                 pass #Just ignore the error, the next file will be tested
         #Still here?
-        print "Gladefile not found! Checked pathes were:"
+        print "Gladefile not found! Checked paths were:"
         print gladefiles
         sys.exit(2)
     
@@ -92,7 +92,7 @@ class fourDigits:
         self.time_label = self.wTree.get_widget('time_label')
         
         self.score_view = self.wTree.get_widget('score_view')
-	self.build_hint_grid()
+        self.build_hint_table()
         dic = {'on_window1_destroy': gtk.main_quit,
                 'on_btQuit_clicked': gtk.main_quit,
                 'on_mQuit_activate': gtk.main_quit,
@@ -109,33 +109,43 @@ class fourDigits:
         # new game initialization
         self.game = newRound()
 
-    def build_hint_grid(self):
-    	box_hints = self.wTree.get_widget('box_hints')
-    	self.cb_hint = []
-	self.label_hint = []
+    def build_hint_table(self):
+        box_hints = self.wTree.get_widget('box_hints')
+        self.cb_hint = []
+        self.label_hint = []
         for name in (0, 40):
-	    table = gtk.Table(rows=11, columns=6)
-	    box_hints.pack_start(table)
-	    for y in range(0, 10):
-	    	label = gtk.CheckButton(str(y))
-		label.set_active(True)
-		table.attach(label, 0, 1, y+1, y+2)
-		label.connect('toggled', self.change_row, y+name)
-		self.label_hint.append(label)
-	    for x in range(1, 5):
-	    	label = gtk.Label(str(x))
-		table.attach(label, x, x+1, 0, 1)
-		for y in range(0,10):
-		    checkbutton = gtk.CheckButton()
-		    table.attach(checkbutton, x, x+1, y+1, y+2)
-		    self.cb_hint.append(checkbutton)
-	    if name == 0:
-	    	box_hints.pack_start(gtk.VSeparator())
+            table = gtk.Table(rows=11, columns=6)
+            box_hints.pack_start(table)
+            for y in range(0, 10):
+                label = gtk.CheckButton(str(y))
+                table.attach(label, 0, 1, y+1, y+2)
+                label.connect('toggled', self.change_row, y+name)
+                self.label_hint.append(label)
+            for x in range(1, 5):
+                label = gtk.Label(str(x))
+                table.attach(label, x, x+1, 0, 1)
+                for y in range(0,10):
+                    checkbutton = gtk.CheckButton()
+                    table.attach(checkbutton, x, x+1, y+1, y+2)
+                    self.cb_hint.append(checkbutton)
+            if name == 0:
+                box_hints.pack_start(gtk.VSeparator())
+        self.init_hint_table()
 
     def change_row(self, widget, row):
-	enable = widget.get_active()
-	for i in range(0,4):
-	    self.cb_hint[10*i+row].set_sensitive(enable)
+        enable = widget.get_active()
+        for i in range(0, 4):
+            self.cb_hint[10 * i + row].set_sensitive(enable)
+
+    def init_hint_table(self):
+        for i in range(0, 40):
+            self.cb_hint[i].set_active(True)
+            self.cb_hint[i+40].set_active(False)
+            self.cb_hint[i+40].set_sensitive(False)
+        self.cb_hint[0].set_active(False)
+        for i in range(0, 10):
+            self.label_hint[i].set_active(True)
+            self.label_hint[i+10].set_active(False)
 
     def on_entry_activate(self, widget):
         """when input is accepted"""
@@ -247,7 +257,10 @@ class fourDigits:
         dlg.scoreList = gtk.ListStore(str, str, str)
         sv.set_model(dlg.scoreList)
 
-        scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+        try:
+            scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+        except IOError:
+            scores = []
 
         for line in scores:
             score_tup = line[0], line[1], ' '.join(line[2:]).rstrip('\n')
@@ -280,10 +293,7 @@ class fourDigits:
             getattr(self, 'g' + repr(i)).set_text('')
             getattr(self, 'r' + repr(i)).set_text('')
         
-        for i in range(0, 80):
-	    self.cb_hint[i].set_active(False)
-	for i in range(0, 10):
-	    self.label_hint[i].set_active(True)
+        self.init_hint_table()
 
     def error_process(self, msg):
         self.info_label.set_text(msg)
@@ -295,7 +305,10 @@ class fourDigits:
         self.game.time_taken = round(self.game.time_taken, 1)
 
     def is_high_score(self, time_taken):
-        scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+        try:
+            scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+        except IOError:
+            return True #List does not exist yet
         if len(scores) < 10:
             return True
         scores = sorted(scores, key = lambda x: float(x[1][:-1]))
@@ -310,8 +323,10 @@ class fourDigits:
                 # FIXME unix only
                 # it's better to get the realname from pw_gecos field
                 pwd.getpwuid(os.getuid())[0], time_taken, date)
-                #os.getlogin(), time_taken, date)
-        saved_scores = file(score_file, 'r').readlines()
+        try:
+            saved_scores = open(score_file, 'r').readlines()
+        except IOError:
+            saved_scores = [] 
         saved_scores.append(new_score)
         scores = [line.split(' ', 6) for line in saved_scores]
         scores = sorted(scores, key = lambda x: float(x[1][:-1]))
@@ -320,8 +335,13 @@ class fourDigits:
         # find the index of the new score
         new_score = new_score.split(' ', 6)
         new_score_rank = scores.index(new_score)
-
-        fp = open(score_file, 'w')
+        try:
+            fp = open(score_file, 'w')
+        except IOError:
+            # Most likely the directory does not exist
+            dir = os.path.dirname(score_file)
+            os.mkdir(dir)
+            fp = open(score_file, 'w') #Try again
         for score in scores:
             fp.write(' '.join(score))
         fp.close()
@@ -358,7 +378,6 @@ class newRound:
                 break
         if self.answer == 4619:
             print 'You are the luckiest guy on the planet!'
-        self.answer = [7, 2, 0, 9]
         print self.answer
         self.guess = 0
         self.guesses = []
