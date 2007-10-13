@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+# pylint: disable-msg=r0201
 """
     4digits - A guess-the-number game, aka Bulls and Cows
     Copyright (c) 2004-2007 Pan Yongzhi <http://pan.cdut.cn/4digits>
@@ -32,7 +32,7 @@ try:
     pygtk.require('2.0')
     import gtk
     import gtk.glade
-except:
+except ImportError:
     print 'PyGTK is required to run 4digits.'
     print 'No PyGTK was found on your system.'
     sys.exit(1)
@@ -52,101 +52,127 @@ helpfile = os.path.normpath(os.path.join(
 score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
 
 def _(arg):
+    """Mark translatable strings"""
     return arg
 
 def load_glade(dialog = None):
-        for gladefile in gladefiles:
-            try:
-                return gtk.glade.XML(gladefile, dialog) 
-            except RuntimeError:
-                pass #Just ignore the error, the next file will be tested
-        #Still here?
-        print "Gladefile not found! Checked paths were:"
-        print gladefiles
-        sys.exit(2)
+    """Try to load dialog from the different possible glade files."""
+    for gladefile in gladefiles:
+        try:
+            return gtk.glade.XML(gladefile, dialog) 
+        except RuntimeError:
+            continue #Just ignore the error, the next file will be tested
+    #Still here?
+    print "Gladefile not found! Checked paths were:"
+    print gladefiles
+    sys.exit(2)
     
 class fourDigits:
     """This is the main class"""
     def __init__(self):
         """GUI initialization"""
-        self.wTree = load_glade()
-        self.toolbar = self.wTree.get_widget('toolbar')
-        self.view_toolbar = self.wTree.get_widget('view_toolbar')
+        self.widget_tree = load_glade()
+        self.toolbar = self.widget_tree.get_widget('toolbar')
+        self.view_toolbar = self.widget_tree.get_widget('view_toolbar')
 
-        self.hint_table = self.wTree.get_widget('box_hints')
-        self.hseparator2 = self.wTree.get_widget('hseparator2')
-        self.view_hint_table = self.wTree.get_widget('view_hint_table')
+        self.hint_table = self.widget_tree.get_widget('box_hints')
+        self.hint_hseparator = self.widget_tree.get_widget('hint_hseparator')
+        self.view_hint_table = self.widget_tree.get_widget('view_hint_table')
+        self.autofill_hints = self.widget_tree.get_widget('view_autofill_hints')
 
-        self.entry = self.wTree.get_widget('entry')
+        self.entry = self.widget_tree.get_widget('entry')
         self.entry.grab_focus()
 
-        self.btOK = self.wTree.get_widget('btOK')
-        self.btOK.set_sensitive(True)
+        self.ok_button = self.widget_tree.get_widget('ok_button')
+        self.ok_button.set_sensitive(True)
         self.entry.set_sensitive(True)
 
-        self.table = self.wTree.get_widget("table1")
+        self.table = self.widget_tree.get_widget("state_table")
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
                 'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
-            setattr(self, widget, self.wTree.get_widget(widget))
-        self.info_label = self.wTree.get_widget('info_label')
-        self.time_label = self.wTree.get_widget('time_label')
+            setattr(self, widget, self.widget_tree.get_widget(widget))
+        self.info_label = self.widget_tree.get_widget('info_label')
+        self.time_label = self.widget_tree.get_widget('time_label')
         
-        self.score_view = self.wTree.get_widget('score_view')
+        self.score_view = self.widget_tree.get_widget('score_view')
+        
+        self.cb_hint = []
+        self.label_hint = []
         self.build_hint_table()
-        dic = {'on_window1_destroy': gtk.main_quit,
-                'on_btQuit_clicked': gtk.main_quit,
-                'on_mQuit_activate': gtk.main_quit,
-                'on_btOK_clicked': self.on_entry_activate,
-                'on_new_game': self.on_new_game,
+        dic = {'on_main_window_destroy': gtk.main_quit,
+                'on_quit_activate': gtk.main_quit,
+                'on_ok_clicked': self.on_entry_activate,
+                'on_new_game_activate': self.on_new_game_activate,
                 'on_view_toolbar_toggled': self.on_view_toolbar_toggled,
                 'on_view_hint_table_toggled': self.on_view_hint_table_toggled,
                 'on_entry_activate': self.on_entry_activate,
                 'on_entry_changed': self.on_entry_changed,
-                'on_mHelp_activate' : self.on_mHelp_activate,
-                'on_mAbout_activate' : self.on_mAbout_activate,
-                'on_score_menu_activate': self.on_score_menu_activate}
-        self.wTree.signal_autoconnect(dic)
+                'on_help_activate' : self.on_help_activate,
+                'on_about_activate' : self.on_about_activate,
+                'on_score_activate': self.on_score_activate}
+        self.widget_tree.signal_autoconnect(dic)
         # new game initialization
         self.game = newRound()
 
     def build_hint_table(self):
-        box_hints = self.wTree.get_widget('box_hints')
-        self.cb_hint = []
-        self.label_hint = []
+        """Create the controls for the hint table"""
+        box_hints = self.widget_tree.get_widget('box_hints')
         for name in (0, 40):
             table = gtk.Table(rows=11, columns=6)
             box_hints.pack_start(table)
-            for y in range(0, 10):
-                label = gtk.CheckButton(str(y))
-                table.attach(label, 0, 1, y+1, y+2)
-                label.connect('toggled', self.change_row, y+name)
+
+            #Create row labels
+            for row in range(0, 10):
+                label = gtk.CheckButton(str(row))
+                table.attach(label, 0, 1, row+1, row+2)
+                label.connect('toggled', self.change_row, row+name)
                 self.label_hint.append(label)
-            for x in range(1, 5):
-                label = gtk.Label(str(x))
-                table.attach(label, x, x+1, 0, 1)
-                for y in range(0,10):
+
+            for col in range(1, 5):
+                #Create column labels
+                label = gtk.Label(str(col))
+                table.attach(label, col, col+1, 0, 1)
+                #Create Checkboxes
+                for row in range(0, 10):
                     checkbutton = gtk.CheckButton()
-                    table.attach(checkbutton, x, x+1, y+1, y+2)
+                    table.attach(checkbutton, col, col+1, row+1, row+2)
                     self.cb_hint.append(checkbutton)
-            if name == 0:
+
+            if name == 0: #First table
                 box_hints.pack_start(gtk.VSeparator())
         self.init_hint_table()
 
     def change_row(self, widget, row):
+        """Toggle a rows state."""
         enable = widget.get_active()
-        for i in range(0, 4):
-            self.cb_hint[10 * i + row].set_sensitive(enable)
+        for col in range(0, 4):
+            self.cb_hint[10 * col + row].set_sensitive(enable)
 
     def init_hint_table(self):
+        """Reset all controls in the hinttable to their default state."""
         for i in range(0, 40):
             self.cb_hint[i].set_active(True)
             self.cb_hint[i+40].set_active(False)
             self.cb_hint[i+40].set_sensitive(False)
         self.cb_hint[0].set_active(False)
-        for i in range(0, 10):
-            self.label_hint[i].set_active(True)
-            self.label_hint[i+10].set_active(False)
+        for row in range(0, 10):
+            self.label_hint[row].set_active(True)
+            self.label_hint[row+10].set_active(False)
+    
+    #
+    #         1    2    3    4                   1    2    3    4
+    #  0/0    00   10   20   30          0/10    40   50   60   70
+    #  1/1    01   11   21   31          1/11    41   51   61   71
+    #  2/2    02   12   22   32          2/12    42   52   62   72
+    # ...
+    def get_checkbox(self, row, col, tablenr=0):
+        """Get the checkbox at the specified position"""
+        return self.cb_hint[tablenr * 40 + col * 10 + row]
 
+    def get_label(self, row, tablenr=0):
+        """Get the label at the specified position"""
+        return self.label_hint[tablenr*10 + row]
+    
     def on_entry_activate(self, widget):
         """when input is accepted"""
         A, B = 0, 0
@@ -172,7 +198,7 @@ class fourDigits:
                 self.error_process(_('Four digits must be unique.'))
                 return False
             elif number in self.game.guesses:
-                self.error_process(_("You've guessed it."))
+                self.error_process(_("You've already guessed it."))
                 return False
             self.game.guesses.append(number)
             # process input
@@ -187,13 +213,17 @@ class fourDigits:
             result_label = getattr(self, 'r' + repr(self.game.guess))
             guess_label.set_text(number)
             result_label.set_text('%dA%dB' % (A, B))
+
+            if (self.autofill_hints.get_active()):
+                self.fill_hints(number, A, B)
             
             # win
             if A == 4:
                 self.info_label.set_text(_('You win! :)'))
                 self.get_time_taken_till_now()
-                self.time_label.set_text(_('Used %.1f s.') % self.game.time_taken)
-                self.btOK.set_sensitive(False)
+                self.time_label.set_text(_('Used %.1f s.') % 
+                    self.game.time_taken)
+                self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
                 if self.is_high_score(self.game.time_taken):
                     new_score_rank = self.write_score(self.game.time_taken)
@@ -203,15 +233,61 @@ class fourDigits:
                 answer = ''
                 for i in xrange(4):
                     answer += repr(self.game.answer[i])
-                self.info_label.set_text(_('Haha, you lose. It is %s.') % answer)
+                self.info_label.set_text(_('Haha, you lose. It is %s.') % 
+                    answer)
                 self.get_time_taken_till_now()
-                self.time_label.set_text(_('Wasted %.1f s.') % self.game.time_taken)
-                self.btOK.set_sensitive(False)
+                self.time_label.set_text(_('Wasted %.1f s.') % 
+                    self.game.time_taken)
+                self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
         self.game.guess += 1
         self.entry.grab_focus()
 
+    def clear_row(self, row):
+        """Clear a complete row"""
+        self.get_label(row, 0).set_active(False)
+        self.get_label(row, 1).set_active(False)
+        for col in range(0, 4):
+            self.get_checkbox(row, col, 0).set_active(False)
+            self.get_checkbox(row, col, 1).set_active(False)
+
+    def fill_hints(self, number, A, B):
+        """Autocomplete the hint table"""
+        number = [int(x) for x in number]
+        if A == 0 and B == 0:
+            for digit in number:
+                self.clear_row(digit)
+            return
+
+        if (A+B) == 4:
+            for digit in range(0, 10):
+                if digit in number:
+                    self.get_label(digit, 0).set_active(True)
+                    self.get_label(digit, 1).set_active(True)
+                else:
+                    self.clear_row(digit)
+
+        if A == 0: #Everything wrong
+            for digit_pos in range(0, 4):
+                self.get_checkbox(number[digit_pos], digit_pos, 
+                    0).set_active(False)
+                self.get_checkbox(number[digit_pos], digit_pos, 
+                    1).set_active(False)
+
+        if B == 0:
+            #Everything right
+            for digit_pos in range(0, 4):
+                for pos2 in range(0, 4):
+                    if pos2 == digit_pos:
+                        continue
+                    self.get_checkbox(number[digit_pos], pos2, 
+                        0).set_active(False)
+
+                self.get_checkbox(number[digit_pos], digit_pos, 
+                    1).set_active(True)
+
     def on_entry_changed(self, widget):
+        """Start timer as soon as the user enters the first digit"""
         self.info_label.set_text('')
         if self.game.on_entry_cb_first_called_in_this_round == True:
             self.time_label.set_text(_('Timer started...'))
@@ -229,33 +305,36 @@ class fourDigits:
         """Toggle hint table visibility"""
         if self.view_hint_table.get_active():
             self.hint_table.show_all()
-            self.hseparator2.show()
+            self.hint_hseparator.show()
         else:
             self.hint_table.hide_all()
-            self.hseparator2.hide()
-
-    def on_mHelp_activate(self, widget):
+            self.hint_hseparator.hide()
+    
+    def on_help_activate(self, widget):
+        """Show help."""
         webbrowser.open(helpfile)
 
-    def on_mAbout_activate(self, widget):
-        about = aboutDialog().dAbout
+    def on_about_activate(self, widget):
+        """Show about dialog"""
+        about = aboutDialog().about_dialog
         about.run()
         about.destroy()
     
-    def on_score_menu_activate(self, new_score_rank):
+    def on_score_activate(self, new_score_rank):
+        """Show scores"""
         sd = scoreDialog()
-        dlg = sd.dScore
-        sv = sd.score_view
-        sv_selection = sv.get_selection()
+        dlg = sd.score_dialog
+        score_view = sd.score_view
+        sv_selection = score_view.get_selection()
         sv_selection.set_mode(gtk.SELECTION_NONE)
         column = gtk.TreeViewColumn('Name', gtk.CellRendererText(), text = 0)
-        sv.append_column(column)
+        score_view.append_column(column)
         column = gtk.TreeViewColumn('Score', gtk.CellRendererText(), text = 1)
-        sv.append_column(column)
+        score_view.append_column(column)
         column = gtk.TreeViewColumn('Date', gtk.CellRendererText(), text = 2)
-        sv.append_column(column)
+        score_view.append_column(column)
         dlg.scoreList = gtk.ListStore(str, str, str)
-        sv.set_model(dlg.scoreList)
+        score_view.set_model(dlg.scoreList)
 
         try:
             scores = [line.split(' ', 6) for line in file(score_file, 'r')]
@@ -275,10 +354,10 @@ class fourDigits:
         dlg.run()
         dlg.destroy()
 
-    def on_new_game(self, widget):
+    def on_new_game_activate(self, widget):
         """New game initialization"""
         self.game = newRound()
-        self.btOK.set_sensitive(True)
+        self.ok_button.set_sensitive(True)
         self.entry.set_sensitive(True)
         self.entry.grab_focus()
         # won't start the timer when you just start a new game
@@ -296,15 +375,18 @@ class fourDigits:
         self.init_hint_table()
 
     def error_process(self, msg):
+        """Show error message in statusbar"""
         self.info_label.set_text(msg)
         self.entry.grab_focus()
 
     def get_time_taken_till_now(self):
+        """Get time since start of the game"""
         self.game.time_end = time.time()
         self.game.time_taken = self.game.time_end - self.game.time_start
         self.game.time_taken = round(self.game.time_taken, 1)
 
     def is_high_score(self, time_taken):
+        """Is this time a highscore?"""
         try:
             scores = [line.split(' ', 6) for line in file(score_file, 'r')]
         except IOError:
@@ -318,7 +400,8 @@ class fourDigits:
             return False
 
     def write_score(self, time_taken):
-        date = time.strftime("%a %b %d %H:%M:%S %Y"); 
+        """Write highscore file"""
+        date = time.strftime("%a %b %d %H:%M:%S %Y") 
         new_score = "%s %ss %s\n" % (
                 # FIXME unix only
                 # it's better to get the realname from pw_gecos field
@@ -339,8 +422,8 @@ class fourDigits:
             fp = open(score_file, 'w')
         except IOError:
             # Most likely the directory does not exist
-            dir = os.path.dirname(score_file)
-            os.mkdir(dir)
+            new_dir = os.path.dirname(score_file)
+            os.mkdir(new_dir)
             fp = open(score_file, 'w') #Try again
         for score in scores:
             fp.write(' '.join(score))
@@ -348,29 +431,30 @@ class fourDigits:
         return new_score_rank
 
     def show_score(self, new_score_rank):
-        self.on_score_menu_activate(new_score_rank)
+        """Show highscore dialog"""
+        self.on_score_activate(new_score_rank)
 
 class aboutDialog:
     """the about dialog"""
     def __init__(self):
-        self.wTree = load_glade('dAbout') 
-        self.dAbout = self.wTree.get_widget("dAbout")
-        self.dAbout.set_name('4digits')
-        self.dAbout.set_title(_('About 4digits'))
+        self.widget_tree = load_glade('about_dialog')
+        self.about_dialog = self.widget_tree.get_widget("about_dialog")
+        self.about_dialog.set_name('4digits')
+        self.about_dialog.set_title(_('About 4digits'))
         gtk.about_dialog_set_url_hook(
                 lambda about_dialog, url: webbrowser.open(url))
-        self.dAbout.set_website('http://pan.cdut.cn/4digits')
-        self.dAbout.set_website_label('http://pan.cdut.cn/4digits')
+        self.about_dialog.set_website('http://pan.cdut.cn/4digits')
+        self.about_dialog.set_website_label('http://pan.cdut.cn/4digits')
 
 class scoreDialog:
     """the score dialog"""
     def __init__(self):
-        self.wTree = load_glade('score_dlg')
-        self.dScore = self.wTree.get_widget("score_dlg")
-        self.score_view = self.wTree.get_widget('score_view')
+        self.widget_tree = load_glade('score_dialog')
+        self.score_dialog = self.widget_tree.get_widget('score_dialog')
+        self.score_view = self.widget_tree.get_widget('score_view')
 
 class newRound:
-    """Tihs class contains data in one round of the game"""
+    """This class contains data in one round of the game"""
     def __init__(self):
         while True:
             self.answer = random.sample(range(10), 4)
