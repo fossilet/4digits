@@ -46,8 +46,9 @@ import webbrowser
 gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
     os.path.normpath(os.path.join( # ??
     os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
-helpfile = os.path.normpath(os.path.join(
-    os.path.dirname(__file__), '../share/doc/4digits/index.html'))
+helpfiles = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
+    os.path.normpath(os.path.join(
+    os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
 # FIXME won't work for windows
 score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
 
@@ -246,7 +247,7 @@ class fourDigits:
     def clear_row(self, row):
         """Clear a complete row"""
         self.get_label(row, 0).set_active(False)
-        self.get_label(row, 1).set_active(False)
+        #self.get_label(row, 1).set_active(False)
         for col in range(0, 4):
             self.get_checkbox(row, col, 0).set_active(False)
             self.get_checkbox(row, col, 1).set_active(False)
@@ -274,17 +275,17 @@ class fourDigits:
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     1).set_active(False)
 
-        if B == 0:
+#        if B == 0:
             #Everything right
-            for digit_pos in range(0, 4):
-                for pos2 in range(0, 4):
-                    if pos2 == digit_pos:
-                        continue
-                    self.get_checkbox(number[digit_pos], pos2, 
-                        0).set_active(False)
+#            for digit_pos in range(0, 4):
+#                for pos2 in range(0, 4):
+#                    if pos2 == digit_pos:
+#                        continue
+#                    self.get_checkbox(number[digit_pos], pos2, 
+#                        0).set_active(False)
 
-                self.get_checkbox(number[digit_pos], digit_pos, 
-                    1).set_active(True)
+#                self.get_checkbox(number[digit_pos], digit_pos, 
+#                    1).set_active(True)
 
     def on_entry_changed(self, widget):
         """Start timer as soon as the user enters the first digit"""
@@ -312,7 +313,15 @@ class fourDigits:
     
     def on_help_activate(self, widget):
         """Show help."""
-        webbrowser.open(helpfile)
+        for helpfile in helpfiles:
+            try:
+                file(helpfile)
+            except IOError:
+                continue
+            finally:
+                print helpfile
+                webbrowser.open(helpfile)
+                return
 
     def on_about_activate(self, widget):
         """Show about dialog"""
@@ -443,8 +452,8 @@ class aboutDialog:
         self.about_dialog.set_title(_('About 4digits'))
         gtk.about_dialog_set_url_hook(
                 lambda about_dialog, url: webbrowser.open(url))
-        self.about_dialog.set_website('http://pan.cdut.cn/4digits')
-        self.about_dialog.set_website_label('http://pan.cdut.cn/4digits')
+        self.about_dialog.set_website('http://fourdigits.sourceforge.net')
+        self.about_dialog.set_website_label('http://fourdigits.sourceforge.net')
 
 class scoreDialog:
     """the score dialog"""
@@ -460,8 +469,9 @@ class newRound:
             self.answer = random.sample(range(10), 4)
             if self.answer[0] != 0:
                 break
-        if self.answer == 4619:
+        if self.answer == [4, 6, 1, 9]:
             print 'You are the luckiest guy on the planet!'
+        self.answer = [7, 2, 0, 9]
         print self.answer
         self.guess = 0
         self.guesses = []
