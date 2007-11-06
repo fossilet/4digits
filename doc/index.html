@@ -24,7 +24,7 @@
             <a href="#intro" name="intro-toc">Introduction</a><br /><br />
             <a href="#intall" name="install-toc">Installation</a><br /><br />
             <a href="#play" name='play-toc'>Playing 4digits</a><br /><br />
-            <a href="#tutorial" name='tutorial-toc'>Tutorial</a><br /><br />
+            <a href="#hinttable" name='hinttable-toc'>Hint table</a><br /><br />
             <a href="#author" name='author-toc'>Authors</a><br /> <br />
             <a href="#license" name='license-toc'>License</a><br /> <br />
             <a href="http://fourdigits.sourceforge.net">Homepage</a><br /> <br />
@@ -61,8 +61,85 @@
             <p><img src='lose.png' alt='lose a game' title='lose a game' /></p>
             <p>Figure 4  When you lose a game.</p>
 
-            <h3><a href="#tutorial-toc" name='tutorial'>Tutorial</a></h3>
-            <p>Hermann Kraus wrote a <a href="hinttable.html">tutorial</a> on how to solve your game with the hinttable.</p>
+            <h3><a href="#hinttable-toc" name='hinttable'>Hint table</a></h3>
+            <table>
+                <tr>
+                    <td><p>This is an example how to solve your game with the hinttable. The hint table can be toggled from the menu View -> Hint table. It looks like below. All the check boxes at the left column are checked meaning all possibilities. All the check boxes at the right column are unchecked meaning no digit or place is confirmed. You can check menu View -> Autofill Hints to let the computer help you filling some obvious cases.</p></td>
+                    <td><img src="hinttable.png" alt='hint table' /></td>
+                </tr>
+            </table>
+
+            <h2>Step 1</h2>
+            <table>
+                <tr>
+                    <td><img src="step1.png" alt="Step 1" /></td>
+                    <td>
+                        <p>We don't have any information yet, so we start with some random numbers. There is not much we can conclude from this, but the information that one number is at the right place will be helpful later.</p></td>
+                </tr>
+            </table>
+
+            <h2>Step 2</h2>
+            <table>
+                <tr>
+                    <td><p>So let's try some more random numbers, but different ones than in the first try.</p>
+                        <p> Now this gives us some real hints.</p>
+                        <ul>
+                            <li> Because there were no correct numbers in the second try we can conclude that the frist digit can't be 5, the second can't be 6, ... Add this to the frist grid.</li>
+                            <li> Then there is another number which we always know something about: Zero can't be the first digit (forbidden by gamerules). Also add this to the first grid.</li>
+                            <li> We have tried the numbers 1, 2, 3, 4, 5, 6, 7, 8 but only two of them are in the final number. As we need another two digits and only two are left, we are sure that 0 and 9 are somewhere in the number. Add this to the second grid.</li>
+                    </ul></td>
+                    <td><img src="step2.png" alt="Step 2" /></td>
+                </tr>
+            </table>
+
+            <h2>Step 3</h2>
+            <table>
+                <tr>
+                    <td><img src="step3.png" alt="Step 3" /></td>
+                    <td><p>Now we try to gather some more information about the numbers 1 to 9. I tried 3456 and the answer was 0A0B. So we can be sure that none of these digits is valid!</p></td>
+                </tr>
+            </table>
+
+            <h2>Step 4</h2>
+            <table>
+                <tr>
+                    <td><p>Next I tried 9027 and got 0A4B.</p>
+                        <p> So we have found all valid digits! Mark them in both tables. As in step 2 we can again exclude some places for the valid digits and mark them in the first table.</p></td>
+                    <td><img src="step4-1.png" alt="Step 5" /></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td><img src="step4-2.png" alt="Step 6" /></td>
+                    <td><p>I also tried 9072 which gave me the hint that 2 is not at the last place.</p></td>
+                </tr>
+            </table>
+
+            <h2>Step 5</h2>
+            <table>
+                <tr>
+                    <td><p>Now we have the situation that both 2 and 7 can only go to places 1 and 2. This implies that no other digit can go to these places. So we can exclude the digit 9 from place 2.</p></td>
+                    <td><img src="step5.png" alt="Step 7" /></td>
+                </tr>
+            </table>
+
+            <h2>Step 6</h2>
+            <table>
+                <tr>
+                    <td><img src="step6.png" alt="Step 8" /></td>
+                    <td><p>Now we use the information we got in step 1.</p>
+                        <p>The first result was that there is one digit in the right place. Obviously this can only be the 2. Mark this in the second table.</p>
+                        <p>Now the 2 can't go to place 1 (because it's already at place 2 and no duplicates are allowed). Therefore 7 must go to place 1. Mark this in the second table.</p></td>
+                </tr>
+            </table>
+
+            <h2>Step 7</h2>
+            <table>
+                <tr>
+                    <td><p>Only two possible solutions left: 7209 and 7290. I choose 7209.....and win!</p></td>
+                    <td><img src="step7.png" alt="Step 9" /></td>
+                </tr>
+            </table>
 
             <h3><a href="#author-toc" name='author'>Authors</a></h3>
             <p>4digits is written by Pan Yongzhi. Go to <a href="http://fourdigits.sourceforge.net">4digits homepage</a> for more info.</p>
