@@ -31,6 +31,10 @@ h2 {
     color:#a52a2a
 }
 
+table {
+
+}
+
 a {
     text-decoration:none;
     font-family:verdana, arial, helvetica, sans-serif;
@@ -39,9 +43,9 @@ a:hover {background-color:#ccc;}
 
 #Header {
     font-weight:600;
-    font-size: x-large;	/* should be same as an h1 header */
+    font-size: x-large; /* should be same as an h1 header */
     margin:20px 0 10px 0;
-    padding:0 0 2.0ex 20px;
+    padding:1.0ex 0 2.0ex 20px;
     border-style:solid;
     border-color:black;
     border-width:1px 0;
@@ -68,7 +72,7 @@ body>#Header {height:14px;}
 #Content {
     /* Left margin is menu width + 3em
      */
-margin:0 50px 50px 11em;
+margin:0 50px 0px 11em;
 padding:10px;
 }
 
@@ -94,11 +98,11 @@ body>#Menu {width:8em;}
          */
 margin:0 50px 50px 0;
 padding:10px;
-        }
+}
 
-        #Menu {
-            display: none;
-        }
+#Menu {
+    display: none;
+}
 
 }
 

@@ -38,19 +38,18 @@ except ImportError:
     sys.exit(1)
 
 import os
-import pwd
 import random
 import time
 import webbrowser
 
 gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
-    os.path.normpath(os.path.join( # ??
+    os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
 helpfiles = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
-# FIXME won't work for windows
-score_file = os.path.expanduser('~/.4digits/4digits.4digits.scores')
+score_file = os.path.join(os.getenv('HOME'), '.4digits/4digits.4digits.scores')
+print score_file
 
 def _(arg):
     """Mark translatable strings"""
@@ -63,12 +62,12 @@ def load_glade(dialog = None):
             return gtk.glade.XML(gladefile, dialog) 
         except RuntimeError:
             continue #Just ignore the error, the next file will be tested
-    #Still here?
+    #Still here
     print "Gladefile not found! Checked paths were:"
     print gladefiles
     sys.exit(2)
     
-class fourDigits:
+class FourDigits:
     """This is the main class"""
     def __init__(self):
         """GUI initialization"""
@@ -113,7 +112,7 @@ class fourDigits:
                 'on_score_activate': self.on_score_activate}
         self.widget_tree.signal_autoconnect(dic)
         # new game initialization
-        self.game = newRound()
+        self.game = NewRound()
 
     def build_hint_table(self):
         """Create the controls for the hint table"""
@@ -325,13 +324,13 @@ class fourDigits:
 
     def on_about_activate(self, widget):
         """Show about dialog"""
-        about = aboutDialog().about_dialog
+        about = AboutDialog().about_dialog
         about.run()
         about.destroy()
     
     def on_score_activate(self, new_score_rank):
         """Show scores"""
-        sd = scoreDialog()
+        sd = ScoreDialog()
         dlg = sd.score_dialog
         score_view = sd.score_view
         sv_selection = score_view.get_selection()
@@ -357,7 +356,7 @@ class fourDigits:
         try:
             sv_selection.set_mode(gtk.SELECTION_SINGLE)
             sv_selection.select_path(new_score_rank)
-        except:
+        except TypeError:
             sv_selection.set_mode(gtk.SELECTION_NONE)
 
         dlg.run()
@@ -365,7 +364,7 @@ class fourDigits:
 
     def on_new_game_activate(self, widget):
         """New game initialization"""
-        self.game = newRound()
+        self.game = NewRound()
         self.ok_button.set_sensitive(True)
         self.entry.set_sensitive(True)
         self.entry.grab_focus()
@@ -395,7 +394,7 @@ class fourDigits:
         self.game.time_taken = round(self.game.time_taken, 1)
 
     def is_high_score(self, time_taken):
-        """Is this time a highscore?"""
+        """Is this time a highscore"""
         try:
             scores = [line.split(' ', 6) for line in file(score_file, 'r')]
         except IOError:
@@ -412,9 +411,7 @@ class fourDigits:
         """Write highscore file"""
         date = time.strftime("%a %b %d %H:%M:%S %Y") 
         new_score = "%s %ss %s\n" % (
-                # FIXME unix only
-                # it's better to get the realname from pw_gecos field
-                pwd.getpwuid(os.getuid())[0], time_taken, date)
+                os.getenv('USERNAME'), time_taken, date)
         try:
             saved_scores = open(score_file, 'r').readlines()
         except IOError:
@@ -443,26 +440,26 @@ class fourDigits:
         """Show highscore dialog"""
         self.on_score_activate(new_score_rank)
 
-class aboutDialog:
+class AboutDialog:
     """the about dialog"""
     def __init__(self):
         self.widget_tree = load_glade('about_dialog')
         self.about_dialog = self.widget_tree.get_widget("about_dialog")
-        self.about_dialog.set_name('4digits')
-        self.about_dialog.set_title(_('About 4digits'))
+        #self.about_dialog.set_name('4digits')
+        #self.about_dialog.set_title(_('About 4digits'))
         gtk.about_dialog_set_url_hook(
                 lambda about_dialog, url: webbrowser.open(url))
-        self.about_dialog.set_website('http://fourdigits.sourceforge.net')
-        self.about_dialog.set_website_label('http://fourdigits.sourceforge.net')
+        self.about_dialog.set_website('http://FourDigits.sourceforge.net')
+        self.about_dialog.set_website_label('http://FourDigits.sourceforge.net')
 
-class scoreDialog:
+class ScoreDialog:
     """the score dialog"""
     def __init__(self):
         self.widget_tree = load_glade('score_dialog')
         self.score_dialog = self.widget_tree.get_widget('score_dialog')
         self.score_view = self.widget_tree.get_widget('score_view')
 
-class newRound:
+class NewRound:
     """This class contains data in one round of the game"""
     def __init__(self):
         while True:
@@ -471,7 +468,7 @@ class newRound:
                 break
         if self.answer == [4, 6, 1, 9]:
             print 'You are the luckiest guy on the planet!'
-        self.answer = [7, 2, 0, 9]
+        #self.answer = [7, 2, 0, 9]
         print self.answer
         self.guess = 0
         self.guesses = []
@@ -481,5 +478,5 @@ class newRound:
         self.on_entry_cb_first_called_in_this_round = True
 
 if __name__ == "__main__":
-    fourdigits = fourDigits()
+    FourDigits = FourDigits()
     gtk.main()

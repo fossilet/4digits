@@ -6,7 +6,7 @@
     <property name="visible">True</property>
     <property name="title" translatable="yes">4digits</property>
     <property name="resizable">False</property>
-    <property name="window_position">GTK_WIN_POS_CENTER_ALWAYS</property>
+    <property name="window_position">GTK_WIN_POS_CENTER</property>
     <property name="icon">4digits_logo.png</property>
     <signal name="destroy" handler="on_main_window_destroy"/>
     <child>
@@ -611,7 +611,11 @@
   </widget>
   <widget class="GtkAboutDialog" id="about_dialog">
     <property name="border_width">5</property>
+    <property name="title" translatable="yes">About 4digits</property>
+    <property name="window_position">GTK_WIN_POS_CENTER</property>
+    <property name="icon">4digits_logo.png</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+    <property name="has_separator">False</property>
     <property name="version">0.8</property>
     <property name="copyright" translatable="yes">Copyright © 2004-2007 Pan Yongzhi</property>
     <property name="comments" translatable="yes">A guess-the-number puzzle game</property>
@@ -627,6 +631,7 @@ Hermann Kraus: hint table</property>
     <property name="documenters">Pan Yongzhi
 
 Hermann Kraus: hint table</property>
+    <property name="translator_credits" translatable="yes">Call for translators...</property>
     <property name="artists">Pan Yongzhi</property>
     <property name="logo">4digits_logo.png</property>
     <property name="wrap_license">True</property>

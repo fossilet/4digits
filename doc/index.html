@@ -3,26 +3,18 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>4digits Manual</title>
+        <title>4digits Puzzle Game Manual</title>
         <meta http-equiv="content-type" content='text/html; charset=utf-8' />
         <link rel="stylesheet" type="text/css" href="4digits_manual.css" />
         <link rev="made" href="mailto:panyongzhi@@gmail..com" />
     </head>
     <body>
         <div id="Header">
-            <table summary="Canned page header" cellpadding="0" style="width: 100%">
-                <tbody>
-                    <tr>
-                        <td style="width: 80%">4digits Manual</td>
-                        <td align="right" style="width: 20%">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            4digits Puzzle Game Manual
         </div>
         <div id="Menu">
             <a href="#intro" name="intro-toc">Introduction</a><br /><br />
-            <a href="#intall" name="install-toc">Installation</a><br /><br />
+            <a href="#install" name="install-toc">Installation</a><br /><br />
             <a href="#play" name='play-toc'>Playing 4digits</a><br /><br />
             <a href="#hinttable" name='hinttable-toc'>Hint table</a><br /><br />
             <a href="#author" name='author-toc'>Authors</a><br /> <br />
@@ -34,31 +26,31 @@
             <h3><a href="#intro-toc" name="intro">Introduction</a></h3>
             <p>4digits is a guess-the-number puzzle game. It's called <a href="http://www.answers.com/topic/bulls-and-cows">Bulls and Cows</a>, and in China people simply call it Guess-the-Number. The game's objective is to guess a four-digit number in 8 times in as less times as possible. It is similar to <a href="http://www.answers.com/topic/mastermind">Mastermind</a>, but the four digits are different to each other. 4digits has both graphical user interface version and textual user interface version. This manual demonstrates the GUI version.</p>
 
-            <h3><a href="#intall-toc" name="install">Installation</a></h3>
+            <h3><a href="#install-toc" name="install">Installation</a></h3>
             <p>Before playing 4digits, you need python, python-gtk and python-glade installed in your computer.</p>
             <h4>Linux</h4>
             <p>Python is usually already installed in your computer if your are a using a modern Linux distribution. You can install python-gtk and python-glade from the software repository of your distribution. Add a launcher of 4digits to the panel of your desktop, then you can start to play it easily.</p>
             <h4>BSD's and Unix's</h4>
             <p>Install python, python-gtk and python-glade for your system.</p>
             <h4>Windows</h4>
-            <p>Click <a href="http://osl.ulpgc.es/~arc/gnome/pygtk-setup.exe">here</a> to download PyGTK for Windows. Clink <a href="http://gladewin32.sourceforge.net/modules/wfdownloads/viewcat.php?cid=3">here</a> to download libglade-bin for Windows. Install PyGTK then unzip and copy the contents of the bin directory of libglade-bin to %gtkdir%/bin. If you still have problem, see <a href="http://www.async.com.br/faq/pygtk/index.py?req=show&amp;file=faq21.002.htp">here</a>.</p>
+            <p>Click <a href="http://osl.ulpgc.es/~arc/gnome/pygtk-setup.exe">here</a> to download PyGTK for Windows. Click <a href="http://gladewin32.sourceforge.net/modules/wfdownloads/viewcat.php?cid=3">here</a> to download libglade-bin for Windows. Install PyGTK then unzip and copy the contents of the bin directory of libglade-bin to %gtkdir%/bin. If you still have problem, see <a href="http://www.async.com.br/faq/pygtk/index.py?req=show&amp;file=faq21.002.htp">here</a>.</p>
             <h4>Mac OS X</h4>
             <p><a href="http://fink.sourgeforge.net">Fink</a> has PyGTK for mac. You can try.</p>
 
             <h3><a href="#play-toc" name='play'>Playing 4digits</a></h3>
             <p>When you start a game, what it looks like is show in Figure 1. You are given eight times to guess a four-digit number. A digit is marked A if its value and position are both correct, and marked B if only its value is correct. You win the game when you get 4A0B. Good luck!</p>
-            <p><img src='4digits_main_window.png' alt='4digits main window' title='4digits main window' /></p>
+            <p><img src='images/4digits_main_window.png' alt='4digits main window' title='4digits main window' /></p>
             <p>Figure 1   The main window when you start a game.</p>
             <p>In Figure 2, the answer is 5184, which is known somehow. The first guess is 1234, then you get 1A1B. Why? 1A because '4' in 1234 and 5184 has the same value and position, and 1B because '1' in 1234 and 5184 share the same value but different position. If you enter 3456 then, you get 0A2B, because the values of '4' and '5' are right but there positions are not correct.</p>
-            <p><img src='fig2.png' alt='start a game' title='start a game' /></p>
+            <p><img src='images/game_start.png' alt='game start' title='game start' /></p>
             <p>Figure 2  You get 1A1B when the answer is 5184.</p>
             <p>A typical game in which the player wins is shown in Figure 3. The answer 7564 is guessed in 96.3 seconds.</p>
-            <p><img src='win.png' alt='win a game' title='win a game' /></p>
+            <p><img src='images/win.png' alt='win a game' title='win a game' /></p>
             <p>Figure 3  When you win a game.</p>
             <p>If your time(score) is in the top ten you will be shown the list of top scores. You can also review the scores later by choosing Scores from the Game menu.</p>
-            <p><img src='scores.png' alt='high score' title='high score' /></p>
+            <p><img src='images/scores.png' alt='high score' title='high score' /></p>
             <p>Belowe in Figure 4 is a game in which my brain fails me.</p>
-            <p><img src='lose.png' alt='lose a game' title='lose a game' /></p>
+            <p><img src='images/lose.png' alt='lose a game' title='lose a game' /></p>
             <p>Figure 4  When you lose a game.</p>
 
             <h3><a href="#hinttable-toc" name='hinttable'>Hint table</a></h3>
@@ -150,11 +142,9 @@
             <p>4digits is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
 
             <p>You should have received a copy of the GNU General Public License along with 4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</p>
-            <div>
-                <hr />
-                First update: 21 Mar 2007<br />
-                Last update: <script src="datestamp.en.js" type='text/javascript'></script>
-            </div>
+            <hr />
+            First update: 21 Mar 2007<br />
+            Last update: <script src="datestamp.en.js" type='text/javascript'></script>
         </div>
     </body>
 </html>

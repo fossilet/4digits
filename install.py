@@ -117,6 +117,10 @@ if args == ["install"]:
         if os.path.isfile(os.path.join('doc', file)):
             install(os.path.join('doc', file),
                 os.path.join('share/doc/4digits/', file))
+    for file in os.listdir('doc/images/'):
+        if os.path.isfile(os.path.join('doc/images/', file)):
+            install(os.path.join('doc/images/', file),
+                os.path.join('share/doc/4digits/images/', file))
 elif args == ["uninstall"]:
     print "Uninstalling 4digits from", install_dir, "...\n"
     uninstall("games/4digits")
@@ -132,7 +136,7 @@ elif args == ["uninstall"]:
     uninstall("share/4digits/")
     uninstall("share/doc/4digits/")
     print
-    print "There might still be files in ~/.4digits/ left on your system."
+    print "There might still be files in your $HOME/.4digits/ directory."
     print "Please remove that directory manually if you do not plan to"
     print "install 4digits again later."
     
