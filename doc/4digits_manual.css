@@ -77,7 +77,7 @@ padding:10px;
 }
 
 #Menu {
-    position:absolute;
+    position:fixed;
     top:80px;
     left:20px;
     width:120px;

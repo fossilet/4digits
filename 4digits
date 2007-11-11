@@ -449,8 +449,8 @@ class AboutDialog:
         #self.about_dialog.set_title(_('About 4digits'))
         gtk.about_dialog_set_url_hook(
                 lambda about_dialog, url: webbrowser.open(url))
-        self.about_dialog.set_website('http://FourDigits.sourceforge.net')
-        self.about_dialog.set_website_label('http://FourDigits.sourceforge.net')
+        self.about_dialog.set_website('http://fourdigits.sourceforge.net')
+        self.about_dialog.set_website_label('http://fourdigits.sourceforge.net')
 
 class ScoreDialog:
     """the score dialog"""

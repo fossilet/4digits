@@ -21,6 +21,11 @@
             <a href="#license" name='license-toc'>License</a><br /> <br />
             <a href="http://fourdigits.sourceforge.net">Homepage</a><br /> <br />
             <a href="http://sourceforge.net/projects/fourdigits">Sourceforge Project Page</a><br /> <br />
+            <p>
+            <a href="http://localhost/w3c-markup-validator/check?uri=referer"><img
+                src="images/vxhtml10.png"
+                alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+            </p>
         </div>
         <div id="Content">
             <h3><a href="#intro-toc" name="intro">Introduction</a></h3>
@@ -38,33 +43,73 @@
             <p><a href="http://fink.sourgeforge.net">Fink</a> has PyGTK for mac. You can try.</p>
 
             <h3><a href="#play-toc" name='play'>Playing 4digits</a></h3>
-            <p>When you start a game, what it looks like is show in Figure 1. You are given eight times to guess a four-digit number. A digit is marked A if its value and position are both correct, and marked B if only its value is correct. You win the game when you get 4A0B. Good luck!</p>
-            <p><img src='images/4digits_main_window.png' alt='4digits main window' title='4digits main window' /></p>
-            <p>Figure 1   The main window when you start a game.</p>
-            <p>In Figure 2, the answer is 5184, which is known somehow. The first guess is 1234, then you get 1A1B. Why? 1A because '4' in 1234 and 5184 has the same value and position, and 1B because '1' in 1234 and 5184 share the same value but different position. If you enter 3456 then, you get 0A2B, because the values of '4' and '5' are right but there positions are not correct.</p>
-            <p><img src='images/game_start.png' alt='game start' title='game start' /></p>
-            <p>Figure 2  You get 1A1B when the answer is 5184.</p>
-            <p>A typical game in which the player wins is shown in Figure 3. The answer 7564 is guessed in 96.3 seconds.</p>
-            <p><img src='images/win.png' alt='win a game' title='win a game' /></p>
-            <p>Figure 3  When you win a game.</p>
-            <p>If your time(score) is in the top ten you will be shown the list of top scores. You can also review the scores later by choosing Scores from the Game menu.</p>
-            <p><img src='images/scores.png' alt='high score' title='high score' /></p>
-            <p>Belowe in Figure 4 is a game in which my brain fails me.</p>
-            <p><img src='images/lose.png' alt='lose a game' title='lose a game' /></p>
-            <p>Figure 4  When you lose a game.</p>
+            <table>
+                <tr>
+                    <td>
+                        <p><img src='images/4digits_main_window.png' alt='4digits main window' title='4digits main window' /></p>
+                        <p>Figure 1   The main window when you start a game.</p>
+                    </td>
+                    <td>
+                        <p>When you start a game, what it looks like is show in Figure 1. You are given eight times to guess a four-digit number. A digit is marked A if its value and position are both correct, and marked B if only its value is correct. You win the game when you get 4A0B. Good luck!</p>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <p>In Figure 2, the answer is 5184, which is known somehow. The first guess is 1234, then you get 1A1B. Why? 1A because '4' in 1234 and 5184 has the same value and position, and 1B because '1' in 1234 and 5184 share the same value but different position. If you enter 3456 then, you get 0A2B, because the values of '4' and '5' are right but there positions are not correct.</p>
+                    </td>
+                    <td>
+                        <p><img src='images/game_start.png' alt='game start' title='game start' /></p>
+                        <p>Figure 2  You get 1A1B when the answer is 5184.</p>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <p><img src='images/win.png' alt='win a game' title='win a game' /></p>
+                        <p>Figure 3  When you win a game.</p>
+                    </td>
+                    <td>
+                        <p>A typical game in which the player wins is shown in Figure 3. The answer 7564 is guessed in 96.3 seconds.</p>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <p>If your time(score) is in the top ten you will be shown the list of top scores. You can also review the scores later by choosing Scores from the Game menu.</p>
+                    </td>
+                    <td>
+                        <p><img src='images/scores.png' alt='high score' title='high score' /></p>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <p><img src='images/lose.png' alt='lose a game' title='lose a game' /></p>
+                        <p>Figure 4  When you lose a game.</p>
+                    </td>
+                    <td>
+                        <p>In Figure 4 is a game in which my brain fails me.</p>
+                    </td>
+                </tr>
+            </table>
 
             <h3><a href="#hinttable-toc" name='hinttable'>Hint table</a></h3>
             <table>
                 <tr>
                     <td><p>This is an example how to solve your game with the hinttable. The hint table can be toggled from the menu View -> Hint table. It looks like below. All the check boxes at the left column are checked meaning all possibilities. All the check boxes at the right column are unchecked meaning no digit or place is confirmed. You can check menu View -> Autofill Hints to let the computer help you filling some obvious cases.</p></td>
-                    <td><img src="hinttable.png" alt='hint table' /></td>
+                    <td><img src="images/hinttable.png" alt='hint table' /></td>
                 </tr>
             </table>
 
             <h2>Step 1</h2>
             <table>
                 <tr>
-                    <td><img src="step1.png" alt="Step 1" /></td>
+                    <td><img src="images/step1.png" alt="Step 1" /></td>
                     <td>
                         <p>We don't have any information yet, so we start with some random numbers. There is not much we can conclude from this, but the information that one number is at the right place will be helpful later.</p></td>
                 </tr>
@@ -80,14 +125,14 @@
                             <li> Then there is another number which we always know something about: Zero can't be the first digit (forbidden by gamerules). Also add this to the first grid.</li>
                             <li> We have tried the numbers 1, 2, 3, 4, 5, 6, 7, 8 but only two of them are in the final number. As we need another two digits and only two are left, we are sure that 0 and 9 are somewhere in the number. Add this to the second grid.</li>
                     </ul></td>
-                    <td><img src="step2.png" alt="Step 2" /></td>
+                    <td><img src="images/step2.png" alt="Step 2" /></td>
                 </tr>
             </table>
 
             <h2>Step 3</h2>
             <table>
                 <tr>
-                    <td><img src="step3.png" alt="Step 3" /></td>
+                    <td><img src="images/step3.png" alt="Step 3" /></td>
                     <td><p>Now we try to gather some more information about the numbers 1 to 9. I tried 3456 and the answer was 0A0B. So we can be sure that none of these digits is valid!</p></td>
                 </tr>
             </table>
@@ -97,12 +142,12 @@
                 <tr>
                     <td><p>Next I tried 9027 and got 0A4B.</p>
                         <p> So we have found all valid digits! Mark them in both tables. As in step 2 we can again exclude some places for the valid digits and mark them in the first table.</p></td>
-                    <td><img src="step4-1.png" alt="Step 5" /></td>
+                    <td><img src="images/step4-1.png" alt="Step 5" /></td>
                 </tr>
             </table>
             <table>
                 <tr>
-                    <td><img src="step4-2.png" alt="Step 6" /></td>
+                    <td><img src="images/step4-2.png" alt="Step 6" /></td>
                     <td><p>I also tried 9072 which gave me the hint that 2 is not at the last place.</p></td>
                 </tr>
             </table>
@@ -111,14 +156,14 @@
             <table>
                 <tr>
                     <td><p>Now we have the situation that both 2 and 7 can only go to places 1 and 2. This implies that no other digit can go to these places. So we can exclude the digit 9 from place 2.</p></td>
-                    <td><img src="step5.png" alt="Step 7" /></td>
+                    <td><img src="images/step5.png" alt="Step 7" /></td>
                 </tr>
             </table>
 
             <h2>Step 6</h2>
             <table>
                 <tr>
-                    <td><img src="step6.png" alt="Step 8" /></td>
+                    <td><img src="images/step6.png" alt="Step 8" /></td>
                     <td><p>Now we use the information we got in step 1.</p>
                         <p>The first result was that there is one digit in the right place. Obviously this can only be the 2. Mark this in the second table.</p>
                         <p>Now the 2 can't go to place 1 (because it's already at place 2 and no duplicates are allowed). Therefore 7 must go to place 1. Mark this in the second table.</p></td>
@@ -129,12 +174,12 @@
             <table>
                 <tr>
                     <td><p>Only two possible solutions left: 7209 and 7290. I choose 7209.....and win!</p></td>
-                    <td><img src="step7.png" alt="Step 9" /></td>
+                    <td><img src="images/step7.png" alt="Step 9" /></td>
                 </tr>
             </table>
 
             <h3><a href="#author-toc" name='author'>Authors</a></h3>
-            <p>4digits is written by Pan Yongzhi. Go to <a href="http://fourdigits.sourceforge.net">4digits homepage</a> for more info.</p>
+            <p>4digits is written by Pan Yongzhi. In 2007, Hermann Kraus added a hint table. Go to <a href="http://fourdigits.sourceforge.net">4digits homepage</a> for more information.</p>
 
             <h3><a href="#license-toc" name='license'>License</a></h3>
             <p>4digits is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
