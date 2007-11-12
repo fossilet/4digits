@@ -37,6 +37,7 @@ except ImportError:
     print 'No PyGTK was found on your system.'
     sys.exit(1)
 
+import gnome.ui
 import os
 import random
 import time
@@ -61,8 +62,8 @@ def load_glade(dialog = None):
         try:
             return gtk.glade.XML(gladefile, dialog) 
         except RuntimeError:
-            continue #Just ignore the error, the next file will be tested
-    #Still here
+            continue # Just ignore the error, the next file will be tested
+    # Still here
     print "Gladefile not found! Checked paths were:"
     print gladefiles
     sys.exit(2)
@@ -121,7 +122,7 @@ class FourDigits:
             table = gtk.Table(rows=11, columns=6)
             box_hints.pack_start(table)
 
-            #Create row labels
+            # Create row labels
             for row in range(0, 10):
                 label = gtk.CheckButton(str(row))
                 table.attach(label, 0, 1, row+1, row+2)
@@ -129,16 +130,16 @@ class FourDigits:
                 self.label_hint.append(label)
 
             for col in range(1, 5):
-                #Create column labels
+                # Create column labels
                 label = gtk.Label(str(col))
                 table.attach(label, col, col+1, 0, 1)
-                #Create Checkboxes
+                # Create Checkboxes
                 for row in range(0, 10):
                     checkbutton = gtk.CheckButton()
                     table.attach(checkbutton, col, col+1, row+1, row+2)
                     self.cb_hint.append(checkbutton)
 
-            if name == 0: #First table
+            if name == 0: # First table
                 box_hints.pack_start(gtk.VSeparator())
         self.init_hint_table()
 
@@ -246,7 +247,7 @@ class FourDigits:
     def clear_row(self, row):
         """Clear a complete row"""
         self.get_label(row, 0).set_active(False)
-        #self.get_label(row, 1).set_active(False)
+        # self.get_label(row, 1).set_active(False)
         for col in range(0, 4):
             self.get_checkbox(row, col, 0).set_active(False)
             self.get_checkbox(row, col, 1).set_active(False)
@@ -267,7 +268,7 @@ class FourDigits:
                 else:
                     self.clear_row(digit)
 
-        if A == 0: #Everything wrong
+        if A == 0: # Everything wrong
             for digit_pos in range(0, 4):
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     0).set_active(False)
@@ -275,7 +276,7 @@ class FourDigits:
                     1).set_active(False)
 
 #        if B == 0:
-            #Everything right
+            # Everything right
 #            for digit_pos in range(0, 4):
 #                for pos2 in range(0, 4):
 #                    if pos2 == digit_pos:
@@ -330,9 +331,9 @@ class FourDigits:
     
     def on_score_activate(self, new_score_rank):
         """Show scores"""
-        sd = ScoreDialog()
-        dlg = sd.score_dialog
-        score_view = sd.score_view
+        score_dialog = ScoreDialog()
+        dlg = score_dialog.score_dialog
+        score_view = score_dialog.score_view
         sv_selection = score_view.get_selection()
         sv_selection.set_mode(gtk.SELECTION_NONE)
         column = gtk.TreeViewColumn('Name', gtk.CellRendererText(), text = 0)
@@ -352,7 +353,7 @@ class FourDigits:
         for line in scores:
             score_tup = line[0], line[1], ' '.join(line[2:]).rstrip('\n')
             dlg.scoreList.append(score_tup)
-
+        # high light the current high score entry
         try:
             sv_selection.set_mode(gtk.SELECTION_SINGLE)
             sv_selection.select_path(new_score_rank)
@@ -373,7 +374,7 @@ class FourDigits:
         self.entry.set_text('')
         self.game.on_entry_cb_first_called_in_this_round = True
         self.info_label.set_text(_('Ready'))
-        #self.info_label.set_text(_(str(self.game.answer)))
+        # self.info_label.set_text(_(str(self.game.answer)))
         self.time_label.set_text('')
 
         for i in xrange(8):
@@ -398,7 +399,7 @@ class FourDigits:
         try:
             scores = [line.split(' ', 6) for line in file(score_file, 'r')]
         except IOError:
-            return True #List does not exist yet
+            return True # List does not exist yet
         if len(scores) < 10:
             return True
         scores = sorted(scores, key = lambda x: float(x[1][:-1]))
@@ -430,7 +431,7 @@ class FourDigits:
             # Most likely the directory does not exist
             new_dir = os.path.dirname(score_file)
             os.mkdir(new_dir)
-            fp = open(score_file, 'w') #Try again
+            fp = open(score_file, 'w') # Try again
         for score in scores:
             fp.write(' '.join(score))
         fp.close()
@@ -445,8 +446,8 @@ class AboutDialog:
     def __init__(self):
         self.widget_tree = load_glade('about_dialog')
         self.about_dialog = self.widget_tree.get_widget("about_dialog")
-        #self.about_dialog.set_name('4digits')
-        #self.about_dialog.set_title(_('About 4digits'))
+        # self.about_dialog.set_name('4digits')
+        # self.about_dialog.set_title(_('About 4digits'))
         gtk.about_dialog_set_url_hook(
                 lambda about_dialog, url: webbrowser.open(url))
         self.about_dialog.set_website('http://fourdigits.sourceforge.net')
@@ -468,7 +469,7 @@ class NewRound:
                 break
         if self.answer == [4, 6, 1, 9]:
             print 'You are the luckiest guy on the planet!'
-        #self.answer = [7, 2, 0, 9]
+        # self.answer = [7, 2, 0, 9]
         print self.answer
         self.guess = 0
         self.guesses = []
@@ -479,4 +480,5 @@ class NewRound:
 
 if __name__ == "__main__":
     FourDigits = FourDigits()
+    gnome.init('4digits', '0.8') # to load gnome stock icon 
     gtk.main()
