@@ -6,7 +6,7 @@ To install 4digits, do
 
 to install 4digits.
 
-If you want to make deb package, you can do 
+If you want to make deb package, you can do
     
     sudo checkinstall
 

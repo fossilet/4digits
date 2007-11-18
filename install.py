@@ -111,6 +111,7 @@ if args == ["install"]:
     install("4digits.desktop", "share/applications/4digits.desktop")
     install("4digits_logo.png", "share/4digits/4digits_logo.png")
     install("4digits_logo.png", "share/pixmaps/4digits_logo.png")
+    install("4digits.xpm", "share/pixmaps/4digits.xpm")
     install("4digits_logo.png", "share/icons/hicolor/48x48/apps/4digits_logo.png")
     install("4digits_logo.xcf", "share/4digits/4digits_logo.xcf")
     for file in os.listdir('doc'):
@@ -131,6 +132,7 @@ elif args == ["uninstall"]:
     uninstall("share/applications/4digits.desktop")
     uninstall("share/4digits/4digits_logo.png")
     uninstall("share/pixmaps/4digits_logo.png")
+    uninstall("share/pixmaps/4digits.xpm")
     uninstall("share/icons/hicolor/48x48/apps/4digits_logo.png")
     uninstall("share/4digits/4digits_logo.xcf")
     uninstall("share/4digits/")

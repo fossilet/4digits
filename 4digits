@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# pylint: disable-msg=r0201
 """
     4digits - A guess-the-number game, aka Bulls and Cows
     Copyright (c) 2004-2007 Pan Yongzhi <http://pan.cdut.cn/4digits>
@@ -17,12 +16,12 @@
 
     4digits is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
     along with 4digits; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 """
 
 import sys
@@ -33,16 +32,24 @@ try:
     import gtk
     import gtk.glade
 except ImportError:
-    print 'PyGTK is required to run 4digits.'
-    print 'No PyGTK was found on your system.'
+    print 'python-gtk2 is required to run 4digits.'
+    print 'No python-gtk2 was found on your system.'
     sys.exit(1)
 
-import gnome.ui
+try:
+    import gnome.ui
+except ImportError:
+    print 'python-gnome2 is required to run 4digits.'
+    print 'No python-gnome2 is found on your system.'
+    sys.exit(1)
+
 import os
 import random
 import time
 import webbrowser
 
+# The first is the current directory, so you do not have to install 
+# 4digits to play it. The second is the installation directory.
 gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
@@ -50,7 +57,6 @@ helpfiles = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
 score_file = os.path.join(os.getenv('HOME'), '.4digits/4digits.4digits.scores')
-print score_file
 
 def _(arg):
     """Mark translatable strings"""
@@ -160,12 +166,12 @@ class FourDigits:
             self.label_hint[row].set_active(True)
             self.label_hint[row+10].set_active(False)
     
-    #
     #         1    2    3    4                   1    2    3    4
     #  0/0    00   10   20   30          0/10    40   50   60   70
     #  1/1    01   11   21   31          1/11    41   51   61   71
     #  2/2    02   12   22   32          2/12    42   52   62   72
     # ...
+
     def get_checkbox(self, row, col, tablenr=0):
         """Get the checkbox at the specified position"""
         return self.cb_hint[tablenr * 40 + col * 10 + row]
@@ -247,7 +253,6 @@ class FourDigits:
     def clear_row(self, row):
         """Clear a complete row"""
         self.get_label(row, 0).set_active(False)
-        # self.get_label(row, 1).set_active(False)
         for col in range(0, 4):
             self.get_checkbox(row, col, 0).set_active(False)
             self.get_checkbox(row, col, 1).set_active(False)
@@ -268,24 +273,12 @@ class FourDigits:
                 else:
                     self.clear_row(digit)
 
-        if A == 0: # Everything wrong
+        if A == 0: # Only B's
             for digit_pos in range(0, 4):
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     0).set_active(False)
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     1).set_active(False)
-
-#        if B == 0:
-            # Everything right
-#            for digit_pos in range(0, 4):
-#                for pos2 in range(0, 4):
-#                    if pos2 == digit_pos:
-#                        continue
-#                    self.get_checkbox(number[digit_pos], pos2, 
-#                        0).set_active(False)
-
-#                self.get_checkbox(number[digit_pos], digit_pos, 
-#                    1).set_active(True)
 
     def on_entry_changed(self, widget):
         """Start timer as soon as the user enters the first digit"""
@@ -318,10 +311,7 @@ class FourDigits:
                 file(helpfile)
             except IOError:
                 continue
-            finally:
-                print helpfile
-                webbrowser.open(helpfile)
-                return
+            webbrowser.open(helpfile)
 
     def on_about_activate(self, widget):
         """Show about dialog"""
@@ -336,11 +326,14 @@ class FourDigits:
         score_view = score_dialog.score_view
         sv_selection = score_view.get_selection()
         sv_selection.set_mode(gtk.SELECTION_NONE)
-        column = gtk.TreeViewColumn('Name', gtk.CellRendererText(), text = 0)
+        column = gtk.TreeViewColumn(
+                'Name', gtk.CellRendererText(), text = 0)
         score_view.append_column(column)
-        column = gtk.TreeViewColumn('Score', gtk.CellRendererText(), text = 1)
+        column = gtk.TreeViewColumn(
+                'Score', gtk.CellRendererText(), text = 1)
         score_view.append_column(column)
-        column = gtk.TreeViewColumn('Date', gtk.CellRendererText(), text = 2)
+        column = gtk.TreeViewColumn(
+                'Date', gtk.CellRendererText(), text = 2)
         score_view.append_column(column)
         dlg.scoreList = gtk.ListStore(str, str, str)
         score_view.set_model(dlg.scoreList)
@@ -374,7 +367,6 @@ class FourDigits:
         self.entry.set_text('')
         self.game.on_entry_cb_first_called_in_this_round = True
         self.info_label.set_text(_('Ready'))
-        # self.info_label.set_text(_(str(self.game.answer)))
         self.time_label.set_text('')
 
         for i in xrange(8):
@@ -446,12 +438,12 @@ class AboutDialog:
     def __init__(self):
         self.widget_tree = load_glade('about_dialog')
         self.about_dialog = self.widget_tree.get_widget("about_dialog")
-        # self.about_dialog.set_name('4digits')
-        # self.about_dialog.set_title(_('About 4digits'))
         gtk.about_dialog_set_url_hook(
                 lambda about_dialog, url: webbrowser.open(url))
-        self.about_dialog.set_website('http://fourdigits.sourceforge.net')
-        self.about_dialog.set_website_label('http://fourdigits.sourceforge.net')
+        self.about_dialog.set_website(
+                'http://fourdigits.sourceforge.net')
+        self.about_dialog.set_website_label(
+                'http://fourdigits.sourceforge.net')
 
 class ScoreDialog:
     """the score dialog"""
@@ -469,8 +461,6 @@ class NewRound:
                 break
         if self.answer == [4, 6, 1, 9]:
             print 'You are the luckiest guy on the planet!'
-        # self.answer = [7, 2, 0, 9]
-        print self.answer
         self.guess = 0
         self.guesses = []
         self.time_start = 0
@@ -480,5 +470,5 @@ class NewRound:
 
 if __name__ == "__main__":
     FourDigits = FourDigits()
-    gnome.init('4digits', '0.8') # to load gnome stock icon 
+    gnome.init('4digits', '0.8')
     gtk.main()

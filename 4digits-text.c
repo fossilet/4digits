@@ -33,7 +33,7 @@
 #include <unistd.h>
 
 //#define DEBUG
-#define VERSION_STRING "0.6, Jul 2007"
+#define VERSION_STRING "0.8, Nov 2007"
 
 const char AUTHOR[] = "Written by Pan Yongzhi.\n";
 const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
@@ -44,7 +44,7 @@ const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
 "information about these matters, see the file named COPYING.\n";
 
 const char HELP[] = 
-"4digits 0.6, a guess-the-number game.\n"
+"4digits 0.8, a guess-the-number game.\n"
 "Usage: 4digits [OPTION] ...\n"
 "\n"
 "You have eight times to guess a 4-digit number. You get one A \n"
