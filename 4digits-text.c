@@ -1,6 +1,6 @@
 /*
  4digits - A guess-the-number game, aka Bulls and Cows
- Copyright (c) 2004-2007 Pan Yongzhi <http://pan.cdut.cn/4digits>
+ Copyright (c) 2004-2007 Pan Yongzhi <http://fourdigits.sourceforge.net>
                                                                        
  4digits is a guess-the-number puzzle game. You are given eight times
  to guess a four-digit number. One digit is marked A if its value and

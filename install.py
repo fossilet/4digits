@@ -114,10 +114,13 @@ if args == ["install"]:
     install("4digits.xpm", "share/pixmaps/4digits.xpm")
     install("4digits_logo.png", "share/icons/hicolor/48x48/apps/4digits_logo.png")
     install("4digits_logo.xcf", "share/4digits/4digits_logo.xcf")
+
     for file in os.listdir('doc'):
         if os.path.isfile(os.path.join('doc', file)):
             install(os.path.join('doc', file),
                 os.path.join('share/doc/4digits/', file))
+    install("INSTALL", "share/doc/4digits/INSTALL")
+    install("COPYING", "share/doc/4digits/COPYING")
     for file in os.listdir('doc/images/'):
         if os.path.isfile(os.path.join('doc/images/', file)):
             install(os.path.join('doc/images/', file),
