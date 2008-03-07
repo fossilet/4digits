@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# pylint: disable-msg=r0201
 """
     4digits - A guess-the-number game, aka Bulls and Cows
     Copyright (c) 2004-2007 Pan Yongzhi <http://fourdigits.sourceforge.net>
@@ -24,6 +25,11 @@
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 """
 
+import os
+import gettext
+os.environ.setdefault('LANG', 'en')
+gettext.install('4digits', '/home/tux/programming/4digits/fourdigits')
+
 import sys
 
 try:
@@ -32,18 +38,17 @@ try:
     import gtk
     import gtk.glade
 except ImportError:
-    print 'python-gtk2 is required to run 4digits.'
-    print 'No python-gtk2 was found on your system.'
+    print _('python-gtk2 is required to run 4digits.')
+    print _('No python-gtk2 was found on your system.')
     sys.exit(1)
 
 try:
     import gnome.ui
 except ImportError:
-    print 'python-gnome2 is required to run 4digits.'
-    print 'No python-gnome2 is found on your system.'
+    print _('python-gnome2 is required to run 4digits.')
+    print _('No python-gnome2 is found on your system.')
     sys.exit(1)
 
-import os
 import random
 import time
 import webbrowser
@@ -58,9 +63,11 @@ helpfiles = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
 score_file = os.path.join(os.getenv('HOME'), '.4digits/4digits.4digits.scores')
 
-def _(arg):
-    """Mark translatable strings"""
-    return arg
+try: _
+except NameError:
+    def _(arg):
+        """Mark translatable strings"""
+        return arg
 
 def load_glade(dialog = None):
     """Try to load dialog from the different possible glade files."""
@@ -179,7 +186,7 @@ class FourDigits:
     def get_label(self, row, tablenr=0):
         """Get the label at the specified position"""
         return self.label_hint[tablenr*10 + row]
-    
+
     def on_entry_activate(self, widget):
         """when input is accepted"""
         A, B = 0, 0
@@ -280,13 +287,16 @@ class FourDigits:
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     1).set_active(False)
 
-        if A == 4:# Everything right
+        if B == 0:
+        # Only digits which are either in the right place or completely wrong
             for digit_pos in range(0, 4):
                 for pos2 in range(0, 4):
                     if pos2 == digit_pos:
                         continue
+                    # uncheck impossible boxes in first column
                     self.get_checkbox(number[digit_pos], pos2, 
                         0).set_active(False)
+                # check possible boxes in second column
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     1).set_active(True)
 
@@ -337,13 +347,13 @@ class FourDigits:
         sv_selection = score_view.get_selection()
         sv_selection.set_mode(gtk.SELECTION_NONE)
         column = gtk.TreeViewColumn(
-                'Name', gtk.CellRendererText(), text = 0)
+                _('Name'), gtk.CellRendererText(), text = 0)
         score_view.append_column(column)
         column = gtk.TreeViewColumn(
-                'Score', gtk.CellRendererText(), text = 1)
+                _('Score'), gtk.CellRendererText(), text = 1)
         score_view.append_column(column)
         column = gtk.TreeViewColumn(
-                'Date', gtk.CellRendererText(), text = 2)
+                _('Date'), gtk.CellRendererText(), text = 2)
         score_view.append_column(column)
         dlg.scoreList = gtk.ListStore(str, str, str)
         score_view.set_model(dlg.scoreList)
@@ -469,6 +479,7 @@ class NewRound:
             self.answer = random.sample(range(10), 4)
             if self.answer[0] != 0:
                 break
+        print self.answer
         if self.answer == [4, 6, 1, 9]:
             print 'You are the luckiest guy on the planet!'
         self.guess = 0

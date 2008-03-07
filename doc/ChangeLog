@@ -3,7 +3,7 @@
 Version 0.8 (11/22/2007):
     GUI version:
     * High score recording and viewing.
-    * A hint table, which can be used to mark possibilites.
+    * A hint table, which can be used to mark possibilities.
     * Auto filling hint table.
     * Desktop entry file.
     * An install script in python copied from Comix.
