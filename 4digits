@@ -26,11 +26,10 @@
 """
 
 import os
-import gettext
-os.environ.setdefault('LANG', 'en')
-gettext.install('4digits', '/home/tux/programming/4digits/fourdigits')
-
+import random
 import sys
+import time
+import webbrowser
 
 try:
     import pygtk
@@ -48,10 +47,6 @@ except ImportError:
     print _('python-gnome2 is required to run 4digits.')
     print _('No python-gnome2 is found on your system.')
     sys.exit(1)
-
-import random
-import time
-import webbrowser
 
 # The first is the current directory, so you do not have to install 
 # 4digits to play it. The second is the installation directory.
@@ -81,7 +76,7 @@ def load_glade(dialog = None):
     print gladefiles
     sys.exit(2)
     
-class FourDigits:
+class FourDigits(object):
     """This is the main class"""
     def __init__(self):
         """GUI initialization"""
@@ -324,7 +319,8 @@ class FourDigits:
             self.hint_table.hide_all()
             self.hint_hseparator.hide()
     
-    def on_help_activate(self, widget):
+    @classmethod
+    def on_help_activate(cls, widget):
         """Show help."""
         for helpfile in helpfiles:
             try:
@@ -333,13 +329,15 @@ class FourDigits:
                 continue
             webbrowser.open(helpfile)
 
-    def on_about_activate(self, widget):
+    @classmethod
+    def on_about_activate(cls, widget):
         """Show about dialog"""
         about = AboutDialog().about_dialog
         about.run()
         about.destroy()
     
-    def on_score_activate(self, new_score_rank):
+    @classmethod
+    def on_score_activate(cls, new_score_rank):
         """Show scores"""
         score_dialog = ScoreDialog()
         dlg = score_dialog.score_dialog
@@ -406,7 +404,8 @@ class FourDigits:
         self.game.time_taken = self.game.time_end - self.game.time_start
         self.game.time_taken = round(self.game.time_taken, 1)
 
-    def is_high_score(self, time_taken):
+    @classmethod
+    def is_high_score(cls, time_taken):
         """Is this time a highscore"""
         try:
             scores = [line.split(' ', 6) for line in file(score_file, 'r')]
@@ -420,7 +419,8 @@ class FourDigits:
         else:
             return False
 
-    def write_score(self, time_taken):
+    @classmethod
+    def write_score(cls, time_taken):
         """Write highscore file"""
         date = time.strftime("%a %b %d %H:%M:%S %Y") 
         new_score = "%s %ss %s\n" % (
@@ -453,7 +453,7 @@ class FourDigits:
         """Show highscore dialog"""
         self.on_score_activate(new_score_rank)
 
-class AboutDialog:
+class AboutDialog(object):
     """the about dialog"""
     def __init__(self):
         self.widget_tree = load_glade('about_dialog')
@@ -465,21 +465,20 @@ class AboutDialog:
         self.about_dialog.set_website_label(
                 'http://fourdigits.sourceforge.net')
 
-class ScoreDialog:
+class ScoreDialog(object):
     """the score dialog"""
     def __init__(self):
         self.widget_tree = load_glade('score_dialog')
         self.score_dialog = self.widget_tree.get_widget('score_dialog')
         self.score_view = self.widget_tree.get_widget('score_view')
 
-class NewRound:
+class NewRound(object):
     """This class contains data in one round of the game"""
     def __init__(self):
         while True:
             self.answer = random.sample(range(10), 4)
             if self.answer[0] != 0:
                 break
-        print self.answer
         if self.answer == [4, 6, 1, 9]:
             print 'You are the luckiest guy on the planet!'
         self.guess = 0
