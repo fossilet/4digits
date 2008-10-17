@@ -3,7 +3,7 @@
 # pylint: disable-msg=r0201
 """
     4digits - A guess-the-number game, aka Bulls and Cows
-    Copyright (c) 2004-2007 Pan Yongzhi <http://fourdigits.sourceforge.net>
+    Copyright (c) 2004-2008 Pan Yongzhi <http://fourdigits.sourceforge.net>
 
     4digits is a guess-the-number puzzle game. You are given eight times
     to guess a four-digit number. One digit is marked A if its value and
@@ -26,6 +26,7 @@
 """
 
 import os
+import cPickle
 import random
 import sys
 import time
@@ -48,72 +49,106 @@ except ImportError:
     print _('No python-gnome2 is found on your system.')
     sys.exit(1)
 
+__version__ = '0.9'
+__appdata_dir__ = os.path.join(os.getenv('HOME'), '.4digits')
+__config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
+__prefs__ = {
+        'show toolbar': True,
+        'show hint table': False,
+        'auto fill hints': False
+        }
+
 # The first is the current directory, so you do not have to install 
 # 4digits to play it. The second is the installation directory.
-gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
+__gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
-helpfiles = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
+__helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
-score_file = os.path.join(os.getenv('HOME'), '.4digits/4digits.4digits.scores')
+__score_filename__ = os.path.join(__appdata_dir__, '4digits.4digits.scores')
 
-try: _
+# For future gettext support. I cannot figure out i18n now.
+# I wish someone could help me with it.
+try: 
+    _()
 except NameError:
     def _(arg):
-        """Mark translatable strings"""
+        """Mark translatable strings."""
         return arg
 
 def load_glade(dialog = None):
     """Try to load dialog from the different possible glade files."""
-    for gladefile in gladefiles:
+    for gladefile in __gladefiles__:
         try:
             return gtk.glade.XML(gladefile, dialog) 
         except RuntimeError:
             continue # Just ignore the error, the next file will be tested
     # Still here
     print "Gladefile not found! Checked paths were:"
-    print gladefiles
+    print __gladefiles__
     sys.exit(2)
     
-class FourDigits(object):
-    """This is the main class"""
+
+class MainWindow(object):
+    """The main game window."""
     def __init__(self):
-        """GUI initialization"""
+        """GUI initialization."""
         self.widget_tree = load_glade()
         self.toolbar = self.widget_tree.get_widget('toolbar')
         self.view_toolbar = self.widget_tree.get_widget('view_toolbar')
-
-        self.hint_table = self.widget_tree.get_widget('box_hints')
-        self.hint_hseparator = self.widget_tree.get_widget('hint_hseparator')
-        self.view_hint_table = self.widget_tree.get_widget('view_hint_table')
-        self.autofill_hints = self.widget_tree.get_widget('view_autofill_hints')
-
+        self.hint_table = self.widget_tree.get_widget('hint_table')
+        self.hint_hseparator = self.widget_tree.get_widget(
+                'hint_hseparator')
+        self.view_hint_table = self.widget_tree.get_widget(
+                'view_hint_table')
+        self.auto_fill_hints = self.widget_tree.get_widget(
+                'view_auto_fill_hints')
         self.entry = self.widget_tree.get_widget('entry')
         self.entry.grab_focus()
-
         self.ok_button = self.widget_tree.get_widget('ok_button')
-        self.ok_button.set_sensitive(True)
-        self.entry.set_sensitive(True)
-
-        self.table = self.widget_tree.get_widget("state_table")
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
                 'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
             setattr(self, widget, self.widget_tree.get_widget(widget))
         self.info_label = self.widget_tree.get_widget('info_label')
         self.time_label = self.widget_tree.get_widget('time_label')
-        
         self.score_view = self.widget_tree.get_widget('score_view')
-        
-        self.cb_hint = []
+
+        self.cb_hint = [] # container for check boxes in the hint table
         self.label_hint = []
         self.build_hint_table()
-        dic = {'on_main_window_destroy': gtk.main_quit,
-                'on_quit_activate': gtk.main_quit,
+
+        # parse preferences
+        self.read_preferences_file()
+        if __prefs__['show toolbar']:
+            self.toolbar.show()
+            self.view_toolbar.set_active(True)
+        else:
+            self.toolbar.hide()
+            self.view_toolbar.set_active(False)
+        if __prefs__['show hint table']:
+            self.hint_table.show_all()
+            self.hint_hseparator.show()
+            self.view_hint_table.set_active(True)
+        else:
+            self.hint_table.hide_all()
+            self.hint_hseparator.hide()
+            self.view_hint_table.set_active(False)
+        if __prefs__['auto fill hints']:
+            self.auto_fill_hints.set_active(True)
+        else:
+            self.auto_fill_hints.set_active(False)
+        
+        # connect signals and callbacks
+        dic = {'on_main_window_destroy': self.terminate_program,
+                'on_quit_activate': self.terminate_program,
                 'on_ok_clicked': self.on_entry_activate,
                 'on_new_game_activate': self.on_new_game_activate,
                 'on_view_toolbar_toggled': self.on_view_toolbar_toggled,
-                'on_view_hint_table_toggled': self.on_view_hint_table_toggled,
+                'on_view_hint_table_toggled'
+                : self.on_view_hint_table_toggled,
+                'on_view_auto_fill_hints_toggled'
+                : self.on_view_auto_fill_hints_toggled,
                 'on_entry_activate': self.on_entry_activate,
                 'on_entry_changed': self.on_entry_changed,
                 'on_help_activate' : self.on_help_activate,
@@ -123,12 +158,38 @@ class FourDigits(object):
         # new game initialization
         self.game = NewRound()
 
+    def read_preferences_file(self):
+        """Read preferences data from disk.
+        Copied from Comix.
+        """
+        if os.path.isfile(__config_path__):
+            try:
+                config = open(__config_path__)
+                old___prefs__ = cPickle.load(config)
+                config.close()
+            except Exception:
+                print 'Corrupted preferences file \
+                "%s", deleting...' % __config_path__
+                os.remove(__config_path__)
+            else:
+                for key in old___prefs__:
+                    if key in __prefs__:
+                        __prefs__[key] = old___prefs__[key]
+
+    def write_preferences_file(self):
+        """Write preference data to disk.
+        Copied from Comix.
+        """
+        config = open(__config_path__, 'w')
+        cPickle.dump(__prefs__, config, cPickle.HIGHEST_PROTOCOL)
+        config.close()
+
     def build_hint_table(self):
-        """Create the controls for the hint table"""
-        box_hints = self.widget_tree.get_widget('box_hints')
+        """Create the controls for the hint table."""
+        hint_table = self.widget_tree.get_widget('hint_table')
         for name in (0, 40):
             table = gtk.Table(rows=11, columns=6)
-            box_hints.pack_start(table)
+            hint_table.pack_start(table)
 
             # Create row labels
             for row in range(0, 10):
@@ -148,7 +209,7 @@ class FourDigits(object):
                     self.cb_hint.append(checkbutton)
 
             if name == 0: # First table
-                box_hints.pack_start(gtk.VSeparator())
+                hint_table.pack_start(gtk.VSeparator())
         self.init_hint_table()
 
     def change_row(self, widget, row):
@@ -175,39 +236,39 @@ class FourDigits(object):
     # ...
 
     def get_checkbox(self, row, col, tablenr=0):
-        """Get the checkbox at the specified position"""
+        """Get the checkbox at the specified position."""
         return self.cb_hint[tablenr * 40 + col * 10 + row]
 
     def get_label(self, row, tablenr=0):
-        """Get the label at the specified position"""
+        """Get the label at the specified position."""
         return self.label_hint[tablenr*10 + row]
 
     def on_entry_activate(self, widget):
-        """when input is accepted"""
-        A, B = 0, 0
+        """when input is accepted."""
+        bulls, cows = 0, 0
         number = ''
         # check input
         if self.game.guess < 8:
             number = self.entry.get_text()
             if number == '':
-                self.error_process(_('Must input something.'))
+                self.process_error(_('Must input something.'))
                 return False
             elif number[0] == '0':
-                self.error_process(_('First digit cannot be zero.'))
+                self.process_error(_('First digit cannot be zero.'))
                 return False
             try:
                 number = repr(int(number))
             except ValueError:
-                self.error_process(_('Must input a number.'))
+                self.process_error(_('Must input a number.'))
                 return False
             if len(number) < 4:
-                self.error_process(_('Must input four digits.'))
+                self.process_error(_('Must input four digits.'))
                 return False
-            elif len(set(number)) <4:
-                self.error_process(_('Four digits must be unique.'))
+            elif len(set(number)) < 4:
+                self.process_error(_('Four digits must be unique.'))
                 return False
             elif number in self.game.guesses:
-                self.error_process(_("You've already guessed it."))
+                self.process_error(_("You've already guessed it."))
                 return False
             self.game.guesses.append(number)
             # process input
@@ -215,19 +276,19 @@ class FourDigits(object):
                 for j in xrange(4):
                     if self.game.answer[i] == int(number[j]):
                         if i == j:
-                            A += 1
+                            bulls += 1
                         else:
-                            B += 1
+                            cows += 1
             guess_label = getattr(self, 'g' + repr(self.game.guess))
             result_label = getattr(self, 'r' + repr(self.game.guess))
             guess_label.set_text(number)
-            result_label.set_text('%dA%dB' % (A, B))
+            result_label.set_text('%dA%dB' % (bulls, cows))
 
-            if (self.autofill_hints.get_active()):
-                self.fill_hints(number, A, B)
+            if self.auto_fill_hints.get_active():
+                self.fill_hints(number, bulls, cows)
             
             # win
-            if A == 4:
+            if bulls == 4:
                 self.info_label.set_text(_('You win! :)'))
                 self.get_time_taken_till_now()
                 self.time_label.set_text(_('Used %.1f s.') % 
@@ -253,21 +314,21 @@ class FourDigits(object):
         self.entry.grab_focus()
 
     def clear_row(self, row):
-        """Clear a complete row"""
+        """Clear a complete row."""
         self.get_label(row, 0).set_active(False)
         for col in range(0, 4):
             self.get_checkbox(row, col, 0).set_active(False)
             self.get_checkbox(row, col, 1).set_active(False)
 
-    def fill_hints(self, number, A, B):
-        """Autocomplete the hint table"""
+    def fill_hints(self, number, bulls, cows):
+        """Auto filling some obvious cases in the hint table."""
         number = [int(x) for x in number]
-        if A == 0 and B == 0:
+        if bulls == 0 and cows == 0:
             for digit in number:
                 self.clear_row(digit)
             return
 
-        if (A+B) == 4:
+        if bulls+cows == 4:
             for digit in range(0, 10):
                 if digit in number:
                     self.get_label(digit, 0).set_active(True)
@@ -275,14 +336,14 @@ class FourDigits(object):
                 else:
                     self.clear_row(digit)
 
-        if A == 0: # Only B's
+        if bulls == 0: # Only cows
             for digit_pos in range(0, 4):
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     0).set_active(False)
                 self.get_checkbox(number[digit_pos], digit_pos, 
                     1).set_active(False)
 
-        if B == 0:
+        if cows == 0: # Only bulls
         # Only digits which are either in the right place or completely wrong
             for digit_pos in range(0, 4):
                 for pos2 in range(0, 4):
@@ -291,38 +352,46 @@ class FourDigits(object):
                     # uncheck impossible boxes in first column
                     self.get_checkbox(number[digit_pos], pos2, 
                         0).set_active(False)
-                # check possible boxes in second column
-                self.get_checkbox(number[digit_pos], digit_pos, 
-                    1).set_active(True)
 
     def on_entry_changed(self, widget):
-        """Start timer as soon as the user enters the first digit"""
+        """Start timer as soon as the user enters the first digit."""
         self.info_label.set_text('')
-        if self.game.on_entry_cb_first_called_in_this_round == True:
+        if self.game.on_entry_cb_first_called == True:
             self.time_label.set_text(_('Timer started...'))
             self.game.time_start = time.time()
-            self.game.on_entry_cb_first_called_in_this_round = False
+            self.game.on_entry_cb_first_called = False
   
     def on_view_toolbar_toggled(self, widget):
-        """Toggle toolbar visibility"""
-        if self.view_toolbar.get_active():
-            self.toolbar.show()
-        else:
+        """Toggle toolbar visibility."""
+        if self.toolbar.get_property('visible'):
             self.toolbar.hide()
+            __prefs__['show toolbar'] = False
+        else:
+            self.toolbar.show()
+            __prefs__['show toolbar'] = True
 
     def on_view_hint_table_toggled(self, widget):
-        """Toggle hint table visibility"""
-        if self.view_hint_table.get_active():
-            self.hint_table.show_all()
-            self.hint_hseparator.show()
-        else:
+        """Toggle hint table visibility."""
+        if self.hint_table.get_property('visible'):
             self.hint_table.hide_all()
             self.hint_hseparator.hide()
+            __prefs__['show hint table'] = False
+        else:
+            self.hint_table.show_all()
+            self.hint_hseparator.show()
+            __prefs__['show hint table'] = True
     
+    def on_view_auto_fill_hints_toggled(self, widget):
+        """Toggle auto filling of hint table."""
+        if self.auto_fill_hints.get_active():
+            __prefs__['auto fill hints'] = True
+        else:
+            __prefs__['auto fill hints'] = False
+
     @classmethod
     def on_help_activate(cls, widget):
         """Show help."""
-        for helpfile in helpfiles:
+        for helpfile in __helpfiles__:
             try:
                 file(helpfile)
             except IOError:
@@ -331,14 +400,14 @@ class FourDigits(object):
 
     @classmethod
     def on_about_activate(cls, widget):
-        """Show about dialog"""
+        """Show about dialog."""
         about = AboutDialog().about_dialog
         about.run()
         about.destroy()
     
     @classmethod
     def on_score_activate(cls, new_score_rank):
-        """Show scores"""
+        """Show high scores."""
         score_dialog = ScoreDialog()
         dlg = score_dialog.score_dialog
         score_view = score_dialog.score_view
@@ -357,7 +426,8 @@ class FourDigits(object):
         score_view.set_model(dlg.scoreList)
 
         try:
-            scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+            scores = [line.split(' ', 6) 
+                    for line in file(__score_filename__, 'r')]
         except IOError:
             scores = []
 
@@ -375,15 +445,15 @@ class FourDigits(object):
         dlg.destroy()
 
     def on_new_game_activate(self, widget):
-        """New game initialization"""
+        """New game initialization."""
         self.game = NewRound()
         self.ok_button.set_sensitive(True)
         self.entry.set_sensitive(True)
         self.entry.grab_focus()
         # won't start the timer when you just start a new game
-        self.game.on_entry_cb_first_called_in_this_round = False
+        self.game.on_entry_cb_first_called = False
         self.entry.set_text('')
-        self.game.on_entry_cb_first_called_in_this_round = True
+        self.game.on_entry_cb_first_called = True
         self.info_label.set_text(_('Ready'))
         self.time_label.set_text('')
 
@@ -393,22 +463,23 @@ class FourDigits(object):
         
         self.init_hint_table()
 
-    def error_process(self, msg):
-        """Show error message in statusbar"""
+    def process_error(self, msg):
+        """Show error message in statusbar."""
         self.info_label.set_text(msg)
         self.entry.grab_focus()
 
     def get_time_taken_till_now(self):
-        """Get time since start of the game"""
+        """Get time since start of the game."""
         self.game.time_end = time.time()
         self.game.time_taken = self.game.time_end - self.game.time_start
         self.game.time_taken = round(self.game.time_taken, 1)
 
     @classmethod
     def is_high_score(cls, time_taken):
-        """Is this time a highscore"""
+        """Is this time a highscore."""
         try:
-            scores = [line.split(' ', 6) for line in file(score_file, 'r')]
+            scores = [line.split(' ', 6) 
+                    for line in file(__score_filename__, 'r')]
         except IOError:
             return True # List does not exist yet
         if len(scores) < 10:
@@ -421,12 +492,12 @@ class FourDigits(object):
 
     @classmethod
     def write_score(cls, time_taken):
-        """Write highscore file"""
+        """Write highscore file."""
         date = time.strftime("%a %b %d %H:%M:%S %Y") 
         new_score = "%s %ss %s\n" % (
                 os.getenv('USERNAME'), time_taken, date)
         try:
-            saved_scores = open(score_file, 'r').readlines()
+            saved_scores = open(__score_filename__, 'r').readlines()
         except IOError:
             saved_scores = [] 
         saved_scores.append(new_score)
@@ -438,23 +509,31 @@ class FourDigits(object):
         new_score = new_score.split(' ', 6)
         new_score_rank = scores.index(new_score)
         try:
-            fp = open(score_file, 'w')
+            scorefile = open(__score_filename__, 'w')
         except IOError:
             # Most likely the directory does not exist
-            new_dir = os.path.dirname(score_file)
+            new_dir = os.path.dirname(__score_filename__)
             os.mkdir(new_dir)
-            fp = open(score_file, 'w') # Try again
+            scorefile = open(__score_filename__, 'w') # Try again
         for score in scores:
-            fp.write(' '.join(score))
-        fp.close()
+            scorefile.write(' '.join(score))
+        scorefile.close()
         return new_score_rank
 
     def show_score(self, new_score_rank):
-        """Show highscore dialog"""
+        """Show highscore dialog."""
         self.on_score_activate(new_score_rank)
+    
+    def terminate_program(self, widget):
+        """Run clean-up tasks and exit.
+        Copied from comix.        
+        """
+        self.write_preferences_file()
+        gtk.main_quit()
+
 
 class AboutDialog(object):
-    """the about dialog"""
+    """The about dialog."""
     def __init__(self):
         self.widget_tree = load_glade('about_dialog')
         self.about_dialog = self.widget_tree.get_widget("about_dialog")
@@ -465,30 +544,34 @@ class AboutDialog(object):
         self.about_dialog.set_website_label(
                 'http://fourdigits.sourceforge.net')
 
+
 class ScoreDialog(object):
-    """the score dialog"""
+    """The score dialog."""
     def __init__(self):
         self.widget_tree = load_glade('score_dialog')
         self.score_dialog = self.widget_tree.get_widget('score_dialog')
         self.score_view = self.widget_tree.get_widget('score_view')
 
+
 class NewRound(object):
-    """This class contains data in one round of the game"""
+    """Contains data in one round of the game."""
     def __init__(self):
         while True:
             self.answer = random.sample(range(10), 4)
-            if self.answer[0] != 0:
+            if self.answer[0] != 0: # first digit cannot be zero
                 break
         if self.answer == [4, 6, 1, 9]:
-            print 'You are the luckiest guy on the planet!'
+            gtk.MessageDialog(message_format
+                    ='4619: You are the luckiest guy on the planet!').show()
         self.guess = 0
         self.guesses = []
         self.time_start = 0
         self.time_end = 0
         self.time_taken = 0
-        self.on_entry_cb_first_called_in_this_round = True
+        self.on_entry_cb_first_called = True
 
 if __name__ == "__main__":
-    FourDigits = FourDigits()
-    gnome.init('4digits', '0.8')
+    MainWindow()
+    # This way we can use the gnome high score stock icon.
+    gnome.init('4digits', '0.9')
     gtk.main()

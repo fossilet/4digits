@@ -21,6 +21,7 @@
             <a href="#license" name='license-toc'>License</a><br /> <br />
             <a href="http://fourdigits.sourceforge.net">Homepage</a><br /> <br />
             <a href="http://sourceforge.net/projects/fourdigits">Sourceforge Project Page</a><br /> <br />
+            <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=182681&amp;type=4" width="125" height="37" border="0" alt="SourceForge.net Logo" /></a><br /> <br />
             <p>
             <a href="http://validator.w3.org/check?uri=referer"><img
                 src="images/vxhtml10.png"
@@ -29,16 +30,16 @@
         </div>
         <div id="Content">
             <h3><a href="#intro-toc" name="intro">Introduction</a></h3>
-            <p>4digits is a guess-the-number puzzle game. It's called <a href="http://www.answers.com/topic/bulls-and-cows">Bulls and Cows</a>, and in China people simply call it Guess-the-Number. The game's objective is to guess a four-digit number in 8 times using as less time as possible. It is similar to <a href="http://www.answers.com/topic/mastermind">Mastermind</a>, but the four digits are different to each other. 4digits has both graphical user interface <i>4digits</i> and textual user interface <i>4digits-text</i>. This manual demonstrates the GUI version.</p>
+            <p>4digits is a guess-the-number puzzle game. It's called Bulls and Cows, and in China people simply call it Guess-the-Number. The game's objective is to guess a four-digit number in 8 times using as less time as possible. It is similar to Mastermind, but the four digits are different to each other. 4digits has a graphical user interface version <i>4digits</i> and a textual user interface version <i>4digits-text</i>. This manual demonstrates the GUI version.</p>
 
             <h3><a href="#install-toc" name="install">Installation</a></h3>
-            <p>Before playing 4digits, you need to install python, python-gtk2, python-glade2 and python-gnome2 in your computer.</p>
+            <p>Before playing 4digits, you need to install python (version 2.5 or below, not tested in 2.6), python-gtk2, python-glade2 and python-gnome2 in your computer.</p>
             <h4>Linux</h4>
             <p>Python is usually already installed in your computer if your are a using a modern Linux distribution. You can install python-gtk2, python-glade2 and python-gnome2 from the software repository of your distribution.</p>
             <h4>BSD's and Unix's</h4>
             <p>Install python, python-gtk2, python-glade2 and python-gnome2 for your system.</p>
             <h4>Windows</h4>
-            <p>4digits 0.8 no longer runs correctly on Windows, but you can still play version 0.4. You need to install <a href='http://www.pygtk.org/'>PyGTK</a>. Click <a href="http://osl.ulpgc.es/~arc/gnome/pygtk-setup.exe">here</a> to download the all-in-one PyGTK installer for Windows.</p>
+            <p>Since version 0.8, 4digits is no longer supported on Windows, but you can still play version 0.4. You need to install <a href='http://www.pygtk.org/'>PyGTK</a>. Click <a href="http://osl.ulpgc.es/~arc/gnome/pygtk-setup.exe">here</a> to download the all-in-one PyGTK installer for Windows.</p>
             <h4>Mac OS X</h4>
             <p><a href="http://finkproject.org/">Fink Project</a> has PyGTK and gnome-python2 for Mac OS X. You can try it.</p>
 
@@ -50,7 +51,7 @@
                         <p>Figure 1 The main window.</p>
                     </td>
                     <td>
-                        <p>When you start 4digits, the window is like the one shown in Figure 1. You are given eight times to guess a four-digit number. A digit is marked A if its value and position are both correct, and marked B if only its value is correct. You win the game when you get 4A0B. Good luck!</p>
+                        <p>When you start 4digits, the main window is like the one shown in Figure 1. You are given eight times to guess a four-digit number. You get one A if its value and position are both correct, and you get one B if only its value is correct. You win the game when you get 4A0B. </p>
                     </td>
                 </tr>
             </table>
@@ -79,7 +80,7 @@
             <table>
                 <tr>
                     <td>
-                        <p>If your time is in the top ten you will be shown the top ten scores. You can also view the scores later by choosing <i>Scores</i> from the <i>Game</i> menu.</p>
+                        <p>If your time is in the top ten you will be shown the top ten scores, and the score you just get is highlighted. You can also view the scores later by choosing menu <i>Game -> Scores</i>.</p>
                     </td>
                     <td>
                         <p><img src='images/scores.png' alt='high score' title='high score' /></p>
@@ -93,7 +94,7 @@
                         <p>Figure 4  When you lose a game.</p>
                     </td>
                     <td>
-                        <p>In Figure 4, the player does not guess the answer in eight times.</p>
+                        <p>In Figure 4, the player fails to guess the answer in eight times.</p>
                     </td>
                 </tr>
             </table>
@@ -102,16 +103,16 @@
             <table>
                 <tr>
                     <td>
-                        <p>This is an example on how to solve your game with the hint table. The hint table can be toggled from menu <i>View</i> -> <i>Hint table</i>. All the check boxes of the left column are checked meaning all possibilities, all the check boxes of the right column are unchecked meaning no digit or place is confirmed. That is to say:</p>
+                        <p>This is an example on how to solve your game with the hint table. The hint table can be toggled from menu <i>View</i> -> <i>Hint Table</i>. All the check boxes of the left column are checked meaning all possibilities, all the check boxes of the right column are unchecked meaning no digit or place is confirmed. That is to say:</p>
                         <blockquote>
                             <p>Left side:<br />
-                            - You UNCHECK a BOX if you are absolutely sure that this number CANNOT be at this position.<br />
-                            - You UNCHECK a ROW if you are absolutely sure that this number is NOT included at any position.</p>
+                            - You uncheck a box if you are sure that this number cannot be at this position.<br />
+                            - You uncheck a row if you are sure that this number is not in the answer.</p>
                             <p>Right side:<br />
-                            - You CHECK a BOX if you are absolutely sure that this number IS at this position if it is included at all.<br />
-                            - You CHECK a ROW if you are absolutely sure that this number MUST BE included at any position.</p>
+                            - You check a box if you are sure that this number is at this position if it is included at all.<br />
+                            - You check a row if you are sure that this number must be in the answer.</p>
                         </blockquote>
-                        <p>You can check menu <i>View</i> -> <i>Auto Filling Hints</i> to let the computer help you filling some obvious cases.</p>
+                        <p>You can check menu <i>View</i> -> <i>Auto Fill Hints</i> to let the computer help you fill some obvious cases.</p>
                     </td>
                     <td><img src="images/hinttable.png" alt='hint table' /></td>
                 </tr>
@@ -205,9 +206,7 @@
             </table>
 
             <h3><a href="#author-toc" name='author'>Authors</a></h3>
-            <p>4digits is written by Pan Yongzhi.</p> 
-            <p>In 2007, Hermann Kraus added a hint table.</p>
-            <p> Go to <a href="http://fourdigits.sourceforge.net">4digits homepage</a> for more information.</p>
+            <p>4digits is written by Pan Yongzhi. In 2007, Hermann Kraus added a hint table.</p>
 
             <h3><a href="#license-toc" name='license'>License</a></h3>
             <p>4digits is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>

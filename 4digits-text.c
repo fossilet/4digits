@@ -1,26 +1,28 @@
 /*
- 4digits - A guess-the-number game, aka Bulls and Cows
- Copyright (c) 2004-2007 Pan Yongzhi <http://fourdigits.sourceforge.net>
-                                                                       
- 4digits is a guess-the-number puzzle game. You are given eight times
- to guess a four-digit number. One digit is marked A if its value and
- position are both correct, and marked B if only its value is correct.
- You win the game when you get 4A0B. Good luck!
-                                                                       
- 4digits is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License as
- published by the Free Software Foundation; either version 2 of
- the License, or (at your option) any later version.
- 
- 4digits is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-                                                                       
- You should have received a copy of the GNU General Public License
- along with 4digits; if not, write to the Free Software Foundation,
- Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
- */
+   4digits - A guess-the-number game, aka Bulls and Cows
+   Copyright (c) 2004-2008 Pan Yongzhi <http://fourdigits.sourceforge.net>
+
+   4digits is a guess-the-number puzzle game. It's called Bulls and Cows,
+   and in China people simply call it Guess-the-Number. The game's
+   objective is to guess a four-digit number in 8 times using as less time
+   as possible. It is similar to Mastermind, but the four digits are
+   different to each other. 4digits has a graphical user interface version
+   4digits and a textual user interface version 4digits-text. 
+
+   4digits is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
+
+   4digits is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with 4digits; if not, write to the Free Software Foundation,
+   Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+   */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,29 +30,27 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdbool.h>
-
 #include <getopt.h>
 #include <unistd.h>
 
 //#define DEBUG
-#define VERSION_STRING "0.8, Nov 2007"
+#define VERSION_STRING "0.9, Nov 2008"
 
-const char AUTHOR[] = "Written by Pan Yongzhi.\n";
 const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
 "4digits comes with NO WARRANTY to the extent permitted by law.\n"
 "This program is free software; you can redistribute it and/or\n"
 "modify it under the terms of the GNU General Public License as\n"
 "published by the Free Software Foundation - version 2. For more\n"
 "information about these matters, see the file named COPYING.\n";
+const char AUTHOR[] = "Written by Pan Yongzhi.\n";
 
 const char HELP[] = 
-"4digits 0.8, a guess-the-number game.\n"
+"4digits, a guess-the-number game.\n"
 "Usage: 4digits [OPTION] ...\n"
 "\n"
-"You have eight times to guess a 4-digit number. You get one A \n"
-"if its value and position are both correct, and one B \n"
-"if only its value is correct. You win the game when you get   \n"
-"4A0B. Good luck!\n"
+"You are given eight times to guess a four-digit number. You get\n"
+"one A if its value and position are both correct, and you get one\n"
+"B if only its value is correct. You win the game when you get 4A0B.\n"
 "\n"
 "-v, --version \t display the version of 4digits and exit.\n"
 "-h, -?, --help \t print this help.\n"      
@@ -68,57 +68,52 @@ static const struct option longOpts[] = {
     { NULL, no_argument, NULL, 0 }
 };
 
-void showopt(void);
 void print_help(void);
 void display_usage(void);
-void gen_rand(int answerdgts[4]);
+void gen_rand(int ans_digits[]);
 int enter_number(void);
-void show_high_score(void);
 void save_score(const int time_taken);
-void compare(const int *inputdgts, const int *answerdgts, int *A, int *B);
+void compare(const int *in_digits, const int *ans_digits, int *A, int *B);
 int tenpow(int power);
 
-void showopt(void) {
-    printf("version: %s\n", globalArgs.version);
-}
-
 void print_help(void) {
-    puts(HELP);
+    (void)puts(HELP);
     exit(EXIT_FAILURE);
 }
 
 void display_usage(void) {
-    puts("Usage: 4digits [OPTION]...\n");
-    puts("Try `4digits --help' for more information.");
+    (void)puts("Usage: 4digits [OPTION]...\n");
+    (void)puts("Try `4digits --help' for more information.");
     exit(EXIT_FAILURE);
 }
 
 /* generate a random number */
-void gen_rand(int answerdgts[4]) {
-    srand(time(NULL));
-    int answer = 1000 + (int) (8999.0 * rand() / RAND_MAX);
+void gen_rand(int ans_digits[]) {
+    srand((unsigned)time(NULL));
+    int ans = 1000 + (int)(8999.0*rand()/RAND_MAX);
     for(int i=0; i<4; i++)
-        answerdgts[i]=(int) (answer / tenpow(3-i))%10;
+        ans_digits[i] = (int)(ans/tenpow(3-i)) % 10;
 
-    /* if 4 digits of n is not different from each other, regenerate it*/
-    while(answerdgts[0]==answerdgts[1] || answerdgts[1]==answerdgts[2]
-            || answerdgts[2]==answerdgts[3] || answerdgts[0]==answerdgts[2]
-            || answerdgts[0]==answerdgts[3] || answerdgts[1]==answerdgts[3]) {
-        answer = 1000 + (int)(8999.0 * ((double)rand()/RAND_MAX)); 
+    /* if 4 digits is not different from each other, regenerate it*/
+    while(ans_digits[0]==ans_digits[1] || ans_digits[1]==ans_digits[2]
+            || ans_digits[2]==ans_digits[3] || ans_digits[0]==ans_digits[2]
+            || ans_digits[0]==ans_digits[3] || ans_digits[1]==ans_digits[3])
+    {
+        ans = 1000 + (int)(8999.0 * ((double)rand()/RAND_MAX)); 
         for(int i=0; i<4; i++)
-            answerdgts[i] = (int)(answer / tenpow(3-i))%10;
+            ans_digits[i] = (int)(ans / tenpow(3-i))%10;
     }
 #ifdef DEBUG
-    printf("%d\n", answer);
+    printf("%d\n", ans);
 #endif
 }
 
 /* enter a 4-digit number */
 int enter_number() {
-    char mstr[5]={'\0', '\0', '\0', '\0', '\0'}; 
+    char mstr[5]={'\0','\0','\0','\0','\0'}; 
     int c;
     int input;
-    int inputdgts[4]={0,0,0,0}; /* arrays for the 4 digits of input*/
+    int in_digits[4]={0,0,0,0}; /* arrays for the 4 digits of input*/
     bool reinput;
     do {
         reinput = false;
@@ -141,17 +136,17 @@ int enter_number() {
         }
         input = atoi(mstr);
         if (input < 1000 || input > 9999) {
-            fprintf(stderr, \
-                    "%d: Input error, must be a number between 1000 and 9999!\n", input);
+            fprintf(stderr, "Must be a number between 1000 and 9999!\n");
             reinput = true;
             continue;
         }
         for(int i=0; i<4; i++)
-            inputdgts[i]=(int) (input / tenpow(3-i) )%10;
-        if(inputdgts[0]==inputdgts[1] || inputdgts[1]==inputdgts[2] 
-                ||inputdgts[2]==inputdgts[3] || inputdgts[0]==inputdgts[2]
-                || inputdgts[0]==inputdgts[3] || inputdgts[1]==inputdgts[3]) {
-            fprintf(stderr, "%d: Input error, 4 digits must be unique!\n", input);
+            in_digits[i]=(int) (input / tenpow(3-i) )%10;
+        if(in_digits[0]==in_digits[1] || in_digits[1]==in_digits[2] 
+                || in_digits[2]==in_digits[3] || in_digits[0]==in_digits[2]
+                || in_digits[0]==in_digits[3] || in_digits[1]==in_digits[3])
+        {
+            fprintf(stderr, "Four digits must be unique.\n");
             reinput = true;
             continue;
         }
@@ -160,10 +155,10 @@ int enter_number() {
 }
 
 /* compare answer and input, refresh A & B */
-void compare(const int *inputdgts, const int *answerdgts, int *a, int *b) {
+void compare(const int *in_digits, const int *ans_digits, int *a, int *b) {
     for(register int i=0 ; i<4; i++)
         for(register int j=0 ; j<4; j++)
-            if(inputdgts[i] == answerdgts[j])
+            if(in_digits[i] == ans_digits[j])
                 (i == j) ? (*a)++ : (*b)++;
 }
 
@@ -172,39 +167,25 @@ void save_score(const int time_taken) {
     time_t tm = time(NULL);
     struct tm *today = localtime(&tm);
     char tmpbuffer[129];
-
-    /* user name, eg. tux, mimic emacs tetris-scores */
     today = localtime(&tm);
     const char *sfpath = getenv("HOME");
-#ifdef DEBUG
-    const char sfname[] = "/.fourdgtsscrdbg";
-#else 
-    const char sfname[] = "/.4digits-scores";
-#endif
-    char *scorefile = (char *)malloc(strlen(sfpath) + strlen(sfname) + 1);
+    const char score_filename[] = "/.4digits/4digits-text.4digits.scores";
+    char *scorefile = (char *)malloc(
+            strlen(sfpath) + strlen(score_filename) + 1);
     if(!scorefile) {
         fprintf(stderr, "Memory allocation error.\n");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     strcpy(scorefile, sfpath);
-    strcat(scorefile, sfname);
+    strcat(scorefile, score_filename);
     FILE *sfp = fopen(scorefile, "a+");
     if (!sfp) {
-        fprintf(stderr, "Cannot open score file!\n");
+        fprintf(stderr, "Cannot open score file.\n");
         exit(EXIT_FAILURE);
     }
     strftime(tmpbuffer, 128, "%a %b %d %H:%M:%S %Y", today); 
-    fprintf(sfp, "%ds %s %s\n", time_taken, getlogin(), tmpbuffer);
+    fprintf(sfp, "%s %ds %s\n", getlogin(), time_taken, tmpbuffer);
     free(scorefile);
-}
-
-/* show high scores */
-void show_high_score(void) {
-    // FIXME
-    // open sfp
-    // read scores
-    // sort lines according to scores
-    // print lines after sorting
 }
 
 int tenpow(int exponent) {
@@ -245,12 +226,8 @@ int main(int argc, char *argv[]) {
         opt = getopt_long(argc, argv, optString, longOpts, &longIndex);
     }
 
-#ifdef DEBUG
-    showopt();
-#endif
-
-    int answerdgts[4];
-    gen_rand(answerdgts); /* array for the 4 digits of n*/
+    int ans_digits[4];
+    gen_rand(ans_digits); /* array for the 4 digits of n*/
     time_t temp = time(NULL);
     time_t tic = temp;
     int guessed[8] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -264,8 +241,7 @@ int main(int argc, char *argv[]) {
         for(int i=0; i < num_guess; i++)
             // duplicated input
             if (input == guessed[i]) {
-                fprintf(stderr, 
-                        "%d: You have entered that number!\n", input);
+                fprintf(stderr, "You've already guessed it.\n");
                 --num_guess;
                 dup = true;
                 break;
@@ -276,12 +252,12 @@ int main(int argc, char *argv[]) {
             continue;
         }
 
-        int inputdgts[4]; /* arrays for the 4 digits of input*/
+        int in_digits[4]; /* arrays for the 4 digits of input*/
         for(i=0; i<4; i++) {
-            inputdgts[i]=(int) (input / tenpow(3-i) )%10;
+            in_digits[i]=(int) (input / tenpow(3-i) )%10;
         }
 
-        compare(inputdgts, answerdgts, &A, &B);
+        compare(in_digits, ans_digits, &A, &B);
         printf("%dA%dB    ", A, B);
         if (num_guess != 7)
             printf("\t %d times left.\n", 7-num_guess);
@@ -290,14 +266,14 @@ int main(int argc, char *argv[]) {
         if(A == 4) {
             time_t toc = time(NULL);
             int score = (int)(toc-tic);
-            printf("You win in %d sec.\n", score);
+            printf("You win! :) Used %d sec.\n", score);
             save_score(score); /* save score in the score file */
             return 0;
         }
     }
-    printf("\nHahah, you lose. The number is ");
+    printf("\nHaha, you lose. It is ");
     for(int i = 0; i < 4; i++)
-        printf("%d", answerdgts[i]);
+        printf("%d", ans_digits[i]);
     printf(".\n");
     return 0;
 }
