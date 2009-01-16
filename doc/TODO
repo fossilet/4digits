@@ -10,5 +10,6 @@ Below is the todo list for 4digits. Contributions are greatly appreciated.
 *. big font for input box
 *. keyboard for mouse input like in gnome sudoku
 *. save game process in high score record
+*. 清理__prefs__變量。
 
 *. more and more......

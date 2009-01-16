@@ -52,7 +52,8 @@ except ImportError:
 __version__ = '0.9'
 __appdata_dir__ = os.path.join(os.getenv('HOME'), '.4digits')
 __config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
-__prefs__ = {
+prefs = {
+        'game type': 4,
         'show toolbar': True,
         'show hint table': False,
         'auto fill hints': False
@@ -66,7 +67,8 @@ __gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
 __helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
-__score_filename__ = os.path.join(__appdata_dir__, '4digits.4digits.scores')
+# ?????????????
+score_filename = ''
 
 # For future gettext support. I cannot figure out i18n now.
 # I wish someone could help me with it.
@@ -77,11 +79,11 @@ except NameError:
         """Mark translatable strings."""
         return arg
 
-def load_glade(dialog = None):
-    """Try to load dialog from the different possible glade files."""
+def load_glade(root = None):
+    """Try to load widget tree from the different possible glade files."""
     for gladefile in __gladefiles__:
         try:
-            return gtk.glade.XML(gladefile, dialog) 
+            return gtk.glade.XML(gladefile, root) 
         except RuntimeError:
             continue # Just ignore the error, the next file will be tested
     # Still here
@@ -95,6 +97,10 @@ class MainWindow(object):
     def __init__(self):
         """GUI initialization."""
         self.widget_tree = load_glade()
+        self.game_type_3digits = self.widget_tree.get_widget('game_type_3digits')
+        self.game_type_4digits = self.widget_tree.get_widget('game_type_4digits')
+        self.game_type_5digits = self.widget_tree.get_widget('game_type_5digits')
+        self.game_type_6digits = self.widget_tree.get_widget('game_type_6digits')
         self.toolbar = self.widget_tree.get_widget('toolbar')
         self.view_toolbar = self.widget_tree.get_widget('view_toolbar')
         self.hint_table = self.widget_tree.get_widget('hint_table')
@@ -106,6 +112,7 @@ class MainWindow(object):
                 'view_auto_fill_hints')
         self.entry = self.widget_tree.get_widget('entry')
         self.entry.grab_focus()
+        print prefs['game type']
         self.ok_button = self.widget_tree.get_widget('ok_button')
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
                 'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
@@ -120,13 +127,26 @@ class MainWindow(object):
 
         # parse preferences
         self.read_preferences_file()
-        if __prefs__['show toolbar']:
+        self.entry.set_max_length(prefs['game type'])
+        global score_filename
+        score_filename = os.path.join(__appdata_dir__, 
+                                      '4digits.%ddigits.scores'  % prefs['game type'])
+        print score_filename
+        if prefs['game type'] == 3:
+            self.game_type_3digits.set_active(True)
+        elif prefs['game type'] == 4:
+            self.game_type_4digits.set_active(True)
+        elif prefs['game type'] == 5:
+            self.game_type_5digits.set_active(True)
+        elif prefs['game type'] == 6:
+            self.game_type_6digits.set_active(True)                
+        if prefs['show toolbar']:
             self.toolbar.show()
             self.view_toolbar.set_active(True)
         else:
             self.toolbar.hide()
             self.view_toolbar.set_active(False)
-        if __prefs__['show hint table']:
+        if prefs['show hint table']:
             self.hint_table.show_all()
             self.hint_hseparator.show()
             self.view_hint_table.set_active(True)
@@ -134,7 +154,7 @@ class MainWindow(object):
             self.hint_table.hide_all()
             self.hint_hseparator.hide()
             self.view_hint_table.set_active(False)
-        if __prefs__['auto fill hints']:
+        if prefs['auto fill hints']:
             self.auto_fill_hints.set_active(True)
         else:
             self.auto_fill_hints.set_active(False)
@@ -142,6 +162,10 @@ class MainWindow(object):
         # connect signals and callbacks
         dic = {'on_main_window_destroy': self.terminate_program,
                 'on_quit_activate': self.terminate_program,
+                'on_game_type_3digits_toggled': self.on_game_type_3digits_toggled,
+                'on_game_type_4digits_toggled': self.on_game_type_4digits_toggled,
+                'on_game_type_5digits_toggled': self.on_game_type_5digits_toggled,
+                'on_game_type_6digits_toggled': self.on_game_type_6digits_toggled,
                 'on_ok_clicked': self.on_entry_activate,
                 'on_new_game_activate': self.on_new_game_activate,
                 'on_view_toolbar_toggled': self.on_view_toolbar_toggled,
@@ -165,23 +189,23 @@ class MainWindow(object):
         if os.path.isfile(__config_path__):
             try:
                 config = open(__config_path__)
-                old___prefs__ = cPickle.load(config)
+                old_prefs = cPickle.load(config)
                 config.close()
             except Exception:
                 print 'Corrupted preferences file \
                 "%s", deleting...' % __config_path__
                 os.remove(__config_path__)
             else:
-                for key in old___prefs__:
-                    if key in __prefs__:
-                        __prefs__[key] = old___prefs__[key]
+                for key in old_prefs:
+                    if key in prefs:
+                        prefs[key] = old_prefs[key]
 
     def write_preferences_file(self):
         """Write preference data to disk.
         Copied from Comix.
         """
         config = open(__config_path__, 'w')
-        cPickle.dump(__prefs__, config, cPickle.HIGHEST_PROTOCOL)
+        cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)
         config.close()
 
     def build_hint_table(self):
@@ -261,19 +285,19 @@ class MainWindow(object):
             except ValueError:
                 self.process_error(_('Must input a number.'))
                 return False
-            if len(number) < 4:
-                self.process_error(_('Must input four digits.'))
+            if len(number) < prefs['game type']:
+                self.process_error(_('Must input %d digits.' % prefs['game type']))
                 return False
-            elif len(set(number)) < 4:
-                self.process_error(_('Four digits must be unique.'))
+            elif len(set(number)) < prefs['game type']:
+                self.process_error(_('%d digits must be unique.') % prefs['game type'])
                 return False
             elif number in self.game.guesses:
                 self.process_error(_("You've already guessed it."))
                 return False
             self.game.guesses.append(number)
             # process input
-            for i in xrange(4):
-                for j in xrange(4):
+            for i in xrange(prefs['game type']):
+                for j in xrange(prefs['game type']):
                     if self.game.answer[i] == int(number[j]):
                         if i == j:
                             bulls += 1
@@ -288,7 +312,7 @@ class MainWindow(object):
                 self.fill_hints(number, bulls, cows)
             
             # win
-            if bulls == 4:
+            if bulls == prefs['game type']:
                 self.info_label.set_text(_('You win! :)'))
                 self.get_time_taken_till_now()
                 self.time_label.set_text(_('Used %.1f s.') % 
@@ -301,7 +325,7 @@ class MainWindow(object):
             # lose
             elif self.game.guess == 7:
                 answer = ''
-                for i in xrange(4):
+                for i in xrange(prefs['game type']):
                     answer += repr(self.game.answer[i])
                 self.info_label.set_text(_('Haha, you lose. It is %s.') % 
                     answer)
@@ -361,32 +385,64 @@ class MainWindow(object):
             self.game.time_start = time.time()
             self.game.on_entry_cb_first_called = False
   
+    def on_game_type_3digits_toggled(self, widget):
+        """Toggle game type."""
+        if self.game_type_3digits.get_active():
+            self.game_type_3digits.set_active(True)
+            prefs['game type'] = 3
+            self.entry.set_max_length(prefs['game type'])
+        print prefs['game type']
+            
+    def on_game_type_4digits_toggled(self, widget):
+        """Toggle game type."""
+        if self.game_type_4digits.get_active():
+            self.game_type_4digits.set_active(True)
+            prefs['game type'] = 4
+            self.entry.set_max_length(prefs['game type'])
+        print prefs['game type']
+
+    def on_game_type_5digits_toggled(self, widget):
+        """Toggle game type."""
+        if self.game_type_5digits.get_active():
+            self.game_type_5digits.set_active(True)
+            prefs['game type'] = 5
+            self.entry.set_max_length(prefs['game type'])
+        print prefs['game type']
+
+    def on_game_type_6digits_toggled(self, widget):
+        """Toggle game type."""
+        if self.game_type_6digits.get_active():
+            self.game_type_6digits.set_active(True)
+            prefs['game type'] = 6
+            self.entry.set_max_length(prefs['game type'])
+        print prefs['game type']
+
     def on_view_toolbar_toggled(self, widget):
         """Toggle toolbar visibility."""
         if self.toolbar.get_property('visible'):
             self.toolbar.hide()
-            __prefs__['show toolbar'] = False
+            prefs['show toolbar'] = False
         else:
             self.toolbar.show()
-            __prefs__['show toolbar'] = True
+            prefs['show toolbar'] = True
 
     def on_view_hint_table_toggled(self, widget):
         """Toggle hint table visibility."""
         if self.hint_table.get_property('visible'):
             self.hint_table.hide_all()
             self.hint_hseparator.hide()
-            __prefs__['show hint table'] = False
+            prefs['show hint table'] = False
         else:
             self.hint_table.show_all()
             self.hint_hseparator.show()
-            __prefs__['show hint table'] = True
+            prefs['show hint table'] = True
     
     def on_view_auto_fill_hints_toggled(self, widget):
         """Toggle auto filling of hint table."""
         if self.auto_fill_hints.get_active():
-            __prefs__['auto fill hints'] = True
+            prefs['auto fill hints'] = True
         else:
-            __prefs__['auto fill hints'] = False
+            prefs['auto fill hints'] = False
 
     @classmethod
     def on_help_activate(cls, widget):
@@ -410,37 +466,7 @@ class MainWindow(object):
         """Show high scores."""
         score_dialog = ScoreDialog()
         dlg = score_dialog.score_dialog
-        score_view = score_dialog.score_view
-        sv_selection = score_view.get_selection()
-        sv_selection.set_mode(gtk.SELECTION_NONE)
-        column = gtk.TreeViewColumn(
-                _('Name'), gtk.CellRendererText(), text = 0)
-        score_view.append_column(column)
-        column = gtk.TreeViewColumn(
-                _('Score'), gtk.CellRendererText(), text = 1)
-        score_view.append_column(column)
-        column = gtk.TreeViewColumn(
-                _('Date'), gtk.CellRendererText(), text = 2)
-        score_view.append_column(column)
-        dlg.scoreList = gtk.ListStore(str, str, str)
-        score_view.set_model(dlg.scoreList)
-
-        try:
-            scores = [line.split(' ', 6) 
-                    for line in file(__score_filename__, 'r')]
-        except IOError:
-            scores = []
-
-        for line in scores:
-            score_tup = line[0], line[1], ' '.join(line[2:]).rstrip('\n')
-            dlg.scoreList.append(score_tup)
-        # high light the current high score entry
-        try:
-            sv_selection.set_mode(gtk.SELECTION_SINGLE)
-            sv_selection.select_path(new_score_rank)
-        except TypeError:
-            sv_selection.set_mode(gtk.SELECTION_NONE)
-
+        score_dialog.load_score_data(dlg, new_score_rank)
         dlg.run()
         dlg.destroy()
 
@@ -479,8 +505,9 @@ class MainWindow(object):
         """Is this time a highscore."""
         try:
             scores = [line.split(' ', 6) 
-                    for line in file(__score_filename__, 'r')]
+                    for line in open(score_filename, 'r')]
         except IOError:
+            print 'Score file read error!'
             return True # List does not exist yet
         if len(scores) < 10:
             return True
@@ -496,11 +523,16 @@ class MainWindow(object):
         date = time.strftime("%a %b %d %H:%M:%S %Y") 
         new_score = "%s %ss %s\n" % (
                 os.getenv('USERNAME'), time_taken, date)
+        score_filename = os.path.join(__appdata_dir__, 
+                                      '4digits.%ddigits.scores'  % prefs['game type'])
+        print 'write_score', score_filename
         try:
-            saved_scores = open(__score_filename__, 'r').readlines()
+            saved_scores = open(score_filename, 'r').readlines()
         except IOError:
+            print 'Score file read error!'
             saved_scores = [] 
         saved_scores.append(new_score)
+        print saved_scores
         scores = [line.split(' ', 6) for line in saved_scores]
         scores = sorted(scores, key = lambda x: float(x[1][:-1]))
         scores = scores[:10]
@@ -509,12 +541,12 @@ class MainWindow(object):
         new_score = new_score.split(' ', 6)
         new_score_rank = scores.index(new_score)
         try:
-            scorefile = open(__score_filename__, 'w')
+            scorefile = open(score_filename, 'w')
         except IOError:
             # Most likely the directory does not exist
-            new_dir = os.path.dirname(__score_filename__)
+            new_dir = os.path.dirname(score_filename)
             os.mkdir(new_dir)
-            scorefile = open(__score_filename__, 'w') # Try again
+            scorefile = open(score_filename, 'w') # Try again
         for score in scores:
             scorefile.write(' '.join(score))
         scorefile.close()
@@ -530,7 +562,6 @@ class MainWindow(object):
         """
         self.write_preferences_file()
         gtk.main_quit()
-
 
 class AboutDialog(object):
     """The about dialog."""
@@ -551,15 +582,68 @@ class ScoreDialog(object):
         self.widget_tree = load_glade('score_dialog')
         self.score_dialog = self.widget_tree.get_widget('score_dialog')
         self.score_view = self.widget_tree.get_widget('score_view')
+        self.score_type = self.widget_tree.get_widget('score_type')
+        self.score_type.set_active(prefs['game type']-3)
+
+        dic = {'on_score_type_changed': self.on_score_type_changed}
+        self.widget_tree.signal_autoconnect(dic)
+
+    def on_score_type_changed(self, widget):
+        """Toggle game type in the score dialog"""
+        self.load_score_data(self, widget)
+        print prefs['game type']
+
+    def load_score_data(self, widget, new_score_rank):
+        dlg = self.score_dialog
+        score_view = self.score_view
+        sv_selection = score_view.get_selection()
+        sv_selection.set_mode(gtk.SELECTION_NONE)
+        if not score_view.get_columns():
+            column = gtk.TreeViewColumn(
+                    _('Name'), gtk.CellRendererText(), text = 0)
+            score_view.append_column(column)
+            column = gtk.TreeViewColumn(
+                    _('Score'), gtk.CellRendererText(), text = 1)
+            score_view.append_column(column)
+            column = gtk.TreeViewColumn(
+                    _('Date'), gtk.CellRendererText(), text = 2)
+            score_view.append_column(column)
+        dlg.scoreList = gtk.ListStore(str, str, str)
+        score_view.set_model(dlg.scoreList)
+
+        num = self.score_type.get_active()
+        tmp_prefs = {}
+        tmp_prefs['game type'] = num + 3
+        score_filename = os.path.join(__appdata_dir__,
+                                      '4digits.%ddigits.scores'  % tmp_prefs['game type'])
+        print 'write to %s' % score_filename
+        try:
+            scores = [line.split(' ', 6) 
+                    for line in file(score_filename, 'r')]
+        except IOError:
+            print "Score file read error!"
+            scores = []
+
+        for line in scores:
+            score_tup = line[0], line[1], ' '.join(line[2:]).rstrip('\n')
+            dlg.scoreList.append(score_tup)
+        # high light the current high score entry
+        try:
+            sv_selection.set_mode(gtk.SELECTION_SINGLE)
+            sv_selection.select_path(new_score_rank)
+        except TypeError:
+            sv_selection.set_mode(gtk.SELECTION_NONE)
+            print 'high score highlight error!'
 
 
 class NewRound(object):
     """Contains data in one round of the game."""
     def __init__(self):
         while True:
-            self.answer = random.sample(range(10), 4)
+            self.answer = random.sample(range(10), prefs['game type'])
             if self.answer[0] != 0: # first digit cannot be zero
                 break
+        print self.answer
         if self.answer == [4, 6, 1, 9]:
             gtk.MessageDialog(message_format
                     ='4619: You are the luckiest guy on the planet!').show()
@@ -573,5 +657,5 @@ class NewRound(object):
 if __name__ == "__main__":
     MainWindow()
     # This way we can use the gnome high score stock icon.
-    gnome.init('4digits', '0.9')
+    gnome.init('4digits', __version__)
     gtk.main()
