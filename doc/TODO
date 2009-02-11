@@ -1,15 +1,15 @@
-Below is the todo list for 4digits. Contributions are greatly appreciated.
+Below is the TODO list for 4digits. Contributions are greatly appreciated.
 
 *. internationalization using gettext
 *. translate documentation
 
 *. improve text version
 *. game for 3, 4, 5, 6 digits
-*. ai for playing versus computre
+*. AI for playing versus computer
 
 *. big font for input box
 *. keyboard for mouse input like in gnome sudoku
 *. save game process in high score record
-*. 清理__prefs__變量。
+*. 清理__prefs__变量。
 
 *. more and more......

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # pylint: disable-msg=r0201
+
 """
     4digits - A guess-the-number game, aka Bulls and Cows
     Copyright (c) 2004-2008 Pan Yongzhi <http://fourdigits.sourceforge.net>
@@ -59,7 +60,7 @@ prefs = {
         'auto fill hints': False
         }
 
-# The first is the current directory, so you do not have to install 
+# The first is the current directory, so you do not have to install
 # 4digits to play it. The second is the installation directory.
 __gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
     os.path.normpath(os.path.join(
@@ -72,7 +73,7 @@ score_filename = ''
 
 # For future gettext support. I cannot figure out i18n now.
 # I wish someone could help me with it.
-try: 
+try:
     _()
 except NameError:
     def _(arg):
@@ -83,14 +84,14 @@ def load_glade(root = None):
     """Try to load widget tree from the different possible glade files."""
     for gladefile in __gladefiles__:
         try:
-            return gtk.glade.XML(gladefile, root) 
+            return gtk.glade.XML(gladefile, root)
         except RuntimeError:
             continue # Just ignore the error, the next file will be tested
     # Still here
     print "Gladefile not found! Checked paths were:"
     print __gladefiles__
     sys.exit(2)
-    
+
 
 class MainWindow(object):
     """The main game window."""
@@ -129,7 +130,7 @@ class MainWindow(object):
         self.read_preferences_file()
         self.entry.set_max_length(prefs['game type'])
         global score_filename
-        score_filename = os.path.join(__appdata_dir__, 
+        score_filename = os.path.join(__appdata_dir__,
                                       '4digits.%ddigits.scores'  % prefs['game type'])
         print score_filename
         if prefs['game type'] == 3:
@@ -139,7 +140,7 @@ class MainWindow(object):
         elif prefs['game type'] == 5:
             self.game_type_5digits.set_active(True)
         elif prefs['game type'] == 6:
-            self.game_type_6digits.set_active(True)                
+            self.game_type_6digits.set_active(True)
         if prefs['show toolbar']:
             self.toolbar.show()
             self.view_toolbar.set_active(True)
@@ -158,7 +159,7 @@ class MainWindow(object):
             self.auto_fill_hints.set_active(True)
         else:
             self.auto_fill_hints.set_active(False)
-        
+
         # connect signals and callbacks
         dic = {'on_main_window_destroy': self.terminate_program,
                 'on_quit_activate': self.terminate_program,
@@ -252,7 +253,7 @@ class MainWindow(object):
         for row in range(0, 10):
             self.label_hint[row].set_active(True)
             self.label_hint[row+10].set_active(False)
-    
+
     #         1    2    3    4                   1    2    3    4
     #  0/0    00   10   20   30          0/10    40   50   60   70
     #  1/1    01   11   21   31          1/11    41   51   61   71
@@ -310,12 +311,12 @@ class MainWindow(object):
 
             if self.auto_fill_hints.get_active():
                 self.fill_hints(number, bulls, cows)
-            
+
             # win
             if bulls == prefs['game type']:
                 self.info_label.set_text(_('You win! :)'))
                 self.get_time_taken_till_now()
-                self.time_label.set_text(_('Used %.1f s.') % 
+                self.time_label.set_text(_('Used %.1f s.') %
                     self.game.time_taken)
                 self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
@@ -327,10 +328,10 @@ class MainWindow(object):
                 answer = ''
                 for i in xrange(prefs['game type']):
                     answer += repr(self.game.answer[i])
-                self.info_label.set_text(_('Haha, you lose. It is %s.') % 
+                self.info_label.set_text(_('Haha, you lose. It is %s.') %
                     answer)
                 self.get_time_taken_till_now()
-                self.time_label.set_text(_('Wasted %.1f s.') % 
+                self.time_label.set_text(_('Wasted %.1f s.') %
                     self.game.time_taken)
                 self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
@@ -362,9 +363,9 @@ class MainWindow(object):
 
         if bulls == 0: # Only cows
             for digit_pos in range(0, 4):
-                self.get_checkbox(number[digit_pos], digit_pos, 
+                self.get_checkbox(number[digit_pos], digit_pos,
                     0).set_active(False)
-                self.get_checkbox(number[digit_pos], digit_pos, 
+                self.get_checkbox(number[digit_pos], digit_pos,
                     1).set_active(False)
 
         if cows == 0: # Only bulls
@@ -374,7 +375,7 @@ class MainWindow(object):
                     if pos2 == digit_pos:
                         continue
                     # uncheck impossible boxes in first column
-                    self.get_checkbox(number[digit_pos], pos2, 
+                    self.get_checkbox(number[digit_pos], pos2,
                         0).set_active(False)
 
     def on_entry_changed(self, widget):
@@ -384,7 +385,7 @@ class MainWindow(object):
             self.time_label.set_text(_('Timer started...'))
             self.game.time_start = time.time()
             self.game.on_entry_cb_first_called = False
-  
+
     def on_game_type_3digits_toggled(self, widget):
         """Toggle game type."""
         if self.game_type_3digits.get_active():
@@ -392,7 +393,7 @@ class MainWindow(object):
             prefs['game type'] = 3
             self.entry.set_max_length(prefs['game type'])
         print prefs['game type']
-            
+
     def on_game_type_4digits_toggled(self, widget):
         """Toggle game type."""
         if self.game_type_4digits.get_active():
@@ -436,7 +437,7 @@ class MainWindow(object):
             self.hint_table.show_all()
             self.hint_hseparator.show()
             prefs['show hint table'] = True
-    
+
     def on_view_auto_fill_hints_toggled(self, widget):
         """Toggle auto filling of hint table."""
         if self.auto_fill_hints.get_active():
@@ -460,7 +461,7 @@ class MainWindow(object):
         about = AboutDialog().about_dialog
         about.run()
         about.destroy()
-    
+
     @classmethod
     def on_score_activate(cls, new_score_rank):
         """Show high scores."""
@@ -486,7 +487,7 @@ class MainWindow(object):
         for i in xrange(8):
             getattr(self, 'g' + repr(i)).set_text('')
             getattr(self, 'r' + repr(i)).set_text('')
-        
+
         self.init_hint_table()
 
     def process_error(self, msg):
@@ -504,7 +505,7 @@ class MainWindow(object):
     def is_high_score(cls, time_taken):
         """Is this time a highscore."""
         try:
-            scores = [line.split(' ', 6) 
+            scores = [line.split(' ', 6)
                     for line in open(score_filename, 'r')]
         except IOError:
             print 'Score file read error!'
@@ -520,17 +521,17 @@ class MainWindow(object):
     @classmethod
     def write_score(cls, time_taken):
         """Write highscore file."""
-        date = time.strftime("%a %b %d %H:%M:%S %Y") 
+        date = time.strftime("%a %b %d %H:%M:%S %Y")
         new_score = "%s %ss %s\n" % (
                 os.getenv('USERNAME'), time_taken, date)
-        score_filename = os.path.join(__appdata_dir__, 
+        score_filename = os.path.join(__appdata_dir__,
                                       '4digits.%ddigits.scores'  % prefs['game type'])
         print 'write_score', score_filename
         try:
             saved_scores = open(score_filename, 'r').readlines()
         except IOError:
             print 'Score file read error!'
-            saved_scores = [] 
+            saved_scores = []
         saved_scores.append(new_score)
         print saved_scores
         scores = [line.split(' ', 6) for line in saved_scores]
@@ -555,10 +556,10 @@ class MainWindow(object):
     def show_score(self, new_score_rank):
         """Show highscore dialog."""
         self.on_score_activate(new_score_rank)
-    
+
     def terminate_program(self, widget):
         """Run clean-up tasks and exit.
-        Copied from comix.        
+        Copied from comix.
         """
         self.write_preferences_file()
         gtk.main_quit()
@@ -618,7 +619,7 @@ class ScoreDialog(object):
                                       '4digits.%ddigits.scores'  % tmp_prefs['game type'])
         print 'write to %s' % score_filename
         try:
-            scores = [line.split(' ', 6) 
+            scores = [line.split(' ', 6)
                     for line in file(score_filename, 'r')]
         except IOError:
             print "Score file read error!"
