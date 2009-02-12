@@ -39,9 +39,10 @@
 /* 10 is Equal to 9
  * Since There Are Only 10 Digital Number
  */
+#define MAX_GUESS_NUM 20
 static const int GUESS_MAX[DIGITS_MAX+1] ={
   /*0 1 2 3 4 5 6  7  8  9  10 */
-    0,4,5,6,7,9,11,13,15,17
+    0,4,5,6,7,9,11,13,15,17 /* this all should less than MAX_GUESS_NUM */
 };
 int digits_type = 4;
 const char NAME_GAME[DIGITS_MAX+1][6]={
@@ -57,7 +58,7 @@ const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
 
 const char AUTHOR[] =
   "Written by Pan Yongzhi.\n"
-  "Maintain by MA Xu ( njmarshal@gmail.com ) \n";
+  "Maintain by MA Xu ( njmarshal@gmail.com ). \n";
 
 const char HELP[] =
   "4digits, a guess-the-number game.\n"
@@ -67,9 +68,9 @@ const char HELP[] =
   "one A if its value and position are both correct, and you get one\n"
   "B if only its value is correct. You win the game when you get 4A0B.\n"
   "\n"
-  "-d [num], --digits [num] \t change the number of digits to num, default is 4. \n"
-  "-v, --version \t display the version of 4digits and exit.\n"
-  "-h, -?, --help \t print this help.\n"
+  "-d [n], --digits [n] \t change the number of digits to n, default is 4. \n"
+  "-v, --version        \t display the version of 4digits and exit.\n"
+  "-h, -?, --help       \t print this help.\n"
   "\n"
   "Report bugs at <http://sourceforge.net/projects/fourdigits/>.";
 
@@ -281,7 +282,6 @@ int main(int argc, char *argv[]) {
   while(opt != -1) {
     switch(opt) {
     case 'd':
-      /* printf("%s",optarg); */
       if(NULL != optarg)
         change_digits(atoi(optarg));
       break;
@@ -309,9 +309,10 @@ int main(int argc, char *argv[]) {
   gen_rand(ans_digits); /* array for the 4 digits of n*/
   time_t temp = time(NULL);
   time_t tic = temp;
-  int guessed[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  int guessed[MAX_GUESS_NUM+1];
   int i;
   bool dup = false;
+  for(i=0;i<=MAX_GUESS_NUM,i++) guessed[i] = 0;
 
   for (int num_guess = 0; num_guess < GUESS_MAX[digits_type]+1; num_guess++) {
     int A = 0, B = 0;

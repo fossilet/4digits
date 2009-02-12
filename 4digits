@@ -4,7 +4,7 @@
 
 """
     4digits - A guess-the-number game, aka Bulls and Cows
-    Copyright (c) 2004-2008 Pan Yongzhi <http://fourdigits.sourceforge.net>
+    Copyright (c) 2004-2008 Pan Yongzhi and MA Xu <http://fourdigits.sourceforge.net>
 
     4digits is a guess-the-number puzzle game. You are given eight times
     to guess a four-digit number. One digit is marked A if its value and
@@ -32,6 +32,68 @@ import random
 import sys
 import time
 import webbrowser
+import locale
+
+try:
+    import gettext
+except ImportError:
+    print 'python-gettext is recommended to run 4digits for Internationalization.'
+    print 'No python-gettext was found on your system.'
+    sys.exit(1)
+
+__version__ = '0.9'
+__appdata_dir__ = os.path.join(os.getenv('HOME'), '.4digits')
+__config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
+prefs = {
+        'game type': 4,
+        'show toolbar': True,
+        'show hint table': False,
+        'auto fill hints': False,
+        'language': 'cn' # Default Language Support: English
+        }
+# The first is the current directory, so you do not have to install
+# 4digits to play it. The second is the installation directory.
+__gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
+    os.path.normpath(os.path.join(
+    os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
+__helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
+    os.path.normpath(os.path.join(
+    os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
+# ?????????????
+score_filename = ''
+
+softLang=prefs['language']
+# For future gettext support. I cannot figure out i18n now.
+# I wish someone could help me with it.
+gettext.install('4digits', './locale', unicode=False)
+if softLang=='cn':
+    lang=gettext.translation('4digits', './locale',
+                             languages=[softLang])
+if softLang=='sys' and locale.getdefaultlocale()[0]=='cn':
+    softLang = 'cn'
+    lang=gettext.translation('4digits', './locale',
+                             languages=[softLang])
+if softLang=='sys' and locale.getdefaultlocale()[0]!='cn':
+    softLang = 'en'
+    lang=gettext.translation('4digits', './locale',
+                             languages=[softLang])
+if softLang=='en':
+    lang=gettext.translation('4digits', './locale',
+                             languages=[softLang])
+
+lang.install(True)
+def _(s):return s
+############################################
+# try:                                     #
+#     _('')                                #
+# except NameError:                        #
+#     print "Error"                        #
+#     def _(arg):                          #
+#         """Mark translatable strings.""" #
+#         return arg                       #
+############################################
+_=lang.gettext
+#_=gettext.translation('messages','.').gettext
 
 try:
     import pygtk
@@ -50,36 +112,6 @@ except ImportError:
     print _('No python-gnome2 is found on your system.')
     sys.exit(1)
 
-__version__ = '0.9'
-__appdata_dir__ = os.path.join(os.getenv('HOME'), '.4digits')
-__config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
-prefs = {
-        'game type': 4,
-        'show toolbar': True,
-        'show hint table': False,
-        'auto fill hints': False
-        }
-
-# The first is the current directory, so you do not have to install
-# 4digits to play it. The second is the installation directory.
-__gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
-    os.path.normpath(os.path.join(
-    os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
-__helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
-    os.path.normpath(os.path.join(
-    os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
-# ?????????????
-score_filename = ''
-
-# For future gettext support. I cannot figure out i18n now.
-# I wish someone could help me with it.
-try:
-    _()
-except NameError:
-    def _(arg):
-        """Mark translatable strings."""
-        return arg
-
 def load_glade(root = None):
     """Try to load widget tree from the different possible glade files."""
     for gladefile in __gladefiles__:
@@ -88,9 +120,17 @@ def load_glade(root = None):
         except RuntimeError:
             continue # Just ignore the error, the next file will be tested
     # Still here
-    print "Gladefile not found! Checked paths were:"
+    print _("Gladefile not found! Checked paths were:")
     print __gladefiles__
     sys.exit(2)
+
+class language (object):
+    """Multilanguage Support via gettext for Internationalization."""
+    def __init (self, locale_for_instance):
+        self.lang = gettext.translation("appname", localedir,
+                                        locale=locale_for_instance)
+    def some_method (self, arg):
+        return self.lang.gettext(arg)
 
 
 class MainWindow(object):
@@ -106,17 +146,17 @@ class MainWindow(object):
         self.view_toolbar = self.widget_tree.get_widget('view_toolbar')
         self.hint_table = self.widget_tree.get_widget('hint_table')
         self.hint_hseparator = self.widget_tree.get_widget(
-                'hint_hseparator')
+            'hint_hseparator')
         self.view_hint_table = self.widget_tree.get_widget(
-                'view_hint_table')
+            'view_hint_table')
         self.auto_fill_hints = self.widget_tree.get_widget(
-                'view_auto_fill_hints')
+            'view_auto_fill_hints')
         self.entry = self.widget_tree.get_widget('entry')
         self.entry.grab_focus()
         print prefs['game type']
         self.ok_button = self.widget_tree.get_widget('ok_button')
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
-                'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
+                       'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
             setattr(self, widget, self.widget_tree.get_widget(widget))
         self.info_label = self.widget_tree.get_widget('info_label')
         self.time_label = self.widget_tree.get_widget('time_label')
@@ -508,7 +548,7 @@ class MainWindow(object):
             scores = [line.split(' ', 6)
                     for line in open(score_filename, 'r')]
         except IOError:
-            print 'Score file read error!'
+            print _('Score file read error!')
             return True # List does not exist yet
         if len(scores) < 10:
             return True
@@ -526,11 +566,11 @@ class MainWindow(object):
                 os.getenv('USERNAME'), time_taken, date)
         score_filename = os.path.join(__appdata_dir__,
                                       '4digits.%ddigits.scores'  % prefs['game type'])
-        print 'write_score', score_filename
+        print _('write_score'), score_filename
         try:
             saved_scores = open(score_filename, 'r').readlines()
         except IOError:
-            print 'Score file read error!'
+            print _('Score file read error!')
             saved_scores = []
         saved_scores.append(new_score)
         print saved_scores
@@ -617,12 +657,12 @@ class ScoreDialog(object):
         tmp_prefs['game type'] = num + 3
         score_filename = os.path.join(__appdata_dir__,
                                       '4digits.%ddigits.scores'  % tmp_prefs['game type'])
-        print 'write to %s' % score_filename
+        print 'write to','%s' % score_filename
         try:
             scores = [line.split(' ', 6)
                     for line in file(score_filename, 'r')]
         except IOError:
-            print "Score file read error!"
+            print _("Score file read error!")
             scores = []
 
         for line in scores:
@@ -634,7 +674,7 @@ class ScoreDialog(object):
             sv_selection.select_path(new_score_rank)
         except TypeError:
             sv_selection.set_mode(gtk.SELECTION_NONE)
-            print 'high score highlight error!'
+            print _('high score highlight error!')
 
 
 class NewRound(object):
