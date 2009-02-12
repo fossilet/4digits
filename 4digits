@@ -657,7 +657,7 @@ class ScoreDialog(object):
         tmp_prefs['game type'] = num + 3
         score_filename = os.path.join(__appdata_dir__,
                                       '4digits.%ddigits.scores'  % tmp_prefs['game type'])
-        print 'write to','%s' % score_filename
+        print _('write to'),'%s' % score_filename
         try:
             scores = [line.split(' ', 6)
                     for line in file(score_filename, 'r')]
