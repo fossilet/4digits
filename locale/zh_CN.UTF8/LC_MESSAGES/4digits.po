@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-13 16:12+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=gb18030\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 4digits:104
+msgid "python-gtk2 is required to run 4digits."
+msgstr "运行 4digits 需要案装 python-gtk2 库。"
+
+#: 4digits:105
+msgid "No python-gtk2 was found on your system."
+msgstr "在你的系统上没有找到 python-gtk2 库，请安装。"
+
+#: 4digits:111
+msgid "python-gnome2 is required to run 4digits."
+msgstr "运行 4digits 需要案装 python-gnome2 库。"
+
+#: 4digits:112
+msgid "No python-gnome2 is found on your system."
+msgstr "在你的系统上没有找到 python-gnome2 库，请安装。"
+
+#: 4digits:123
+msgid "Gladefile not found! Checked paths were:"
+msgstr "没有找到记录文件，请检查路径："
+
+#: 4digits:319
+msgid "Must input something."
+msgstr "请输入"
+
+#: 4digits:322
+msgid "First digit cannot be zero."
+msgstr "第一个数字不能为零。"
+
+#: 4digits:327
+msgid "Must input a number."
+msgstr "请输入数字。"
+
+#: 4digits:330
+#, python-format
+msgid "Must input %d digits."
+msgstr "请输入 %d 个数字。"
+
+#: 4digits:333
+#, python-format
+msgid "%d digits must be unique."
+msgstr "输入的 %d 个数字不能重复。"
+
+#: 4digits:336
+msgid "You've already guessed it."
+msgstr "恭喜你，猜出来了！"
+
+#: 4digits:357
+msgid "You win! :)"
+msgstr "恭喜，猜出来了！:)"
+
+#: 4digits:359
+#, python-format
+msgid "Used %.1f s."
+msgstr "耗时 %.1f 秒。"
+
+#: 4digits:371
+#, python-format
+msgid "Haha, you lose. It is %s."
+msgstr "哈哈，你输了，数字是 %s 。"
+
+#: 4digits:374
+#, python-format
+msgid "Wasted %.1f s."
+msgstr "耗时 %.1f 秒。"
+
+#: 4digits:425
+msgid "Timer started..."
+msgstr "计时器开始..."
+
+#: 4digits:524 4digits.glade.h:36
+msgid "Ready"
+msgstr "就绪"
+
+#: 4digits:551 4digits:573 4digits:665
+msgid "Score file read error!"
+msgstr "读取成绩记录文件错误！"
+
+#: 4digits:569
+msgid "write_score"
+msgstr "保存记录"
+
+#: 4digits:644
+msgid "Name"
+msgstr "姓名"
+
+#: 4digits:647
+msgid "Score"
+msgstr "成绩"
+
+#: 4digits:650
+msgid "Date"
+msgstr "日期"
+
+#: 4digits:660
+msgid "write to"
+msgstr "记录保存到"
+
+#: 4digits:677
+msgid "high score highlight error!"
+msgstr "显示最高记录出错！"
+
+#: 4digits.glade.h:1
+msgid ""
+"    Left side:\n"
+"    - You uncheck a box if you are sure that this number cannot be at this "
+"position.\n"
+"    - You uncheck a row if you are sure that this number is not in the "
+"answer.\n"
+"\n"
+"    Right side:\n"
+"    - You check a box if you are sure that this number is at this position "
+"if it is included at all.\n"
+"    - You check a row if you are sure that this number must be in the answer."
+msgstr ""
+"    左侧：\n"
+"    - - You uncheck a box if you are sure that this number cannot be at this "
+"position.\n"
+"    - You uncheck a row if you are sure that this number is not in the "
+"answer.\n"
+"\n"
+"    右侧：\n"
+"    - You check a box if you are sure that this number is at this position "
+"if it is included at all.\n"
+"    - You check a row if you are sure that this number must be in the answer."
+
+#: 4digits.glade.h:8
+msgid "1"
+msgstr "1"
+
+#: 4digits.glade.h:9
+msgid "2"
+msgstr "2"
+
+#: 4digits.glade.h:10
+msgid "3"
+msgstr "3"
+
+#: 4digits.glade.h:11
+msgid "4"
+msgstr "4"
+
+#: 4digits.glade.h:12
+msgid "4digits"
+msgstr "4digits"
+
+#: 4digits.glade.h:13
+msgid "4digits Scores"
+msgstr "4digits 成绩"
+
+#: 4digits.glade.h:14
+msgid ""
+"4digits is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+"\n"
+"4digits is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA  02110-1301, USA."
+msgstr ""
+"4digits 是自由软体；你可以重新分发和/或修改他"
+#: 4digits.glade.h:19
+msgid "5"
+msgstr "5"
+
+#: 4digits.glade.h:20
+msgid "6"
+msgstr "6"
+
+#: 4digits.glade.h:21
+msgid "7"
+msgstr "7"
+
+#: 4digits.glade.h:22
+msgid "8"
+msgstr "8"
+
+#: 4digits.glade.h:23
+msgid "<b>Type:</b>"
+msgstr "<b>游戏类型</b>"
+
+#: 4digits.glade.h:24
+msgid ""
+"A guess-the-number puzzle game\n"
+"\n"
+"pour Maman\n"
+"\n"
+"Oct 17, 2008"
+msgstr ""
+"猜数字游戏\n"
+"\n"
+"pour Maman\n"
+"\n"
+"Oct 17, 2008"
+
+#: 4digits.glade.h:29
+msgid "About 4digits"
+msgstr "关于 4digits 游戏"
+
+#: 4digits.glade.h:30
+msgid "Close this window"
+msgstr "关闭本窗口"
+
+#: 4digits.glade.h:31
+msgid "Copyright at 2004-2009 Pan Yongzhi and MA Xu"
+msgstr "版权所有 2004－2009 Pan Yongzhi 和 MA Xu"
+
+#: 4digits.glade.h:32
+msgid "Fi_ve Digits"
+msgstr "5 Digits"
+
+#: 4digits.glade.h:33
+msgid "Guess"
+msgstr "猜测"
+
+#: 4digits.glade.h:34
+msgid "New Game"
+msgstr "新游戏"
+
+#: 4digits.glade.h:35
+msgid "Quit"
+msgstr "退出游戏"
+
+#: 4digits.glade.h:37
+msgid "Result"
+msgstr "结果"
+
+#: 4digits.glade.h:38
+msgid "See your browser"
+msgstr ""
+
+#: 4digits.glade.h:39
+msgid "Start a new game"
+msgstr "开始新游戏"
+
+#: 4digits.glade.h:40
+msgid "Th_ree Digits"
+msgstr "3 Digits"
+
+#: 4digits.glade.h:41
+msgid "_Auto Fill Hints"
+msgstr "自动管理Hints"
+
+#: 4digits.glade.h:42
+msgid "_Contents"
+msgstr "帮助主题"
+
+#: 4digits.glade.h:43
+msgid "_Four Digits"
+msgstr "_4 Digits"
+
+#: 4digits.glade.h:44
+msgid "_Game"
+msgstr "_游戏"
+
+#: 4digits.glade.h:45
+msgid "_Help"
+msgstr "_帮助"
+
+#: 4digits.glade.h:46
+msgid "_Hint Table"
+msgstr "_Hint 表"
+
+#: 4digits.glade.h:47
+msgid "_Input:"
+msgstr "_输入"
+
+#: 4digits.glade.h:48
+msgid "_New Game"
+msgstr "_新游戏"
+
+#: 4digits.glade.h:49
+msgid "_Scores"
+msgstr "_成绩记录"
+
+#: 4digits.glade.h:50
+msgid "_Six Digits"
+msgstr "_6 Digits"
+
+#: 4digits.glade.h:51
+msgid "_Toolbar"
+msgstr "_工具浪"
+
+#: 4digits.glade.h:52
+msgid "_Type"
+msgstr "_游戏类型"
+
+#: 4digits.glade.h:53
+msgid "_View"
+msgstr "_查看"
