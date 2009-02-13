@@ -37,8 +37,8 @@ import locale
 try:
     import gettext
 except ImportError:
-    print 'python-gettext is recommended to run 4digits for Internationalization.'
-    print 'No python-gettext was found on your system.'
+    print _('python-gettext is recommended to run 4digits for Internationalization.')
+    print _('No python-gettext was found on your system.')
     sys.exit(1)
 
 __version__ = '0.9'
@@ -49,7 +49,7 @@ prefs = {
         'show toolbar': True,
         'show hint table': False,
         'auto fill hints': False,
-        'language': 'cn' # Default Language Support: English
+        'language': 'en' # Default Language Support: English
         }
 # The first is the current directory, so you do not have to install
 # 4digits to play it. The second is the installation directory.
@@ -59,30 +59,39 @@ __gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
 __helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
+__APP__='4digits'
+__DIR__ = './locale'
+
 # ?????????????
 score_filename = ''
 
 softLang=prefs['language']
 # For future gettext support. I cannot figure out i18n now.
 # I wish someone could help me with it.
-gettext.install('4digits', './locale', unicode=False)
-if softLang=='cn':
-    lang=gettext.translation('4digits', './locale',
-                             languages=[softLang])
-if softLang=='sys' and locale.getdefaultlocale()[0]=='cn':
-    softLang = 'cn'
-    lang=gettext.translation('4digits', './locale',
-                             languages=[softLang])
-if softLang=='sys' and locale.getdefaultlocale()[0]!='cn':
-    softLang = 'en'
-    lang=gettext.translation('4digits', './locale',
-                             languages=[softLang])
-if softLang=='en':
-    lang=gettext.translation('4digits', './locale',
-                             languages=[softLang])
+locale.setlocale(locale.LC_ALL, '')
+print locale.getlocale()
+gettext.bindtextdomain(__APP__, __DIR__)
+gettext.textdomain(__APP__)
+_ = gettext.gettext
 
-lang.install(True)
-def _(s):return s
+# gettext.install(__APP__, __DIR__, unicode=False)
+# if softLang=='cn':
+#     lang=gettext.translation(__APP__, __DIR__,
+#                              languages=[softLang])
+# if softLang=='sys' and locale.getdefaultlocale()[0]=='cn':
+#     softLang = 'cn'
+#     lang=gettext.translation(__APP__, __DIR__,
+#                              languages=[softLang])
+# if softLang=='sys' and locale.getdefaultlocale()[0]!='cn':
+#     softLang = 'en'
+#     lang=gettext.translation(__APP__, __DIR__,
+#                              languages=[softLang])
+# if softLang=='en':
+#     lang=gettext.translation(__APP__, __DIR__,
+#                              languages=[softLang])
+#
+# lang.install(True)
+# def _(s):return s
 ############################################
 # try:                                     #
 #     _('')                                #
@@ -92,7 +101,7 @@ def _(s):return s
 #         """Mark translatable strings.""" #
 #         return arg                       #
 ############################################
-_=lang.gettext
+#_=lang.gettext
 #_=gettext.translation('messages','.').gettext
 
 try:
@@ -104,6 +113,12 @@ except ImportError:
     print _('python-gtk2 is required to run 4digits.')
     print _('No python-gtk2 was found on your system.')
     sys.exit(1)
+# see http://bugzilla.gnome.org/show_bug.cgi?id=344926 for why the
+# next two commands look repeated.
+gtk.glade.bindtextdomain(__APP__,__DIR__)
+gtk.glade.textdomain(__APP__)
+gettext.bindtextdomain(__APP__,__DIR__)
+gettext.textdomain(__APP__)
 
 try:
     import gnome.ui
@@ -233,8 +248,8 @@ class MainWindow(object):
                 old_prefs = cPickle.load(config)
                 config.close()
             except Exception:
-                print 'Corrupted preferences file \
-                "%s", deleting...' % __config_path__
+                print _("Corrupted preferences file "),
+                "%s" % __config_path__, "deleting..."
                 os.remove(__config_path__)
             else:
                 for key in old_prefs:
@@ -700,3 +715,4 @@ if __name__ == "__main__":
     # This way we can use the gnome high score stock icon.
     gnome.init('4digits', __version__)
     gtk.main()
+
