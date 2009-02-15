@@ -312,7 +312,7 @@ int main(int argc, char *argv[]) {
   int guessed[MAX_GUESS_NUM+1];
   int i;
   bool dup = false;
-  for(i=0;i<=MAX_GUESS_NUM,i++) guessed[i] = 0;
+  for(i=0;i<=MAX_GUESS_NUM;i++) guessed[i] = 0;
 
   for (int num_guess = 0; num_guess < GUESS_MAX[digits_type]+1; num_guess++) {
     int A = 0, B = 0;
