@@ -12,10 +12,10 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
     <property name="version">1.0</property>
-    <property name="copyright" translatable="yes">Copyright © 2004-2010 Pan Yongzhi</property>
+    <property name="copyright" translatable="yes">Copyright © 2004-2011 Pan Yongzhi</property>
     <property name="comments" translatable="yes">A guess-the-number puzzle game
 
-Dec 10, 2010</property>
+Jul 5, 2011</property>
     <property name="license" translatable="yes">4digits is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
 4digits is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.

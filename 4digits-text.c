@@ -1,6 +1,6 @@
 /*
    4digits - A guess-the-number game, aka Bulls and Cows
-   Copyright (c) 2004-2008 Pan Yongzhi <http://fourdigits.sourceforge.net>
+   Copyright (c) 2004-2011 Pan Yongzhi <http://fourdigits.sourceforge.net>
 
    4digits is a guess-the-number puzzle game. It's called Bulls and Cows,
    and in China people simply call it Guess-the-Number. The game's
@@ -34,7 +34,7 @@
 #include <unistd.h>
 
 //#define DEBUG
-#define VERSION_STRING "0.9, Nov 2008"
+#define VERSION_STRING "1.0, Jul 2011"
 
 const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
 "4digits comes with NO WARRANTY to the extent permitted by law.\n"
