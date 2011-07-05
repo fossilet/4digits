@@ -28,6 +28,7 @@
 import os
 import cPickle
 import random
+import pango
 import sys
 import time
 import webbrowser
@@ -43,7 +44,7 @@ except ImportError:
     sys.exit(1)
 
 __version__ = '1.0'
-__appdata_dir__ = os.path.join(os.getenv('HOME'), '.4digits')
+__appdata_dir__ = os.path.join(os.path.expanduser('~'), '.4digits')
 __config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
 __prefs__ = {
         'show toolbar': True,
@@ -56,7 +57,7 @@ __prefs__ = {
 __gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
-__helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc/index.html'),
+__helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc', 'index.html'),
     os.path.normpath(os.path.join(
     os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
 __score_filename__ = os.path.join(__appdata_dir__, '4digits.4digits.scores')
@@ -97,8 +98,14 @@ class MainWindow(object):
                 'view_hint_table')
         self.auto_fill_hints = self.widget_tree.get_widget(
                 'view_auto_fill_hints')
+
+        # Input box
         self.entry = self.widget_tree.get_widget('entry')
         self.entry.grab_focus()
+        fontsize = self.entry.get_pango_context().\
+                get_font_description().get_size()/pango.SCALE
+        self.entry.modify_font(pango.FontDescription(str(int(fontsize*3))))
+
         self.ok_button = self.widget_tree.get_widget('ok_button')
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
                 'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
@@ -193,8 +200,8 @@ class MainWindow(object):
 
             for col in range(1, 5):
                 # Create column labels
-                label = gtk.Label(str(col))
-                table.attach(label, col, col+1, 0, 1)
+                #label = gtk.Label(str(col))
+                #table.attach(label, col, col+1, 0, 1)
                 # Create Checkboxes
                 for row in range(0, 10):
                     checkbutton = gtk.CheckButton()
