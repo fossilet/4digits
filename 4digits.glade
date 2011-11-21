@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<glade-interface>
-  <!-- interface-requires gtk+ 2.16 -->
-  <!-- interface-naming-policy toplevel-contextual -->
-  <widget class="GtkAboutDialog" id="about_dialog">
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <object class="GtkAboutDialog" id="about_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">About 4digits</property>
@@ -11,36 +10,36 @@
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="version">1.0</property>
-    <property name="copyright" translatable="yes">Copyright © 2004-2011 Pan Yongzhi</property>
-    <property name="comments" translatable="yes">A guess-the-number puzzle game
-
-Jul 5, 2011</property>
+    <property name="version">1.1</property>
+    <property name="copyright" translatable="yes">Copyright (c) 2004-2011 Yongzhi Pan</property>
+    <property name="comments" translatable="yes">A guess-the-number puzzle game</property>
+    <property name="website">http://fourdigits.sourceforge.net</property>
+    <property name="website_label" translatable="yes">4digits website</property>
     <property name="license" translatable="yes">4digits is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
 4digits is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with 4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</property>
-    <property name="authors">Pan Yongzhi
+    <property name="authors">Yongzhi Pan
 
 Hermann Kraus: hint table</property>
-    <property name="documenters">Pan Yongzhi
+    <property name="documenters">Yongzhi Pan
 
 Hermann Kraus: hint table</property>
-    <property name="artists">Pan Yongzhi</property>
+    <property name="artists">Yongzhi Pan</property>
     <property name="logo">4digits_logo.png</property>
     <property name="wrap_license">True</property>
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area1">
+          <object class="GtkButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
@@ -51,10 +50,11 @@ Hermann Kraus: hint table</property>
         <child>
           <placeholder/>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-  <widget class="GtkWindow" id="main_window">
+  </object>
+  <object class="GtkAccelGroup" id="accelgroup1"/>
+  <object class="GtkWindow" id="main_window">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">4digits</property>
@@ -62,154 +62,153 @@ Hermann Kraus: hint table</property>
     <property name="icon">4digits_logo.png</property>
     <signal name="destroy" handler="on_main_window_destroy" swapped="no"/>
     <child>
-      <widget class="GtkVBox" id="vbox1">
+      <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <widget class="GtkMenuBar" id="menubar1">
+          <object class="GtkMenuBar" id="menubar1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <widget class="GtkMenuItem" id="game_menu">
+              <object class="GtkMenuItem" id="game_menu">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_Game</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <widget class="GtkMenu" id="game_menu_menu">
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu1">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <widget class="GtkImageMenuItem" id="game_new">
+                      <object class="GtkImageMenuItem" id="game_new">
                         <property name="label">gtk-new</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <accelerator key="n" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_new_game_activate" swapped="no"/>
-                      </widget>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem1">
+                      <object class="GtkSeparatorMenuItem" id="separatormenuitem1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                      </widget>
+                        <property name="use_action_appearance">False</property>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkMenuItem" id="game_score">
+                      <object class="GtkMenuItem" id="game_score">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Scores</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_score_activate" swapped="no"/>
-                      </widget>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem2">
+                      <object class="GtkSeparatorMenuItem" id="separatormenuitem2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                      </widget>
+                        <property name="use_action_appearance">False</property>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkImageMenuItem" id="game_quit">
+                      <object class="GtkImageMenuItem" id="game_quit">
                         <property name="label">gtk-quit</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <accelerator key="q" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_quit_activate" swapped="no"/>
-                      </widget>
+                      </object>
                     </child>
-                  </widget>
+                  </object>
                 </child>
-              </widget>
+              </object>
             </child>
             <child>
-              <widget class="GtkMenuItem" id="view_menu">
+              <object class="GtkMenuItem" id="view_menu">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_View</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <widget class="GtkMenu" id="view_menu_menu">
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu2">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <widget class="GtkCheckMenuItem" id="view_toolbar">
+                      <object class="GtkCheckMenuItem" id="view_toolbar">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Toolbar</property>
                         <property name="use_underline">True</property>
-                        <property name="active">True</property>
                         <signal name="toggled" handler="on_view_toolbar_toggled" swapped="no"/>
-                      </widget>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkCheckMenuItem" id="view_hint_table">
+                      <object class="GtkCheckMenuItem" id="view_hint_table">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Hint Table</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_view_hint_table_toggled" swapped="no"/>
-                      </widget>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkCheckMenuItem" id="view_auto_fill_hints">
+                      <object class="GtkCheckMenuItem" id="view_auto_fill_hints">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Auto Fill Hints</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_view_auto_fill_hints_toggled" swapped="no"/>
-                      </widget>
+                      </object>
                     </child>
-                  </widget>
+                  </object>
                 </child>
-              </widget>
+              </object>
             </child>
             <child>
-              <widget class="GtkMenuItem" id="help_menu">
+              <object class="GtkMenuItem" id="help_menu">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_Help</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <widget class="GtkMenu" id="help_menu_menu">
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu3">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <widget class="GtkImageMenuItem" id="help_contents">
-                        <property name="label">Contents</property>
+                      <object class="GtkImageMenuItem" id="help_contents">
+                        <property name="label">gtk-help</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip" translatable="yes">See your browser</property>
                         <property name="use_action_appearance">False</property>
-                        <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_help_activate" swapped="no"/>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
                         <accelerator key="F1" signal="activate"/>
-                        <child internal-child="image">
-                          <widget class="GtkImage" id="image3">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="stock">gtk-help</property>
-                          </widget>
-                        </child>
-                      </widget>
+                        <signal name="activate" handler="on_help_activate" swapped="no"/>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem3">
+                      <object class="GtkSeparatorMenuItem" id="separatormenuitem3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                      </widget>
+                        <property name="use_action_appearance">False</property>
+                      </object>
                     </child>
                     <child>
-                      <widget class="GtkImageMenuItem" id="help_about">
+                      <object class="GtkImageMenuItem" id="help_about">
                         <property name="label">gtk-about</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -217,13 +216,13 @@ Hermann Kraus: hint table</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <signal name="activate" handler="on_about_activate" swapped="no"/>
-                      </widget>
+                      </object>
                     </child>
-                  </widget>
+                  </object>
                 </child>
-              </widget>
+              </object>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
@@ -231,50 +230,50 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkToolbar" id="toolbar">
+          <object class="GtkToolbar" id="toolbar">
             <property name="can_focus">False</property>
             <child>
-              <widget class="GtkToolButton" id="btn_new_game">
+              <object class="GtkToolButton" id="btn_new_game">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="tooltip" translatable="yes">Start a new game</property>
+                <property name="tooltip_text" translatable="yes">Start a new game</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">New Game</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-new</property>
                 <signal name="clicked" handler="on_new_game_activate" swapped="no"/>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="homogeneous">True</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkSeparatorToolItem" id="separatortoolitem1">
+              <object class="GtkSeparatorToolItem" id="separatortoolitem1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkToolButton" id="btQuit">
+              <object class="GtkToolButton" id="btQuit">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="tooltip" translatable="yes">Close this window</property>
+                <property name="tooltip_text" translatable="yes">Close this window</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Quit</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-quit</property>
                 <signal name="clicked" handler="on_quit_activate" swapped="no"/>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="homogeneous">True</property>
               </packing>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
@@ -282,18 +281,18 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkHBox" id="input_hbox">
+          <object class="GtkHBox" id="input_hbox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">4</property>
             <child>
-              <widget class="GtkLabel" id="input_label">
+              <object class="GtkLabel" id="input_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Input:</property>
                 <property name="use_underline">True</property>
                 <property name="mnemonic_widget">entry</property>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
@@ -302,7 +301,7 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkEntry" id="entry">
+              <object class="GtkEntry" id="entry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_focus">True</property>
@@ -310,11 +309,9 @@ Hermann Kraus: hint table</property>
                 <property name="activates_default">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <signal name="changed" handler="on_entry_changed" swapped="no"/>
                 <signal name="activate" handler="on_entry_activate" swapped="no"/>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
@@ -323,7 +320,7 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkButton" id="ok_button">
+              <object class="GtkButton" id="ok_button">
                 <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -331,7 +328,7 @@ Hermann Kraus: hint table</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_ok_clicked" swapped="no"/>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
@@ -339,7 +336,7 @@ Hermann Kraus: hint table</property>
                 <property name="position">2</property>
               </packing>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
@@ -348,7 +345,7 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkTable" id="guess_table">
+          <object class="GtkTable" id="guess_table">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="n_rows">9</property>
@@ -356,120 +353,120 @@ Hermann Kraus: hint table</property>
             <property name="column_spacing">2</property>
             <property name="row_spacing">2</property>
             <child>
-              <widget class="GtkLabel" id="label3">
+              <object class="GtkLabel" id="label3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">1</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">1</property>
                 <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label4">
+              <object class="GtkLabel" id="label4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">2</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label5">
+              <object class="GtkLabel" id="label5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">3</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">3</property>
                 <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label6">
+              <object class="GtkLabel" id="label6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">5</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">5</property>
                 <property name="bottom_attach">6</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label7">
+              <object class="GtkLabel" id="label7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">4</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">4</property>
                 <property name="bottom_attach">5</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label8">
+              <object class="GtkLabel" id="label8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">6</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">6</property>
                 <property name="bottom_attach">7</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label9">
+              <object class="GtkLabel" id="label9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">7</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">7</property>
                 <property name="bottom_attach">8</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label10">
+              <object class="GtkLabel" id="label10">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">8</property>
-              </widget>
+              </object>
               <packing>
                 <property name="top_attach">8</property>
                 <property name="bottom_attach">9</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label1">
+              <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Guess</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label11">
+              <object class="GtkLabel" id="label11">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Result</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g0">
+              <object class="GtkLabel" id="g0">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -478,10 +475,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g1">
+              <object class="GtkLabel" id="g1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -490,10 +487,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g2">
+              <object class="GtkLabel" id="g2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -502,10 +499,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g3">
+              <object class="GtkLabel" id="g3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -514,10 +511,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g4">
+              <object class="GtkLabel" id="g4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -526,10 +523,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g5">
+              <object class="GtkLabel" id="g5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -538,10 +535,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g6">
+              <object class="GtkLabel" id="g6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -550,10 +547,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="g7">
+              <object class="GtkLabel" id="g7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
@@ -562,10 +559,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r0">
+              <object class="GtkLabel" id="r0">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -574,10 +571,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r1">
+              <object class="GtkLabel" id="r1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -586,10 +583,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r2">
+              <object class="GtkLabel" id="r2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -598,10 +595,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r3">
+              <object class="GtkLabel" id="r3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -610,10 +607,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r4">
+              <object class="GtkLabel" id="r4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -622,10 +619,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r5">
+              <object class="GtkLabel" id="r5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -634,10 +631,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r6">
+              <object class="GtkLabel" id="r6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -646,10 +643,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="r7">
+              <object class="GtkLabel" id="r7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
@@ -660,7 +657,7 @@ Hermann Kraus: hint table</property>
             <child>
               <placeholder/>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
@@ -669,10 +666,10 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkHSeparator" id="hseparator1">
+          <object class="GtkHSeparator" id="hseparator1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
@@ -680,9 +677,9 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkHBox" id="hint_table">
+          <object class="GtkHBox" id="hint_table">
             <property name="can_focus">False</property>
-            <property name="tooltip" translatable="yes"> Left side:
+            <property name="tooltip_text" translatable="yes"> Left side:
  - You uncheck a row if you are sure that this number is not in the answer.
  - You uncheck a box if you are sure that this number cannot be at this position.
 
@@ -696,7 +693,7 @@ Hermann Kraus: hint table</property>
             <child>
               <placeholder/>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
@@ -704,9 +701,9 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkHSeparator" id="hint_hseparator">
+          <object class="GtkHSeparator" id="hint_hseparator">
             <property name="can_focus">False</property>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
@@ -714,16 +711,16 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkHBox" id="status_hbox">
+          <object class="GtkHBox" id="status_hbox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">4</property>
             <child>
-              <widget class="GtkLabel" id="info_label">
+              <object class="GtkLabel" id="info_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Ready</property>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
@@ -732,10 +729,10 @@ Hermann Kraus: hint table</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="time_label">
+              <object class="GtkLabel" id="time_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
@@ -743,17 +740,17 @@ Hermann Kraus: hint table</property>
                 <property name="position">1</property>
               </packing>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
             <property name="position">7</property>
           </packing>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-  <widget class="GtkDialog" id="score_dialog">
+  </object>
+  <object class="GtkDialog" id="score_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">4digits Scores</property>
@@ -764,12 +761,12 @@ Hermann Kraus: hint table</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox2">
+      <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">12</property>
         <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area2">
+          <object class="GtkButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -777,21 +774,21 @@ Hermann Kraus: hint table</property>
               <placeholder/>
             </child>
             <child>
-              <widget class="GtkButton" id="button1">
+              <object class="GtkButton" id="button1">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-              </widget>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
@@ -800,11 +797,11 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkLabel" id="label1">
+          <object class="GtkLabel" id="label2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">4digits Scores</property>
-          </widget>
+          </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
@@ -812,19 +809,25 @@ Hermann Kraus: hint table</property>
           </packing>
         </child>
         <child>
-          <widget class="GtkTreeView" id="score_view">
+          <object class="GtkTreeView" id="score_view">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
             <property name="rules_hint">True</property>
-          </widget>
+            <child internal-child="selection">
+              <object class="GtkTreeSelection" id="treeview-selection1"/>
+            </child>
+          </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-</glade-interface>
+    <action-widgets>
+      <action-widget response="0">button1</action-widget>
+    </action-widgets>
+  </object>
+</interface>

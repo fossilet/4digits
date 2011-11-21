@@ -37,13 +37,12 @@ try:
     import pygtk
     pygtk.require('2.0')
     import gtk
-    import gtk.glade
 except ImportError:
     print _('python-gtk2 is required to run 4digits.')
     print _('No python-gtk2 was found on your system.')
     sys.exit(1)
 
-__version__ = '1.0'
+__version__ = '1.1'
 __appdata_dir__ = os.path.join(os.path.expanduser('~'), '.4digits')
 __config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
 __prefs__ = {
@@ -54,12 +53,8 @@ __prefs__ = {
 
 # The first is the current directory, so you do not have to install 
 # 4digits to play it. The second is the installation directory.
-__gladefiles__ = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
-    os.path.normpath(os.path.join(
-    os.path.dirname(__file__), '../share/4digits/4digits.glade'))]
-__helpfiles__ = [os.path.join(os.path.dirname(__file__), 'doc', 'index.html'),
-    os.path.normpath(os.path.join(
-    os.path.dirname(__file__), '../share/doc/4digits/index.html'))]
+__gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
+__helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
 __score_filename__ = os.path.join(__appdata_dir__, '4digits.4digits.scores')
 
 # For future gettext support. I cannot figure out i18n now.
@@ -71,52 +66,44 @@ except NameError:
         """Mark translatable strings."""
         return arg
 
-def load_glade(dialog = None):
-    """Try to load dialog from the different possible glade files."""
-    for gladefile in __gladefiles__:
-        try:
-            return gtk.glade.XML(gladefile, dialog) 
-        except RuntimeError:
-            continue # Just ignore the error, the next file will be tested
-    # Still here
-    print "Gladefile not found! Checked paths were:"
-    print __gladefiles__
-    sys.exit(2)
-    
-
 class MainWindow(object):
     """The main game window."""
     def __init__(self):
         """GUI initialization."""
-        self.widget_tree = load_glade()
-        self.toolbar = self.widget_tree.get_widget('toolbar')
-        self.view_toolbar = self.widget_tree.get_widget('view_toolbar')
-        self.hint_table = self.widget_tree.get_widget('hint_table')
-        self.hint_hseparator = self.widget_tree.get_widget(
+        self.widget_tree = gtk.Builder()
+        self.widget_tree.add_from_file(__gladefile__)
+        self.toolbar = self.widget_tree.get_object('toolbar')
+        self.view_toolbar = self.widget_tree.get_object('view_toolbar')
+        self.hint_table = self.widget_tree.get_object('hint_table')
+        self.hint_hseparator = self.widget_tree.get_object(
                 'hint_hseparator')
-        self.view_hint_table = self.widget_tree.get_widget(
+        self.view_hint_table = self.widget_tree.get_object(
                 'view_hint_table')
-        self.auto_fill_hints = self.widget_tree.get_widget(
+        self.auto_fill_hints = self.widget_tree.get_object(
                 'view_auto_fill_hints')
 
         # Input box
-        self.entry = self.widget_tree.get_widget('entry')
+        self.entry = self.widget_tree.get_object('entry')
         self.entry.grab_focus()
         fontsize = self.entry.get_pango_context().\
                 get_font_description().get_size()/pango.SCALE
         self.entry.modify_font(pango.FontDescription(str(int(fontsize*3))))
 
-        self.ok_button = self.widget_tree.get_widget('ok_button')
+        self.ok_button = self.widget_tree.get_object('ok_button')
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
                 'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
-            setattr(self, widget, self.widget_tree.get_widget(widget))
-        self.info_label = self.widget_tree.get_widget('info_label')
-        self.time_label = self.widget_tree.get_widget('time_label')
-        self.score_view = self.widget_tree.get_widget('score_view')
+            setattr(self, widget, self.widget_tree.get_object(widget))
+        self.info_label = self.widget_tree.get_object('info_label')
+        self.time_label = self.widget_tree.get_object('time_label')
+        self.score_view = self.widget_tree.get_object('score_view')
 
         self.cb_hint = [] # container for check boxes in the hint table
         self.label_hint = []
         self.build_hint_table()
+
+        # about and score dialog
+        self.about_dialog = self.widget_tree.get_object('about_dialog')
+        self.score_dialog = self.widget_tree.get_object('score_dialog')
 
         # parse preferences
         self.read_preferences_file()
@@ -154,7 +141,7 @@ class MainWindow(object):
                 'on_help_activate' : self.on_help_activate,
                 'on_about_activate' : self.on_about_activate,
                 'on_score_activate': self.on_score_activate}
-        self.widget_tree.signal_autoconnect(dic)
+        self.widget_tree.connect_signals(dic)
         # new game initialization
         self.game = NewRound()
 
@@ -180,13 +167,18 @@ class MainWindow(object):
         """Write preference data to disk.
         Copied from Comix.
         """
+        if not os.path.exists(__appdata_dir__):
+            os.mkdir(__appdata_dir__)
+        elif not os.path.isdir(__appdata_dir__):
+            os.rename(__appdata_dir__, __appdata_dir__+'.bak')
+            os.mkdir(__appdata_dir__)
         config = open(__config_path__, 'w')
         cPickle.dump(__prefs__, config, cPickle.HIGHEST_PROTOCOL)
         config.close()
 
     def build_hint_table(self):
         """Create the controls for the hint table."""
-        hint_table = self.widget_tree.get_widget('hint_table')
+        hint_table = self.widget_tree.get_object('hint_table')
         for name in (0, 40):
             table = gtk.Table(rows=11, columns=6)
             hint_table.pack_start(table)
@@ -391,39 +383,35 @@ class MainWindow(object):
     @classmethod
     def on_help_activate(cls, widget):
         """Show help."""
-        for helpfile in __helpfiles__:
+        '''for helpfile in __helpfile__:
             try:
                 file(helpfile)
             except IOError:
                 continue
-            webbrowser.open(helpfile)
+                '''
+        webbrowser.open(__helpfile__)
 
-    @classmethod
-    def on_about_activate(cls, widget):
+    def on_about_activate(self, widget):
         """Show about dialog."""
-        about = AboutDialog().about_dialog
-        about.run()
-        about.destroy()
+        self.about_dialog.run()
+        self.about_dialog.hide()
     
-    @classmethod
-    def on_score_activate(cls, new_score_rank):
+    def on_score_activate(self, new_score_rank):
         """Show high scores."""
-        score_dialog = ScoreDialog()
-        dlg = score_dialog.score_dialog
-        score_view = score_dialog.score_view
-        sv_selection = score_view.get_selection()
+        #dlg = score_dialog.score_dialog
+        sv_selection = self.score_view.get_selection()
         sv_selection.set_mode(gtk.SELECTION_NONE)
         column = gtk.TreeViewColumn(
                 _('Name'), gtk.CellRendererText(), text = 0)
-        score_view.append_column(column)
+        self.score_view.append_column(column)
         column = gtk.TreeViewColumn(
                 _('Score'), gtk.CellRendererText(), text = 1)
-        score_view.append_column(column)
+        self.score_view.append_column(column)
         column = gtk.TreeViewColumn(
                 _('Date'), gtk.CellRendererText(), text = 2)
-        score_view.append_column(column)
-        dlg.scoreList = gtk.ListStore(str, str, str)
-        score_view.set_model(dlg.scoreList)
+        self.score_view.append_column(column)
+        scoreList = gtk.ListStore(str, str, str)
+        self.score_view.set_model(scoreList)
 
         try:
             scores = [line.split(' ', 6) 
@@ -433,7 +421,7 @@ class MainWindow(object):
 
         for line in scores:
             score_tup = line[0], line[1], ' '.join(line[2:]).rstrip('\n')
-            dlg.scoreList.append(score_tup)
+            scoreList.append(score_tup)
         # high light the current high score entry
         try:
             sv_selection.set_mode(gtk.SELECTION_SINGLE)
@@ -441,8 +429,8 @@ class MainWindow(object):
         except TypeError:
             sv_selection.set_mode(gtk.SELECTION_NONE)
 
-        dlg.run()
-        dlg.destroy()
+        self.score_dialog.run()
+        self.score_dialog.hide()
 
     def on_new_game_activate(self, widget):
         """New game initialization."""
@@ -532,27 +520,6 @@ class MainWindow(object):
         gtk.main_quit()
 
 
-class AboutDialog(object):
-    """The about dialog."""
-    def __init__(self):
-        self.widget_tree = load_glade('about_dialog')
-        self.about_dialog = self.widget_tree.get_widget("about_dialog")
-        gtk.about_dialog_set_url_hook(
-                lambda about_dialog, url: webbrowser.open(url))
-        self.about_dialog.set_website(
-                'http://fourdigits.sourceforge.net')
-        self.about_dialog.set_website_label(
-                'http://fourdigits.sourceforge.net')
-
-
-class ScoreDialog(object):
-    """The score dialog."""
-    def __init__(self):
-        self.widget_tree = load_glade('score_dialog')
-        self.score_dialog = self.widget_tree.get_widget('score_dialog')
-        self.score_view = self.widget_tree.get_widget('score_view')
-
-
 class NewRound(object):
     """Contains data in one round of the game."""
     def __init__(self):
@@ -563,7 +530,7 @@ class NewRound(object):
         #print self.answer
         if self.answer == [4, 6, 1, 9]:
             gtk.MessageDialog(message_format
-                    ='4619: You are the luckiest guy on the planet!').show()
+                    =_('4619: You are the luckiest guy on the planet!')).show()
         self.guess = 0
         self.guesses = []
         self.time_start = 0
