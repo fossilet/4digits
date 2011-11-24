@@ -43,19 +43,17 @@ except ImportError:
     sys.exit(1)
 
 __version__ = '1.1'
+# We do not search glade file in /usr/share/ any longer. Debian packagers may need to patch this.
+__gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
+__helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
 __appdata_dir__ = os.path.join(os.path.expanduser('~'), '.4digits')
 __config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
+__score_filename__ = os.path.join(__appdata_dir__, '4digits.4digits.scores')
 __prefs__ = {
         'show toolbar': True,
         'show hint table': False,
         'auto fill hints': False
         }
-
-# The first is the current directory, so you do not have to install 
-# 4digits to play it. The second is the installation directory.
-__gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
-__helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
-__score_filename__ = os.path.join(__appdata_dir__, '4digits.4digits.scores')
 
 # For future gettext support. I cannot figure out i18n now.
 # I wish someone could help me with it.
@@ -162,19 +160,6 @@ class MainWindow(object):
                 for key in old___prefs__:
                     if key in __prefs__:
                         __prefs__[key] = old___prefs__[key]
-
-    def write_preferences_file(self):
-        """Write preference data to disk.
-        Copied from Comix.
-        """
-        if not os.path.exists(__appdata_dir__):
-            os.mkdir(__appdata_dir__)
-        elif not os.path.isdir(__appdata_dir__):
-            os.rename(__appdata_dir__, __appdata_dir__+'.bak')
-            os.mkdir(__appdata_dir__)
-        config = open(__config_path__, 'w')
-        cPickle.dump(__prefs__, config, cPickle.HIGHEST_PROTOCOL)
-        config.close()
 
     def build_hint_table(self):
         """Create the controls for the hint table."""
@@ -398,17 +383,17 @@ class MainWindow(object):
     
     def on_score_activate(self, new_score_rank):
         """Show high scores."""
-        #dlg = score_dialog.score_dialog
         sv_selection = self.score_view.get_selection()
         sv_selection.set_mode(gtk.SELECTION_NONE)
-        column = gtk.TreeViewColumn(
-                _('Name'), gtk.CellRendererText(), text = 0)
+
+        # Since we hide but don't destory the score dialog, we have to remove all columns before appending, otherwise we would have more and more columns. 
+        for col in self.score_view.get_columns():
+            self.score_view.remove_column(col)
+        column = gtk.TreeViewColumn(_('Name'), gtk.CellRendererText(), text = 0)
         self.score_view.append_column(column)
-        column = gtk.TreeViewColumn(
-                _('Score'), gtk.CellRendererText(), text = 1)
+        column = gtk.TreeViewColumn(_('Score'), gtk.CellRendererText(), text = 1)
         self.score_view.append_column(column)
-        column = gtk.TreeViewColumn(
-                _('Date'), gtk.CellRendererText(), text = 2)
+        column = gtk.TreeViewColumn(_('Date'), gtk.CellRendererText(), text = 2)
         self.score_view.append_column(column)
         scoreList = gtk.ListStore(str, str, str)
         self.score_view.set_model(scoreList)
@@ -477,6 +462,19 @@ class MainWindow(object):
             return True
         else:
             return False
+
+    def write_preferences_file(self):
+        """Write preference data to disk.
+        Copied from Comix.
+        """
+        if not os.path.exists(__appdata_dir__):
+            os.mkdir(__appdata_dir__)
+        elif not os.path.isdir(__appdata_dir__):
+            os.rename(__appdata_dir__, __appdata_dir__+'.bak')
+            os.mkdir(__appdata_dir__)
+        config = open(__config_path__, 'w')
+        cPickle.dump(__prefs__, config, cPickle.HIGHEST_PROTOCOL)
+        config.close()
 
     @classmethod
     def write_score(cls, time_taken):

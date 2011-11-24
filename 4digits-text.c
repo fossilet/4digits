@@ -24,17 +24,22 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
    */
 
+#include <ctype.h>
+#include <dirent.h>
+#include <errno.h>
+#include <getopt.h>
+#include <pwd.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <ctype.h>
 #include <string.h>
-#include <stdbool.h>
-#include <getopt.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 
 //#define DEBUG
-#define VERSION_STRING "1.1, Jan 2012"
+#define VERSION_STRING "1.1, Nov 2011"
 
 const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
 "4digits comes with NO WARRANTY to the extent permitted by law.\n"
@@ -55,7 +60,7 @@ const char HELP[] =
 "-v, --version \t display the version of 4digits and exit.\n"
 "-h, -?, --help \t print this help.\n"      
 "\n"
-"Report bugs at <http://sourceforge.net/projects/fourdigits/>.";
+"Report bugs at <https://github.com/fossilet/4digits/issues>.";
 
 static const char *optString = "vh?";
 struct globalArgs_t {
@@ -68,22 +73,15 @@ static const struct option longOpts[] = {
     { NULL, no_argument, NULL, 0 }
 };
 
-void print_help(void);
-void display_usage(void);
+void err_msg(const char* msg);
 void gen_rand(int ans_digits[]);
 int enter_number(void);
 void save_score(const int time_taken);
 void compare(const int *in_digits, const int *ans_digits, int *A, int *B);
 int tenpow(int power);
 
-void print_help(void) {
-    (void)puts(HELP);
-    exit(EXIT_FAILURE);
-}
-
-void display_usage(void) {
-    (void)puts("Usage: 4digits [OPTION]...\n");
-    (void)puts("Try `4digits --help' for more information.");
+void err_msg(const char* msg) {
+    fprintf(stderr, "%s\n", msg);
     exit(EXIT_FAILURE);
 }
 
@@ -118,10 +116,8 @@ int enter_number() {
     do {
         reinput = false;
         printf("Input a 4-digit number:");
-        if(fgets(mstr, sizeof mstr, stdin) == NULL) {
-            fprintf(stderr, "Something's got wrong, I'd better quit...\n");
-            exit(EXIT_FAILURE); 
-        }
+        if(fgets(mstr, sizeof mstr, stdin) == NULL)
+            err_msg("Something's got wrong, I'd better quit...\n");
         // fgets appends the newline entered, if it appears in the first 4
         // elements of mstr, then it's sure less than 4 digits are entered
         bool flag = false;
@@ -168,23 +164,36 @@ void save_score(const int time_taken) {
     struct tm *today = localtime(&tm);
     char tmpbuffer[129];
     today = localtime(&tm);
-    const char *sfpath = getenv("HOME");
-    const char score_filename[] = "/.4digits/4digits-text.4digits.scores";
-    char *scorefile = (char *)malloc(
-            strlen(sfpath) + strlen(score_filename) + 1);
-    if(!scorefile) {
-        fprintf(stderr, "Memory allocation error.\n");
-        exit(EXIT_FAILURE);
-    }
-    strcpy(scorefile, sfpath);
+    char appdata_dir[4096]; //XXX why _PC_PATH_MAX is only 4?
+    const char *score_filename = "4digits.4digits.scores";
+    strcpy(appdata_dir, getenv("HOME"));
+    strcat(appdata_dir, "/.4digits/");
+    char *scorefile = (char*)malloc(strlen(appdata_dir) + strlen(score_filename) + 1);
+    if(!scorefile)
+        err_msg("Memory allocation error.\n");
+    strcpy(scorefile, appdata_dir);
     strcat(scorefile, score_filename);
+
     FILE *sfp = fopen(scorefile, "a+");
     if (!sfp) {
-        fprintf(stderr, "Cannot open score file.\n");
-        exit(EXIT_FAILURE);
+        if (errno == ENOENT) {
+            DIR *dp = opendir(appdata_dir);
+            if(!dp)
+                if (errno == ENOENT) {
+                    int ret = mkdir(appdata_dir, 0700);
+                    if (ret == -1)
+                        err_msg("Cannot open score file.\n");
+                    sfp = fopen(scorefile, "a+");
+                }
+        }
+        else
+            err_msg("Cannot open score file.\n");
     }
     strftime(tmpbuffer, 128, "%a %b %d %H:%M:%S %Y", today); 
-    fprintf(sfp, "%s %ds %s\n", getlogin(), time_taken, tmpbuffer);
+    struct passwd *pwd;
+    pwd = getpwuid(geteuid());
+    // getenv("USERNAME") conforms to C99 thus is more portable.
+    fprintf(sfp, "%s %ds %s\n", pwd->pw_name, time_taken, tmpbuffer);
     free(scorefile);
 }
 
@@ -211,10 +220,11 @@ int main(int argc, char *argv[]) {
                 printf("%s\n%s", COPYRIGHT, AUTHOR);
                 exit(1);
             case 'h': 
-                print_help();
+                err_msg(HELP);
                 break;
             case '?': /* fall-through is intentional */
-                display_usage();
+                err_msg("Usage: 4digits [OPTION]...\n"
+                        "Try `4digits --help' for more information.");
                 break; 
             case 0:    /* long option without a short arg */
                 if(strcmp("version", longOpts[longIndex].name) == 0)

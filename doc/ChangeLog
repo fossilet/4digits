@@ -1,6 +1,19 @@
 4digits: A guess-the-number game, aka Bulls and Cows
 
+Version 1.1 (2011-11-24):
+    GUI version:
+    * Fixed a bug that caused preference file and score file cannot be created for the first time and game cannot quit.
+    * No longer searches glade files and help files in different places.
+    * UI definition is converted from libglade to GTK+ Builder.
+
+    CLI version:
+    * Fixed a bug that caused score file cannot be created for the first time.
+    * Uses the same score file with GUI version.
+    * Code cleanup.
+    * No longer supports Windows.
+
 Version 1.0 (2011-07-05):
+    GUI version:
     * Fully compatible with Windows. Now you can play it under Windows as well.
     * Bigger font size for input box. This looks much better.
     * Removed hint table column header. This results in a clearer GUI.
@@ -13,7 +26,7 @@ Version 0.9 (2008-10-17):
     * Minor user interface tweaks.
     * Much code cleanup. 
 
-    Text version:
+    CLI version:
     * Moved score file to ~/.4digits/.
     * Program messages are now the same as in GUI version.
     * Much code cleanup.
@@ -27,12 +40,12 @@ Version 0.8 (2007-11-19):
     * Detailed documentation.
     * Visual improvements.
 
-    Text version:
+    CLI version:
     * Better input handling.
 
 Version 0.4 (2007-03-22):
     * Added GUI version.
-    * Text version renamed to 4digits-text. 4digits now launched GUI version.
+    * CLI version renamed to 4digits-text. 4digits now launched GUI version.
     * Added HTML documentation with screenshots.
 
 Version 0.3 (2006-11-18):
