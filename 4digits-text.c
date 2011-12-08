@@ -126,7 +126,7 @@ int enter_number() {
         reinput = false;
         printf(_("Input a 4-digit number:"));
         if(fgets(mstr, sizeof mstr, stdin) == NULL)
-            err_msg("Something's got wrong, I'd better quit...\n");
+            err_msg(_("Something's got wrong, I'd better quit...\n"));
         // fgets appends the newline entered, if it appears in the first 4
         // elements of mstr, then it's sure less than 4 digits are entered
         bool flag = false;
@@ -284,7 +284,7 @@ int main(int argc, char *argv[]) {
         compare(in_digits, ans_digits, &A, &B);
         printf("%dA%dB    ", A, B);
         if (num_guess != 7)
-            printf(_("\t %d times left.\n"), 7-num_guess);
+            printf(ngettext("\t %d time left.\n", "\t %d times left.\n", 7-num_guess), 7-num_guess);
         guessed[num_guess] = input;
 
         if(A == 4) {
