@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-09 03:08+0700\n"
+"POT-Creation-Date: 2011-12-09 06:09+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: 4digits.py:46
 msgid "python-gtk2 is required to run 4digits."
@@ -25,81 +26,113 @@ msgstr ""
 msgid "No python-gtk2 was found on your system."
 msgstr ""
 
-#: 4digits.py:160
+#: 4digits.py:161
 #, python-format
 msgid "Corrupted preferences file                 \"%s\", deleting..."
 msgstr ""
 
-#: 4digits.py:235
+#: 4digits.py:236
 msgid "Must input something."
 msgstr ""
 
-#: 4digits.py:238
+#: 4digits.py:239
 msgid "First digit cannot be zero."
 msgstr ""
 
-#: 4digits.py:243
+#: 4digits.py:244
 msgid "Must input a number."
 msgstr ""
 
-#: 4digits.py:246
+#: 4digits.py:247
 msgid "Must input four digits."
 msgstr ""
 
-#: 4digits.py:249
+#: 4digits.py:250
 msgid "Four digits must be unique."
 msgstr ""
 
-#: 4digits.py:252
+#: 4digits.py:253
 msgid "You've already guessed it."
 msgstr ""
 
-#: 4digits.py:273
+#: 4digits.py:274
 msgid "You win! :)"
 msgstr ""
 
-#: 4digits.py:275
+#: 4digits.py:276
 #, python-format
 msgid "Used %.1f s."
 msgstr ""
 
-#: 4digits.py:287
+#: 4digits.py:288
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr ""
 
-#: 4digits.py:290
+#: 4digits.py:291
 #, python-format
 msgid "Wasted %.1f s."
 msgstr ""
 
-#: 4digits.py:341
+#: 4digits.py:342
 msgid "Timer started..."
 msgstr ""
 
-#: 4digits.py:396
+#: 4digits.py:397
 msgid "Name"
 msgstr ""
 
-#: 4digits.py:398
+#: 4digits.py:399
 msgid "Score"
 msgstr ""
 
-#: 4digits.py:400
+#: 4digits.py:401
 msgid "Date"
 msgstr ""
 
-#: 4digits.py:434 4digits.glade:722
+#: 4digits.py:435 4digits.glade:726
 msgid "Ready"
 msgstr ""
 
-#: 4digits.py:535
+#: 4digits.py:536
 msgid "4619: You are the luckiest guy on the planet!"
+msgstr ""
+
+#: 4digits-text.c:53
+msgid ""
+"4digits comes with NO WARRANTY to the extent permitted by law.\n"
+"This program is free software; you can redistribute it and/or\n"
+"modify it under the terms of the GNU General Public License as\n"
+"published by the Free Software Foundation - version 2. For more\n"
+"information about these matters, see the file named COPYING.\n"
+msgstr ""
+
+#: 4digits-text.c:59
+msgid "Written by Pan Yongzhi.\n"
+msgstr ""
+
+#: 4digits-text.c:62
+msgid ""
+"4digits, a guess-the-number game.\n"
+"Usage: 4digits [OPTION] ...\n"
+"\n"
+"You are given eight times to guess a four-digit number. You get\n"
+"one A if its value and position are both correct, and you get one\n"
+"B if only its value is correct. You win the game when you get 4A0B.\n"
+"\n"
+"-v, --version \t display the version of 4digits and exit.\n"
+"-h, -?, --help \t print this help.\n"
+"\n"
+"Report bugs at <https://github.com/fossilet/4digits/issues>."
 msgstr ""
 
 #: 4digits-text.c:127
 #, c-format
 msgid "Input a 4-digit number:"
+msgstr ""
+
+#: 4digits-text.c:129
+msgid "Something's got wrong, I'd better quit...\n"
 msgstr ""
 
 #: 4digits-text.c:138
@@ -138,8 +171,10 @@ msgstr ""
 
 #: 4digits-text.c:287
 #, c-format
-msgid "\t %d times left.\n"
-msgstr ""
+msgid "\t %d time left.\n"
+msgid_plural "\t %d times left.\n"
+msgstr[0] ""
+msgstr[1] ""
 
 #: 4digits-text.c:293
 #, c-format
@@ -186,99 +221,104 @@ msgid ""
 "Street, Fifth Floor, Boston, MA  02110-1301, USA."
 msgstr ""
 
-#: 4digits.glade:60
+#. Write your names here
+#: 4digits.glade:29
+msgid "tranlator-credits"
+msgstr ""
+
+#: 4digits.glade:61
 msgid "4digits"
 msgstr ""
 
-#: 4digits.glade:77
+#: 4digits.glade:78
 msgid "_Game"
 msgstr ""
 
-#: 4digits.glade:107
+#: 4digits.glade:108
 msgid "_Scores"
 msgstr ""
 
-#: 4digits.glade:140
+#: 4digits.glade:141
 msgid "_View"
 msgstr ""
 
-#: 4digits.glade:151
+#: 4digits.glade:152
 msgid "_Toolbar"
 msgstr ""
 
-#: 4digits.glade:161
+#: 4digits.glade:162
 msgid "_Hint Table"
 msgstr ""
 
-#: 4digits.glade:171
+#: 4digits.glade:172
 msgid "_Auto Fill Hints"
 msgstr ""
 
-#: 4digits.glade:185
+#: 4digits.glade:186
 msgid "_Help"
 msgstr ""
 
-#: 4digits.glade:239
+#: 4digits.glade:241
 msgid "Start a new game"
 msgstr ""
 
-#: 4digits.glade:241
+#: 4digits.glade:243
 msgid "New Game"
 msgstr ""
 
-#: 4digits.glade:264
+#: 4digits.glade:267
 msgid "Close this window"
 msgstr ""
 
-#: 4digits.glade:266
+#: 4digits.glade:269
 msgid "Quit"
 msgstr ""
 
-#: 4digits.glade:292
+#: 4digits.glade:295
 msgid "_Input:"
 msgstr ""
 
-#: 4digits.glade:359
+#: 4digits.glade:363
 msgid "1"
 msgstr ""
 
-#: 4digits.glade:370
+#: 4digits.glade:374
 msgid "2"
 msgstr ""
 
-#: 4digits.glade:381
+#: 4digits.glade:385
 msgid "3"
 msgstr ""
 
-#: 4digits.glade:392
+#: 4digits.glade:396
 msgid "5"
 msgstr ""
 
-#: 4digits.glade:403
+#: 4digits.glade:407
 msgid "4"
 msgstr ""
 
-#: 4digits.glade:414
+#: 4digits.glade:418
 msgid "6"
 msgstr ""
 
-#: 4digits.glade:425
+#: 4digits.glade:429
 msgid "7"
 msgstr ""
 
-#: 4digits.glade:436
+#: 4digits.glade:440
 msgid "8"
 msgstr ""
 
-#: 4digits.glade:447
+#: 4digits.glade:451
 msgid "Guess"
 msgstr ""
 
-#: 4digits.glade:458
+#: 4digits.glade:462
 msgid "Result"
 msgstr ""
 
-#: 4digits.glade:682
+#: 4digits.glade:686
 msgid ""
 " Left side:\n"
 " - You uncheck a row if you are sure that this number is not in the answer.\n"
@@ -291,6 +331,6 @@ msgid ""
 "it is included at all.\n"
 msgstr ""
 
-#: 4digits.glade:756 4digits.glade:803
+#: 4digits.glade:760 4digits.glade:808
 msgid "4digits Scores"
 msgstr ""
