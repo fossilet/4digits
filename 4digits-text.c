@@ -38,18 +38,27 @@
 #include <time.h>
 #include <unistd.h>
 
+#include <locale.h>
+#include <libintl.h>
+#define _(str) gettext(str)
+#define N_(str) str
+#define LOCALE_PATH "/usr/local/share/locale"
+
 //#define DEBUG
 #define VERSION_STRING "1.1, Nov 2011"
 
-const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
+const char VERSION[] = "4digits " VERSION_STRING;
+
+const char COPYRIGHT[] = N_(
 "4digits comes with NO WARRANTY to the extent permitted by law.\n"
 "This program is free software; you can redistribute it and/or\n"
 "modify it under the terms of the GNU General Public License as\n"
 "published by the Free Software Foundation - version 2. For more\n"
-"information about these matters, see the file named COPYING.\n";
-const char AUTHOR[] = "Written by Pan Yongzhi.\n";
+"information about these matters, see the file named COPYING.\n");
 
-const char HELP[] = 
+const char AUTHOR[] = N_("Written by Pan Yongzhi.\n");
+
+const char HELP[] = N_(
 "4digits, a guess-the-number game.\n"
 "Usage: 4digits [OPTION] ...\n"
 "\n"
@@ -60,7 +69,7 @@ const char HELP[] =
 "-v, --version \t display the version of 4digits and exit.\n"
 "-h, -?, --help \t print this help.\n"      
 "\n"
-"Report bugs at <https://github.com/fossilet/4digits/issues>.";
+"Report bugs at <https://github.com/fossilet/4digits/issues>.");
 
 static const char *optString = "vh?";
 struct globalArgs_t {
@@ -115,9 +124,9 @@ int enter_number() {
     bool reinput;
     do {
         reinput = false;
-        printf("Input a 4-digit number:");
+        printf(_("Input a 4-digit number:"));
         if(fgets(mstr, sizeof mstr, stdin) == NULL)
-            err_msg("Something's got wrong, I'd better quit...\n");
+            err_msg(_("Something's got wrong, I'd better quit...\n"));
         // fgets appends the newline entered, if it appears in the first 4
         // elements of mstr, then it's sure less than 4 digits are entered
         bool flag = false;
@@ -126,13 +135,13 @@ int enter_number() {
             while((c = getchar()) != '\n' && c != EOF)
                 flag = true;
         if (flag == true) {
-            fprintf(stderr, "Input too long!\n");
+            fprintf(stderr, _("Input too long!\n"));
             reinput = true;
             continue;
         }
         input = atoi(mstr);
         if (input < 1000 || input > 9999) {
-            fprintf(stderr, "Must be a number between 1000 and 9999!\n");
+            fprintf(stderr, _("Must be a number between 1000 and 9999!\n"));
             reinput = true;
             continue;
         }
@@ -142,7 +151,7 @@ int enter_number() {
                 || in_digits[2]==in_digits[3] || in_digits[0]==in_digits[2]
                 || in_digits[0]==in_digits[3] || in_digits[1]==in_digits[3])
         {
-            fprintf(stderr, "Four digits must be unique.\n");
+            fprintf(stderr, _("Four digits must be unique.\n"));
             reinput = true;
             continue;
         }
@@ -170,7 +179,7 @@ void save_score(const int time_taken) {
     strcat(appdata_dir, "/.4digits/");
     char *scorefile = (char*)malloc(strlen(appdata_dir) + strlen(score_filename) + 1);
     if(!scorefile)
-        err_msg("Memory allocation error.\n");
+        err_msg(_("Memory allocation error.\n"));
     strcpy(scorefile, appdata_dir);
     strcat(scorefile, score_filename);
 
@@ -182,12 +191,12 @@ void save_score(const int time_taken) {
                 if (errno == ENOENT) {
                     int ret = mkdir(appdata_dir, 0700);
                     if (ret == -1)
-                        err_msg("Cannot open score file.\n");
+                        err_msg(_("Cannot open score file.\n"));
                     sfp = fopen(scorefile, "a+");
                 }
         }
         else
-            err_msg("Cannot open score file.\n");
+            err_msg(_("Cannot open score file.\n"));
     }
     strftime(tmpbuffer, 128, "%a %b %d %H:%M:%S %Y", today); 
     struct passwd *pwd;
@@ -211,20 +220,25 @@ int main(int argc, char *argv[]) {
     /* Initialize globalArgs before we get to work. */
     globalArgs.version = NULL;    /* false */
 
+	//prepare i18n
+	setlocale(LC_ALL, "");
+	bindtextdomain("4digits", LOCALE_PATH);
+	textdomain("4digits");
+
     // Process the arguments with getopt_long(), then populate globalArgs
     opt = getopt_long(argc, argv, optString, longOpts, &longIndex);
     while(opt != -1) {
         switch(opt) {
             case 'v':
                 globalArgs.version = VERSION_STRING;
-                printf("%s\n%s", COPYRIGHT, AUTHOR);
+                printf("%s\n%s\n%s", VERSION, _(COPYRIGHT), _(AUTHOR));
                 exit(1);
             case 'h': 
-                err_msg(HELP);
+                err_msg(_(HELP));
                 break;
             case '?': /* fall-through is intentional */
-                err_msg("Usage: 4digits [OPTION]...\n"
-                        "Try `4digits --help' for more information.");
+                err_msg(_("Usage: 4digits [OPTION]...\n"
+                        "Try `4digits --help' for more information."));
                 break; 
             case 0:    /* long option without a short arg */
                 if(strcmp("version", longOpts[longIndex].name) == 0)
@@ -251,7 +265,7 @@ int main(int argc, char *argv[]) {
         for(int i=0; i < num_guess; i++)
             // duplicated input
             if (input == guessed[i]) {
-                fprintf(stderr, "You've already guessed it.\n");
+                fprintf(stderr, _("You've already guessed it.\n"));
                 --num_guess;
                 dup = true;
                 break;
@@ -270,18 +284,18 @@ int main(int argc, char *argv[]) {
         compare(in_digits, ans_digits, &A, &B);
         printf("%dA%dB    ", A, B);
         if (num_guess != 7)
-            printf("\t %d times left.\n", 7-num_guess);
+            printf(ngettext("\t %d time left.\n", "\t %d times left.\n", 7-num_guess), 7-num_guess);
         guessed[num_guess] = input;
 
         if(A == 4) {
             time_t toc = time(NULL);
             int score = (int)(toc-tic);
-            printf("You win! :) Used %d sec.\n", score);
+            printf(_("You win! :) Used %d sec.\n"), score);
             save_score(score); /* save score in the score file */
             return 0;
         }
     }
-    printf("\nHaha, you lose. It is ");
+    printf(_("\nHaha, you lose. It is "));
     for(int i = 0; i < 4; i++)
         printf("%d", ans_digits[i]);
     printf(".\n");
