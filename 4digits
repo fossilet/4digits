@@ -33,6 +33,11 @@ import sys
 import time
 import webbrowser
 
+import locale
+import gettext
+from gettext import gettext as _
+LOCALE_PATH = '/usr/local/share/locale/'
+
 try:
     import pygtk
     pygtk.require('2.0')
@@ -55,14 +60,13 @@ __prefs__ = {
         'auto fill hints': False
         }
 
-# For future gettext support. I cannot figure out i18n now.
-# I wish someone could help me with it.
-try: 
-    _()
-except NameError:
-    def _(arg):
-        """Mark translatable strings."""
-        return arg
+#try: 
+#    _()
+#except NameError:
+#     def _(arg):
+#         """Mark translatable strings."""
+#         return arg
+
 
 class MainWindow(object):
     """The main game window."""
@@ -153,8 +157,8 @@ class MainWindow(object):
                 old___prefs__ = cPickle.load(config)
                 config.close()
             except Exception:
-                print 'Corrupted preferences file \
-                "%s", deleting...' % __config_path__
+                print _('Corrupted preferences file \
+                "%s", deleting...') % __config_path__
                 os.remove(__config_path__)
             else:
                 for key in old___prefs__:
@@ -537,5 +541,10 @@ class NewRound(object):
         self.on_entry_cb_first_called = True
 
 if __name__ == "__main__":
+    #prepare i18n
+    locale.setlocale(locale.LC_ALL, '')
+    gettext.bindtextdomain('4digits', LOCALE_PATH)
+    gettext.textdomain('4digits')
+    #start
     MainWindow()
     gtk.main()

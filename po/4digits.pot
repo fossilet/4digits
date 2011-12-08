@@ -1,0 +1,296 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-09 03:08+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 4digits.py:46
+msgid "python-gtk2 is required to run 4digits."
+msgstr ""
+
+#: 4digits.py:47
+msgid "No python-gtk2 was found on your system."
+msgstr ""
+
+#: 4digits.py:160
+#, python-format
+msgid "Corrupted preferences file                 \"%s\", deleting..."
+msgstr ""
+
+#: 4digits.py:235
+msgid "Must input something."
+msgstr ""
+
+#: 4digits.py:238
+msgid "First digit cannot be zero."
+msgstr ""
+
+#: 4digits.py:243
+msgid "Must input a number."
+msgstr ""
+
+#: 4digits.py:246
+msgid "Must input four digits."
+msgstr ""
+
+#: 4digits.py:249
+msgid "Four digits must be unique."
+msgstr ""
+
+#: 4digits.py:252
+msgid "You've already guessed it."
+msgstr ""
+
+#: 4digits.py:273
+msgid "You win! :)"
+msgstr ""
+
+#: 4digits.py:275
+#, python-format
+msgid "Used %.1f s."
+msgstr ""
+
+#: 4digits.py:287
+#, python-format
+msgid "Haha, you lose. It is %s."
+msgstr ""
+
+#: 4digits.py:290
+#, python-format
+msgid "Wasted %.1f s."
+msgstr ""
+
+#: 4digits.py:341
+msgid "Timer started..."
+msgstr ""
+
+#: 4digits.py:396
+msgid "Name"
+msgstr ""
+
+#: 4digits.py:398
+msgid "Score"
+msgstr ""
+
+#: 4digits.py:400
+msgid "Date"
+msgstr ""
+
+#: 4digits.py:434 4digits.glade:722
+msgid "Ready"
+msgstr ""
+
+#: 4digits.py:535
+msgid "4619: You are the luckiest guy on the planet!"
+msgstr ""
+
+#: 4digits-text.c:127
+#, c-format
+msgid "Input a 4-digit number:"
+msgstr ""
+
+#: 4digits-text.c:138
+#, c-format
+msgid "Input too long!\n"
+msgstr ""
+
+#: 4digits-text.c:144
+#, c-format
+msgid "Must be a number between 1000 and 9999!\n"
+msgstr ""
+
+#: 4digits-text.c:154
+#, c-format
+msgid "Four digits must be unique.\n"
+msgstr ""
+
+#: 4digits-text.c:182
+msgid "Memory allocation error.\n"
+msgstr ""
+
+#: 4digits-text.c:194 4digits-text.c:199
+msgid "Cannot open score file.\n"
+msgstr ""
+
+#: 4digits-text.c:240
+msgid ""
+"Usage: 4digits [OPTION]...\n"
+"Try `4digits --help' for more information."
+msgstr ""
+
+#: 4digits-text.c:268
+#, c-format
+msgid "You've already guessed it.\n"
+msgstr ""
+
+#: 4digits-text.c:287
+#, c-format
+msgid "\t %d times left.\n"
+msgstr ""
+
+#: 4digits-text.c:293
+#, c-format
+msgid "You win! :) Used %d sec.\n"
+msgstr ""
+
+#: 4digits-text.c:298
+#, c-format
+msgid ""
+"\n"
+"Haha, you lose. It is "
+msgstr ""
+
+#: 4digits.glade:7
+msgid "About 4digits"
+msgstr ""
+
+#: 4digits.glade:14
+msgid "Copyright (c) 2004-2011 Yongzhi Pan"
+msgstr ""
+
+#: 4digits.glade:15
+msgid "A guess-the-number puzzle game"
+msgstr ""
+
+#: 4digits.glade:17
+msgid "4digits website"
+msgstr ""
+
+#: 4digits.glade:18
+msgid ""
+"4digits is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+"\n"
+"4digits is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA  02110-1301, USA."
+msgstr ""
+
+#: 4digits.glade:60
+msgid "4digits"
+msgstr ""
+
+#: 4digits.glade:77
+msgid "_Game"
+msgstr ""
+
+#: 4digits.glade:107
+msgid "_Scores"
+msgstr ""
+
+#: 4digits.glade:140
+msgid "_View"
+msgstr ""
+
+#: 4digits.glade:151
+msgid "_Toolbar"
+msgstr ""
+
+#: 4digits.glade:161
+msgid "_Hint Table"
+msgstr ""
+
+#: 4digits.glade:171
+msgid "_Auto Fill Hints"
+msgstr ""
+
+#: 4digits.glade:185
+msgid "_Help"
+msgstr ""
+
+#: 4digits.glade:239
+msgid "Start a new game"
+msgstr ""
+
+#: 4digits.glade:241
+msgid "New Game"
+msgstr ""
+
+#: 4digits.glade:264
+msgid "Close this window"
+msgstr ""
+
+#: 4digits.glade:266
+msgid "Quit"
+msgstr ""
+
+#: 4digits.glade:292
+msgid "_Input:"
+msgstr ""
+
+#: 4digits.glade:359
+msgid "1"
+msgstr ""
+
+#: 4digits.glade:370
+msgid "2"
+msgstr ""
+
+#: 4digits.glade:381
+msgid "3"
+msgstr ""
+
+#: 4digits.glade:392
+msgid "5"
+msgstr ""
+
+#: 4digits.glade:403
+msgid "4"
+msgstr ""
+
+#: 4digits.glade:414
+msgid "6"
+msgstr ""
+
+#: 4digits.glade:425
+msgid "7"
+msgstr ""
+
+#: 4digits.glade:436
+msgid "8"
+msgstr ""
+
+#: 4digits.glade:447
+msgid "Guess"
+msgstr ""
+
+#: 4digits.glade:458
+msgid "Result"
+msgstr ""
+
+#: 4digits.glade:682
+msgid ""
+" Left side:\n"
+" - You uncheck a row if you are sure that this number is not in the answer.\n"
+" - You uncheck a box if you are sure that this number cannot be at this "
+"position.\n"
+"\n"
+" Right side:\n"
+" - You check a row if you are sure that this number must be in the answer.\n"
+" - You check a box if you are sure that this number is at this position if "
+"it is included at all.\n"
+msgstr ""
+
+#: 4digits.glade:756 4digits.glade:803
+msgid "4digits Scores"
+msgstr ""
