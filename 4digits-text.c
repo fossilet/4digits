@@ -42,7 +42,7 @@
 #include <libintl.h>
 #define _(str) gettext(str)
 #define N_(str) str
-#define LOCALE_PATH "/usr/local/share/locale"
+#define LOCALE_PATH "/usr/share/locale"
 
 //#define DEBUG
 #define VERSION_STRING "1.1, Nov 2011"

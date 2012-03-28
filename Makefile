@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -Wall -std=c99 -pedantic -g
 SHELL = /bin/sh
-INSTALL_DIR = /usr/local
+INSTALL_DIR = /usr/local/
 
 all: 4digits-text compile-po
 
