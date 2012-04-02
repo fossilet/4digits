@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-09 06:09+0700\n"
+"POT-Creation-Date: 2012-04-02 15:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,11 +90,11 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: 4digits.py:435 4digits.glade:726
+#: 4digits.py:435 4digits.glade:724
 msgid "Ready"
 msgstr ""
 
-#: 4digits.py:536
+#: 4digits.py:538
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr ""
 
@@ -222,39 +222,39 @@ msgid ""
 msgstr ""
 
 #. Write your names here
-#: 4digits.glade:29
-msgid "tranlator-credits"
+#: 4digits.glade:30
+msgid "Russian: Sergey Basalaev"
 msgstr ""
 
-#: 4digits.glade:61
+#: 4digits.glade:62
 msgid "4digits"
 msgstr ""
 
-#: 4digits.glade:78
+#: 4digits.glade:79
 msgid "_Game"
 msgstr ""
 
-#: 4digits.glade:108
+#: 4digits.glade:109
 msgid "_Scores"
 msgstr ""
 
-#: 4digits.glade:141
+#: 4digits.glade:142
 msgid "_View"
 msgstr ""
 
-#: 4digits.glade:152
+#: 4digits.glade:153
 msgid "_Toolbar"
 msgstr ""
 
-#: 4digits.glade:162
+#: 4digits.glade:163
 msgid "_Hint Table"
 msgstr ""
 
-#: 4digits.glade:172
+#: 4digits.glade:173
 msgid "_Auto Fill Hints"
 msgstr ""
 
-#: 4digits.glade:186
+#: 4digits.glade:187
 msgid "_Help"
 msgstr ""
 
@@ -266,59 +266,59 @@ msgstr ""
 msgid "New Game"
 msgstr ""
 
-#: 4digits.glade:267
+#: 4digits.glade:266
 msgid "Close this window"
 msgstr ""
 
-#: 4digits.glade:269
+#: 4digits.glade:268
 msgid "Quit"
 msgstr ""
 
-#: 4digits.glade:295
+#: 4digits.glade:294
 msgid "_Input:"
 msgstr ""
 
-#: 4digits.glade:363
+#: 4digits.glade:361
 msgid "1"
 msgstr ""
 
-#: 4digits.glade:374
+#: 4digits.glade:372
 msgid "2"
 msgstr ""
 
-#: 4digits.glade:385
+#: 4digits.glade:383
 msgid "3"
 msgstr ""
 
-#: 4digits.glade:396
+#: 4digits.glade:394
 msgid "5"
 msgstr ""
 
-#: 4digits.glade:407
+#: 4digits.glade:405
 msgid "4"
 msgstr ""
 
-#: 4digits.glade:418
+#: 4digits.glade:416
 msgid "6"
 msgstr ""
 
-#: 4digits.glade:429
+#: 4digits.glade:427
 msgid "7"
 msgstr ""
 
-#: 4digits.glade:440
+#: 4digits.glade:438
 msgid "8"
 msgstr ""
 
-#: 4digits.glade:451
+#: 4digits.glade:449
 msgid "Guess"
 msgstr ""
 
-#: 4digits.glade:462
+#: 4digits.glade:460
 msgid "Result"
 msgstr ""
 
-#: 4digits.glade:686
+#: 4digits.glade:684
 msgid ""
 " Left side:\n"
 " - You uncheck a row if you are sure that this number is not in the answer.\n"
@@ -331,6 +331,6 @@ msgid ""
 "it is included at all.\n"
 msgstr ""
 
-#: 4digits.glade:760 4digits.glade:808
+#: 4digits.glade:758 4digits.glade:805
 msgid "4digits Scores"
 msgstr ""

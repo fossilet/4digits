@@ -25,6 +25,7 @@
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 """
 
+import errno
 import os
 import cPickle
 import random
@@ -47,7 +48,7 @@ except ImportError:
     print _('No python-gtk2 was found on your system.')
     sys.exit(1)
 
-__version__ = '1.1'
+__version__ = '1.2'
 # We do not search glade file in /usr/share/ any longer. Debian packagers may need to patch this.
 __gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
 __helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
@@ -158,8 +159,7 @@ class MainWindow(object):
                 old___prefs__ = cPickle.load(config)
                 config.close()
             except Exception:
-                print _('Corrupted preferences file \
-                "%s", deleting...') % __config_path__
+                print _('Corrupted preferences file "%s", deleting...') % __config_path__
                 os.remove(__config_path__)
             else:
                 for key in old___prefs__:
@@ -278,7 +278,7 @@ class MainWindow(object):
                 self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
                 if self.is_high_score(self.game.time_taken):
-                    new_score_rank = self.write_score(self.game.time_taken)
+                    new_score_rank = self.save_score(self.game.time_taken)
                     self.show_score(new_score_rank)
             # lose
             elif self.game.guess == 7:
@@ -468,22 +468,31 @@ class MainWindow(object):
         else:
             return False
 
-    def write_preferences_file(self):
-        """Write preference data to disk.
+    def save_prefs(self):
+        """Save preference data to disk.
         Copied from Comix.
         """
-        if not os.path.exists(__appdata_dir__):
-            os.mkdir(__appdata_dir__)
-        elif not os.path.isdir(__appdata_dir__):
-            os.rename(__appdata_dir__, __appdata_dir__+'.bak')
-            os.mkdir(__appdata_dir__)
-        config = open(__config_path__, 'w')
+        try:
+            config = open(__config_path__, 'w')
+        except IOError as (errnum, strerror):
+            if errnum == errno.ENOENT:
+                try:
+                    os.mkdir(__appdata_dir__)
+                except IOError:
+                    print _("Cannot open score file.\n");
+                    sys.exit(1)
+                config = open(__config_path__, 'w')
+        except:
+            print _("Cannot open score file.\n");
+            sys.exit(1)
+       
+       # Here `else' cannot be used.
         cPickle.dump(__prefs__, config, cPickle.HIGHEST_PROTOCOL)
         config.close()
 
     @classmethod
-    def write_score(cls, time_taken):
-        """Write highscore file."""
+    def save_score(cls, time_taken):
+        """Save highscore file."""
         date = time.strftime("%a %b %d %H:%M:%S %Y") 
         new_score = "%s %ss %s\n" % (
                 os.getenv('USERNAME'), time_taken, date)
@@ -499,17 +508,33 @@ class MainWindow(object):
         # find the index of the new score
         new_score = new_score.split(' ', 6)
         new_score_rank = scores.index(new_score)
+
         try:
             scorefile = open(__score_filename__, 'w')
-        except IOError:
-            # Most likely the directory does not exist
-            new_dir = os.path.dirname(__score_filename__)
-            os.mkdir(new_dir)
-            scorefile = open(__score_filename__, 'w') # Try again
+        except IOError as (errnum, strerror):
+            if errnum == errno.ENOENT:
+                try:
+                    os.mkdir(__appdata_dir__)
+                except IOError:
+                    print _("Cannot open score file.\n");
+                    sys.exit(1)
+                scorefile = open(__score_filename__, 'w')
+        except:
+            print _("Cannot open score file.\n");
+            sys.exit(1)
+
+       # Here `else' cannot be used.
         for score in scores:
             scorefile.write(' '.join(score))
         scorefile.close()
         return new_score_rank
+
+#        if not os.path.exists(__appdata_dir__):
+#            os.mkdir(__appdata_dir__)
+#        elif not os.path.isdir(__appdata_dir__):
+#            os.rename(__appdata_dir__, __appdata_dir__+'.orig')
+#            os.mkdir(__appdata_dir__)
+#        scorefile = open(__score_filename__, 'w')
 
     def show_score(self, new_score_rank):
         """Show highscore dialog."""
@@ -519,7 +544,7 @@ class MainWindow(object):
         """Run clean-up tasks and exit.
         Copied from comix.        
         """
-        self.write_preferences_file()
+        self.save_prefs()
         gtk.main_quit()
 
 
@@ -530,7 +555,7 @@ class NewRound(object):
             self.answer = random.sample(range(10), 4)
             if self.answer[0] != 0: # first digit cannot be zero
                 break
-        #print self.answer
+        print self.answer
         if self.answer == [4, 6, 1, 9]:
             gtk.MessageDialog(message_format
                     =_('4619: You are the luckiest guy on the planet!')).show()

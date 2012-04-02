@@ -1,6 +1,6 @@
 /*
    4digits - A guess-the-number game, aka Bulls and Cows
-   Copyright (c) 2004-2011 Pan Yongzhi <http://fourdigits.sourceforge.net>
+   Copyright (c) 2004-2012 Pan Yongzhi <http://fourdigits.sourceforge.net>
 
    4digits is a guess-the-number puzzle game. It's called Bulls and Cows,
    and in China people simply call it Guess-the-Number. The game's
@@ -45,7 +45,7 @@
 #define LOCALE_PATH "/usr/share/locale"
 
 //#define DEBUG
-#define VERSION_STRING "1.1, Nov 2011"
+#define VERSION_STRING "1.2, Nov 2012"
 
 const char VERSION[] = "4digits " VERSION_STRING;
 
@@ -82,14 +82,14 @@ static const struct option longOpts[] = {
     { NULL, no_argument, NULL, 0 }
 };
 
-void err_msg(const char* msg);
+void err_exit(const char* msg);
 void gen_rand(int ans_digits[]);
 int enter_number(void);
 void save_score(const int time_taken);
 void compare(const int *in_digits, const int *ans_digits, int *A, int *B);
 int tenpow(int power);
 
-void err_msg(const char* msg) {
+void err_exit(const char* msg) {
     fprintf(stderr, "%s\n", msg);
     exit(EXIT_FAILURE);
 }
@@ -126,7 +126,7 @@ int enter_number() {
         reinput = false;
         printf(_("Input a 4-digit number:"));
         if(fgets(mstr, sizeof mstr, stdin) == NULL)
-            err_msg(_("Something's got wrong, I'd better quit...\n"));
+            err_exit(_("Something's got wrong, I'd better quit...\n"));
         // fgets appends the newline entered, if it appears in the first 4
         // elements of mstr, then it's sure less than 4 digits are entered
         bool flag = false;
@@ -179,7 +179,7 @@ void save_score(const int time_taken) {
     strcat(appdata_dir, "/.4digits/");
     char *scorefile = (char*)malloc(strlen(appdata_dir) + strlen(score_filename) + 1);
     if(!scorefile)
-        err_msg(_("Memory allocation error.\n"));
+        err_exit(_("Memory allocation error.\n"));
     strcpy(scorefile, appdata_dir);
     strcat(scorefile, score_filename);
 
@@ -191,17 +191,18 @@ void save_score(const int time_taken) {
                 if (errno == ENOENT) {
                     int ret = mkdir(appdata_dir, 0700);
                     if (ret == -1)
-                        err_msg(_("Cannot open score file.\n"));
+                        err_exit(_("Cannot open score file.\n"));
                     sfp = fopen(scorefile, "a+");
                 }
         }
         else
-            err_msg(_("Cannot open score file.\n"));
+            err_exit(_("Cannot open score file.\n"));
     }
+
     strftime(tmpbuffer, 128, "%a %b %d %H:%M:%S %Y", today); 
     struct passwd *pwd;
     pwd = getpwuid(geteuid());
-    // getenv("USERNAME") conforms to C99 thus is more portable.
+    // but getenv("USERNAME") conforms to C99 thus is more portable.
     fprintf(sfp, "%s %ds %s\n", pwd->pw_name, time_taken, tmpbuffer);
     free(scorefile);
 }
@@ -234,10 +235,10 @@ int main(int argc, char *argv[]) {
                 printf("%s\n%s\n%s", VERSION, _(COPYRIGHT), _(AUTHOR));
                 exit(1);
             case 'h': 
-                err_msg(_(HELP));
+                err_exit(_(HELP));
                 break;
             case '?': /* fall-through is intentional */
-                err_msg(_("Usage: 4digits [OPTION]...\n"
+                err_exit(_("Usage: 4digits [OPTION]...\n"
                         "Try `4digits --help' for more information."));
                 break; 
             case 0:    /* long option without a short arg */

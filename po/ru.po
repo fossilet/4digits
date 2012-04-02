@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4digits 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-09 06:09+0700\n"
+"POT-Creation-Date: 2012-04-02 15:47+0800\n"
 "PO-Revision-Date: 2011-12-09 06:10+0600\n"
 "Last-Translator: Sergey Basalaev <sbasalaev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,7 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: 4digits.py:46
 msgid "python-gtk2 is required to run 4digits."
@@ -90,12 +91,11 @@ msgstr "Счёт"
 msgid "Date"
 msgstr "Дата"
 
-#: 4digits.py:435
-#: 4digits.glade:726
+#: 4digits.py:435 4digits.glade:724
 msgid "Ready"
 msgstr "Готов"
 
-#: 4digits.py:536
+#: 4digits.py:538
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr "4619: Вы счастливейший человек на планете!"
 
@@ -172,8 +172,7 @@ msgstr "Все четыре цифры должны быть различны.\n
 msgid "Memory allocation error.\n"
 msgstr "Ошибка выделения памяти.\n"
 
-#: 4digits-text.c:194
-#: 4digits-text.c:199
+#: 4digits-text.c:194 4digits-text.c:199
 msgid "Cannot open score file.\n"
 msgstr "Не удалось открыть файл со счётом.\n"
 
@@ -230,52 +229,68 @@ msgstr "Веб-сайт 4digits"
 
 #: 4digits.glade:18
 msgid ""
-"4digits is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
+"4digits is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
 "\n"
-"4digits is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"4digits is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License along with 4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA."
+"You should have received a copy of the GNU General Public License along with "
+"4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA  02110-1301, USA."
 msgstr ""
-"4digits является свободным программным обеспечением; вы можете распространять и модифицировать его в соответствии с условиями лицензии GNU General Public License, опубликованной Free Software Foundation; либо по версии 2 лицензии, либо (на ваш выбор) любой более поздней версии.\n"
+"4digits является свободным программным обеспечением; вы можете "
+"распространять и модифицировать его в соответствии с условиями лицензии GNU "
+"General Public License, опубликованной Free Software Foundation; либо по "
+"версии 2 лицензии, либо (на ваш выбор) любой более поздней версии.\n"
 "\n"
-"Программа 4digits распространяется в надежде, что она будет полезна, но БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ; не гарантируется даже, что она ПРИГОДНА К ПРОДАЖЕ или ПОДХОДИТ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ.  Больше подробностей можно узнать в тексте GNU General Public.\n"
+"Программа 4digits распространяется в надежде, что она будет полезна, но БЕЗ "
+"КАКИХ-ЛИБО ГАРАНТИЙ; не гарантируется даже, что она ПРИГОДНА К ПРОДАЖЕ или "
+"ПОДХОДИТ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ.  Больше подробностей можно узнать в тексте GNU "
+"General Public.\n"
 "\n"
-"Вы должны были получить копию GNU General Public License вместе с 4digits; если нет, напишите в Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA."
+"Вы должны были получить копию GNU General Public License вместе с 4digits; "
+"если нет, напишите в Free Software Foundation, Inc., 51 Franklin Street, "
+"Fifth Floor, Boston, MA  02110-1301, USA."
 
 #. Write your names here
-#: 4digits.glade:29
-msgid "tranlator-credits"
-msgstr "Sergey Basalaev <sbasalaev@gmail.com>"
+#: 4digits.glade:30
+msgid "Russian: Sergey Basalaev"
+msgstr ""
 
-#: 4digits.glade:61
+#: 4digits.glade:62
 msgid "4digits"
 msgstr "4digits"
 
-#: 4digits.glade:78
+#: 4digits.glade:79
 msgid "_Game"
 msgstr "_Игра"
 
-#: 4digits.glade:108
+#: 4digits.glade:109
 msgid "_Scores"
 msgstr "_Очки"
 
-#: 4digits.glade:141
+#: 4digits.glade:142
 msgid "_View"
 msgstr "_Вид"
 
-#: 4digits.glade:152
+#: 4digits.glade:153
 msgid "_Toolbar"
 msgstr "_Панель"
 
-#: 4digits.glade:162
+#: 4digits.glade:163
 msgid "_Hint Table"
 msgstr "_Таблица подсказок"
 
-#: 4digits.glade:172
+#: 4digits.glade:173
 msgid "_Auto Fill Hints"
 msgstr "_Автозаполнение подсказок"
 
-#: 4digits.glade:186
+#: 4digits.glade:187
 msgid "_Help"
 msgstr "_Справка"
 
@@ -287,78 +302,85 @@ msgstr "Начать новую игру"
 msgid "New Game"
 msgstr "Новая игра"
 
-#: 4digits.glade:267
+#: 4digits.glade:266
 msgid "Close this window"
 msgstr "Закрыть это окно"
 
-#: 4digits.glade:269
+#: 4digits.glade:268
 msgid "Quit"
 msgstr "Выйти"
 
-#: 4digits.glade:295
+#: 4digits.glade:294
 msgid "_Input:"
 msgstr "_Ввод:"
 
-#: 4digits.glade:363
+#: 4digits.glade:361
 msgid "1"
 msgstr "1"
 
-#: 4digits.glade:374
+#: 4digits.glade:372
 msgid "2"
 msgstr "2"
 
-#: 4digits.glade:385
+#: 4digits.glade:383
 msgid "3"
 msgstr "3"
 
-#: 4digits.glade:396
+#: 4digits.glade:394
 msgid "5"
 msgstr "5"
 
-#: 4digits.glade:407
+#: 4digits.glade:405
 msgid "4"
 msgstr "4"
 
-#: 4digits.glade:418
+#: 4digits.glade:416
 msgid "6"
 msgstr "6"
 
-#: 4digits.glade:429
+#: 4digits.glade:427
 msgid "7"
 msgstr "7"
 
-#: 4digits.glade:440
+#: 4digits.glade:438
 msgid "8"
 msgstr "8"
 
-#: 4digits.glade:451
+#: 4digits.glade:449
 msgid "Guess"
 msgstr "Предположение"
 
-#: 4digits.glade:462
+#: 4digits.glade:460
 msgid "Result"
 msgstr "Результат"
 
-#: 4digits.glade:686
+#: 4digits.glade:684
 msgid ""
 " Left side:\n"
 " - You uncheck a row if you are sure that this number is not in the answer.\n"
-" - You uncheck a box if you are sure that this number cannot be at this position.\n"
+" - You uncheck a box if you are sure that this number cannot be at this "
+"position.\n"
 "\n"
 " Right side:\n"
 " - You check a row if you are sure that this number must be in the answer.\n"
-" - You check a box if you are sure that this number is at this position if it is included at all.\n"
+" - You check a box if you are sure that this number is at this position if "
+"it is included at all.\n"
 msgstr ""
 " Левая сторона:\n"
-" - Уберите флажок со строки, если вы уверены, что это число не является ответом.\n"
-" - Уберите флажок с числа, если вы уверены, что это число не может находиться в данной позиции.\n"
+" - Уберите флажок со строки, если вы уверены, что это число не является "
+"ответом.\n"
+" - Уберите флажок с числа, если вы уверены, что это число не может "
+"находиться в данной позиции.\n"
 "\n"
 " Правая сторона:\n"
-" - Установите флажок на строке, если вы уверены, что это число должно быть в ответе.\n"
-" - Установите флажок на числе, если вы уверены, что это число находится в данной позиции.\n"
+" - Установите флажок на строке, если вы уверены, что это число должно быть в "
+"ответе.\n"
+" - Установите флажок на числе, если вы уверены, что это число находится в "
+"данной позиции.\n"
 
-#: 4digits.glade:760
-#: 4digits.glade:808
+#: 4digits.glade:758 4digits.glade:805
 msgid "4digits Scores"
 msgstr "Счёт 4digits"
 
+#~ msgid "tranlator-credits"
+#~ msgstr "Sergey Basalaev <sbasalaev@gmail.com>"
