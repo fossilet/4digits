@@ -3,7 +3,7 @@
 # pylint: disable-msg=r0201
 """
     4digits - A guess-the-number game, aka Bulls and Cows
-    Copyright (c) 2004-2011 Yongzhi Pan <http://fourdigits.sourceforge.net>
+    Copyright (c) 2004-2012 Yongzhi Pan <http://fourdigits.sourceforge.net>
 
     4digits is a guess-the-number puzzle game. You are given eight times
     to guess a four-digit number. One digit is marked A if its value and
@@ -37,7 +37,8 @@ import webbrowser
 import locale
 import gettext
 from gettext import gettext as _
-LOCALE_PATH = '/usr/local/share/locale/'
+#LOCALE_PATH = '/usr/local/share/locale/'
+LOCALE_PATH = 'locale/'
 
 try:
     import pygtk

@@ -45,7 +45,7 @@
 #define LOCALE_PATH "/usr/share/locale"
 
 //#define DEBUG
-#define VERSION_STRING "1.2, Nov 2012"
+#define VERSION_STRING "1.2"
 
 const char VERSION[] = "4digits " VERSION_STRING;
 

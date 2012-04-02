@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-02 15:47+0800\n"
+"POT-Creation-Date: 2012-04-02 17:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,83 +18,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: 4digits.py:46
+#: 4digits.py:48
 msgid "python-gtk2 is required to run 4digits."
 msgstr ""
 
-#: 4digits.py:47
+#: 4digits.py:49
 msgid "No python-gtk2 was found on your system."
 msgstr ""
 
-#: 4digits.py:161
+#: 4digits.py:163
 #, python-format
-msgid "Corrupted preferences file                 \"%s\", deleting..."
+msgid "Corrupted preferences file \"%s\", deleting..."
 msgstr ""
 
-#: 4digits.py:236
+#: 4digits.py:237
 msgid "Must input something."
 msgstr ""
 
-#: 4digits.py:239
+#: 4digits.py:240
 msgid "First digit cannot be zero."
 msgstr ""
 
-#: 4digits.py:244
+#: 4digits.py:245
 msgid "Must input a number."
 msgstr ""
 
-#: 4digits.py:247
+#: 4digits.py:248
 msgid "Must input four digits."
 msgstr ""
 
-#: 4digits.py:250
+#: 4digits.py:251
 msgid "Four digits must be unique."
 msgstr ""
 
-#: 4digits.py:253
+#: 4digits.py:254
 msgid "You've already guessed it."
 msgstr ""
 
-#: 4digits.py:274
+#: 4digits.py:275
 msgid "You win! :)"
 msgstr ""
 
-#: 4digits.py:276
+#: 4digits.py:277
 #, python-format
 msgid "Used %.1f s."
 msgstr ""
 
-#: 4digits.py:288
+#: 4digits.py:289
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr ""
 
-#: 4digits.py:291
+#: 4digits.py:292
 #, python-format
 msgid "Wasted %.1f s."
 msgstr ""
 
-#: 4digits.py:342
+#: 4digits.py:343
 msgid "Timer started..."
 msgstr ""
 
-#: 4digits.py:397
+#: 4digits.py:398
 msgid "Name"
 msgstr ""
 
-#: 4digits.py:399
+#: 4digits.py:400
 msgid "Score"
 msgstr ""
 
-#: 4digits.py:401
+#: 4digits.py:402
 msgid "Date"
 msgstr ""
 
-#: 4digits.py:435 4digits.glade:724
+#: 4digits.py:436 4digits.glade:724
 msgid "Ready"
 msgstr ""
 
-#: 4digits.py:538
+#: 4digits.py:483 4digits.py:487 4digits.py:520 4digits.py:524
+#: 4digits-text.c:194 4digits-text.c:199
+msgid "Cannot open score file.\n"
+msgstr ""
+
+#: 4digits.py:562
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr ""
 
@@ -154,34 +159,30 @@ msgstr ""
 msgid "Memory allocation error.\n"
 msgstr ""
 
-#: 4digits-text.c:194 4digits-text.c:199
-msgid "Cannot open score file.\n"
-msgstr ""
-
-#: 4digits-text.c:240
+#: 4digits-text.c:241
 msgid ""
 "Usage: 4digits [OPTION]...\n"
 "Try `4digits --help' for more information."
 msgstr ""
 
-#: 4digits-text.c:268
+#: 4digits-text.c:269
 #, c-format
 msgid "You've already guessed it.\n"
 msgstr ""
 
-#: 4digits-text.c:287
+#: 4digits-text.c:288
 #, c-format
 msgid "\t %d time left.\n"
 msgid_plural "\t %d times left.\n"
 msgstr[0] ""
 msgstr[1] ""
 
-#: 4digits-text.c:293
+#: 4digits-text.c:294
 #, c-format
 msgid "You win! :) Used %d sec.\n"
 msgstr ""
 
-#: 4digits-text.c:298
+#: 4digits-text.c:299
 #, c-format
 msgid ""
 "\n"
@@ -193,7 +194,7 @@ msgid "About 4digits"
 msgstr ""
 
 #: 4digits.glade:14
-msgid "Copyright (c) 2004-2011 Yongzhi Pan"
+msgid "Copyright (c) 2004-2012 Yongzhi Pan"
 msgstr ""
 
 #: 4digits.glade:15

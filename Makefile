@@ -3,9 +3,11 @@
 CC = gcc
 CFLAGS = -Wall -std=c99 -pedantic -g
 SHELL = /bin/sh
-INSTALL_DIR = /usr/local/
+#INSTALL_DIR = /usr/local/
+INSTALL_DIR = .
 
-all: 4digits-text compile-po
+#all: 4digits-text compile-po
+all: 4digits-text update-po compile-po
 
 4digits-text: 4digits-text.c
 	$(CC) $(CFLAGS) 4digits-text.c -o 4digits-text
@@ -35,6 +37,6 @@ compile-po:
 install-po:
 	for g in po/*.mo; do \
 		l=`echo $$g | sed -e 's#po/\(.*\)\.mo#\1#'`; \
-		install -D $$g $(INSTALL_DIR)/share/locale/$$l/LC_MESSAGES/4digits.mo; \
+		#install -D $$g $(INSTALL_DIR)/share/locale/$$l/LC_MESSAGES/4digits.mo;
+		install -D $$g $(INSTALL_DIR)/locale/$$l/LC_MESSAGES/4digits.mo; \
 	done
-

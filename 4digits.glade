@@ -10,8 +10,8 @@
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="version">1.1</property>
-    <property name="copyright" translatable="yes">Copyright (c) 2004-2011 Yongzhi Pan</property>
+    <property name="version">1.2</property>
+    <property name="copyright" translatable="yes">Copyright (c) 2004-2012 Yongzhi Pan</property>
     <property name="comments" translatable="yes">A guess-the-number puzzle game</property>
     <property name="website">http://fourdigits.sourceforge.net</property>
     <property name="website_label" translatable="yes">4digits website</property>

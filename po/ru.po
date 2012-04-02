@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4digits 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-02 15:47+0800\n"
+"POT-Creation-Date: 2012-04-02 17:46+0800\n"
 "PO-Revision-Date: 2011-12-09 06:10+0600\n"
 "Last-Translator: Sergey Basalaev <sbasalaev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -19,83 +19,88 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: 4digits.py:46
+#: 4digits.py:48
 msgid "python-gtk2 is required to run 4digits."
 msgstr "Для запуска 4digits необходим python-gtk2."
 
-#: 4digits.py:47
+#: 4digits.py:49
 msgid "No python-gtk2 was found on your system."
 msgstr "python-gtk2 не был найден в вашей системе."
 
-#: 4digits.py:161
-#, python-format
-msgid "Corrupted preferences file                 \"%s\", deleting..."
+#: 4digits.py:163
+#, fuzzy, python-format
+msgid "Corrupted preferences file \"%s\", deleting..."
 msgstr "Испорченный файл настроек                  «%s», удаление..."
 
-#: 4digits.py:236
+#: 4digits.py:237
 msgid "Must input something."
 msgstr "Нужно что-нибудь ввести."
 
-#: 4digits.py:239
+#: 4digits.py:240
 msgid "First digit cannot be zero."
 msgstr "Первая цифра не может быть нулём."
 
-#: 4digits.py:244
+#: 4digits.py:245
 msgid "Must input a number."
 msgstr "Нужно ввести число."
 
-#: 4digits.py:247
+#: 4digits.py:248
 msgid "Must input four digits."
 msgstr "Нужно ввести четыре цифры."
 
-#: 4digits.py:250
+#: 4digits.py:251
 msgid "Four digits must be unique."
 msgstr "Все четыре цифры должны быть различны."
 
-#: 4digits.py:253
+#: 4digits.py:254
 msgid "You've already guessed it."
 msgstr "Вы уже вводили это."
 
-#: 4digits.py:274
+#: 4digits.py:275
 msgid "You win! :)"
 msgstr "Вы выиграли! :)"
 
-#: 4digits.py:276
+#: 4digits.py:277
 #, python-format
 msgid "Used %.1f s."
 msgstr "Использовано %.1f с."
 
-#: 4digits.py:288
+#: 4digits.py:289
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr "Хаха, вы проиграли. Это %s."
 
-#: 4digits.py:291
+#: 4digits.py:292
 #, python-format
 msgid "Wasted %.1f s."
 msgstr "Потрачено %.1f с."
 
-#: 4digits.py:342
+#: 4digits.py:343
 msgid "Timer started..."
 msgstr "Таймер запущен..."
 
-#: 4digits.py:397
+#: 4digits.py:398
 msgid "Name"
 msgstr "Имя"
 
-#: 4digits.py:399
+#: 4digits.py:400
 msgid "Score"
 msgstr "Счёт"
 
-#: 4digits.py:401
+#: 4digits.py:402
 msgid "Date"
 msgstr "Дата"
 
-#: 4digits.py:435 4digits.glade:724
+#: 4digits.py:436 4digits.glade:724
 msgid "Ready"
 msgstr "Готов"
 
-#: 4digits.py:538
+#: 4digits.py:483 4digits.py:487 4digits.py:520 4digits.py:524
+#: 4digits-text.c:194 4digits-text.c:199
+msgid "Cannot open score file.\n"
+msgstr "Не удалось открыть файл со счётом.\n"
+
+#: 4digits.py:562
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr "4619: Вы счастливейший человек на планете!"
 
@@ -172,11 +177,7 @@ msgstr "Все четыре цифры должны быть различны.\n
 msgid "Memory allocation error.\n"
 msgstr "Ошибка выделения памяти.\n"
 
-#: 4digits-text.c:194 4digits-text.c:199
-msgid "Cannot open score file.\n"
-msgstr "Не удалось открыть файл со счётом.\n"
-
-#: 4digits-text.c:240
+#: 4digits-text.c:241
 msgid ""
 "Usage: 4digits [OPTION]...\n"
 "Try `4digits --help' for more information."
@@ -184,12 +185,12 @@ msgstr ""
 "Синтаксис: 4digits [ОПЦИИ]...\n"
 "Введите `4digits --help', чтобы узнать больше."
 
-#: 4digits-text.c:268
+#: 4digits-text.c:269
 #, c-format
 msgid "You've already guessed it.\n"
 msgstr "Вы уже вводили это.\n"
 
-#: 4digits-text.c:287
+#: 4digits-text.c:288
 #, c-format
 msgid "\t %d time left.\n"
 msgid_plural "\t %d times left.\n"
@@ -197,12 +198,12 @@ msgstr[0] "\t осталась %d попытка.\n"
 msgstr[1] "\t осталось %d попытки.\n"
 msgstr[2] "\t осталось %d попыток.\n"
 
-#: 4digits-text.c:293
+#: 4digits-text.c:294
 #, c-format
 msgid "You win! :) Used %d sec.\n"
 msgstr "Вы выиграли! :) Использовано %d с.\n"
 
-#: 4digits-text.c:298
+#: 4digits-text.c:299
 #, c-format
 msgid ""
 "\n"
@@ -216,7 +217,8 @@ msgid "About 4digits"
 msgstr "О программе 4digits"
 
 #: 4digits.glade:14
-msgid "Copyright (c) 2004-2011 Yongzhi Pan"
+#, fuzzy
+msgid "Copyright (c) 2004-2012 Yongzhi Pan"
 msgstr "Copyright (c) 2004-2011 Yongzhi Pan"
 
 #: 4digits.glade:15
