@@ -556,7 +556,7 @@ class NewRound(object):
             self.answer = random.sample(range(10), 4)
             if self.answer[0] != 0: # first digit cannot be zero
                 break
-        print self.answer
+        #print self.answer
         if self.answer == [4, 6, 1, 9]:
             gtk.MessageDialog(message_format
                     =_('4619: You are the luckiest guy on the planet!')).show()
