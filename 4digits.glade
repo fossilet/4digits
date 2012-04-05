@@ -59,7 +59,7 @@ Hermann Kraus: hint table</property>
   <object class="GtkWindow" id="main_window">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">4digits</property>
+    <property name="title">4digits</property>
     <property name="resizable">False</property>
     <property name="icon">4digits_logo.png</property>
     <signal name="destroy" handler="on_main_window_destroy" swapped="no"/>

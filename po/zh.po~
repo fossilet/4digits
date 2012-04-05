@@ -1,107 +1,107 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Chinese translations for 4digits.
+# 4digits的中文翻译。
+# Copyright (c) 2004-2012 Yongzhi Pan <http://fourdigits.sourceforge.net>
+# This file is distributed under the same license as the 4digits package.
+# Yongzhi Pan <panyongzhi@gmail.com>, 2012.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 4digits 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-05 16:35+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2012-04-04 22:06+0800\n"
+"PO-Revision-Date: 2012-04-03 21:59+0800\n"
+"Last-Translator: Pan Yongzhi\n"
+"Language-Team: Simplified Chinese <zh_cn@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-
-#: 4digits.py:47
-msgid "python-gtk2 is required to run 4digits."
-msgstr ""
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: 4digits.py:48
-msgid "No python-gtk2 was found on your system."
-msgstr ""
+msgid "python-gtk2 is required to run 4digits."
+msgstr "4digits运行需要python-gtk2。"
 
-#: 4digits.py:162
+#: 4digits.py:49
+msgid "No python-gtk2 was found on your system."
+msgstr "系统中未找到python-gtk2。"
+
+#: 4digits.py:163
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
-msgstr ""
+msgstr "损坏的偏好文件 \"%s\"，删除..."
 
-#: 4digits.py:236
+#: 4digits.py:237
 msgid "Must input something."
-msgstr ""
+msgstr "必须输入点东西"
 
-#: 4digits.py:239
+#: 4digits.py:240
 msgid "First digit cannot be zero."
-msgstr ""
+msgstr "第一个数字不能为零"
 
-#: 4digits.py:244
+#: 4digits.py:245
 msgid "Must input a number."
-msgstr ""
+msgstr "必须输入数字"
 
-#: 4digits.py:247
+#: 4digits.py:248
 msgid "Must input four digits."
-msgstr ""
+msgstr "必须输入四个数字"
 
-#: 4digits.py:250
+#: 4digits.py:251
 msgid "Four digits must be unique."
-msgstr ""
+msgstr "四个数字必须唯一"
 
-#: 4digits.py:253
+#: 4digits.py:254
 msgid "You've already guessed it."
-msgstr ""
+msgstr "已经猜过了"
 
-#: 4digits.py:274
+#: 4digits.py:275
 msgid "You win! :)"
-msgstr ""
+msgstr "你赢了！：）"
 
-#: 4digits.py:276
+#: 4digits.py:277
 #, python-format
 msgid "Used %.1f s."
-msgstr ""
+msgstr "用了%.1f秒"
 
-#: 4digits.py:288
+#: 4digits.py:289
 #, python-format
 msgid "Haha, you lose. It is %s."
-msgstr ""
+msgstr "哈哈你输了，结果是%s"
 
-#: 4digits.py:291
+#: 4digits.py:292
 #, python-format
 msgid "Wasted %.1f s."
-msgstr ""
+msgstr "浪费了%.1f秒"
 
-#: 4digits.py:342
+#: 4digits.py:343
 msgid "Timer started..."
-msgstr ""
+msgstr "记时开始..."
 
-#: 4digits.py:397
+#: 4digits.py:398
 msgid "Name"
-msgstr ""
+msgstr "名字"
 
-#: 4digits.py:399
+#: 4digits.py:400
 msgid "Score"
-msgstr ""
+msgstr "分数"
 
-#: 4digits.py:401
+#: 4digits.py:402
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
-#: 4digits.py:435 4digits.glade:724
+#: 4digits.py:436 4digits.glade:724
 msgid "Ready"
-msgstr ""
+msgstr "就绪"
 
-#: 4digits.py:482 4digits.py:486 4digits.py:519 4digits.py:523
+#: 4digits.py:483 4digits.py:487 4digits.py:520 4digits.py:524
 #: 4digits-text.c:194 4digits-text.c:199
 msgid "Cannot open score file.\n"
-msgstr ""
+msgstr "不能打开分数文件。\n"
 
-#: 4digits.py:561
+#: 4digits.py:562
 msgid "4619: You are the luckiest guy on the planet!"
-msgstr ""
+msgstr "4619：你是地球上最幸运的家伙！"
 
 #: 4digits-text.c:53
 msgid ""
@@ -110,11 +110,11 @@ msgid ""
 "modify it under the terms of the GNU General Public License as\n"
 "published by the Free Software Foundation - version 2. For more\n"
 "information about these matters, see the file named COPYING.\n"
-msgstr ""
+msgstr "4digits\n"
 
 #: 4digits-text.c:59
 msgid "Written by Pan Yongzhi.\n"
-msgstr ""
+msgstr "由潘永之编写。\n"
 
 #: 4digits-text.c:62
 msgid ""
@@ -130,57 +130,69 @@ msgid ""
 "\n"
 "Report bugs at <https://github.com/fossilet/4digits/issues>."
 msgstr ""
+"4digits，猜数字游戏。\n"
+"用法：4digits [选项] ...\n"
+"\n"
+"你有八次机会来猜一个四位数。 如果\n"
+"数字位置和值都正确那么得到1个A，如果\n"
+"只有值正确得到1个B。得到4A0B时就赢了。\n"
+"\n"
+"-v, --version \t 显示4digits的版本后退出。\n"
+"-h, -?, --help \t 显示此帮助。\n"
+"\n"
+"汇报bug请到<https://github.com/fossilet/4digits/issues>."
 
 #: 4digits-text.c:127
 #, c-format
 msgid "Input a 4-digit number:"
-msgstr ""
+msgstr "输入一个四位数："
 
 #: 4digits-text.c:129
 msgid "Something's got wrong, I'd better quit...\n"
-msgstr ""
+msgstr "出错了，我最好退出...\n"
 
 #: 4digits-text.c:138
 #, c-format
 msgid "Input too long!\n"
-msgstr ""
+msgstr "输入太长！\n"
 
 #: 4digits-text.c:144
 #, c-format
 msgid "Must be a number between 1000 and 9999!\n"
-msgstr ""
+msgstr "必须输入1000到9999之间的数！\n"
 
 #: 4digits-text.c:154
 #, c-format
 msgid "Four digits must be unique.\n"
-msgstr ""
+msgstr "四个数字必须唯一。\n"
 
 #: 4digits-text.c:182
 msgid "Memory allocation error.\n"
-msgstr ""
+msgstr "内存分配错误。\n"
 
 #: 4digits-text.c:241
 msgid ""
 "Usage: 4digits [OPTION]...\n"
 "Try `4digits --help' for more information."
 msgstr ""
+"用法：4digits [选项]...\n"
+"执行”4digits --help“来获取更多信息。"
 
 #: 4digits-text.c:269
 #, c-format
 msgid "You've already guessed it.\n"
-msgstr ""
+msgstr "你已经猜过了。\n"
 
 #: 4digits-text.c:288
 #, c-format
 msgid "\t %d time left.\n"
 msgid_plural "\t %d times left.\n"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\t还有%d次机会。\n"
 
 #: 4digits-text.c:294
 #, c-format
 msgid "You win! :) Used %d sec.\n"
-msgstr ""
+msgstr "你赢了！：）用了%d秒。\n"
 
 #: 4digits-text.c:299
 #, c-format
@@ -188,22 +200,24 @@ msgid ""
 "\n"
 "Haha, you lose. It is "
 msgstr ""
+"\n"
+"哈哈，你输了。答案是"
 
 #: 4digits.glade:7
 msgid "About 4digits"
-msgstr ""
+msgstr "关于4digits"
 
 #: 4digits.glade:14
 msgid "Copyright (c) 2004-2012 Yongzhi Pan"
-msgstr ""
+msgstr "FIXME (c) 2004-2012"
 
 #: 4digits.glade:15
 msgid "A guess-the-number puzzle game"
-msgstr ""
+msgstr "猜数字游戏"
 
 #: 4digits.glade:17
 msgid "4digits website"
-msgstr ""
+msgstr "FIXME 4digits"
 
 #: 4digits.glade:18
 msgid ""
@@ -221,99 +235,108 @@ msgid ""
 "4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA  02110-1301, USA."
 msgstr ""
+"4digits是自由软件；您可依据自由软件基金会所发表的GNU通用公共授权条款，对本软"
+"件再次发布和/或修改；无论您依据的是本授权的第三版，或（您可选的）任一日后发行"
+"的版本。\n"
+"\n"
+"本软件是基于使用目的而加以发布，然而不负任何担保责任；亦无对适售性或特定目的"
+"适用性所为的默示性担保。详情请参照GNU通用公共授权。\n"
+"\n"
+"您应已收到附随于本软件的GNU通用公共授权的副本；如果没有，请参照<http://www."
+"gnu.org/licenses/>."
 
 #. Write your names here
 #: 4digits.glade:30
 msgid "Russian: Sergey Basalaev"
-msgstr ""
+msgstr "俄语：Sergey Basalaev"
 
 #: 4digits.glade:79
 msgid "_Game"
-msgstr ""
+msgstr "游戏 (_G)"
 
 #: 4digits.glade:109
 msgid "_Scores"
-msgstr ""
+msgstr "分数 (_S)"
 
 #: 4digits.glade:142
 msgid "_View"
-msgstr ""
+msgstr "查看 (_V)"
 
 #: 4digits.glade:153
 msgid "_Toolbar"
-msgstr ""
+msgstr "工具栏 (_T)"
 
 #: 4digits.glade:163
 msgid "_Hint Table"
-msgstr ""
+msgstr "提示标 (_H)"
 
 #: 4digits.glade:173
 msgid "_Auto Fill Hints"
-msgstr ""
+msgstr "自动填充提示 (_A)"
 
 #: 4digits.glade:187
 msgid "_Help"
-msgstr ""
+msgstr "帮助 (_H)"
 
 #: 4digits.glade:241
 msgid "Start a new game"
-msgstr ""
+msgstr "开始新游戏"
 
 #: 4digits.glade:243
 msgid "New Game"
-msgstr ""
+msgstr "新游戏"
 
 #: 4digits.glade:266
 msgid "Close this window"
-msgstr ""
+msgstr "关闭此窗口"
 
 #: 4digits.glade:268
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 #: 4digits.glade:294
 msgid "_Input:"
-msgstr ""
+msgstr "输入 (_I)"
 
 #: 4digits.glade:361
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: 4digits.glade:372
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: 4digits.glade:383
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #: 4digits.glade:394
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: 4digits.glade:405
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: 4digits.glade:416
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #: 4digits.glade:427
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #: 4digits.glade:438
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #: 4digits.glade:449
 msgid "Guess"
-msgstr ""
+msgstr "猜"
 
 #: 4digits.glade:460
 msgid "Result"
-msgstr ""
+msgstr "结果"
 
 #: 4digits.glade:684
 msgid ""
@@ -327,7 +350,17 @@ msgid ""
 " - You check a box if you are sure that this number is at this position if "
 "it is included at all.\n"
 msgstr ""
+" 左边：\n"
+" - 如果确定该数字不在答案中，就取消选中该行。\n"
+" - 如果确定该数字不在某个位置，就取消选中该框。\n"
+"\n"
+"右边：\n"
+" - 如果确定该数字在答案中，就选中该行。\n"
+" - 如果确定该数字在某个位置，就选中该框。\n"
 
 #: 4digits.glade:758 4digits.glade:805
 msgid "4digits Scores"
-msgstr ""
+msgstr "4digits分数"
+
+#~ msgid "4digits"
+#~ msgstr "4digits"

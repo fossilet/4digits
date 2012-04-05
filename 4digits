@@ -26,6 +26,7 @@
 """
 
 import errno
+import gtk.glade
 import os
 import cPickle
 import random
@@ -37,8 +38,6 @@ import webbrowser
 import locale
 import gettext
 from gettext import gettext as _
-#LOCALE_PATH = '/usr/local/share/locale/'
-LOCALE_PATH = 'locale/'
 
 try:
     import pygtk
@@ -395,6 +394,7 @@ class MainWindow(object):
         # Since we hide but don't destory the score dialog, we have to remove all columns before appending, otherwise we would have more and more columns. 
         for col in self.score_view.get_columns():
             self.score_view.remove_column(col)
+	# FIXME column header not translated under windows 
         column = gtk.TreeViewColumn(_('Name'), gtk.CellRendererText(), text = 0)
         self.score_view.append_column(column)
         column = gtk.TreeViewColumn(_('Score'), gtk.CellRendererText(), text = 1)
@@ -569,10 +569,23 @@ class NewRound(object):
 
 if __name__ == "__main__":
     #prepare i18n
+    APP="4digits"
+    #LOCALE_PATH = '/usr/local/share/locale/'
+    LOCALE_PATH = 'locale/'
     locale.setlocale(locale.LC_ALL, '')
-    locale.bindtextdomain('4digits', LOCALE_PATH)
-    gettext.bindtextdomain('4digits', LOCALE_PATH)
-    gettext.textdomain('4digits')
-    #start
+    
+    # Fix for Windows
+    # https://bugzilla.gnome.org/show_bug.cgi?id=574520#c14
+    if sys.platform == 'win32':
+        from ctypes import cdll
+        libintl = cdll.intl
+        libintl.bindtextdomain(APP, LOCALE_PATH)
+    else:
+        locale.bindtextdomain(APP, LOCALE_PATH)
+    #gettext.bindtextdomain(APP, LOCALE_PATH)
+    #gettext.textdomain(APP)
+    gtk.glade.bindtextdomain(APP, LOCALE_PATH)
+    gtk.glade.textdomain(APP)
+
     MainWindow()
     gtk.main()
