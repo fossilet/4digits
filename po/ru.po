@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4digits 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-02 17:46+0800\n"
+"POT-Creation-Date: 2012-04-05 16:30+0800\n"
 "PO-Revision-Date: 2011-12-09 06:10+0600\n"
 "Last-Translator: Sergey Basalaev <sbasalaev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -19,88 +19,88 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: 4digits.py:48
+#: 4digits.py:47
 msgid "python-gtk2 is required to run 4digits."
 msgstr "Для запуска 4digits необходим python-gtk2."
 
-#: 4digits.py:49
+#: 4digits.py:48
 msgid "No python-gtk2 was found on your system."
 msgstr "python-gtk2 не был найден в вашей системе."
 
-#: 4digits.py:163
+#: 4digits.py:162
 #, fuzzy, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
 msgstr "Испорченный файл настроек                  «%s», удаление..."
 
-#: 4digits.py:237
+#: 4digits.py:236
 msgid "Must input something."
 msgstr "Нужно что-нибудь ввести."
 
-#: 4digits.py:240
+#: 4digits.py:239
 msgid "First digit cannot be zero."
 msgstr "Первая цифра не может быть нулём."
 
-#: 4digits.py:245
+#: 4digits.py:244
 msgid "Must input a number."
 msgstr "Нужно ввести число."
 
-#: 4digits.py:248
+#: 4digits.py:247
 msgid "Must input four digits."
 msgstr "Нужно ввести четыре цифры."
 
-#: 4digits.py:251
+#: 4digits.py:250
 msgid "Four digits must be unique."
 msgstr "Все четыре цифры должны быть различны."
 
-#: 4digits.py:254
+#: 4digits.py:253
 msgid "You've already guessed it."
 msgstr "Вы уже вводили это."
 
-#: 4digits.py:275
+#: 4digits.py:274
 msgid "You win! :)"
 msgstr "Вы выиграли! :)"
 
-#: 4digits.py:277
+#: 4digits.py:276
 #, python-format
 msgid "Used %.1f s."
 msgstr "Использовано %.1f с."
 
-#: 4digits.py:289
+#: 4digits.py:288
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr "Хаха, вы проиграли. Это %s."
 
-#: 4digits.py:292
+#: 4digits.py:291
 #, python-format
 msgid "Wasted %.1f s."
 msgstr "Потрачено %.1f с."
 
-#: 4digits.py:343
+#: 4digits.py:342
 msgid "Timer started..."
 msgstr "Таймер запущен..."
 
-#: 4digits.py:398
+#: 4digits.py:397
 msgid "Name"
 msgstr "Имя"
 
-#: 4digits.py:400
+#: 4digits.py:399
 msgid "Score"
 msgstr "Счёт"
 
-#: 4digits.py:402
+#: 4digits.py:401
 msgid "Date"
 msgstr "Дата"
 
-#: 4digits.py:436 4digits.glade:724
+#: 4digits.py:435 4digits.glade:724
 msgid "Ready"
 msgstr "Готов"
 
-#: 4digits.py:483 4digits.py:487 4digits.py:520 4digits.py:524
+#: 4digits.py:482 4digits.py:486 4digits.py:519 4digits.py:523
 #: 4digits-text.c:194 4digits-text.c:199
 msgid "Cannot open score file.\n"
 msgstr "Не удалось открыть файл со счётом.\n"
 
-#: 4digits.py:562
+#: 4digits.py:561
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr "4619: Вы счастливейший человек на планете!"
 
@@ -264,10 +264,6 @@ msgstr ""
 msgid "Russian: Sergey Basalaev"
 msgstr ""
 
-#: 4digits.glade:62
-msgid "4digits"
-msgstr "4digits"
-
 #: 4digits.glade:79
 msgid "_Game"
 msgstr "_Игра"
@@ -383,6 +379,9 @@ msgstr ""
 #: 4digits.glade:758 4digits.glade:805
 msgid "4digits Scores"
 msgstr "Счёт 4digits"
+
+#~ msgid "4digits"
+#~ msgstr "4digits"
 
 #~ msgid "tranlator-credits"
 #~ msgstr "Sergey Basalaev <sbasalaev@gmail.com>"
