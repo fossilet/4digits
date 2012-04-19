@@ -39,7 +39,7 @@
 #include <unistd.h>
 
 //#define DEBUG
-#define VERSION_STRING "1.1, Nov 2011"
+#define VERSION_STRING "1.1.1, Apr 2012"
 
 const char COPYRIGHT[] = "4digits " VERSION_STRING "\n"
 "4digits comes with NO WARRANTY to the extent permitted by law.\n"

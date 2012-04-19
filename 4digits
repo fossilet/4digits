@@ -42,7 +42,7 @@ except ImportError:
     print _('No python-gtk2 was found on your system.')
     sys.exit(1)
 
-__version__ = '1.1'
+__version__ = '1.1.1'
 # We do not search glade file in /usr/share/ any longer. Debian packagers may need to patch this.
 __gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
 __helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')

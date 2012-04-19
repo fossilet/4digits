@@ -1,5 +1,8 @@
 4digits: A guess-the-number game, aka Bulls and Cows
 
+Version 1.1.1 (2012-04-19):
+    *Fixed manpages section.
+
 Version 1.1 (2011-11-24):
     GUI version:
     * Fixed a bug that caused preference file and score file cannot be created for the first time and game cannot quit.
