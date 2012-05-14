@@ -42,7 +42,7 @@ except ImportError:
     print _('No python-gtk2 was found on your system.')
     sys.exit(1)
 
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 # We do not search glade file in /usr/share/ any longer. Debian packagers may need to patch this.
 __gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
 __helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
@@ -480,8 +480,8 @@ class MainWindow(object):
     def write_score(cls, time_taken):
         """Write highscore file."""
         date = time.strftime("%a %b %d %H:%M:%S %Y") 
-        new_score = "%s %ss %s\n" % (
-                os.getenv('USERNAME'), time_taken, date)
+        name = 'USERNAME' if sys.platform == 'win32' else 'USER'
+        new_score = "%s %ss %s\n" % (os.getenv(name), time_taken, date)
         try:
             saved_scores = open(__score_filename__, 'r').readlines()
         except IOError:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkAboutDialog" id="about_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -10,7 +10,7 @@
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="version">1.1.1</property>
+    <property name="version">1.1.2</property>
     <property name="copyright" translatable="yes">Copyright (c) 2004-2012 Yongzhi Pan</property>
     <property name="comments" translatable="yes">A guess-the-number puzzle game</property>
     <property name="website">http://fourdigits.sourceforge.net</property>
@@ -71,9 +71,9 @@ Hermann Kraus: hint table</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkMenuItem" id="game_menu">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_Game</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
@@ -83,9 +83,9 @@ Hermann Kraus: hint table</property>
                     <child>
                       <object class="GtkImageMenuItem" id="game_new">
                         <property name="label">gtk-new</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="n" signal="activate" modifiers="GDK_CONTROL_MASK"/>
@@ -94,16 +94,16 @@ Hermann Kraus: hint table</property>
                     </child>
                     <child>
                       <object class="GtkSeparatorMenuItem" id="separatormenuitem1">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="game_score">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Scores</property>
                         <property name="use_underline">True</property>
                         <signal name="activate" handler="on_score_activate" swapped="no"/>
@@ -111,17 +111,17 @@ Hermann Kraus: hint table</property>
                     </child>
                     <child>
                       <object class="GtkSeparatorMenuItem" id="separatormenuitem2">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="game_quit">
                         <property name="label">gtk-quit</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="q" signal="activate" modifiers="GDK_CONTROL_MASK"/>
@@ -134,9 +134,9 @@ Hermann Kraus: hint table</property>
             </child>
             <child>
               <object class="GtkMenuItem" id="view_menu">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_View</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
@@ -145,9 +145,9 @@ Hermann Kraus: hint table</property>
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkCheckMenuItem" id="view_toolbar">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Toolbar</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_view_toolbar_toggled" swapped="no"/>
@@ -155,9 +155,9 @@ Hermann Kraus: hint table</property>
                     </child>
                     <child>
                       <object class="GtkCheckMenuItem" id="view_hint_table">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Hint Table</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_view_hint_table_toggled" swapped="no"/>
@@ -165,9 +165,9 @@ Hermann Kraus: hint table</property>
                     </child>
                     <child>
                       <object class="GtkCheckMenuItem" id="view_auto_fill_hints">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="label" translatable="yes">_Auto Fill Hints</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_view_auto_fill_hints_toggled" swapped="no"/>
@@ -179,9 +179,9 @@ Hermann Kraus: hint table</property>
             </child>
             <child>
               <object class="GtkMenuItem" id="help_menu">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_Help</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
@@ -191,9 +191,9 @@ Hermann Kraus: hint table</property>
                     <child>
                       <object class="GtkImageMenuItem" id="help_contents">
                         <property name="label">gtk-help</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="F1" signal="activate"/>
@@ -202,17 +202,17 @@ Hermann Kraus: hint table</property>
                     </child>
                     <child>
                       <object class="GtkSeparatorMenuItem" id="separatormenuitem3">
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="help_about">
                         <property name="label">gtk-about</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <signal name="activate" handler="on_about_activate" swapped="no"/>
@@ -234,6 +234,7 @@ Hermann Kraus: hint table</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkToolButton" id="btn_new_game">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">Start a new game</property>
@@ -259,6 +260,7 @@ Hermann Kraus: hint table</property>
             </child>
             <child>
               <object class="GtkToolButton" id="btQuit">
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">Close this window</property>
@@ -322,6 +324,7 @@ Hermann Kraus: hint table</property>
             <child>
               <object class="GtkButton" id="ok_button">
                 <property name="label">gtk-ok</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">False</property>
@@ -657,6 +660,9 @@ Hermann Kraus: hint table</property>
             <child>
               <placeholder/>
             </child>
+            <child>
+              <placeholder/>
+            </child>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -776,6 +782,7 @@ Hermann Kraus: hint table</property>
             <child>
               <object class="GtkButton" id="button1">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>

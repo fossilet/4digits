@@ -2,7 +2,7 @@
 all: 4digits-text
 
 CC = gcc
-CFLAGS = -Wall -std=c99 -pedantic -g
+CFLAGS = -Wall -std=c99 -pedantic
 SHELL = /bin/sh
 
 4digits-text: 4digits-text.c
