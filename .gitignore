@@ -1,5 +1,6 @@
 4digit-text
 .project
 .pyproject
+.settings
 *.mo
 *~
