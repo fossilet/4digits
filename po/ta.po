@@ -1,63 +1,64 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Tamil translation for 4digits
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the 4digits package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 4digits\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-25 15:04+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2012-09-22 17:53+0000\n"
+"Last-Translator: Srivatsan Raghavan <Unknown>\n"
+"Language-Team: Tamil <ta@li.org>\n"
+"Language: ta\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2012-11-11 05:12+0000\n"
+"X-Generator: Launchpad (build 16251)\n"
 
 #: 4digits.py:49
 msgid "python-gtk2 is required to run 4digits."
-msgstr ""
+msgstr "4digits-ஐ இயக்க python-gtk2 அவசியம் தேவை."
 
 #: 4digits.py:50
 msgid "No python-gtk2 was found on your system."
-msgstr ""
+msgstr "உங்கள் கணினியில்  python-gtk2 இல்லை"
 
 #: 4digits.py:164
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
-msgstr ""
+msgstr "பழுதுற்ற விருப்பக் கோப்பு \"%s\",அழிக்கபடுகின்றது..."
 
 #: 4digits.py:239
 msgid "Must input something."
-msgstr ""
+msgstr "ஏதேனும் உள்ளீடு செய்தாக வேண்டும்."
 
 #: 4digits.py:242
 msgid "First digit cannot be zero."
-msgstr ""
+msgstr "முதல் எண் பூச்சியமாக இருக்கக் கூடாது."
 
 #: 4digits.py:247
 msgid "Must input a number."
-msgstr ""
+msgstr "ஏதேனும் எண்ணை உள்ளீடு செய்தாக வேண்டும் ."
 
 #: 4digits.py:250
 msgid "Must input four digits."
-msgstr ""
+msgstr "நான்கு எண்களை உள்ளீடு செய்தாக வேண்டும்."
 
 #: 4digits.py:253
 msgid "Four digits must be unique."
-msgstr ""
+msgstr "நான்கு எண்களும் தனித்துவம் வாய்ந்ததாக இருத்தல் வேண்டும்."
 
 #: 4digits.py:256
 msgid "You've already guessed it."
-msgstr ""
+msgstr "நீங்கள் அதை ஏற்கனவே யூகித்துவிட்டீர்கள்."
 
 #: 4digits.py:277
 msgid "You win! :)"
-msgstr ""
+msgstr "நீங்கள் வென்றுவிட்டீர்கள்! :)"
 
 #: 4digits.py:279
 #, python-format

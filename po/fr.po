@@ -1,63 +1,64 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French translation for 4digits
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the 4digits package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 4digits\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-25 15:04+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2012-08-10 15:53+0000\n"
+"Last-Translator: kev671 <Unknown>\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Launchpad-Export-Date: 2012-11-11 05:12+0000\n"
+"X-Generator: Launchpad (build 16251)\n"
 
 #: 4digits.py:49
 msgid "python-gtk2 is required to run 4digits."
-msgstr ""
+msgstr "python-gtk2 est nécessaire pour lancer 4digits"
 
 #: 4digits.py:50
 msgid "No python-gtk2 was found on your system."
-msgstr ""
+msgstr "python-gtk2 n'a pas été trouvé sur votre ordinateur."
 
 #: 4digits.py:164
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
-msgstr ""
+msgstr "Fichier de préférences corrompu \"%s\", suppression..."
 
 #: 4digits.py:239
 msgid "Must input something."
-msgstr ""
+msgstr "Veuillez rentrer une valeur."
 
 #: 4digits.py:242
 msgid "First digit cannot be zero."
-msgstr ""
+msgstr "Le premier chiffre ne peut être zéro."
 
 #: 4digits.py:247
 msgid "Must input a number."
-msgstr ""
+msgstr "Veuillez rentrer un nombre."
 
 #: 4digits.py:250
 msgid "Must input four digits."
-msgstr ""
+msgstr "Veuillez rentrer quatre chiffres."
 
 #: 4digits.py:253
 msgid "Four digits must be unique."
-msgstr ""
+msgstr "Les quatre chiffres doivent être différents."
 
 #: 4digits.py:256
 msgid "You've already guessed it."
-msgstr ""
+msgstr "Vous l'avez déjà deviné."
 
 #: 4digits.py:277
 msgid "You win! :)"
-msgstr ""
+msgstr "Vous avez gagné! :)"
 
 #: 4digits.py:279
 #, python-format
@@ -67,7 +68,7 @@ msgstr ""
 #: 4digits.py:291
 #, python-format
 msgid "Haha, you lose. It is %s."
-msgstr ""
+msgstr "Haha, vous avez perdu. C'est %s."
 
 #: 4digits.py:294
 #, python-format
@@ -76,32 +77,32 @@ msgstr ""
 
 #: 4digits.py:345
 msgid "Timer started..."
-msgstr ""
+msgstr "Le chronomètre a démarré"
 
 #: 4digits.py:403
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: 4digits.py:405
 msgid "Score"
-msgstr ""
+msgstr "Score"
 
 #: 4digits.py:407
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: 4digits.py:441 4digits.glade:713
 msgid "Ready"
-msgstr ""
+msgstr "Prêt"
 
 #: 4digits.py:488 4digits.py:492 4digits.py:525 4digits.py:529
 #: 4digits-text.c:194 4digits-text.c:199
 msgid "Cannot open score file.\n"
-msgstr ""
+msgstr "Impossible d'ouvrir le fichier de score.\n"
 
 #: 4digits.py:567
 msgid "4619: You are the luckiest guy on the planet!"
-msgstr ""
+msgstr "4619: Vous êtes la personne la plus chanceuse du monde!"
 
 #: 4digits-text.c:53
 msgid ""
@@ -114,7 +115,7 @@ msgstr ""
 
 #: 4digits-text.c:59
 msgid "Written by Pan Yongzhi.\n"
-msgstr ""
+msgstr "Ecrit par Pan Yongzhi.\n"
 
 #: 4digits-text.c:62
 msgid ""
@@ -134,7 +135,7 @@ msgstr ""
 #: 4digits-text.c:127
 #, c-format
 msgid "Input a 4-digit number:"
-msgstr ""
+msgstr "Rentrez un nombre à quatre chiffres:"
 
 #: 4digits-text.c:129
 msgid "Something's got wrong, I'd better quit...\n"
@@ -143,27 +144,29 @@ msgstr ""
 #: 4digits-text.c:138
 #, c-format
 msgid "Input too long!\n"
-msgstr ""
+msgstr "La valeur saisie est trop longue!\n"
 
 #: 4digits-text.c:144
 #, c-format
 msgid "Must be a number between 1000 and 9999!\n"
-msgstr ""
+msgstr "Le nombre doit être compris entre 1000 et 9999!\n"
 
 #: 4digits-text.c:154
 #, c-format
 msgid "Four digits must be unique.\n"
-msgstr ""
+msgstr "Les quatre chiffres doivent être différents.\n"
 
 #: 4digits-text.c:182
 msgid "Memory allocation error.\n"
-msgstr ""
+msgstr "Erreur d'allocation mémoire.\n"
 
 #: 4digits-text.c:241
 msgid ""
 "Usage: 4digits [OPTION]...\n"
 "Try `4digits --help' for more information."
 msgstr ""
+"Utilisation: 4digits [OPTION]...\n"
+"Tapez '4digits --help' pour plus d'information."
 
 #: 4digits-text.c:269
 #, c-format

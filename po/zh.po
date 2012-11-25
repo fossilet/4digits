@@ -8,15 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4digits 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-25 14:17+0800\n"
-"PO-Revision-Date: 2012-04-03 21:59+0800\n"
-"Last-Translator: Pan Yongzhi\n"
+"POT-Creation-Date: 2012-11-25 15:04+0800\n"
+"PO-Revision-Date: 2012-11-10 18:54+0000\n"
+"Last-Translator: Yongzhi Pan <panyongzhi@gmail.com>\n"
 "Language-Team: Simplified Chinese <zh_cn@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2012-11-11 05:12+0000\n"
+"X-Generator: Launchpad (build 16251)\n"
 
 #: 4digits.py:49
 msgid "python-gtk2 is required to run 4digits."
@@ -187,7 +189,7 @@ msgstr "你已经猜过了。\n"
 #, c-format
 msgid "\t %d time left.\n"
 msgid_plural "\t %d times left.\n"
-msgstr[0] "\t还有%d次机会。\n"
+msgstr[0] "\t 还有%d次机会。\n"
 
 #: 4digits-text.c:294
 #, c-format
@@ -201,7 +203,7 @@ msgid ""
 "Haha, you lose. It is "
 msgstr ""
 "\n"
-"哈哈，你输了。答案是"
+"哈哈，你输了。答案是 "
 
 #: 4digits.glade:7
 msgid "About 4digits"
