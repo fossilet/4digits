@@ -2,228 +2,228 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-    <head>
-        <title>4digits Puzzle Game Manual</title>
-        <meta http-equiv="content-type" content='text/html; charset=utf-8' />
-        <link rel="icon" type="image/png" href="images/4digit.png">
-        <link rel="stylesheet" type="text/css" href="4digits_manual.css" />
-        <link rev="made" href="mailto:panyongzhi@@gmail..com" />
-    </head>
-    <body>
-        <div id="Header">
-            4digits Puzzle Game Manual
-        </div>
-        <div id="Menu">
-            <a href="#intro" name="intro-toc">Introduction</a><br /><br />
-            <a href="#install" name="install-toc">Installation</a><br /><br />
-            <a href="#play" name='play-toc'>Playing 4digits</a><br /><br />
-            <a href="#hinttable" name='hinttable-toc'>Hint table</a><br /><br />
-            <a href="#author" name='author-toc'>Authors</a><br /> <br />
-            <a href="#license" name='license-toc'>License</a><br /> <br />
-            <a href="http://fourdigits.sourceforge.net">Homepage</a><br /> <br />
-            <a href="http://sourceforge.net/projects/fourdigits">Sourceforge Project Page</a><br /> <br />
-            <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=182681&amp;type=4" width="125" height="37" border="0" alt="SourceForge.net Logo" /></a><br /> <br />
-            <p>
-            <a href="http://validator.w3.org/check?uri=referer"><img
-                src="images/vxhtml10.png"
-                alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
-            </p>
-        </div>
-        <div id="Content">
-            <h3><a href="#intro-toc" name="intro">Introduction</a></h3>
-            <p>4digits is a guess-the-number puzzle game. It's called Bulls and Cows, and in China people simply call it Guess-the-Number. The game's objective is to guess a four-digit number in 8 times using as less time as possible. It is similar to Mastermind, but the four digits are different to each other. 4digits has a graphical user interface version <i>4digits</i> and a textual user interface version <i>4digits-text</i>. This manual demonstrates the GUI version.</p>
+  <head>
+    <title>4digits Puzzle Game Manual</title>
+    <meta http-equiv="content-type" content='text/html; charset=utf-8' />
+    <link rel="icon" type="image/png" href="images/4digit.png" />
+    <link rel="stylesheet" type="text/css" href="4digits_manual.css" />
+    <link rev="made" href="mailto:panyongzhi@@gmail..com" />
+  </head>
+  <body>
+    <div id="Header">
+      4digits Puzzle Game Manual
+    </div>
+    <div id="Menu">
+      <a href="#intro" name="intro-toc">Introduction</a><br /><br />
+      <a href="#install" name="install-toc">Installation</a><br /><br />
+      <a href="#play" name='play-toc'>Playing 4digits</a><br /><br />
+      <a href="#hinttable" name='hinttable-toc'>Hint table</a><br /><br />
+      <a href="#author" name='author-toc'>Authors</a><br /> <br />
+      <a href="#license" name='license-toc'>License</a><br /> <br />
+      <a href="http://fourdigits.sourceforge.net">Homepage</a><br /> <br />
+      <a href="http://sourceforge.net/projects/fourdigits">Sourceforge Project Page</a><br /> <br />
+      <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=182681&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a><br /> <br />
+      <p>
+      <a href="http://validator.w3.org/check?uri=referer"><img
+        src="images/vxhtml10.png"
+        alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+      </p>
+    </div>
+    <div id="Content">
+      <h3><a href="#intro-toc" name="intro">Introduction</a></h3>
+      <p>4digits is a guess-the-number puzzle game. It's called Bulls and Cows, and in China people simply call it Guess-the-Number. The game's objective is to guess a four-digit number in 8 times using as less time as possible. It is similar to Mastermind, but the four digits are different to each other. 4digits has a graphical user interface version <i>4digits</i> and a textual user interface version <i>4digits-text</i>. This manual documents the GUI version.</p>
 
-            <h3><a href="#install-toc" name="install">Installation</a></h3>
-            <p>Before playing 4digits, you need to install python (version 2.7 or below), python-gtk2 and python-glade2 in your computer.</p>
-            <h4>Linux</h4>
-            <p>4digits is distributed in Debian and Ubuntu, so you can install it from APT.</p>
-            <p>Python is usually already installed in your computer if your are a using a modern Linux distribution. You can install python-gtk2 and python-glade2 from the software repository of your distribution.</p>
-            <h4>BSD's and Unix's</h4>
-            <p>Install python, python-gtk2 and python-glade2 for your system.</p>
-            <h4>Windows</h4>
-            <p>From version 1.1 on, the CLI version no longer supports Windows, though it runs OK under <a href="http://www.cygwin.com/">Cygwin</a>. The GUI version will always support Windows. The reason is that I do not want to spend time writing portable C code for Windows, but rather focusing on POSIX and Linux C programming. Also, people using Windows usually do not enjoy its command line interface.</p>
-            <p>First install <a href='http://python.org/download'>Python</a>, version lower than 3.0. Then install <a href='http://www.pygtk.org/'>PyGTK</a>. Click <a href="http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/">here</a> to download the all-in-one PyGTK installer for Windows.</p>
-            <p>Extract 4digits tarball. Create a file called 4digits.bat, which contains the follow line: </p>
-            <p>C:\Python27\python.exe 4digits</p>
-            <p>Substitute with your Python executable file path, and run 4digits.bat each time you want to play this game.</p>
-            <h4>Mac OS X</h4>
-            <p>Download PyGTK for OS X <a href="https://sourceforge.net/projects/macpkg/files/PyGTK/">here</a>. Now run 4digits, voilà.</p>
+      <h3><a href="#install-toc" name="install">Installation</a></h3>
+      <p>Before playing 4digits, you need to install python (version 2.7 or below), python-gtk2 and python-glade2 in your computer.</p>
+      <h4>Linux</h4>
+      <p>4digits is distributed in Debian and Ubuntu, so you can install it from APT.</p>
+      <p>Python is usually already installed in your computer if your are a using a modern Linux distribution. You can install python-gtk2 and python-glade2 from the software repository of your distribution.</p>
+      <h4>BSD's and Unix's</h4>
+      <p>Install python, python-gtk2 and python-glade2 for your system.</p>
+      <h4>Windows</h4>
+      <p>From version 1.1 on, the CLI version no longer supports Windows, though it runs OK under <a href="http://www.cygwin.com/">Cygwin</a>. The GUI version will always support Windows. The reason is that I do not want to spend time writing portable C code for Windows, but rather focusing on POSIX and Linux C programming. Also, people using Windows usually do not enjoy its command line interface.</p>
+      <p>First install <a href='http://python.org/download'>Python</a>, version lower than 3.0. Then install <a href='http://www.pygtk.org/'>PyGTK</a>. Click <a href="http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/">here</a> to download the all-in-one PyGTK installer for Windows.</p>
+      <p>Extract 4digits tarball. Create a file called 4digits.bat, which contains the follow line: </p>
+      <p>C:\Python27\python.exe 4digits</p>
+      <p>Substitute with your Python executable file path, and run 4digits.bat each time you want to play this game.</p>
+      <h4>Mac OS X</h4>
+      <p>Download PyGTK for OS X <a href="https://sourceforge.net/projects/macpkg/files/PyGTK/">here</a>. Now run 4digits, voilà.</p>
 
-            <h3><a href="#play-toc" name='play'>Playing 4digits</a></h3>
-            <table>
-                <tr>
-                    <td>
-                        <p><img src='images/4digits_main_window.png' alt='4digits main window' title='4digits main window' /></p>
-                        <p>Figure 1 The main window.</p>
-                    </td>
-                    <td>
-                        <p>When you start 4digits, the main window is like the one shown in Figure 1. You are given eight times to guess a four-digit number. You get one A if its value and position are both correct, and you get one B if only its value is correct. You win the game when you get 4A0B. </p>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>
-                        <p>In Figure 2, you start with 1234. The answer is 5184, which is known somehow. The first guess is 1234, then you get 1A1B. Why? 1A because '4' in 1234 and 5184 has the same value and position, and 1B because '1' in 1234 and 5184 share the same value but different position. If you enter 3456 then, you get 0A2B, because the values of '4' and '5' are right but there positions are not correct.</p>
-                    </td>
-                    <td>
-                        <p><img src='images/game_start.png' alt='game start' title='game start' /></p>
-                        <p>Figure 2  You get 1A1B when the answer is 5184.</p>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>
-                        <p><img src='images/win.png' alt='win a game' title='win a game' /></p>
-                        <p>Figure 3  When you win a game.</p>
-                    </td>
-                    <td>
-                        <p>A typical game in which the player wins is shown in Figure 3. The answer 7564 is guessed in 96.3 seconds.</p>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>
-                        <p>If your time is in the top ten you will be shown the top ten scores, and the score you just get is highlighted. You can also view the scores later by choosing menu <i>Game -> Scores</i>.</p>
-                    </td>
-                    <td>
-                        <p><img src='images/scores.png' alt='high score' title='high score' /></p>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>
-                        <p><img src='images/lose.png' alt='lose a game' title='lose a game' /></p>
-                        <p>Figure 4  When you lose a game.</p>
-                    </td>
-                    <td>
-                        <p>In Figure 4, the player fails to guess the answer in eight times.</p>
-                    </td>
-                </tr>
-            </table>
+      <h3><a href="#play-toc" name='play'>Playing 4digits</a></h3>
+      <table>
+        <tr>
+          <td>
+            <p><img src='images/4digits_main_window.png' alt='4digits main window' title='4digits main window' /></p>
+            <p>Figure 1 The main window.</p>
+          </td>
+          <td>
+            <p>When you start 4digits, the main window is like the one shown in Figure 1. You are given eight times to guess a four-digit number. You get one A if its value and position are both correct, and you get one B if only its value is correct. You win the game when you get 4A0B. </p>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>
+            <p>In Figure 2, you start with 1234. The answer is 5184, which is known somehow. The first guess is 1234, then you get 1A1B. Why? 1A because '4' in 1234 and 5184 has the same value and position, and 1B because '1' in 1234 and 5184 share the same value but different position. If you enter 3456 then, you get 0A2B, because the values of '4' and '5' are right but there positions are not correct.</p>
+          </td>
+          <td>
+            <p><img src='images/game_start.png' alt='game start' title='game start' /></p>
+            <p>Figure 2  You get 1A1B when the answer is 5184.</p>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>
+            <p><img src='images/win.png' alt='win a game' title='win a game' /></p>
+            <p>Figure 3  When you win a game.</p>
+          </td>
+          <td>
+            <p>A typical game in which the player wins is shown in Figure 3. The answer 7564 is guessed in 96.3 seconds.</p>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>
+            <p>If your time is in the top ten you will be shown the top ten scores, and the score you just get is highlighted. You can also view the scores later by choosing menu <i>Game -> Scores</i>.</p>
+          </td>
+          <td>
+            <p><img src='images/scores.png' alt='high score' title='high score' /></p>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>
+            <p><img src='images/lose.png' alt='lose a game' title='lose a game' /></p>
+            <p>Figure 4  When you lose a game.</p>
+          </td>
+          <td>
+            <p>In Figure 4, the player fails to guess the answer in eight times.</p>
+          </td>
+        </tr>
+      </table>
 
-            <h3><a href="#hinttable-toc" name='hinttable'>Hint table</a></h3>
-            <table>
-                <tr>
-                    <td>
-                        <p>This is an example on how to solve your game with the hint table. The hint table can be toggled from menu <i>View</i> -> <i>Hint Table</i>. All the check boxes of the left column are checked meaning all possibilities, all the check boxes of the right column are unchecked meaning no digit or place is confirmed. That is to say:</p>
-                        <blockquote>
-                            <p>Left side:<br />
-                            - You uncheck a box if you are sure that this number cannot be at this position.<br />
-                            - You uncheck a row if you are sure that this number is not in the answer.</p>
-                            <p>Right side:<br />
-                            - You check a box if you are sure that this number is at this position if it is included at all.<br />
-                            - You check a row if you are sure that this number must be in the answer.</p>
-                        </blockquote>
-                        <p>You can check menu <i>View</i> -> <i>Auto Fill Hints</i> to let the computer help you fill some obvious cases.</p>
-                    </td>
-                    <td><img src="images/hinttable.png" alt='hint table' /></td>
-                </tr>
-            </table>
+      <h3><a href="#hinttable-toc" name='hinttable'>Hint table</a></h3>
+      <table>
+        <tr>
+          <td>
+            <p>This is an example on how to solve your game with the hint table. The hint table can be toggled from menu <i>View</i> -> <i>Hint Table</i>. All the check boxes of the left column are checked meaning all possibilities, all the check boxes of the right column are unchecked meaning no digit or place is confirmed. That is to say:</p>
+            <blockquote>
+              <p>Left side:<br />
+              - You uncheck a box if you are sure that this number cannot be at this position.<br />
+              - You uncheck a row if you are sure that this number is not in the answer.</p>
+              <p>Right side:<br />
+              - You check a box if you are sure that this number is at this position if it is included at all.<br />
+              - You check a row if you are sure that this number must be in the answer.</p>
+            </blockquote>
+            <p>You can check menu <i>View</i> -> <i>Auto Fill Hints</i> to let the computer help you fill some obvious cases.</p>
+          </td>
+          <td><img src="images/hinttable.png" alt='hint table' /></td>
+        </tr>
+      </table>
 
-            <h2>Step 1</h2>
-            <table>
-                <tr>
-                    <td><img src="images/step1.png" alt="Step 1" /></td>
-                    <td>
-                        <p>We don't have any information yet, so we start with a random number. There is not much we can conclude from this, but the information that one number is at the right place will be helpful later.</p></td>
-                </tr>
-            </table>
+      <h2>Step 1</h2>
+      <table>
+        <tr>
+          <td><img src="images/step1.png" alt="Step 1" /></td>
+          <td>
+            <p>We don't have any information yet, so we start with a random number. There is not much we can conclude from this, but the information that one number is at the right place will be helpful later.</p></td>
+        </tr>
+      </table>
 
-            <h2>Step 2</h2>
-            <table>
-                <tr>
-                    <td>
-                        <p>So let's try some more random numbers, but different ones than in the first try.</p>
-                        <p> Now this gives us some real hints.</p>
-                        <ul>
-                            <li> Because there are no correct numbers in the second try we can conclude that the first digit can't be 5, the second can't be 6, ... Add this to the first grid.</li>
-                            <li> Then there is another number which we always know something about: zero can't be the first digit (forbidden by game rule). Add this to the first grid.</li>
-                            <li> We have tried the numbers 1, 2, 3, 4, 5, 6, 7, 8 but only two of them are in the answer. As we need another two digits and only two are left, we are sure that 0 and 9 must be in the answer. Add this to the second grid.</li>
-                        </ul>
-                    </td>
-                    <td><img src="images/step2.png" alt="Step 2" /></td>
-                </tr>
-            </table>
+      <h2>Step 2</h2>
+      <table>
+        <tr>
+          <td>
+            <p>So let's try some more random numbers, but different ones than in the first try.</p>
+            <p> Now this gives us some real hints.</p>
+            <ul>
+              <li> Because there are no correct numbers in the second try we can conclude that the first digit can't be 5, the second can't be 6, ... Add this to the first grid.</li>
+              <li> Then there is another number which we always know something about: zero can't be the first digit (forbidden by game rule). Add this to the first grid.</li>
+              <li> We have tried the numbers 1, 2, 3, 4, 5, 6, 7, 8 but only two of them are in the answer. As we need another two digits and only two are left, we are sure that 0 and 9 must be in the answer. Add this to the second grid.</li>
+            </ul>
+          </td>
+          <td><img src="images/step2.png" alt="Step 2" /></td>
+        </tr>
+      </table>
 
-            <h2>Step 3</h2>
-            <table>
-                <tr>
-                    <td><img src="images/step3.png" alt="Step 3" /></td>
-                    <td>
-                        <p>I tried 3456 and the answer was 0A0B. So we can be sure that none of these digits is valid. Remove them from the first grid.</p>
-                    </td>
-                </tr>
-            </table>
+      <h2>Step 3</h2>
+      <table>
+        <tr>
+          <td><img src="images/step3.png" alt="Step 3" /></td>
+          <td>
+            <p>I tried 3456 and the answer was 0A0B. So we can be sure that none of these digits is valid. Remove them from the first grid.</p>
+          </td>
+        </tr>
+      </table>
 
-            <h2>Step 4</h2>
-            <table>
-                <tr>
-                    <td>
-                        <p>Next I tried 9027 and got 0A4B.</p>
-                        <p> So we have found all the valid digits! Mark them in both tables.</p>
-                    </td>
-                    <td><img src="images/step4-1.png" alt="Step 5" /></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td><img src="images/step4-2.png" alt="Step 6" /></td>
-                    <td>
-                        <p>As in step 2 we can again exclude some places for the valid digits and mark them in the first table.</p>
-                        <p>I also tried 9072 which gave me the hint that 2 is not at the last place.</p>
-                    </td>
-                </tr>
-            </table>
+      <h2>Step 4</h2>
+      <table>
+        <tr>
+          <td>
+            <p>Next I tried 9027 and got 0A4B.</p>
+            <p> So we have found all the valid digits! Mark them in both tables.</p>
+          </td>
+          <td><img src="images/step4-1.png" alt="Step 5" /></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td><img src="images/step4-2.png" alt="Step 6" /></td>
+          <td>
+            <p>As in step 2 we can again exclude some places for the valid digits and mark them in the first table.</p>
+            <p>I also tried 9072 which gave me the hint that 2 is not at the last place.</p>
+          </td>
+        </tr>
+      </table>
 
-            <h2>Step 5</h2>
-            <table>
-                <tr>
-                    <td>
-                        <p>Now we have the situation that both 2 and 7 can only go to places 1 and 2. This implies that no other digit can go to these places. So we can exclude the digit 9 from place 2.</p>
-                    </td>
-                    <td><img src="images/step5.png" alt="Step 7" /></td>
-                </tr>
-            </table>
+      <h2>Step 5</h2>
+      <table>
+        <tr>
+          <td>
+            <p>Now we have the situation that both 2 and 7 can only go to places 1 and 2. This implies that no other digit can go to these places. So we can exclude the digit 9 from place 2.</p>
+          </td>
+          <td><img src="images/step5.png" alt="Step 7" /></td>
+        </tr>
+      </table>
 
-            <h2>Step 6</h2>
-            <table>
-                <tr>
-                    <td><img src="images/step6.png" alt="Step 8" /></td>
-                    <td>
-                        <p>Now we use the information we got in step 1.</p>
-                        <p>The first result was that there is one digit in the right place. Obviously this can only be the 2. Mark this in both tables.</p>
-                        <p>Now 2 can't go to place 1, because it's already at place 2 and no duplicates are allowed. Therefore 7 must go to place 1. Mark this in both tables.</p>
-                    </td>
-                </tr>
-            </table>
+      <h2>Step 6</h2>
+      <table>
+        <tr>
+          <td><img src="images/step6.png" alt="Step 8" /></td>
+          <td>
+            <p>Now we use the information we got in step 1.</p>
+            <p>The first result was that there is one digit in the right place. Obviously this can only be the 2. Mark this in both tables.</p>
+            <p>Now 2 can't go to place 1, because it's already at place 2 and no duplicates are allowed. Therefore 7 must go to place 1. Mark this in both tables.</p>
+          </td>
+        </tr>
+      </table>
 
-            <h2>Step 7</h2>
-            <table>
-                <tr>
-                    <td>
-                        <p>Only two possible solutions left: 7209 and 7290. I choose 7209.....and win!</p>
-                    </td>
-                    <td><img src="images/step7.png" alt="Step 9" /></td>
-                </tr>
-            </table>
+      <h2>Step 7</h2>
+      <table>
+        <tr>
+          <td>
+            <p>Only two possible solutions left: 7209 and 7290. I choose 7209.....and win!</p>
+          </td>
+          <td><img src="images/step7.png" alt="Step 9" /></td>
+        </tr>
+      </table>
 
-            <h3><a href="#author-toc" name='author'>Authors</a></h3>
-            <p>4digits is written by Yongzhi Pan. Hermann Kraus added the hint table in 2007.</p>
+      <h3><a href="#author-toc" name='author'>Authors</a></h3>
+      <p>4digits is written by Yongzhi Pan. Hermann Kraus added the hint table in 2007.</p>
 
-            <h3><a href="#license-toc" name='license'>License</a></h3>
-            <p>4digits is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
+      <h3><a href="#license-toc" name='license'>License</a></h3>
+      <p>4digits is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
 
-            <p>4digits is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+      <p>4digits is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
 
-            <p>You should have received a copy of the GNU General Public License along with 4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</p>
-            <hr />
-            First update: 21 Mar 2007<br />
-            <!-- do not work in opera ?? -->
-            Last update: <script src="datestamp.en.js" type='text/javascript'></script>
-        </div>
-    </body>
+      <p>You should have received a copy of the GNU General Public License along with 4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</p>
+      <hr />
+      First update: 21 Mar 2007<br />
+      <!-- do not work in opera ?? -->
+      Last update: <script src="datestamp.en.js" type='text/javascript'></script>
+    </div>
+  </body>
 </html>
