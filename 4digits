@@ -1,6 +1,5 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
-# pylint: disable-msg=r0201
 """
     4digits - A guess-the-number game, aka Bulls and Cows
     Copyright (c) 2004-2012 Yongzhi Pan <http://fourdigits.sourceforge.net>
@@ -39,6 +38,9 @@ import locale
 import gettext
 from gettext import gettext as _
 
+#LOCALE_PATH = '/usr/local/share/locale/'
+LOCALE_PATH = 'locale/'
+
 try:
     import pygtk
     pygtk.require('2.0')
@@ -49,7 +51,8 @@ except ImportError:
     sys.exit(1)
 
 __version__ = '1.2'
-# We do not search glade file in /usr/share/ any longer. Debian packagers may need to patch this.
+# We do not search glade file in /usr/share/ any longer. Debian packagers may
+# need to patch this.
 __gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
 __helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
 __appdata_dir__ = os.path.join(os.path.expanduser('~'), '.4digits')
@@ -89,9 +92,9 @@ class MainWindow(object):
         # Input box
         self.entry = self.widget_tree.get_object('entry')
         self.entry.grab_focus()
-        fontsize = self.entry.get_pango_context().\
-                get_font_description().get_size()/pango.SCALE
-        self.entry.modify_font(pango.FontDescription(str(int(fontsize*3))))
+        fontsize = self.entry.get_pango_context(). \
+                get_font_description().get_size() / pango.SCALE
+        self.entry.modify_font(pango.FontDescription(str(int(fontsize * 3))))
 
         self.ok_button = self.widget_tree.get_object('ok_button')
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
@@ -101,7 +104,7 @@ class MainWindow(object):
         self.time_label = self.widget_tree.get_object('time_label')
         self.score_view = self.widget_tree.get_object('score_view')
 
-        self.cb_hint = [] # container for check boxes in the hint table
+        self.cb_hint = []  # container for check boxes in the hint table
         self.label_hint = []
         self.build_hint_table()
 
@@ -129,21 +132,20 @@ class MainWindow(object):
             self.auto_fill_hints.set_active(True)
         else:
             self.auto_fill_hints.set_active(False)
-        
+
         # connect signals and callbacks
         dic = {'on_main_window_destroy': self.terminate_program,
                 'on_quit_activate': self.terminate_program,
                 'on_ok_clicked': self.on_entry_activate,
                 'on_new_game_activate': self.on_new_game_activate,
                 'on_view_toolbar_toggled': self.on_view_toolbar_toggled,
-                'on_view_hint_table_toggled'
-                : self.on_view_hint_table_toggled,
-                'on_view_auto_fill_hints_toggled'
-                : self.on_view_auto_fill_hints_toggled,
+                'on_view_hint_table_toggled': self.on_view_hint_table_toggled,
+                'on_view_auto_fill_hints_toggled':
+                    self.on_view_auto_fill_hints_toggled,
                 'on_entry_activate': self.on_entry_activate,
                 'on_entry_changed': self.on_entry_changed,
-                'on_help_activate' : self.on_help_activate,
-                'on_about_activate' : self.on_about_activate,
+                'on_help_activate': self.on_help_activate,
+                'on_about_activate': self.on_about_activate,
                 'on_score_activate': self.on_score_activate}
         self.widget_tree.connect_signals(dic)
         # new game initialization
@@ -159,7 +161,8 @@ class MainWindow(object):
                 old___prefs__ = cPickle.load(config)
                 config.close()
             except Exception:
-                print _('Corrupted preferences file "%s", deleting...') % __config_path__
+                print _('Corrupted preferences file "%s", deleting...') \
+                        % __config_path__
                 os.remove(__config_path__)
             else:
                 for key in old___prefs__:
@@ -174,10 +177,10 @@ class MainWindow(object):
             hint_table.pack_start(table)
 
             # Create row labels
-            for row in range(0, 10):
+            for row in range(10):
                 label = gtk.CheckButton(str(row))
-                table.attach(label, 0, 1, row+1, row+2)
-                label.connect('toggled', self.change_row, row+name)
+                table.attach(label, 0, 1, row + 1, row + 2)
+                label.connect('toggled', self.change_row, row + name)
                 self.label_hint.append(label)
 
             for col in range(1, 5):
@@ -185,32 +188,32 @@ class MainWindow(object):
                 #label = gtk.Label(str(col))
                 #table.attach(label, col, col+1, 0, 1)
                 # Create Checkboxes
-                for row in range(0, 10):
+                for row in range(10):
                     checkbutton = gtk.CheckButton()
-                    table.attach(checkbutton, col, col+1, row+1, row+2)
+                    table.attach(checkbutton, col, col + 1, row + 1, row + 2)
                     self.cb_hint.append(checkbutton)
 
-            if name == 0: # First table
+            if name == 0:  # First table
                 hint_table.pack_start(gtk.VSeparator())
         self.init_hint_table()
 
     def change_row(self, widget, row):
         """Toggle a rows state."""
         enable = widget.get_active()
-        for col in range(0, 4):
+        for col in range(4):
             self.cb_hint[10 * col + row].set_sensitive(enable)
 
     def init_hint_table(self):
         """Reset all controls in the hinttable to their default state."""
-        for i in range(0, 40):
+        for i in range(40):
             self.cb_hint[i].set_active(True)
-            self.cb_hint[i+40].set_active(False)
-            self.cb_hint[i+40].set_sensitive(False)
+            self.cb_hint[i + 40].set_active(False)
+            self.cb_hint[i + 40].set_sensitive(False)
         self.cb_hint[0].set_active(False)
-        for row in range(0, 10):
+        for row in range(10):
             self.label_hint[row].set_active(True)
-            self.label_hint[row+10].set_active(False)
-    
+            self.label_hint[row + 10].set_active(False)
+
     #         1    2    3    4                   1    2    3    4
     #  0/0    00   10   20   30          0/10    40   50   60   70
     #  1/1    01   11   21   31          1/11    41   51   61   71
@@ -223,7 +226,7 @@ class MainWindow(object):
 
     def get_label(self, row, tablenr=0):
         """Get the label at the specified position."""
-        return self.label_hint[tablenr*10 + row]
+        return self.label_hint[tablenr * 10 + row]
 
     def on_entry_activate(self, widget):
         """when input is accepted."""
@@ -254,8 +257,8 @@ class MainWindow(object):
                 return False
             self.game.guesses.append(number)
             # process input
-            for i in xrange(4):
-                for j in xrange(4):
+            for i in range(4):
+                for j in range(4):
                     if self.game.answer[i] == int(number[j]):
                         if i == j:
                             bulls += 1
@@ -268,12 +271,12 @@ class MainWindow(object):
 
             if self.auto_fill_hints.get_active():
                 self.fill_hints(number, bulls, cows)
-            
+
             # win
             if bulls == 4:
                 self.info_label.set_text(_('You win! :)'))
                 self.get_time_taken_till_now()
-                self.time_label.set_text(_('Used %.1f s.') % 
+                self.time_label.set_text(_('Used %.1f s.') %
                     self.game.time_taken)
                 self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
@@ -283,12 +286,12 @@ class MainWindow(object):
             # lose
             elif self.game.guess == 7:
                 answer = ''
-                for i in xrange(4):
+                for i in range(4):
                     answer += repr(self.game.answer[i])
-                self.info_label.set_text(_('Haha, you lose. It is %s.') % 
+                self.info_label.set_text(_('Haha, you lose. It is %s.') %
                     answer)
                 self.get_time_taken_till_now()
-                self.time_label.set_text(_('Wasted %.1f s.') % 
+                self.time_label.set_text(_('Wasted %.1f s.') %
                     self.game.time_taken)
                 self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
@@ -298,7 +301,7 @@ class MainWindow(object):
     def clear_row(self, row):
         """Clear a complete row."""
         self.get_label(row, 0).set_active(False)
-        for col in range(0, 4):
+        for col in range(4):
             self.get_checkbox(row, col, 0).set_active(False)
             self.get_checkbox(row, col, 1).set_active(False)
 
@@ -310,29 +313,29 @@ class MainWindow(object):
                 self.clear_row(digit)
             return
 
-        if bulls+cows == 4:
-            for digit in range(0, 10):
+        if bulls + cows == 4:
+            for digit in range(10):
                 if digit in number:
                     self.get_label(digit, 0).set_active(True)
                     self.get_label(digit, 1).set_active(True)
                 else:
                     self.clear_row(digit)
 
-        if bulls == 0: # Only cows
-            for digit_pos in range(0, 4):
-                self.get_checkbox(number[digit_pos], digit_pos, 
+        if bulls == 0:  # Only cows
+            for digit_pos in range(4):
+                self.get_checkbox(number[digit_pos], digit_pos,
                     0).set_active(False)
-                self.get_checkbox(number[digit_pos], digit_pos, 
+                self.get_checkbox(number[digit_pos], digit_pos,
                     1).set_active(False)
 
-        if cows == 0: # Only bulls
+        if cows == 0:  # Only bulls
         # Only digits which are either in the right place or completely wrong
-            for digit_pos in range(0, 4):
-                for pos2 in range(0, 4):
+            for digit_pos in range(4):
+                for pos2 in range(4):
                     if pos2 == digit_pos:
                         continue
                     # uncheck impossible boxes in first column
-                    self.get_checkbox(number[digit_pos], pos2, 
+                    self.get_checkbox(number[digit_pos], pos2,
                         0).set_active(False)
 
     def on_entry_changed(self, widget):
@@ -342,7 +345,7 @@ class MainWindow(object):
             self.time_label.set_text(_('Timer started...'))
             self.game.time_start = time.time()
             self.game.on_entry_cb_first_called = False
-  
+
     def on_view_toolbar_toggled(self, widget):
         """Toggle toolbar visibility."""
         if self.toolbar.get_property('visible'):
@@ -362,7 +365,7 @@ class MainWindow(object):
             self.hint_table.show_all()
             self.hint_hseparator.show()
             __prefs__['show hint table'] = True
-    
+
     def on_view_auto_fill_hints_toggled(self, widget):
         """Toggle auto filling of hint table."""
         if self.auto_fill_hints.get_active():
@@ -385,27 +388,29 @@ class MainWindow(object):
         """Show about dialog."""
         self.about_dialog.run()
         self.about_dialog.hide()
-    
+
     def on_score_activate(self, new_score_rank):
         """Show high scores."""
         sv_selection = self.score_view.get_selection()
         sv_selection.set_mode(gtk.SELECTION_NONE)
 
-        # Since we hide but don't destory the score dialog, we have to remove all columns before appending, otherwise we would have more and more columns. 
+        # Since we hide but don't destory the score dialog, we have to remove
+        # all columns before appending, otherwise we would have more and more
+        # columns.
         for col in self.score_view.get_columns():
             self.score_view.remove_column(col)
 	# FIXME column header not translated under windows 
-        column = gtk.TreeViewColumn(_('Name'), gtk.CellRendererText(), text = 0)
+        column = gtk.TreeViewColumn(_('Name'), gtk.CellRendererText(), text=0)
         self.score_view.append_column(column)
-        column = gtk.TreeViewColumn(_('Score'), gtk.CellRendererText(), text = 1)
+        column = gtk.TreeViewColumn(_('Score'), gtk.CellRendererText(), text=1)
         self.score_view.append_column(column)
-        column = gtk.TreeViewColumn(_('Date'), gtk.CellRendererText(), text = 2)
+        column = gtk.TreeViewColumn(_('Date'), gtk.CellRendererText(), text=2)
         self.score_view.append_column(column)
         scoreList = gtk.ListStore(str, str, str)
         self.score_view.set_model(scoreList)
 
         try:
-            scores = [line.split(' ', 6) 
+            scores = [line.split(' ', 6)
                     for line in file(__score_filename__, 'r')]
         except IOError:
             scores = []
@@ -436,10 +441,10 @@ class MainWindow(object):
         self.info_label.set_text(_('Ready'))
         self.time_label.set_text('')
 
-        for i in xrange(8):
+        for i in range(8):
             getattr(self, 'g' + repr(i)).set_text('')
             getattr(self, 'r' + repr(i)).set_text('')
-        
+
         self.init_hint_table()
 
     def process_error(self, msg):
@@ -457,13 +462,13 @@ class MainWindow(object):
     def is_high_score(cls, time_taken):
         """Is this time a highscore."""
         try:
-            scores = [line.split(' ', 6) 
+            scores = [line.split(' ', 6)
                     for line in file(__score_filename__, 'r')]
         except IOError:
-            return True # List does not exist yet
+            return True  # List does not exist yet
         if len(scores) < 10:
             return True
-        scores = sorted(scores, key = lambda x: float(x[1][:-1]))
+        scores = sorted(scores, key=lambda x: float(x[1][:-1]))
         if time_taken < float(scores[-1][1][:-1]):
             return True
         else:
@@ -494,16 +499,16 @@ class MainWindow(object):
     @classmethod
     def save_score(cls, time_taken):
         """Save highscore file."""
-        date = time.strftime("%a %b %d %H:%M:%S %Y") 
-        new_score = "%s %ss %s\n" % (
-                os.getenv('USERNAME'), time_taken, date)
+        date = time.strftime("%a %b %d %H:%M:%S %Y")
+        name = 'USERNAME' if sys.platform == 'win32' else 'USER'
+        new_score = "%s %ss %s\n" % (os.getenv(name), time_taken, date)
         try:
             saved_scores = open(__score_filename__, 'r').readlines()
         except IOError:
-            saved_scores = [] 
+            saved_scores = []
         saved_scores.append(new_score)
         scores = [line.split(' ', 6) for line in saved_scores]
-        scores = sorted(scores, key = lambda x: float(x[1][:-1]))
+        scores = sorted(scores, key=lambda x: float(x[1][:-1]))
         scores = scores[:10]
 
         # find the index of the new score
@@ -540,10 +545,10 @@ class MainWindow(object):
     def show_score(self, new_score_rank):
         """Show highscore dialog."""
         self.on_score_activate(new_score_rank)
-    
+
     def terminate_program(self, widget):
         """Run clean-up tasks and exit.
-        Copied from comix.        
+        Copied from comix.
         """
         self.save_prefs()
         gtk.main_quit()
@@ -554,12 +559,12 @@ class NewRound(object):
     def __init__(self):
         while True:
             self.answer = random.sample(range(10), 4)
-            if self.answer[0] != 0: # first digit cannot be zero
+            if self.answer[0] != 0:  # first digit cannot be zero
                 break
         #print self.answer
         if self.answer == [4, 6, 1, 9]:
-            gtk.MessageDialog(message_format
-                    =_('4619: You are the luckiest guy on the planet!')).show()
+            gtk.MessageDialog(message_format=_(
+                   '4619: You are the luckiest guy on the planet!')).show()
         self.guess = 0
         self.guesses = []
         self.time_start = 0
@@ -570,8 +575,6 @@ class NewRound(object):
 if __name__ == "__main__":
     #prepare i18n
     APP="4digits"
-    #LOCALE_PATH = '/usr/local/share/locale/'
-    LOCALE_PATH = 'locale/'
     locale.setlocale(locale.LC_ALL, '')
     
     # Fix for Windows
@@ -582,10 +585,10 @@ if __name__ == "__main__":
         libintl.bindtextdomain(APP, LOCALE_PATH)
     else:
         locale.bindtextdomain(APP, LOCALE_PATH)
-    #gettext.bindtextdomain(APP, LOCALE_PATH)
-    #gettext.textdomain(APP)
-    gtk.glade.bindtextdomain(APP, LOCALE_PATH)
-    gtk.glade.textdomain(APP)
+    gettext.bindtextdomain(APP, LOCALE_PATH)
+    gettext.textdomain(APP)
+    #gtk.glade.bindtextdomain(APP, LOCALE_PATH)
+    #gtk.glade.textdomain(APP)
 
     MainWindow()
     gtk.main()
