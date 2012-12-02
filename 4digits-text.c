@@ -42,9 +42,11 @@
 #include <libintl.h>
 #define _(str) gettext(str)
 #define N_(str) str
-#define LOCALE_PATH "/usr/share/locale"
+// For distribution packaging
+//#define LOCALE_PATH "/usr/share/locale/"
+#define LOCALE_PATH "locale/"
 
-//#define DEBUG
+#define DEBUG
 #define VERSION_STRING "1.2"
 
 const char VERSION[] = "4digits " VERSION_STRING;
@@ -244,6 +246,7 @@ int main(int argc, char *argv[]) {
             case 0:    /* long option without a short arg */
                 if(strcmp("version", longOpts[longIndex].name) == 0)
                     break; 
+                break;
             default:
                 /* You won't actually get here. */
                 break;

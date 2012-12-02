@@ -24,12 +24,12 @@
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 """
 
+import cPickle
 import errno
 import gtk.glade
 import os
-import cPickle
-import random
 import pango
+import random
 import sys
 import time
 import webbrowser
@@ -38,7 +38,8 @@ import locale
 import gettext
 from gettext import gettext as _
 
-#LOCALE_PATH = '/usr/local/share/locale/'
+# For distribution packaging
+#LOCALE_PATH = '/usr/share/locale/'
 LOCALE_PATH = 'locale/'
 
 try:
@@ -50,35 +51,28 @@ except ImportError:
     print _('No python-gtk2 was found on your system.')
     sys.exit(1)
 
-__version__ = '1.2'
+_version = '1.2'
 # We do not search glade file in /usr/share/ any longer. Debian packagers may
 # need to patch this.
-__gladefile__ = os.path.join(os.path.dirname(__file__), '4digits.glade')
-__helpfile__ = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
-__appdata_dir__ = os.path.join(os.path.expanduser('~'), '.4digits')
-__config_path__ = os.path.join(__appdata_dir__, 'prefs.pickle')
-__score_filename__ = os.path.join(__appdata_dir__, '4digits.4digits.scores')
-__prefs__ = {
+gladefile = os.path.join(os.path.dirname(__file__), '4digits.glade')
+helpfile = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
+appdata_dir = os.path.join(os.path.expanduser('~'), '.4digits')
+config_path = os.path.join(appdata_dir, 'prefs.pickle')
+score_filename = os.path.join(appdata_dir, '4digits.4digits.scores')
+prefs = {
         'show toolbar': True,
         'show hint table': False,
         'auto fill hints': False
         }
 
-#try: 
-#    _()
-#except NameError:
-#     def _(arg):
-#         """Mark translatable strings."""
-#         return arg
 
-
-class MainWindow(object):
+class MainWindow:
     """The main game window."""
     def __init__(self):
         """GUI initialization."""
         self.widget_tree = gtk.Builder()
         self.widget_tree.set_translation_domain('4digits')
-        self.widget_tree.add_from_file(__gladefile__)
+        self.widget_tree.add_from_file(gladefile)
         self.toolbar = self.widget_tree.get_object('toolbar')
         self.view_toolbar = self.widget_tree.get_object('view_toolbar')
         self.hint_table = self.widget_tree.get_object('hint_table')
@@ -113,14 +107,14 @@ class MainWindow(object):
         self.score_dialog = self.widget_tree.get_object('score_dialog')
 
         # parse preferences
-        self.read_preferences_file()
-        if __prefs__['show toolbar']:
+        self.read_prefs()
+        if prefs['show toolbar']:
             self.toolbar.show()
             self.view_toolbar.set_active(True)
         else:
             self.toolbar.hide()
             self.view_toolbar.set_active(False)
-        if __prefs__['show hint table']:
+        if prefs['show hint table']:
             self.hint_table.show_all()
             self.hint_hseparator.show()
             self.view_hint_table.set_active(True)
@@ -128,7 +122,7 @@ class MainWindow(object):
             self.hint_table.hide_all()
             self.hint_hseparator.hide()
             self.view_hint_table.set_active(False)
-        if __prefs__['auto fill hints']:
+        if prefs['auto fill hints']:
             self.auto_fill_hints.set_active(True)
         else:
             self.auto_fill_hints.set_active(False)
@@ -151,23 +145,25 @@ class MainWindow(object):
         # new game initialization
         self.game = NewRound()
 
-    def read_preferences_file(self):
+    def read_prefs(self):
         """Read preferences data from disk.
         Copied from Comix.
         """
-        if os.path.isfile(__config_path__):
+        # TODO: use with context manager
+        if os.path.isfile(config_path):
             try:
-                config = open(__config_path__)
-                old___prefs__ = cPickle.load(config)
+                config = open(config_path)
+                old_prefs = cPickle.load(config)
                 config.close()
-            except Exception:
+            except Exception:  # FIXME: Need specific exceptions
                 print _('Corrupted preferences file "%s", deleting...') \
-                        % __config_path__
-                os.remove(__config_path__)
+                        % config_path
+                os.remove(config_path)
             else:
-                for key in old___prefs__:
-                    if key in __prefs__:
-                        __prefs__[key] = old___prefs__[key]
+                # TODO: use dict comprehension
+                for key in old_prefs:
+                    if key in prefs:
+                        prefs[key] = old_prefs[key]
 
     def build_hint_table(self):
         """Create the controls for the hint table."""
@@ -311,7 +307,7 @@ class MainWindow(object):
         if bulls == 0 and cows == 0:
             for digit in number:
                 self.clear_row(digit)
-            return
+            return  # TODO: what does this do?
 
         if bulls + cows == 4:
             for digit in range(10):
@@ -322,7 +318,7 @@ class MainWindow(object):
                     self.clear_row(digit)
 
         if bulls == 0:  # Only cows
-            for digit_pos in range(4):
+            for digit_pos in range(4):  # Adjust line breaking
                 self.get_checkbox(number[digit_pos], digit_pos,
                     0).set_active(False)
                 self.get_checkbox(number[digit_pos], digit_pos,
@@ -350,39 +346,39 @@ class MainWindow(object):
         """Toggle toolbar visibility."""
         if self.toolbar.get_property('visible'):
             self.toolbar.hide()
-            __prefs__['show toolbar'] = False
+            prefs['show toolbar'] = False
         else:
             self.toolbar.show()
-            __prefs__['show toolbar'] = True
+            prefs['show toolbar'] = True
 
     def on_view_hint_table_toggled(self, widget):
         """Toggle hint table visibility."""
         if self.hint_table.get_property('visible'):
             self.hint_table.hide_all()
             self.hint_hseparator.hide()
-            __prefs__['show hint table'] = False
+            prefs['show hint table'] = False
         else:
             self.hint_table.show_all()
             self.hint_hseparator.show()
-            __prefs__['show hint table'] = True
+            prefs['show hint table'] = True
 
     def on_view_auto_fill_hints_toggled(self, widget):
         """Toggle auto filling of hint table."""
         if self.auto_fill_hints.get_active():
-            __prefs__['auto fill hints'] = True
+            prefs['auto fill hints'] = True
         else:
-            __prefs__['auto fill hints'] = False
+            prefs['auto fill hints'] = False
 
-    @classmethod
-    def on_help_activate(cls, widget):
+    @staticmethod
+    def on_help_activate(widget):
         """Show help."""
-        '''for helpfile in __helpfile__:
+        '''for helpfile in helpfiles:
             try:
                 file(helpfile)
             except IOError:
                 continue
                 '''
-        webbrowser.open(__helpfile__)
+        webbrowser.open(helpfile)
 
     def on_about_activate(self, widget):
         """Show about dialog."""
@@ -399,19 +395,19 @@ class MainWindow(object):
         # columns.
         for col in self.score_view.get_columns():
             self.score_view.remove_column(col)
-	# FIXME column header not translated under windows 
-        column = gtk.TreeViewColumn(_('Name'), gtk.CellRendererText(), text=0)
-        self.score_view.append_column(column)
-        column = gtk.TreeViewColumn(_('Score'), gtk.CellRendererText(), text=1)
-        self.score_view.append_column(column)
-        column = gtk.TreeViewColumn(_('Date'), gtk.CellRendererText(), text=2)
-        self.score_view.append_column(column)
+        # FIXME: column header not translated under windows
+        columns = [_('Name'), _('Score'), _('Date')]
+        for p in enumerate(columns):
+            column = gtk.TreeViewColumn(p[1], gtk.CellRendererText(),
+                    text=p[0])
+            self.score_view.append_column(column)
+
         scoreList = gtk.ListStore(str, str, str)
         self.score_view.set_model(scoreList)
 
         try:
             scores = [line.split(' ', 6)
-                    for line in file(__score_filename__, 'r')]
+                    for line in file(score_filename, 'r')]
         except IOError:
             scores = []
 
@@ -458,12 +454,12 @@ class MainWindow(object):
         self.game.time_taken = self.game.time_end - self.game.time_start
         self.game.time_taken = round(self.game.time_taken, 1)
 
-    @classmethod
-    def is_high_score(cls, time_taken):
+    @staticmethod
+    def is_high_score(time_taken):
         """Is this time a highscore."""
         try:
             scores = [line.split(' ', 6)
-                    for line in file(__score_filename__, 'r')]
+                    for line in file(score_filename, 'r')]
         except IOError:
             return True  # List does not exist yet
         if len(scores) < 10:
@@ -478,32 +474,34 @@ class MainWindow(object):
         """Save preference data to disk.
         Copied from Comix.
         """
+        # FIXME: use with context manager
         try:
-            config = open(__config_path__, 'w')
+            config = open(config_path, 'w')
         except IOError as (errnum, strerror):
             if errnum == errno.ENOENT:
                 try:
-                    os.mkdir(__appdata_dir__)
+                    os.mkdir(appdata_dir)
                 except IOError:
                     print _("Cannot open score file.\n");
                     sys.exit(1)
-                config = open(__config_path__, 'w')
+                config = open(config_path, 'w')
         except:
             print _("Cannot open score file.\n");
             sys.exit(1)
        
        # Here `else' cannot be used.
-        cPickle.dump(__prefs__, config, cPickle.HIGHEST_PROTOCOL)
+        cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)
         config.close()
 
-    @classmethod
-    def save_score(cls, time_taken):
+    @staticmethod
+    def save_score(time_taken):
         """Save highscore file."""
         date = time.strftime("%a %b %d %H:%M:%S %Y")
         name = 'USERNAME' if sys.platform == 'win32' else 'USER'
         new_score = "%s %ss %s\n" % (os.getenv(name), time_taken, date)
+        # FIXME: use with context manager
         try:
-            saved_scores = open(__score_filename__, 'r').readlines()
+            saved_scores = open(score_filename, 'r').readlines()
         except IOError:
             saved_scores = []
         saved_scores.append(new_score)
@@ -515,32 +513,35 @@ class MainWindow(object):
         new_score = new_score.split(' ', 6)
         new_score_rank = scores.index(new_score)
 
+        # FIXME: use with context manager
         try:
-            scorefile = open(__score_filename__, 'w')
+            scorefile = open(score_filename, 'w')
         except IOError as (errnum, strerror):
             if errnum == errno.ENOENT:
                 try:
-                    os.mkdir(__appdata_dir__)
+                    os.mkdir(appdata_dir)
                 except IOError:
                     print _("Cannot open score file.\n");
                     sys.exit(1)
-                scorefile = open(__score_filename__, 'w')
+                scorefile = open(score_filename, 'w')
         except:
             print _("Cannot open score file.\n");
             sys.exit(1)
 
-       # Here `else' cannot be used.
+        # XXX: what?
+        # Here `else' cannot be used.
         for score in scores:
             scorefile.write(' '.join(score))
         scorefile.close()
         return new_score_rank
 
-#        if not os.path.exists(__appdata_dir__):
-#            os.mkdir(__appdata_dir__)
-#        elif not os.path.isdir(__appdata_dir__):
-#            os.rename(__appdata_dir__, __appdata_dir__+'.orig')
-#            os.mkdir(__appdata_dir__)
-#        scorefile = open(__score_filename__, 'w')
+# XXX: Are these really needed?
+#        if not os.path.exists(appdata_dir):
+#            os.mkdir(appdata_dir)
+#        elif not os.path.isdir(appdata_dir):
+#            os.rename(appdata_dir, appdata_dir+'.orig')
+#            os.mkdir(appdata_dir)
+#        scorefile = open(score_filename, 'w')
 
     def show_score(self, new_score_rank):
         """Show highscore dialog."""
@@ -554,7 +555,7 @@ class MainWindow(object):
         gtk.main_quit()
 
 
-class NewRound(object):
+class NewRound:
     """Contains data in one round of the game."""
     def __init__(self):
         while True:

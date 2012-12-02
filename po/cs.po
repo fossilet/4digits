@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4digits\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-25 15:04+0800\n"
+"POT-Creation-Date: 2012-11-25 23:39+0800\n"
 "PO-Revision-Date: 2012-04-26 13:11+0000\n"
 "Last-Translator: Martin Volf <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -19,92 +19,92 @@ msgstr ""
 "X-Launchpad-Export-Date: 2012-11-11 05:12+0000\n"
 "X-Generator: Launchpad (build 16251)\n"
 
-#: 4digits.py:49
+#: 4digits.py:50
 msgid "python-gtk2 is required to run 4digits."
 msgstr "Pro spuštění 4digits je potřeba python-gtk2."
 
-#: 4digits.py:50
+#: 4digits.py:51
 msgid "No python-gtk2 was found on your system."
 msgstr "Ve vašem systému nebyl nalezen python-gtk2."
 
-#: 4digits.py:164
+#: 4digits.py:159
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
 msgstr "Soubor  \"%s\" je poškozený, probíhá smazání..."
 
-#: 4digits.py:239
+#: 4digits.py:235
 msgid "Must input something."
 msgstr "Musíte něco zadat."
 
-#: 4digits.py:242
+#: 4digits.py:238
 msgid "First digit cannot be zero."
 msgstr "První číslo nesmí být nula."
 
-#: 4digits.py:247
+#: 4digits.py:243
 msgid "Must input a number."
 msgstr "Musí být vloženo číslo."
 
-#: 4digits.py:250
+#: 4digits.py:246
 msgid "Must input four digits."
 msgstr "Musí být vloženy čtyři číslice."
 
-#: 4digits.py:253
+#: 4digits.py:249
 msgid "Four digits must be unique."
 msgstr "Čtyři čísla musí být jedinečná. (zkus každé jiné)"
 
-#: 4digits.py:256
+#: 4digits.py:252
 msgid "You've already guessed it."
 msgstr "Už jsou to odhadl."
 
-#: 4digits.py:277
+#: 4digits.py:273
 msgid "You win! :)"
 msgstr "Vyhrál jsi! :)"
 
-#: 4digits.py:279
+#: 4digits.py:275
 #, python-format
 msgid "Used %.1f s."
 msgstr "Použito  %.1f s."
 
-#: 4digits.py:291
+#: 4digits.py:287
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr "Haha, prohrál jsi. Je to %s."
 
-#: 4digits.py:294
+#: 4digits.py:290
 #, python-format
 msgid "Wasted %.1f s."
 msgstr "Vyplýtváno %.1f s."
 
-#: 4digits.py:345
+#: 4digits.py:341
 msgid "Timer started..."
 msgstr "Časovač spuštěn..."
 
-#: 4digits.py:403
+#: 4digits.py:399
 msgid "Name"
 msgstr "Jméno"
 
-#: 4digits.py:405
+#: 4digits.py:399
 msgid "Score"
 msgstr "Výsledek"
 
-#: 4digits.py:407
+#: 4digits.py:399
 msgid "Date"
 msgstr "Datum"
 
-#: 4digits.py:441 4digits.glade:713
+#: 4digits.py:437 4digits.glade:713
 msgid "Ready"
 msgstr "Připraven"
 
-#: 4digits.py:488 4digits.py:492 4digits.py:525 4digits.py:529
-#: 4digits-text.c:194 4digits-text.c:199
+#: 4digits.py:485 4digits.py:489 4digits.py:524 4digits.py:528
+#: 4digits-text.c:196 4digits-text.c:201
 msgid "Cannot open score file.\n"
 msgstr "Nelze otevřít soubor výsledků.\n"
 
-#: 4digits.py:567
+#: 4digits.py:568
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr "4619: Jsi nejšťastnější člověk na planetě!"
 
-#: 4digits-text.c:53
+#: 4digits-text.c:55
 msgid ""
 "4digits comes with NO WARRANTY to the extent permitted by law.\n"
 "This program is free software; you can redistribute it and/or\n"
@@ -119,11 +119,11 @@ msgstr ""
 "informace\n"
 "k této problematice si prosím přečtěte soubor COPYING.\n"
 
-#: 4digits-text.c:59
+#: 4digits-text.c:61
 msgid "Written by Pan Yongzhi.\n"
 msgstr "Napsal Pan Yongzhi.\n"
 
-#: 4digits-text.c:62
+#: 4digits-text.c:64
 msgid ""
 "4digits, a guess-the-number game.\n"
 "Usage: 4digits [OPTION] ...\n"
@@ -149,47 +149,47 @@ msgstr ""
 "\n"
 "Případné chyby hlaste na <https://github.com/fossilet/4digits/issues>."
 
-#: 4digits-text.c:127
+#: 4digits-text.c:129
 #, c-format
 msgid "Input a 4-digit number:"
 msgstr "Vlož čtyřčíslicové číslo."
 
-#: 4digits-text.c:129
+#: 4digits-text.c:131
 msgid "Something's got wrong, I'd better quit...\n"
 msgstr "Něco se pokazilo,  raději odejít...\n"
 
-#: 4digits-text.c:138
+#: 4digits-text.c:140
 #, c-format
 msgid "Input too long!\n"
 msgstr "Vstup je příliš dlouhý!\n"
 
-#: 4digits-text.c:144
+#: 4digits-text.c:146
 #, c-format
 msgid "Must be a number between 1000 and 9999!\n"
 msgstr "Číslo musí být mezi 1000 a 9999!\n"
 
-#: 4digits-text.c:154
+#: 4digits-text.c:156
 #, c-format
 msgid "Four digits must be unique.\n"
 msgstr "Čtyři číslice musí být jedinečné.\n"
 
-#: 4digits-text.c:182
+#: 4digits-text.c:184
 msgid "Memory allocation error.\n"
 msgstr "Chyba paměti aplikace.\n"
 
-#: 4digits-text.c:241
+#: 4digits-text.c:243
 msgid ""
 "Usage: 4digits [OPTION]...\n"
 "Try `4digits --help' for more information."
 msgstr ""
 "Využití: 4digits [NASTAVENÍ]...Zkus  `4digits --help' pro další informace."
 
-#: 4digits-text.c:269
+#: 4digits-text.c:272
 #, c-format
 msgid "You've already guessed it.\n"
 msgstr "Toto již bylo uhodnuto.\n"
 
-#: 4digits-text.c:288
+#: 4digits-text.c:291
 #, c-format
 msgid "\t %d time left.\n"
 msgid_plural "\t %d times left.\n"
@@ -197,12 +197,12 @@ msgstr[0] "\t %d zbývajícího času.\n"
 msgstr[1] "\t %d zbývajícího času.\n"
 msgstr[2] "\t %d zbývajícího času.\n"
 
-#: 4digits-text.c:294
+#: 4digits-text.c:297
 #, c-format
 msgid "You win! :) Used %d sec.\n"
 msgstr "Výhra! :) za %d vteřin.\n"
 
-#: 4digits-text.c:299
+#: 4digits-text.c:302
 #, c-format
 msgid ""
 "\n"

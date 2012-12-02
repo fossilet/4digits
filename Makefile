@@ -1,13 +1,16 @@
 # Makefile for 4digits
 
 CC = gcc
-CFLAGS = -Wall -std=c99 -pedantic
+CFLAGS = -Wall -std=c99 -pedantic -g
 SHELL = /bin/sh
-#INSTALL_DIR = /usr/local/share
-INSTALL_DIR = .
+# For distribution packaging
+#INSTALL_DIR = /usr/share/locale
+INSTALL_DIR = locale
 
 #all: 4digits-text compile-po
-all: 4digits-text update-po compile-po
+all: 4digits-text update-po compile-po install-po
+
+trans: update-po compile-po install-po
 
 4digits-text: 4digits-text.c
 	$(CC) $(CFLAGS) 4digits-text.c -o 4digits-text
@@ -37,5 +40,5 @@ compile-po:
 install-po:
 	for g in po/*.mo; do \
 		l=`echo $$g | sed -e 's#po/\(.*\)\.mo#\1#'`; \
-		install -D $$g $(INSTALL_DIR)/locale/$$l/LC_MESSAGES/4digits.mo; \
+		install -D $$g $(INSTALL_DIR)/$$l/LC_MESSAGES/4digits.mo; \
 	done
