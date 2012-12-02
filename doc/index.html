@@ -31,23 +31,29 @@
     </div>
     <div id="Content">
       <h3><a href="#intro-toc" name="intro">Introduction</a></h3>
-      <p>4digits is a guess-the-number puzzle game. It's called Bulls and Cows, and in China people simply call it Guess-the-Number. The game's objective is to guess a four-digit number in 8 times using as less time as possible. It is similar to Mastermind, but the four digits are different to each other. 4digits has a graphical user interface version <i>4digits</i> and a textual user interface version <i>4digits-text</i>. This manual documents the GUI version.</p>
+      <p>4digits is a guess-the-number puzzle game. It's called Bulls and Cows, and in China people simply call it Guess-the-Number. The game's objective is to guess a four-digit number in 8 times using as less time as possible. It is similar to Mastermind, but the four digits are different to each other. 4digits has a graphical user interface version <span class='code'>4digits</span> and a textual user interface version <span class='code'>4digits-text</span>. This manual documents the GUI version.</p>
 
       <h3><a href="#install-toc" name="install">Installation</a></h3>
-      <p>Before playing 4digits, you need to install python (version 2.7 or below), python-gtk2 and python-glade2 in your computer.</p>
       <h4>Linux</h4>
-      <p>4digits is distributed in Debian and Ubuntu, so you can install it from APT.</p>
+      <p>4digits is distributed in <a href='http://packages.debian.org/source/4digits'>Debian</a> and <a href='http://packages.ubuntu.com/source/4digits'>Ubuntu</a>, so you can install it from <a href='apt://4digits'>APT</a>.</p>
       <p>Python is usually already installed in your computer if your are a using a modern Linux distribution. You can install python-gtk2 and python-glade2 from the software repository of your distribution.</p>
       <h4>BSD's and Unix's</h4>
       <p>Install python, python-gtk2 and python-glade2 for your system.</p>
       <h4>Windows</h4>
       <p>From version 1.1 on, the CLI version no longer supports Windows, though it runs OK under <a href="http://www.cygwin.com/">Cygwin</a>. The GUI version will always support Windows. The reason is that I do not want to spend time writing portable C code for Windows, but rather focusing on POSIX and Linux C programming. Also, people using Windows usually do not enjoy its command line interface.</p>
-      <p>First install <a href='http://python.org/download'>Python</a>, version lower than 3.0. Then install <a href='http://www.pygtk.org/'>PyGTK</a>. Click <a href="http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/">here</a> to download the all-in-one PyGTK installer for Windows.</p>
-      <p>Extract 4digits tarball. Create a file called 4digits.bat, which contains the follow line: </p>
-      <p>C:\Python27\python.exe 4digits</p>
-      <p>Substitute with your Python executable file path, and run 4digits.bat each time you want to play this game.</p>
+      <p>First install <a href='http://python.org/'>Python</a> version 2.7 or like, then install <a href='http://www.pygtk.org/'>PyGTK</a>. Click <a href="http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/">here</a> to download the all-in-one PyGTK installer for Windows.</p>
+      <p>Extract 4digits tarball. Create a file called <span class='code'>4digits.bat</span> containing the follow line: </p>
+      <blockquote class='code'>
+        <span>C:\Python27\python.exe 4digits</span>
+      </blockquote>
+      <p>Substitute with your Python executable file path, and run <span class='code'>4digits.bat</span> each time you want to play this game.</p>
       <h4>Mac OS X</h4>
       <p>Download PyGTK for OS X <a href="https://sourceforge.net/projects/macpkg/files/PyGTK/">here</a>. Now run 4digits, voilà.</p>
+      <h4>Use Translations</h4>
+      <p>To use the translations, please install GNU gettext and run the following command: </p>
+      <blockquote class='code'>
+        <span>make trans</span>
+      </blockquote>
 
       <h3><a href="#play-toc" name='play'>Playing 4digits</a></h3>
       <table>
