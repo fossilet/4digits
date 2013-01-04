@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4digits\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-25 23:39+0800\n"
-"PO-Revision-Date: 2012-06-11 15:34+0000\n"
+"POT-Creation-Date: 2013-01-04 17:52+0800\n"
+"PO-Revision-Date: 2012-11-25 11:14+0000\n"
 "Last-Translator: konrad509 <konrad509@op.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "Language: pl\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-11-11 05:12+0000\n"
-"X-Generator: Launchpad (build 16251)\n"
+"X-Launchpad-Export-Date: 2012-12-03 04:49+0000\n"
+"X-Generator: Launchpad (build 16319)\n"
 
 #: 4digits.py:50
 msgid "python-gtk2 is required to run 4digits."
@@ -43,15 +43,15 @@ msgstr "Pierwsza cyfra nie może być zero."
 
 #: 4digits.py:243
 msgid "Must input a number."
-msgstr ""
+msgstr "Należy wprowadzić cyfrę."
 
 #: 4digits.py:246
 msgid "Must input four digits."
-msgstr ""
+msgstr "Należy wprowadzić cztery cyfry."
 
 #: 4digits.py:249
 msgid "Four digits must be unique."
-msgstr ""
+msgstr "Cztery cyfry muszą być różne."
 
 #: 4digits.py:252
 msgid "You've already guessed it."

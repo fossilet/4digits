@@ -1,4 +1,4 @@
-# Czech translation for 4digits
+# Low German translation for 4digits
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the 4digits package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
@@ -8,84 +8,84 @@ msgstr ""
 "Project-Id-Version: 4digits\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-04 17:52+0800\n"
-"PO-Revision-Date: 2012-04-26 13:11+0000\n"
-"Last-Translator: Martin Volf <Unknown>\n"
-"Language-Team: Czech <cs@li.org>\n"
-"Language: cs\n"
+"PO-Revision-Date: 2012-12-03 22:07+0000\n"
+"Last-Translator: A. Kohl <Unknown>\n"
+"Language-Team: Low German <nds@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2012-12-03 04:49+0000\n"
-"X-Generator: Launchpad (build 16319)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2012-12-04 06:10+0000\n"
+"X-Generator: Launchpad (build 16335)\n"
 
 #: 4digits.py:50
 msgid "python-gtk2 is required to run 4digits."
-msgstr "Pro spuštění 4digits je potřeba python-gtk2."
+msgstr ""
 
 #: 4digits.py:51
 msgid "No python-gtk2 was found on your system."
-msgstr "Ve vašem systému nebyl nalezen python-gtk2."
+msgstr ""
 
 #: 4digits.py:159
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
-msgstr "Soubor  \"%s\" je poškozený, probíhá smazání..."
+msgstr ""
 
 #: 4digits.py:235
 msgid "Must input something."
-msgstr "Musíte něco zadat."
+msgstr ""
 
 #: 4digits.py:238
 msgid "First digit cannot be zero."
-msgstr "První číslo nesmí být nula."
+msgstr ""
 
 #: 4digits.py:243
 msgid "Must input a number."
-msgstr "Musí být vloženo číslo."
+msgstr ""
 
 #: 4digits.py:246
 msgid "Must input four digits."
-msgstr "Musí být vloženy čtyři číslice."
+msgstr ""
 
 #: 4digits.py:249
 msgid "Four digits must be unique."
-msgstr "Čtyři čísla musí být jedinečná. (zkus každé jiné)"
+msgstr ""
 
 #: 4digits.py:252
 msgid "You've already guessed it."
-msgstr "Už jsou to odhadl."
+msgstr ""
 
 #: 4digits.py:273
 msgid "You win! :)"
-msgstr "Vyhrál jsi! :)"
+msgstr ""
 
 #: 4digits.py:275
 #, python-format
 msgid "Used %.1f s."
-msgstr "Použito  %.1f s."
+msgstr ""
 
 #: 4digits.py:287
 #, python-format
 msgid "Haha, you lose. It is %s."
-msgstr "Haha, prohrál jsi. Je to %s."
+msgstr ""
 
 #: 4digits.py:290
 #, python-format
 msgid "Wasted %.1f s."
-msgstr "Vyplýtváno %.1f s."
+msgstr ""
 
 #: 4digits.py:341
 msgid "Timer started..."
-msgstr "Časovač spuštěn..."
+msgstr ""
 
 #: 4digits.py:399
 msgid "Name"
-msgstr "Jméno"
+msgstr ""
 
 #: 4digits.py:399
 msgid "Score"
-msgstr "Výsledek"
+msgstr ""
 
 #: 4digits.py:399
 msgid "Date"
@@ -93,16 +93,16 @@ msgstr "Datum"
 
 #: 4digits.py:437 4digits.glade:713
 msgid "Ready"
-msgstr "Připraven"
+msgstr "Afslaten"
 
 #: 4digits.py:485 4digits.py:489 4digits.py:524 4digits.py:528
 #: 4digits-text.c:196 4digits-text.c:201
 msgid "Cannot open score file.\n"
-msgstr "Nelze otevřít soubor výsledků.\n"
+msgstr ""
 
 #: 4digits.py:568
 msgid "4619: You are the luckiest guy on the planet!"
-msgstr "4619: Jsi nejšťastnější člověk na planetě!"
+msgstr ""
 
 #: 4digits-text.c:55
 msgid ""
@@ -112,16 +112,10 @@ msgid ""
 "published by the Free Software Foundation - version 2. For more\n"
 "information about these matters, see the file named COPYING.\n"
 msgstr ""
-"4digits NENESE žádnou záruku v jakémkoli smyslu zákona.\n"
-"Tento program je zdarma; může být dále distribuován a/nebo\n"
-"modifikován podle podmínek licence GNU tak,\n"
-"jak byla publikována Free Software Foundation - ve verzi 2. Pro další "
-"informace\n"
-"k této problematice si prosím přečtěte soubor COPYING.\n"
 
 #: 4digits-text.c:61
 msgid "Written by Pan Yongzhi.\n"
-msgstr "Napsal Pan Yongzhi.\n"
+msgstr ""
 
 #: 4digits-text.c:64
 msgid ""
@@ -137,70 +131,57 @@ msgid ""
 "\n"
 "Report bugs at <https://github.com/fossilet/4digits/issues>."
 msgstr ""
-"4digits, hra hádej-číslo.\n"
-"Využití: 4digits [VOLBA] ...\n"
-"\n"
-"Dostane k uhodnutí osm čtyřmístných čísel. Pokud dostanete\n"
-"A, je správná hodnota i pozice, pokud dostanete \n"
-"B, je správná pouze hodnota. Hru vyhrajete pokud dostanete 4A0B.\n"
-"\n"
-"-v, --version \t zobrazí verzi aplikace 4digits a exit.\n"
-"-h, -?, --help \t vytiskne tuto nápovědu.\n"
-"\n"
-"Případné chyby hlaste na <https://github.com/fossilet/4digits/issues>."
 
 #: 4digits-text.c:129
 #, c-format
 msgid "Input a 4-digit number:"
-msgstr "Vlož čtyřčíslicové číslo."
+msgstr ""
 
 #: 4digits-text.c:131
 msgid "Something's got wrong, I'd better quit...\n"
-msgstr "Něco se pokazilo,  raději odejít...\n"
+msgstr ""
 
 #: 4digits-text.c:140
 #, c-format
 msgid "Input too long!\n"
-msgstr "Vstup je příliš dlouhý!\n"
+msgstr ""
 
 #: 4digits-text.c:146
 #, c-format
 msgid "Must be a number between 1000 and 9999!\n"
-msgstr "Číslo musí být mezi 1000 a 9999!\n"
+msgstr ""
 
 #: 4digits-text.c:156
 #, c-format
 msgid "Four digits must be unique.\n"
-msgstr "Čtyři číslice musí být jedinečné.\n"
+msgstr ""
 
 #: 4digits-text.c:184
 msgid "Memory allocation error.\n"
-msgstr "Chyba paměti aplikace.\n"
+msgstr ""
 
 #: 4digits-text.c:243
 msgid ""
 "Usage: 4digits [OPTION]...\n"
 "Try `4digits --help' for more information."
 msgstr ""
-"Využití: 4digits [NASTAVENÍ]...Zkus  `4digits --help' pro další informace."
 
 #: 4digits-text.c:272
 #, c-format
 msgid "You've already guessed it.\n"
-msgstr "Toto již bylo uhodnuto.\n"
+msgstr ""
 
 #: 4digits-text.c:291
 #, c-format
 msgid "\t %d time left.\n"
 msgid_plural "\t %d times left.\n"
-msgstr[0] "\t %d zbývajícího času.\n"
-msgstr[1] "\t %d zbývajícího času.\n"
-msgstr[2] "\t %d zbývajícího času.\n"
+msgstr[0] ""
+msgstr[1] ""
 
 #: 4digits-text.c:297
 #, c-format
 msgid "You win! :) Used %d sec.\n"
-msgstr "Výhra! :) za %d vteřin.\n"
+msgstr ""
 
 #: 4digits-text.c:302
 #, c-format
@@ -208,24 +189,22 @@ msgid ""
 "\n"
 "Haha, you lose. It is "
 msgstr ""
-"\n"
-"Haha, prohra. To je "
 
 #: 4digits.glade:7
 msgid "About 4digits"
-msgstr "O aplikaci 4digits"
+msgstr ""
 
 #: 4digits.glade:14
 msgid "Copyright (c) 2004-2012 Yongzhi Pan"
-msgstr "Copyright (c) 2004-2012 Yongzhi Pan"
+msgstr ""
 
 #: 4digits.glade:15
 msgid "A guess-the-number puzzle game"
-msgstr "Logická hra hádej-číslo"
+msgstr ""
 
 #: 4digits.glade:17
 msgid "4digits website"
-msgstr "4digits website"
+msgstr ""
 
 #: 4digits.glade:18
 msgid ""
@@ -243,111 +222,99 @@ msgid ""
 "4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA  02110-1301, USA."
 msgstr ""
-"4digits je volně šiřitelný software; je možné ho redistribuovat a/nebo "
-"modifikovat dle podmínek GNU General Public License tak jak byly publikovány "
-"Free Software Foundation; buď ve verzi licence č. 2, nebo (dle volby) v "
-"jakékoliv pozdější verzi.\n"
-"\n"
-"4digits je šířena v naději, že bude užitečná, ale BEZ JAKÉKOLI ZÁRUKY; "
-"dokonce bez záruky PRODEJNOSTI či  ZDOKONALENÍ ZA URČITÝM ÚČELEM. Pro "
-"detailnější informace si projděte GNU General Public License.\n"
-"\n"
-"Měli byste obdržet kopii GNU General Public License společně s 4digits; "
-"pokud ne, napište na Free Software Foundation, Inc., 51 Franklin Street, "
-"Fifth Floor, Boston, MA 02110-1301, USA."
 
 #. Write your names here
 #: 4digits.glade:30
 msgid "Russian: Sergey Basalaev"
-msgstr "Ruština: Sergey Basalaev"
+msgstr ""
 
 #: 4digits.glade:78
 msgid "_Game"
-msgstr "_Hra"
+msgstr ""
 
 #: 4digits.glade:105
 msgid "_Scores"
-msgstr "_Skóre"
+msgstr ""
 
 #: 4digits.glade:135
 msgid "_View"
-msgstr "_Zobrazit"
+msgstr ""
 
 #: 4digits.glade:145
 msgid "_Toolbar"
-msgstr "Lišta nás_trojů"
+msgstr ""
 
 #: 4digits.glade:154
 msgid "_Hint Table"
-msgstr "_Lišta nápovědy"
+msgstr ""
 
 #: 4digits.glade:163
 msgid "_Auto Fill Hints"
-msgstr "_Automatické vyplnění nápovědy"
+msgstr ""
 
 #: 4digits.glade:176
 msgid "_Help"
-msgstr "_Nápověda"
+msgstr ""
 
 #: 4digits.glade:227
 msgid "Start a new game"
-msgstr "Spustit novou hru"
+msgstr ""
 
 #: 4digits.glade:228
 msgid "New Game"
-msgstr "Nová hra"
+msgstr ""
 
 #: 4digits.glade:251
 msgid "Close this window"
-msgstr "Zavřít toto okno"
+msgstr ""
 
 #: 4digits.glade:252
 msgid "Quit"
-msgstr "Konec"
+msgstr ""
 
 #: 4digits.glade:278
 msgid "_Input:"
-msgstr "_Vstup"
+msgstr ""
 
 #: 4digits.glade:344
 msgid "1"
-msgstr "1"
+msgstr ""
 
 #: 4digits.glade:355
 msgid "2"
-msgstr "2"
+msgstr ""
 
 #: 4digits.glade:366
 msgid "3"
-msgstr "3"
+msgstr ""
 
 #: 4digits.glade:377
 msgid "5"
-msgstr "5"
+msgstr ""
 
 #: 4digits.glade:388
 msgid "4"
-msgstr "4"
+msgstr ""
 
 #: 4digits.glade:399
 msgid "6"
-msgstr "6"
+msgstr ""
 
 #: 4digits.glade:410
 msgid "7"
-msgstr "7"
+msgstr ""
 
 #: 4digits.glade:421
 msgid "8"
-msgstr "8"
+msgstr ""
 
 #: 4digits.glade:432
 msgid "Guess"
-msgstr "Odhadnout"
+msgstr ""
 
 #: 4digits.glade:443
 msgid "Result"
-msgstr "Výsledek"
+msgstr ""
 
 #: 4digits.glade:673
 msgid ""
@@ -361,19 +328,7 @@ msgid ""
 " - You check a box if you are sure that this number is at this position if "
 "it is included at all.\n"
 msgstr ""
-" Levá strana:\n"
-" - Odoznačíte  řádek, pokud jste si jisti, že toto číslo není v odpovědi.\n"
-" - Odoznačíte políčko,  pokud jste si jisti, že toto číslo není na této "
-"pozici.\n"
-"\n"
-" Pravá strana:\n"
-" - Označíte řádek,  pokud jste si jisti, že toto číslo odpovědi určitě je.\n"
-" - Označíte políčko,  pokud jste si jisti, že toto číslo odpovědi určitě je "
-"na této pozici, v případě že vůbec v odpovědi je.\n"
 
 #: 4digits.glade:747 4digits.glade:793
 msgid "4digits Scores"
-msgstr "4digits Výsledky"
-
-#~ msgid "4digits"
-#~ msgstr "4digits"
+msgstr ""
