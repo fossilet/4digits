@@ -1,20 +1,21 @@
-# Greek translation for 4digits
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# Arabic translation for 4digits
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the 4digits package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 4digits\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-04 17:52+0800\n"
-"PO-Revision-Date: 2012-10-27 14:12+0000\n"
-"Last-Translator: tzem <athmakrigiannis@gmail.com>\n"
-"Language-Team: Greek <el@li.org>\n"
+"PO-Revision-Date: 2013-05-23 04:27+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
+"3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
 "X-Launchpad-Export-Date: 2013-07-30 01:32+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
@@ -53,55 +54,55 @@ msgstr ""
 
 #: 4digits.py:252
 msgid "You've already guessed it."
-msgstr "Έχετε ήδη μαντέψει."
+msgstr ""
 
 #: 4digits.py:273
 msgid "You win! :)"
-msgstr "Κερδίσατε! :)"
+msgstr ""
 
 #: 4digits.py:275
 #, python-format
 msgid "Used %.1f s."
-msgstr "Χρήση %.1f s."
+msgstr ""
 
 #: 4digits.py:287
 #, python-format
 msgid "Haha, you lose. It is %s."
-msgstr "Χαχα, χάσατε. Αυτό είναι %s."
+msgstr ""
 
 #: 4digits.py:290
 #, python-format
 msgid "Wasted %.1f s."
-msgstr "Σπαταλήσατε %.1f s."
+msgstr ""
 
 #: 4digits.py:341
 msgid "Timer started..."
-msgstr "Το χρονόμετρο ξεκίνησε..."
+msgstr ""
 
 #: 4digits.py:399
 msgid "Name"
-msgstr "Όνομα"
+msgstr ""
 
 #: 4digits.py:399
 msgid "Score"
-msgstr "Βαθμολογία"
+msgstr ""
 
 #: 4digits.py:399
 msgid "Date"
-msgstr "Ημερομηνία"
+msgstr ""
 
 #: 4digits.py:437 4digits.glade:713
 msgid "Ready"
-msgstr "Έτοιμο"
+msgstr ""
 
 #: 4digits.py:485 4digits.py:489 4digits.py:524 4digits.py:528
 #: 4digits-text.c:196 4digits-text.c:201
 msgid "Cannot open score file.\n"
-msgstr "Δεν μπορεί να ανοίξει το αρχείο σκορ.\n"
+msgstr ""
 
 #: 4digits.py:568
 msgid "4619: You are the luckiest guy on the planet!"
-msgstr "4619: Είστε ο πιο τυχερός άνθρωπος στον πλανήτη!"
+msgstr ""
 
 #: 4digits-text.c:55
 msgid ""
@@ -114,7 +115,7 @@ msgstr ""
 
 #: 4digits-text.c:61
 msgid "Written by Pan Yongzhi.\n"
-msgstr "Γράφτηκε απο τον Pan Yongzhi.\n"
+msgstr ""
 
 #: 4digits-text.c:64
 msgid ""

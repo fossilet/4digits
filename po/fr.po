@@ -6,18 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4digits\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-04 17:52+0800\n"
-"PO-Revision-Date: 2012-11-25 11:09+0000\n"
-"Last-Translator: kev671 <Unknown>\n"
+"PO-Revision-Date: 2013-01-23 12:55+0000\n"
+"Last-Translator: Hélion du Mas des Bourboux <helion331990@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2012-12-03 04:49+0000\n"
-"X-Generator: Launchpad (build 16319)\n"
+"X-Launchpad-Export-Date: 2013-07-30 01:32+0000\n"
+"X-Generator: Launchpad (build 16700)\n"
 
 #: 4digits.py:50
 msgid "python-gtk2 is required to run 4digits."
@@ -112,6 +111,11 @@ msgid ""
 "published by the Free Software Foundation - version 2. For more\n"
 "information about these matters, see the file named COPYING.\n"
 msgstr ""
+"4digits comes with NO WARRANTY to the extent permitted by law.\n"
+"This program is free software; you can redistribute it and/or\n"
+"modify it under the terms of the GNU General Public License as\n"
+"published by the Free Software Foundation - version 2. For more\n"
+"information about these matters, see the file named COPYING.\n"
 
 #: 4digits-text.c:61
 msgid "Written by Pan Yongzhi.\n"
@@ -140,6 +144,7 @@ msgstr "Rentrez un nombre à quatre chiffres:"
 #: 4digits-text.c:131
 msgid "Something's got wrong, I'd better quit...\n"
 msgstr ""
+"Quelque chose ne c'est pas bien passé, je ferrai mieux de quitter...\n"
 
 #: 4digits-text.c:140
 #, c-format
@@ -171,19 +176,19 @@ msgstr ""
 #: 4digits-text.c:272
 #, c-format
 msgid "You've already guessed it.\n"
-msgstr ""
+msgstr "Vous avez déjà deviné ça.\n"
 
 #: 4digits-text.c:291
 #, c-format
 msgid "\t %d time left.\n"
 msgid_plural "\t %d times left.\n"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\t %d fois restant.\n"
+msgstr[1] "\t %d fois restants.\n"
 
 #: 4digits-text.c:297
 #, c-format
 msgid "You win! :) Used %d sec.\n"
-msgstr ""
+msgstr "Vous gagnez ! :) Cela a pris %d sec.\n"
 
 #: 4digits-text.c:302
 #, c-format
@@ -191,22 +196,24 @@ msgid ""
 "\n"
 "Haha, you lose. It is "
 msgstr ""
+"\n"
+"Haha, vous avez perdu. Il est "
 
 #: 4digits.glade:7
 msgid "About 4digits"
-msgstr ""
+msgstr "À propos de 4digits"
 
 #: 4digits.glade:14
 msgid "Copyright (c) 2004-2012 Yongzhi Pan"
-msgstr ""
+msgstr "Copyright (c) 2004-2012 Yongzhi Pan"
 
 #: 4digits.glade:15
 msgid "A guess-the-number puzzle game"
-msgstr ""
+msgstr "Un jeu de puzzle du style devine-le-nombre"
 
 #: 4digits.glade:17
 msgid "4digits website"
-msgstr ""
+msgstr "Page web de 4digits"
 
 #: 4digits.glade:18
 msgid ""
@@ -224,6 +231,19 @@ msgid ""
 "4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA  02110-1301, USA."
 msgstr ""
+"4digits is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+"\n"
+"4digits is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA  02110-1301, USA."
 
 #. Write your names here
 #: 4digits.glade:30
@@ -232,19 +252,19 @@ msgstr ""
 
 #: 4digits.glade:78
 msgid "_Game"
-msgstr ""
+msgstr "_Jeu"
 
 #: 4digits.glade:105
 msgid "_Scores"
-msgstr ""
+msgstr "_Scores"
 
 #: 4digits.glade:135
 msgid "_View"
-msgstr ""
+msgstr "_Afficher"
 
 #: 4digits.glade:145
 msgid "_Toolbar"
-msgstr ""
+msgstr "Barre d'_outils"
 
 #: 4digits.glade:154
 msgid "_Hint Table"
@@ -256,67 +276,67 @@ msgstr ""
 
 #: 4digits.glade:176
 msgid "_Help"
-msgstr ""
+msgstr "_Aide"
 
 #: 4digits.glade:227
 msgid "Start a new game"
-msgstr ""
+msgstr "Commencer une nouvelle partie"
 
 #: 4digits.glade:228
 msgid "New Game"
-msgstr ""
+msgstr "Nouvelle partie"
 
 #: 4digits.glade:251
 msgid "Close this window"
-msgstr ""
+msgstr "Fermer cette fenêtre"
 
 #: 4digits.glade:252
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: 4digits.glade:278
 msgid "_Input:"
-msgstr ""
+msgstr "_Entrée :"
 
 #: 4digits.glade:344
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: 4digits.glade:355
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: 4digits.glade:366
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #: 4digits.glade:377
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: 4digits.glade:388
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: 4digits.glade:399
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #: 4digits.glade:410
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #: 4digits.glade:421
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #: 4digits.glade:432
 msgid "Guess"
-msgstr ""
+msgstr "Deviner"
 
 #: 4digits.glade:443
 msgid "Result"
-msgstr ""
+msgstr "Résultat"
 
 #: 4digits.glade:673
 msgid ""
@@ -333,4 +353,4 @@ msgstr ""
 
 #: 4digits.glade:747 4digits.glade:793
 msgid "4digits Scores"
-msgstr ""
+msgstr "Scores de 4digits"
