@@ -26,17 +26,18 @@
 
 import cPickle
 import errno
-import gtk.glade
 import os
-import pango
 import random
 import sys
 import time
 import webbrowser
-
 import locale
 import gettext
 from gettext import gettext as _
+
+import gtk.glade
+from glib import GError
+import pango
 
 # For distribution packaging
 #LOCALE_PATH = '/usr/share/locale/'
@@ -51,14 +52,17 @@ except ImportError:
     print _('No python-gtk2 was found on your system.')
     sys.exit(1)
 
-_version = '1.2'
-# We do not search glade file in /usr/share/ any longer. Debian packagers may
-# need to patch this.
-gladefile = os.path.join(os.path.dirname(__file__), '4digits.glade')
-helpfile = os.path.join(os.path.dirname(__file__), 'doc', 'index.html')
+_version = '1.1.3'
+
+gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
+              "/usr/share/4digits/4digits.glade"]  # For debian packages.
+helpfiles = [os.path.join(os.path.dirname(__file__), 'doc', 'index.html'),
+            "/usr/share/doc/4digits/index.html"]  # For debian packages.
+
 appdata_dir = os.path.join(os.path.expanduser('~'), '.4digits')
 config_path = os.path.join(appdata_dir, 'prefs.pickle')
 score_filename = os.path.join(appdata_dir, '4digits.4digits.scores')
+
 prefs = {
         'show toolbar': True,
         'show hint table': False,
@@ -72,7 +76,13 @@ class MainWindow:
         """GUI initialization."""
         self.widget_tree = gtk.Builder()
         self.widget_tree.set_translation_domain('4digits')
-        self.widget_tree.add_from_file(gladefile)
+        for gladefile in gladefiles:
+            try:
+                self.widget_tree.add_from_file(gladefile)
+            except GError:
+                continue
+            else:
+                break
         self.toolbar = self.widget_tree.get_object('toolbar')
         self.view_toolbar = self.widget_tree.get_object('view_toolbar')
         self.hint_table = self.widget_tree.get_object('hint_table')
@@ -372,12 +382,14 @@ class MainWindow:
     @staticmethod
     def on_help_activate(widget):
         """Show help."""
-        '''for helpfile in helpfiles:
+        for helpfile in helpfiles:
             try:
-                file(helpfile)
+                # webbrowser.open does not raise a catchable exception.
+                open(helpfile)
             except IOError:
                 continue
-                '''
+            else:
+                break
         webbrowser.open(helpfile)
 
     def on_about_activate(self, widget):
@@ -488,7 +500,7 @@ class MainWindow:
         except:
             print _("Cannot open score file.\n");
             sys.exit(1)
-       
+
        # Here `else' cannot be used.
         cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)
         config.close()
@@ -575,9 +587,9 @@ class NewRound:
 
 if __name__ == "__main__":
     #prepare i18n
-    APP="4digits"
+    APP = "4digits"
     locale.setlocale(locale.LC_ALL, '')
-    
+
     # Fix for Windows
     # https://bugzilla.gnome.org/show_bug.cgi?id=574520#c14
     if sys.platform == 'win32':
