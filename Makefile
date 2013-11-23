@@ -23,7 +23,7 @@ clean:
 # has no .py extension so we make a temporary symlink.
 update-po:
 	#Update 4digits.pot
-	ln -s 4digits 4digits.py
+	ln -sf 4digits 4digits.py
 	xgettext 4digits.py 4digits-text.c 4digits.glade -o po/4digits.pot -k_ -kN_
 	rm 4digits.py
 	#Update translations
