@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4digits\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-01-04 17:52+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-23 15:48+0800\n"
 "PO-Revision-Date: 2012-09-22 17:53+0000\n"
 "Last-Translator: Srivatsan Raghavan <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
+"Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,88 +19,88 @@ msgstr ""
 "X-Launchpad-Export-Date: 2013-07-31 06:07+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 
-#: 4digits.py:50
+#: 4digits.py:51
 msgid "python-gtk2 is required to run 4digits."
 msgstr "4digits-ஐ இயக்க python-gtk2 அவசியம் தேவை."
 
-#: 4digits.py:51
+#: 4digits.py:52
 msgid "No python-gtk2 was found on your system."
 msgstr "உங்கள் கணினியில்  python-gtk2 இல்லை"
 
-#: 4digits.py:159
+#: 4digits.py:169
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
 msgstr "பழுதுற்ற விருப்பக் கோப்பு \"%s\",அழிக்கபடுகின்றது..."
 
-#: 4digits.py:235
+#: 4digits.py:245
 msgid "Must input something."
 msgstr "ஏதேனும் உள்ளீடு செய்தாக வேண்டும்."
 
-#: 4digits.py:238
+#: 4digits.py:248
 msgid "First digit cannot be zero."
 msgstr "முதல் எண் பூச்சியமாக இருக்கக் கூடாது."
 
-#: 4digits.py:243
+#: 4digits.py:253
 msgid "Must input a number."
 msgstr "ஏதேனும் எண்ணை உள்ளீடு செய்தாக வேண்டும் ."
 
-#: 4digits.py:246
+#: 4digits.py:256
 msgid "Must input four digits."
 msgstr "நான்கு எண்களை உள்ளீடு செய்தாக வேண்டும்."
 
-#: 4digits.py:249
+#: 4digits.py:259
 msgid "Four digits must be unique."
 msgstr "நான்கு எண்களும் தனித்துவம் வாய்ந்ததாக இருத்தல் வேண்டும்."
 
-#: 4digits.py:252
+#: 4digits.py:262
 msgid "You've already guessed it."
 msgstr "நீங்கள் அதை ஏற்கனவே யூகித்துவிட்டீர்கள்."
 
-#: 4digits.py:273
+#: 4digits.py:283
 msgid "You win! :)"
 msgstr "நீங்கள் வென்றுவிட்டீர்கள்! :)"
 
-#: 4digits.py:275
+#: 4digits.py:285
 #, python-format
 msgid "Used %.1f s."
 msgstr ""
 
-#: 4digits.py:287
+#: 4digits.py:297
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr ""
 
-#: 4digits.py:290
+#: 4digits.py:300
 #, python-format
 msgid "Wasted %.1f s."
 msgstr ""
 
-#: 4digits.py:341
+#: 4digits.py:351
 msgid "Timer started..."
 msgstr ""
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Name"
 msgstr ""
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Score"
 msgstr ""
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Date"
 msgstr ""
 
-#: 4digits.py:437 4digits.glade:713
+#: 4digits.py:449 4digits.glade:713
 msgid "Ready"
 msgstr ""
 
-#: 4digits.py:485 4digits.py:489 4digits.py:524 4digits.py:528
+#: 4digits.py:497 4digits.py:501 4digits.py:536 4digits.py:540
 #: 4digits-text.c:196 4digits-text.c:201
 msgid "Cannot open score file.\n"
 msgstr ""
 
-#: 4digits.py:568
+#: 4digits.py:580
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr ""
 

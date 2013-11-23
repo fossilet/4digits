@@ -8,100 +8,100 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-04 17:52+0800\n"
+"POT-Creation-Date: 2013-11-23 15:48+0800\n"
 "PO-Revision-Date: 2013-10-03 17:39+0000\n"
 "Last-Translator: AJ <b2143658791@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2013-10-04 05:42+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
-"Language: \n"
 
-#: 4digits.py:50
+#: 4digits.py:51
 msgid "python-gtk2 is required to run 4digits."
 msgstr "4digits运行需要python-gtk2。"
 
-#: 4digits.py:51
+#: 4digits.py:52
 msgid "No python-gtk2 was found on your system."
 msgstr "系统中未找到python-gtk2。"
 
-#: 4digits.py:159
+#: 4digits.py:169
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
 msgstr "损坏的偏好文件 \"%s\"，删除..."
 
-#: 4digits.py:235
+#: 4digits.py:245
 msgid "Must input something."
 msgstr "必须输入点东西"
 
-#: 4digits.py:238
+#: 4digits.py:248
 msgid "First digit cannot be zero."
 msgstr "第一个数字不能为零"
 
-#: 4digits.py:243
+#: 4digits.py:253
 msgid "Must input a number."
 msgstr "必须输入数字"
 
-#: 4digits.py:246
+#: 4digits.py:256
 msgid "Must input four digits."
 msgstr "必须输入四个数字"
 
-#: 4digits.py:249
+#: 4digits.py:259
 msgid "Four digits must be unique."
 msgstr "四个数字必须唯一"
 
-#: 4digits.py:252
+#: 4digits.py:262
 msgid "You've already guessed it."
 msgstr "已经猜过了"
 
-#: 4digits.py:273
+#: 4digits.py:283
 msgid "You win! :)"
 msgstr "你赢了！：）"
 
-#: 4digits.py:275
+#: 4digits.py:285
 #, python-format
 msgid "Used %.1f s."
 msgstr "用了%.1f秒"
 
-#: 4digits.py:287
+#: 4digits.py:297
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr "哈哈你输了，结果是%s"
 
-#: 4digits.py:290
+#: 4digits.py:300
 #, python-format
 msgid "Wasted %.1f s."
 msgstr "浪费了%.1f秒"
 
-#: 4digits.py:341
+#: 4digits.py:351
 msgid "Timer started..."
 msgstr "记时开始..."
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Name"
 msgstr "名字"
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Score"
 msgstr "分数"
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Date"
 msgstr "日期"
 
-#: 4digits.py:437 4digits.glade:713
+#: 4digits.py:449 4digits.glade:713
 msgid "Ready"
 msgstr "就绪"
 
-#: 4digits.py:485 4digits.py:489 4digits.py:524 4digits.py:528
+#: 4digits.py:497 4digits.py:501 4digits.py:536 4digits.py:540
 #: 4digits-text.c:196 4digits-text.c:201
 msgid "Cannot open score file.\n"
 msgstr "不能打开分数文件。\n"
 
-#: 4digits.py:568
+#: 4digits.py:580
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr "4619：你是地球上最幸运的家伙！"
 
@@ -242,9 +242,11 @@ msgid ""
 "4digits; if not, write to the Free Software Foundation, Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA  02110-1301, USA."
 msgstr ""
-"4digits是自由软件；您可依据自由软件基金会所发表的GNU通用公共授权条款，对本软件再次发布和/或修改；无论您依据的是本授权的第三版，或（您可选的）任"
-"一日后发行的版本。本程式是基于使用目的而加以发布，然而不负任何担保责任；亦无对适售性或特定目的适用性所为的默示性担保。详情请参照GNU通用公共授权。您应已"
-"收到附随于本程式的GNU通用公共授权的副本；如果没有，请参照<http://www.gnu.org/licenses/>."
+"4digits是自由软件；您可依据自由软件基金会所发表的GNU通用公共授权条款，对本软"
+"件再次发布和/或修改；无论您依据的是本授权的第三版，或（您可选的）任一日后发行"
+"的版本。本程式是基于使用目的而加以发布，然而不负任何担保责任；亦无对适售性或"
+"特定目的适用性所为的默示性担保。详情请参照GNU通用公共授权。您应已收到附随于本"
+"程式的GNU通用公共授权的副本；如果没有，请参照<http://www.gnu.org/licenses/>."
 
 #. Write your names here
 #: 4digits.glade:30

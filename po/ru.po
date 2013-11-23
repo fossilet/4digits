@@ -8,101 +8,101 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4digits 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-04 17:52+0800\n"
+"POT-Creation-Date: 2013-11-23 15:48+0800\n"
 "PO-Revision-Date: 2012-11-10 18:54+0000\n"
 "Last-Translator: Sergey Basalaev <SBasalaev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Launchpad-Export-Date: 2013-07-31 06:07+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
-"Language: ru\n"
 
-#: 4digits.py:50
+#: 4digits.py:51
 msgid "python-gtk2 is required to run 4digits."
 msgstr "Для запуска 4digits необходим python-gtk2."
 
-#: 4digits.py:51
+#: 4digits.py:52
 msgid "No python-gtk2 was found on your system."
 msgstr "python-gtk2 не был найден в вашей системе."
 
-#: 4digits.py:159
+#: 4digits.py:169
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
 msgstr "Поврежденный файл настроек \"%s\", удаление..."
 
-#: 4digits.py:235
+#: 4digits.py:245
 msgid "Must input something."
 msgstr "Нужно что-нибудь ввести."
 
-#: 4digits.py:238
+#: 4digits.py:248
 msgid "First digit cannot be zero."
 msgstr "Первая цифра не может быть нулём."
 
-#: 4digits.py:243
+#: 4digits.py:253
 msgid "Must input a number."
 msgstr "Нужно ввести число."
 
-#: 4digits.py:246
+#: 4digits.py:256
 msgid "Must input four digits."
 msgstr "Нужно ввести четыре цифры."
 
-#: 4digits.py:249
+#: 4digits.py:259
 msgid "Four digits must be unique."
 msgstr "Все четыре цифры должны быть различны."
 
-#: 4digits.py:252
+#: 4digits.py:262
 msgid "You've already guessed it."
 msgstr "Вы уже вводили это."
 
-#: 4digits.py:273
+#: 4digits.py:283
 msgid "You win! :)"
 msgstr "Вы выиграли! :)"
 
-#: 4digits.py:275
+#: 4digits.py:285
 #, python-format
 msgid "Used %.1f s."
 msgstr "Использовано %.1f с."
 
-#: 4digits.py:287
+#: 4digits.py:297
 #, python-format
 msgid "Haha, you lose. It is %s."
 msgstr "Хаха, вы проиграли. Это %s."
 
-#: 4digits.py:290
+#: 4digits.py:300
 #, python-format
 msgid "Wasted %.1f s."
 msgstr "Потрачено %.1f с."
 
-#: 4digits.py:341
+#: 4digits.py:351
 msgid "Timer started..."
 msgstr "Таймер запущен..."
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Name"
 msgstr "Имя"
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Score"
 msgstr "Счёт"
 
-#: 4digits.py:399
+#: 4digits.py:411
 msgid "Date"
 msgstr "Дата"
 
-#: 4digits.py:437 4digits.glade:713
+#: 4digits.py:449 4digits.glade:713
 msgid "Ready"
 msgstr "Готов"
 
-#: 4digits.py:485 4digits.py:489 4digits.py:524 4digits.py:528
+#: 4digits.py:497 4digits.py:501 4digits.py:536 4digits.py:540
 #: 4digits-text.c:196 4digits-text.c:201
 msgid "Cannot open score file.\n"
 msgstr "Не удалось открыть файл со счётом.\n"
 
-#: 4digits.py:568
+#: 4digits.py:580
 msgid "4619: You are the luckiest guy on the planet!"
 msgstr "4619: Вы счастливейший человек на планете!"
 
