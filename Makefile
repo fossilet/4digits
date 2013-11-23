@@ -40,5 +40,5 @@ compile-po:
 install-po:
 	for g in po/*.mo; do \
 		l=`echo $$g | sed -e 's#po/\(.*\)\.mo#\1#'`; \
-		install -D $$g $(INSTALL_DIR)/$$l/LC_MESSAGES/4digits.mo; \
+		install -m644 -D $$g $(INSTALL_DIR)/$$l/LC_MESSAGES/4digits.mo; \
 	done
