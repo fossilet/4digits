@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: 4digits\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-04 17:52+0800\n"
-"PO-Revision-Date: 2013-01-23 12:55+0000\n"
-"Last-Translator: Hélion du Mas des Bourboux <helion331990@gmail.com>\n"
+"PO-Revision-Date: 2013-08-17 02:47+0000\n"
+"Last-Translator: londumas <helion331990@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-07-30 01:32+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-18 05:01+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: 4digits.py:50
 msgid "python-gtk2 is required to run 4digits."
@@ -29,7 +29,7 @@ msgstr "python-gtk2 n'a pas été trouvé sur votre ordinateur."
 #: 4digits.py:159
 #, python-format
 msgid "Corrupted preferences file \"%s\", deleting..."
-msgstr "Fichier de préférences corrompu \"%s\", suppression..."
+msgstr "Fichier de préférences corrompu « %s », suppression..."
 
 #: 4digits.py:235
 msgid "Must input something."
@@ -57,7 +57,7 @@ msgstr "Vous l'avez déjà deviné."
 
 #: 4digits.py:273
 msgid "You win! :)"
-msgstr "Vous avez gagné! :)"
+msgstr "Vous avez gagné ! :)"
 
 #: 4digits.py:275
 #, python-format
@@ -101,7 +101,7 @@ msgstr "Impossible d'ouvrir le fichier de score.\n"
 
 #: 4digits.py:568
 msgid "4619: You are the luckiest guy on the planet!"
-msgstr "4619: Vous êtes la personne la plus chanceuse du monde!"
+msgstr "4619 : Vous êtes la personne la plus chanceuse du monde !"
 
 #: 4digits-text.c:55
 msgid ""
@@ -139,7 +139,7 @@ msgstr ""
 #: 4digits-text.c:129
 #, c-format
 msgid "Input a 4-digit number:"
-msgstr "Rentrez un nombre à quatre chiffres:"
+msgstr "Rentrez un nombre à quatre chiffres :"
 
 #: 4digits-text.c:131
 msgid "Something's got wrong, I'd better quit...\n"
@@ -149,12 +149,12 @@ msgstr ""
 #: 4digits-text.c:140
 #, c-format
 msgid "Input too long!\n"
-msgstr "La valeur saisie est trop longue!\n"
+msgstr "La valeur saisie est trop longue !\n"
 
 #: 4digits-text.c:146
 #, c-format
 msgid "Must be a number between 1000 and 9999!\n"
-msgstr "Le nombre doit être compris entre 1000 et 9999!\n"
+msgstr "Le nombre doit être compris entre 1000 et 9999 !\n"
 
 #: 4digits-text.c:156
 #, c-format
@@ -170,8 +170,8 @@ msgid ""
 "Usage: 4digits [OPTION]...\n"
 "Try `4digits --help' for more information."
 msgstr ""
-"Utilisation: 4digits [OPTION]...\n"
-"Tapez '4digits --help' pour plus d'information."
+"Utilisation : 4digits [OPTION]...\n"
+"Tapez « 4digits --help » pour plus d'information."
 
 #: 4digits-text.c:272
 #, c-format
@@ -188,7 +188,7 @@ msgstr[1] "\t %d fois restants.\n"
 #: 4digits-text.c:297
 #, c-format
 msgid "You win! :) Used %d sec.\n"
-msgstr "Vous gagnez ! :) Cela a pris %d sec.\n"
+msgstr "Vous gagnez ! :) Cela a pris %d sec.\n"
 
 #: 4digits-text.c:302
 #, c-format
@@ -296,7 +296,7 @@ msgstr "Quitter"
 
 #: 4digits.glade:278
 msgid "_Input:"
-msgstr "_Entrée :"
+msgstr "_Entrée :"
 
 #: 4digits.glade:344
 msgid "1"
