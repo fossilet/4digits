@@ -10,8 +10,8 @@
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="version">1.2</property>
-    <property name="copyright" translatable="yes">Copyright (c) 2004-2012 Yongzhi Pan</property>
+    <property name="version">1.1.4</property>
+    <property name="copyright" translatable="yes">Copyright (c) 2004- Yongzhi Pan</property>
     <property name="comments" translatable="yes">A guess-the-number puzzle game</property>
     <property name="website">http://fourdigits.sourceforge.net</property>
     <property name="website_label" translatable="yes">4digits website</property>
@@ -27,7 +27,9 @@ Sergey Basalaev: Internationalization</property>
     <property name="documenters">Yongzhi Pan
 
 Hermann Kraus: hint table</property>
-    <property name="translator_credits" translatable="yes" comments="Write your names here">Russian: Sergey Basalaev</property>
+    <property name="translator_credits" translatable="yes" comments="Write your names here">Russian: Sergey Basalaev
+
+Launchpad Translators group: https://translations.launchpad.net/+groups/launchpad-translators</property>
     <property name="artists">Yongzhi Pan</property>
     <property name="logo">4digits_logo.png</property>
     <property name="wrap_license">True</property>
@@ -638,6 +640,12 @@ Hermann Kraus: hint table</property>
                 <property name="top_attach">8</property>
                 <property name="bottom_attach">9</property>
               </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
             </child>
             <child>
               <placeholder/>

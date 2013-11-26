@@ -1,13 +1,13 @@
 /*
    4digits - A guess-the-number game, aka Bulls and Cows
-   Copyright (c) 2004-2012 Yongzhi Pan <http://fourdigits.sourceforge.net>
+   Copyright (c) 2004- Yongzhi Pan <http://fourdigits.sourceforge.net>
 
    4digits is a guess-the-number puzzle game. It's called Bulls and Cows,
    and in China people simply call it Guess-the-Number. The game's
    objective is to guess a four-digit number in 8 times using as less time
    as possible. It is similar to Mastermind, but the four digits are
    different to each other. 4digits has a graphical user interface version
-   4digits and a textual user interface version 4digits-text. 
+   4digits and a textual user interface version 4digits-text.
 
    4digits is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License as
@@ -42,12 +42,13 @@
 #include <libintl.h>
 #define _(str) gettext(str)
 #define N_(str) str
+
 // For distribution packaging
 //#define LOCALE_PATH "/usr/share/locale/"
 #define LOCALE_PATH "locale/"
 
-#define DEBUG
-#define VERSION_STRING "1.2"
+//#define DEBUG
+#define VERSION_STRING "1.1.4"
 
 const char VERSION[] = "4digits " VERSION_STRING;
 
@@ -69,7 +70,7 @@ const char HELP[] = N_(
 "B if only its value is correct. You win the game when you get 4A0B.\n"
 "\n"
 "-v, --version \t display the version of 4digits and exit.\n"
-"-h, -?, --help \t print this help.\n"      
+"-h, -?, --help \t print this help.\n"
 "\n"
 "Report bugs at <https://github.com/fossilet/4digits/issues>.");
 
@@ -108,7 +109,7 @@ void gen_rand(int ans_digits[]) {
             || ans_digits[2]==ans_digits[3] || ans_digits[0]==ans_digits[2]
             || ans_digits[0]==ans_digits[3] || ans_digits[1]==ans_digits[3])
     {
-        ans = 1000 + (int)(8999.0 * ((double)rand()/RAND_MAX)); 
+        ans = 1000 + (int)(8999.0 * ((double)rand()/RAND_MAX));
         for(int i=0; i<4; i++)
             ans_digits[i] = (int)(ans / tenpow(3-i))%10;
     }
@@ -119,7 +120,7 @@ void gen_rand(int ans_digits[]) {
 
 /* enter a 4-digit number */
 int enter_number() {
-    char mstr[5]={'\0','\0','\0','\0','\0'}; 
+    char mstr[5]={'\0','\0','\0','\0','\0'};
     int c;
     int input;
     int in_digits[4]={0,0,0,0}; /* arrays for the 4 digits of input*/
@@ -132,7 +133,7 @@ int enter_number() {
         // fgets appends the newline entered, if it appears in the first 4
         // elements of mstr, then it's sure less than 4 digits are entered
         bool flag = false;
-        if(mstr[0]!='\n'&& mstr[1]!='\n'&& mstr[2]!='\n' &&mstr[3]!='\n') 
+        if(mstr[0]!='\n'&& mstr[1]!='\n'&& mstr[2]!='\n' &&mstr[3]!='\n')
             /* discard the character */
             while((c = getchar()) != '\n' && c != EOF)
                 flag = true;
@@ -149,7 +150,7 @@ int enter_number() {
         }
         for(int i=0; i<4; i++)
             in_digits[i]=(int) (input / tenpow(3-i) )%10;
-        if(in_digits[0]==in_digits[1] || in_digits[1]==in_digits[2] 
+        if(in_digits[0]==in_digits[1] || in_digits[1]==in_digits[2]
                 || in_digits[2]==in_digits[3] || in_digits[0]==in_digits[2]
                 || in_digits[0]==in_digits[3] || in_digits[1]==in_digits[3])
         {
@@ -201,7 +202,7 @@ void save_score(const int time_taken) {
             err_exit(_("Cannot open score file.\n"));
     }
 
-    strftime(tmpbuffer, 128, "%a %b %d %H:%M:%S %Y", today); 
+    strftime(tmpbuffer, 128, "%a %b %d %H:%M:%S %Y", today);
     struct passwd *pwd;
     pwd = getpwuid(geteuid());
     // but getenv("USERNAME") conforms to C99 thus is more portable.
@@ -236,16 +237,16 @@ int main(int argc, char *argv[]) {
                 globalArgs.version = VERSION_STRING;
                 printf("%s\n%s\n%s", VERSION, _(COPYRIGHT), _(AUTHOR));
                 exit(1);
-            case 'h': 
+            case 'h':
                 err_exit(_(HELP));
                 break;
             case '?': /* fall-through is intentional */
                 err_exit(_("Usage: 4digits [OPTION]...\n"
                         "Try `4digits --help' for more information."));
-                break; 
+                break;
             case 0:    /* long option without a short arg */
                 if(strcmp("version", longOpts[longIndex].name) == 0)
-                    break; 
+                    break;
                 break;
             default:
                 /* You won't actually get here. */
