@@ -1,7 +1,9 @@
 4digits-text
+*.mo
+*~
+
 .project
 .cproject
 .pyproject
 .settings
-*.mo
-*~
+.idea/
