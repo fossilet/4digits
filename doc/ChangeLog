@@ -1,5 +1,8 @@
 4digits: A guess-the-number game, aka Bulls and Cows
 
+Version 1.1.4 (2014-01-10):
+    * Add 20 languages of translation.
+
 Version 1.1.2 (2012-05-16):
     * Fix username in high score.
 
