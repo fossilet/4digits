@@ -38,11 +38,12 @@ from gettext import gettext as _
 from glib import GError
 
 # For distribution packaging
-#LOCALE_PATH = '/usr/share/locale/'
+# LOCALE_PATH = '/usr/share/locale/'
 LOCALE_PATH = 'locale/'
 
 try:
     import pygtk
+
     pygtk.require('2.0')
     # These can only be found after pygtk is "required" on OS X if pygtk is
     # installed via Homebrew.
@@ -58,21 +59,22 @@ except ImportError:
 gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
               "/usr/share/4digits/4digits.glade"]  # For debian packages.
 helpfiles = [os.path.join(os.path.dirname(__file__), 'doc', 'index.html'),
-            "/usr/share/doc/4digits/index.html"]  # For debian packages.
+             "/usr/share/doc/4digits/index.html"]  # For debian packages.
 
 appdata_dir = os.path.join(os.path.expanduser('~'), '.4digits')
 config_path = os.path.join(appdata_dir, 'prefs.pickle')
 score_filename = os.path.join(appdata_dir, '4digits.4digits.scores')
 
 prefs = {
-        'show toolbar': True,
-        'show hint table': False,
-        'auto fill hints': False
-        }
+    'show toolbar': True,
+    'show hint table': False,
+    'auto fill hints': False
+}
 
 
 class MainWindow:
     """The main game window."""
+
     def __init__(self):
         """GUI initialization."""
         self.widget_tree = gtk.Builder()
@@ -88,22 +90,22 @@ class MainWindow:
         self.view_toolbar = self.widget_tree.get_object('view_toolbar')
         self.hint_table = self.widget_tree.get_object('hint_table')
         self.hint_hseparator = self.widget_tree.get_object(
-                'hint_hseparator')
+            'hint_hseparator')
         self.view_hint_table = self.widget_tree.get_object(
-                'view_hint_table')
+            'view_hint_table')
         self.auto_fill_hints = self.widget_tree.get_object(
-                'view_auto_fill_hints')
+            'view_auto_fill_hints')
 
         # Input box
         self.entry = self.widget_tree.get_object('entry')
         self.entry.grab_focus()
         fontsize = self.entry.get_pango_context(). \
-                get_font_description().get_size() / pango.SCALE
+                       get_font_description().get_size() / pango.SCALE
         self.entry.modify_font(pango.FontDescription(str(int(fontsize * 3))))
 
         self.ok_button = self.widget_tree.get_object('ok_button')
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
-                'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
+                       'r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'):
             setattr(self, widget, self.widget_tree.get_object(widget))
         self.info_label = self.widget_tree.get_object('info_label')
         self.time_label = self.widget_tree.get_object('time_label')
@@ -140,18 +142,18 @@ class MainWindow:
 
         # connect signals and callbacks
         dic = {'on_main_window_destroy': self.terminate_program,
-                'on_quit_activate': self.terminate_program,
-                'on_ok_clicked': self.on_entry_activate,
-                'on_new_game_activate': self.on_new_game_activate,
-                'on_view_toolbar_toggled': self.on_view_toolbar_toggled,
-                'on_view_hint_table_toggled': self.on_view_hint_table_toggled,
-                'on_view_auto_fill_hints_toggled':
-                    self.on_view_auto_fill_hints_toggled,
-                'on_entry_activate': self.on_entry_activate,
-                'on_entry_changed': self.on_entry_changed,
-                'on_help_activate': self.on_help_activate,
-                'on_about_activate': self.on_about_activate,
-                'on_score_activate': self.on_score_activate}
+               'on_quit_activate': self.terminate_program,
+               'on_ok_clicked': self.on_entry_activate,
+               'on_new_game_activate': self.on_new_game_activate,
+               'on_view_toolbar_toggled': self.on_view_toolbar_toggled,
+               'on_view_hint_table_toggled': self.on_view_hint_table_toggled,
+               'on_view_auto_fill_hints_toggled':
+                   self.on_view_auto_fill_hints_toggled,
+               'on_entry_activate': self.on_entry_activate,
+               'on_entry_changed': self.on_entry_changed,
+               'on_help_activate': self.on_help_activate,
+               'on_about_activate': self.on_about_activate,
+               'on_score_activate': self.on_score_activate}
         self.widget_tree.connect_signals(dic)
         # new game initialization
         self.game = NewRound()
@@ -168,7 +170,7 @@ class MainWindow:
                 config.close()
             except Exception:  # FIXME: Need specific exceptions
                 print _('Corrupted preferences file "%s", deleting...') \
-                        % config_path
+                      % config_path
                 os.remove(config_path)
             else:
                 # TODO: use dict comprehension
@@ -284,7 +286,7 @@ class MainWindow:
                 self.info_label.set_text(_('You win! :)'))
                 self.get_time_taken_till_now()
                 self.time_label.set_text(_('Used %.1f s.') %
-                    self.game.time_taken)
+                                         self.game.time_taken)
                 self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
                 if self.is_high_score(self.game.time_taken):
@@ -296,10 +298,10 @@ class MainWindow:
                 for i in range(4):
                     answer += repr(self.game.answer[i])
                 self.info_label.set_text(_('Haha, you lose. It is %s.') %
-                    answer)
+                                         answer)
                 self.get_time_taken_till_now()
                 self.time_label.set_text(_('Wasted %.1f s.') %
-                    self.game.time_taken)
+                                         self.game.time_taken)
                 self.ok_button.set_sensitive(False)
                 self.entry.set_sensitive(False)
         self.game.guess += 1
@@ -331,19 +333,19 @@ class MainWindow:
         if bulls == 0:  # Only cows
             for digit_pos in range(4):  # Adjust line breaking
                 self.get_checkbox(number[digit_pos], digit_pos,
-                    0).set_active(False)
+                                  0).set_active(False)
                 self.get_checkbox(number[digit_pos], digit_pos,
-                    1).set_active(False)
+                                  1).set_active(False)
 
         if cows == 0:  # Only bulls
-        # Only digits which are either in the right place or completely wrong
+            # Only digits which are either in the right place or completely wrong
             for digit_pos in range(4):
                 for pos2 in range(4):
                     if pos2 == digit_pos:
                         continue
                     # uncheck impossible boxes in first column
                     self.get_checkbox(number[digit_pos], pos2,
-                        0).set_active(False)
+                                      0).set_active(False)
 
     def on_entry_changed(self, widget):
         """Start timer as soon as the user enters the first digit."""
@@ -412,7 +414,7 @@ class MainWindow:
         columns = [_('Name'), _('Score'), _('Date')]
         for p in enumerate(columns):
             column = gtk.TreeViewColumn(p[1], gtk.CellRendererText(),
-                    text=p[0])
+                                        text=p[0])
             self.score_view.append_column(column)
 
         scoreList = gtk.ListStore(str, str, str)
@@ -420,7 +422,7 @@ class MainWindow:
 
         try:
             scores = [line.split(' ', 6)
-                    for line in file(score_filename, 'r')]
+                      for line in file(score_filename, 'r')]
         except IOError:
             scores = []
 
@@ -472,7 +474,7 @@ class MainWindow:
         """Is this time a highscore."""
         try:
             scores = [line.split(' ', 6)
-                    for line in file(score_filename, 'r')]
+                      for line in file(score_filename, 'r')]
         except IOError:
             return True  # List does not exist yet
         if len(scores) < 10:
@@ -502,7 +504,7 @@ class MainWindow:
             print _("Cannot open score file.\n");
             sys.exit(1)
 
-       # Here `else' cannot be used.
+            # Here `else' cannot be used.
         cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)
         config.close()
 
@@ -548,13 +550,13 @@ class MainWindow:
         scorefile.close()
         return new_score_rank
 
-# XXX: Are these really needed?
-#        if not os.path.exists(appdata_dir):
-#            os.mkdir(appdata_dir)
-#        elif not os.path.isdir(appdata_dir):
-#            os.rename(appdata_dir, appdata_dir+'.orig')
-#            os.mkdir(appdata_dir)
-#        scorefile = open(score_filename, 'w')
+    # XXX: Are these really needed?
+    #        if not os.path.exists(appdata_dir):
+    #            os.mkdir(appdata_dir)
+    #        elif not os.path.isdir(appdata_dir):
+    #            os.rename(appdata_dir, appdata_dir+'.orig')
+    #            os.mkdir(appdata_dir)
+    #        scorefile = open(score_filename, 'w')
 
     def show_score(self, new_score_rank):
         """Show highscore dialog."""
@@ -570,6 +572,7 @@ class MainWindow:
 
 class NewRound:
     """Contains data in one round of the game."""
+
     def __init__(self):
         while True:
             self.answer = random.sample(range(10), 4)
@@ -578,13 +581,14 @@ class NewRound:
         #print self.answer
         if self.answer == [4, 6, 1, 9]:
             gtk.MessageDialog(message_format=_(
-                   '4619: You are the luckiest guy on the planet!')).show()
+                '4619: You are the luckiest guy on the planet!')).show()
         self.guess = 0
         self.guesses = []
         self.time_start = 0
         self.time_end = 0
         self.time_taken = 0
         self.on_entry_cb_first_called = True
+
 
 if __name__ == "__main__":
     #prepare i18n
@@ -595,6 +599,7 @@ if __name__ == "__main__":
     # https://bugzilla.gnome.org/show_bug.cgi?id=574520#c14
     if sys.platform == 'win32':
         from ctypes import cdll
+
         libintl = cdll.intl
         libintl.bindtextdomain(APP, LOCALE_PATH)
     else:
