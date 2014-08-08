@@ -35,9 +35,7 @@ import locale
 import gettext
 from gettext import gettext as _
 
-import gtk.glade
 from glib import GError
-import pango
 
 # For distribution packaging
 #LOCALE_PATH = '/usr/share/locale/'
@@ -46,7 +44,12 @@ LOCALE_PATH = 'locale/'
 try:
     import pygtk
     pygtk.require('2.0')
+    # These can only be found after pygtk is "required" on OS X if pygtk is
+    # installed via Homebrew.
     import gtk
+    import gtk.glade
+    import pango
+
 except ImportError:
     print _('python-gtk2 is required to run 4digits.')
     print _('No python-gtk2 was found on your system.')
@@ -595,7 +598,7 @@ if __name__ == "__main__":
         libintl = cdll.intl
         libintl.bindtextdomain(APP, LOCALE_PATH)
     else:
-        locale.bindtextdomain(APP, LOCALE_PATH)
+        gettext.bindtextdomain(APP, LOCALE_PATH)
     gettext.bindtextdomain(APP, LOCALE_PATH)
     gettext.textdomain(APP)
     #gtk.glade.bindtextdomain(APP, LOCALE_PATH)
