@@ -1,7 +1,7 @@
 # Makefile for 4digits
 
-CC = gcc
-CFLAGS = -Wall -std=c99 -pedantic -g
+CC = cc
+CFLAGS = -Wall -std=c99 -pedantic -g -I/usr/local/opt/gettext/include/ -L/usr/local/opt/gettext/lib/
 SHELL = /bin/sh
 # For distribution packaging
 #INSTALL_DIR = /usr/share/locale
