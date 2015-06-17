@@ -48,7 +48,14 @@
       </blockquote>
       <p>Substitute with your Python executable file path, and run <span class='code'>4digits.bat</span> each time you want to play this game.</p>
       <h4>Mac OS X</h4>
-      <p>Download PyGTK for OS X <a href="https://sourceforge.net/projects/macpkg/files/PyGTK/">here</a>. Now run 4digits, voilà.</p>
+      <p>
+        Install <a href="http://brew.sh/">Homebrew</a> first. Then run the following commands to install PyGTK and XQuartz:
+        <blockquote class="code">
+          brew install --with-libglade pygtk<br/>
+          brew cask install xquartz
+        </blockquote>
+        Now run 4digits, voilà.
+      </p>
       <h4>Use Translations</h4>
       <p>To use the translations, please install GNU gettext and run the following command: </p>
       <blockquote class='code'>
