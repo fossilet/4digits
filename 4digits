@@ -119,6 +119,14 @@ class MainWindow:
         self.about_dialog = self.widget_tree.get_object('about_dialog')
         self.score_dialog = self.widget_tree.get_object('score_dialog')
 
+        # gtk.Dialog use gtk.show_uri to open URL, which depends on gvfs,
+        # which is not available on OS X. Use webbrowser.open instead.
+        # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=519159
+        # http://stackoverflow.com/q/25752808/547578
+        def uri_hook_func(dialog, link, user_data):
+            webbrowser.open(link, new=2)
+        gtk.about_dialog_set_url_hook(uri_hook_func, data=None)
+
         # parse preferences
         self.read_prefs()
         if prefs['show toolbar']:
