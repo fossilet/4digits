@@ -41,20 +41,14 @@ from glib import GError
 # LOCALE_PATH = '/usr/share/locale/'
 LOCALE_PATH = 'locale/'
 
-try:
-    import pygtk
+import pygtk
 
-    pygtk.require('2.0')
-    # These can only be found after pygtk is "required" on OS X if pygtk is
-    # installed via Homebrew.
-    import gtk
-    import gtk.glade
-    import pango
-
-except ImportError:
-    print _('python-gtk2 is required to run 4digits.')
-    print _('No python-gtk2 was found on your system.')
-    sys.exit(1)
+pygtk.require('2.0')
+# These can only be found after pygtk is "required" on OS X if pygtk is
+# installed via Homebrew.
+import gtk
+#import gtk.glade
+import pango
 
 gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
               "/usr/share/4digits/4digits.glade"]  # For debian packages.
