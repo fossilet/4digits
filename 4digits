@@ -395,7 +395,7 @@ class MainWindow:
                 continue
             else:
                 break
-        webbrowser.open(helpfile)
+        webbrowser.open('file:///' + helpfile)
 
     def on_about_activate(self, widget):
         """Show about dialog."""
