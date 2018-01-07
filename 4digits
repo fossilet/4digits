@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
     4digits - A guess-the-number game, aka Bulls and Cows
@@ -41,14 +41,9 @@ from glib import GError
 # LOCALE_PATH = '/usr/share/locale/'
 LOCALE_PATH = 'locale/'
 
-import pygtk
-
-pygtk.require('2.0')
-# These can only be found after pygtk is "required" on OS X if pygtk is
-# installed via Homebrew.
-import gtk
-#import gtk.glade
-import pango
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, Pango
 
 gladefiles = [os.path.join(os.path.dirname(__file__), '4digits.glade'),
               "/usr/share/4digits/4digits.glade"]  # For debian packages.
@@ -71,7 +66,7 @@ class MainWindow:
 
     def __init__(self):
         """GUI initialization."""
-        self.widget_tree = gtk.Builder()
+        self.widget_tree = Gtk.Builder()
         self.widget_tree.set_translation_domain('4digits')
         for gladefile in gladefiles:
             try:
@@ -94,8 +89,8 @@ class MainWindow:
         self.entry = self.widget_tree.get_object('entry')
         self.entry.grab_focus()
         fontsize = self.entry.get_pango_context(). \
-                       get_font_description().get_size() / pango.SCALE
-        self.entry.modify_font(pango.FontDescription(str(int(fontsize * 3))))
+                       get_font_description().get_size() / Pango.SCALE
+        self.entry.modify_font(Pango.FontDescription(str(int(fontsize * 3))))
 
         self.ok_button = self.widget_tree.get_object('ok_button')
         for widget in ('g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7',
@@ -113,14 +108,6 @@ class MainWindow:
         self.about_dialog = self.widget_tree.get_object('about_dialog')
         self.score_dialog = self.widget_tree.get_object('score_dialog')
 
-        # gtk.Dialog use gtk.show_uri to open URL, which depends on gvfs,
-        # which is not available on OS X. Use webbrowser.open instead.
-        # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=519159
-        # http://stackoverflow.com/q/25752808/547578
-        def uri_hook_func(dialog, link, user_data):
-            webbrowser.open(link, new=2)
-        gtk.about_dialog_set_url_hook(uri_hook_func, data=None)
-
         # parse preferences
         self.read_prefs()
         if prefs['show toolbar']:
@@ -134,7 +121,7 @@ class MainWindow:
             self.hint_hseparator.show()
             self.view_hint_table.set_active(True)
         else:
-            self.hint_table.hide_all()
+            self.hint_table.hide()
             self.hint_hseparator.hide()
             self.view_hint_table.set_active(False)
         if prefs['auto fill hints']:
@@ -184,12 +171,12 @@ class MainWindow:
         """Create the controls for the hint table."""
         hint_table = self.widget_tree.get_object('hint_table')
         for name in (0, 40):
-            table = gtk.Table(rows=11, columns=6)
-            hint_table.pack_start(table)
+            table = Gtk.Table(rows=11, columns=6)
+            hint_table.pack_start(table, True, True, 0)
 
             # Create row labels
             for row in range(10):
-                label = gtk.CheckButton(str(row))
+                label = Gtk.CheckButton(str(row))
                 table.attach(label, 0, 1, row + 1, row + 2)
                 label.connect('toggled', self.change_row, row + name)
                 self.label_hint.append(label)
@@ -200,12 +187,12 @@ class MainWindow:
                 #table.attach(label, col, col+1, 0, 1)
                 # Create Checkboxes
                 for row in range(10):
-                    checkbutton = gtk.CheckButton()
+                    checkbutton = Gtk.CheckButton()
                     table.attach(checkbutton, col, col + 1, row + 1, row + 2)
                     self.cb_hint.append(checkbutton)
 
             if name == 0:  # First table
-                hint_table.pack_start(gtk.VSeparator())
+                hint_table.pack_start(Gtk.VSeparator(), True, True, 0)
         self.init_hint_table()
 
     def change_row(self, widget, row):
@@ -369,7 +356,7 @@ class MainWindow:
     def on_view_hint_table_toggled(self, widget):
         """Toggle hint table visibility."""
         if self.hint_table.get_property('visible'):
-            self.hint_table.hide_all()
+            self.hint_table.hide()
             self.hint_hseparator.hide()
             prefs['show hint table'] = False
         else:
@@ -405,7 +392,7 @@ class MainWindow:
     def on_score_activate(self, new_score_rank):
         """Show high scores."""
         sv_selection = self.score_view.get_selection()
-        sv_selection.set_mode(gtk.SELECTION_NONE)
+        sv_selection.set_mode(Gtk.SelectionMode.NONE)
 
         # Since we hide but don't destory the score dialog, we have to remove
         # all columns before appending, otherwise we would have more and more
@@ -415,11 +402,11 @@ class MainWindow:
         # FIXME: column header not translated under windows
         columns = [_('Name'), _('Score'), _('Date')]
         for p in enumerate(columns):
-            column = gtk.TreeViewColumn(p[1], gtk.CellRendererText(),
+            column = Gtk.TreeViewColumn(p[1], Gtk.CellRendererText(),
                                         text=p[0])
             self.score_view.append_column(column)
 
-        scoreList = gtk.ListStore(str, str, str)
+        scoreList = Gtk.ListStore(str, str, str)
         self.score_view.set_model(scoreList)
 
         try:
@@ -433,10 +420,10 @@ class MainWindow:
             scoreList.append(score_tup)
         # high light the current high score entry
         try:
-            sv_selection.set_mode(gtk.SELECTION_SINGLE)
+            sv_selection.set_mode(Gtk.SelectionMode.SINGLE)
             sv_selection.select_path(new_score_rank)
         except TypeError:
-            sv_selection.set_mode(gtk.SELECTION_NONE)
+            sv_selection.set_mode(Gtk.SelectionMode.NONE)
 
         self.score_dialog.run()
         self.score_dialog.hide()
@@ -569,7 +556,7 @@ class MainWindow:
         Copied from comix.
         """
         self.save_prefs()
-        gtk.main_quit()
+        Gtk.main_quit()
 
 
 class NewRound:
@@ -582,7 +569,7 @@ class NewRound:
                 break
         #print self.answer
         if self.answer == [4, 6, 1, 9]:
-            gtk.MessageDialog(message_format=_(
+            Gtk.MessageDialog(message_format=_(
                 '4619: You are the luckiest guy on the planet!')).show()
         self.guess = 0
         self.guesses = []
@@ -612,4 +599,4 @@ if __name__ == "__main__":
     #gtk.glade.textdomain(APP)
 
     MainWindow()
-    gtk.main()
+    Gtk.main()
