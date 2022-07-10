@@ -481,7 +481,7 @@ class MainWindow:
         # FIXME: use with context manager
         try:
             config = open(config_path, 'w')
-        except IOError as (errnum, strerror):
+        except IOError as errnum:
             if errnum == errno.ENOENT:
                 try:
                     os.mkdir(appdata_dir)
@@ -520,7 +520,7 @@ class MainWindow:
         # FIXME: use with context manager
         try:
             scorefile = open(score_filename, 'w')
-        except IOError as (errnum, strerror):
+        except IOError as errnum:
             if errnum == errno.ENOENT:
                 try:
                     os.mkdir(appdata_dir)
