@@ -33,9 +33,8 @@ import time
 import webbrowser
 import locale
 import gettext
+import traceback
 from gettext import gettext as _
-
-from glib import GError
 
 # For distribution packaging
 # LOCALE_PATH = '/usr/share/locale/'
@@ -71,8 +70,8 @@ class MainWindow:
         for gladefile in gladefiles:
             try:
                 self.widget_tree.add_from_file(gladefile)
-            except GError:
-                continue
+            except Exception as e:
+                traceback.print_exc(e)
             else:
                 break
         self.toolbar = self.widget_tree.get_object('toolbar')
@@ -154,10 +153,13 @@ class MainWindow:
         # TODO: use with context manager
         if os.path.isfile(config_path):
             try:
-                config = open(config_path)
+                config = open(config_path, 'br')
                 old_prefs = pickle.load(config)
                 config.close()
-            except Exception:  # FIXME: Need specific exceptions
+            except EOFError as e:
+                traceback.print_exc(e)
+            except Exception as e:
+                traceback.print_exc(e)
                 print(_('Corrupted preferences file "%s", deleting...') \
                       % config_path)
                 os.remove(config_path)
@@ -411,7 +413,7 @@ class MainWindow:
 
         try:
             scores = [line.split(' ', 6)
-                      for line in file(score_filename, 'r')]
+                      for line in open(score_filename, 'r')]
         except IOError:
             scores = []
 
@@ -463,7 +465,7 @@ class MainWindow:
         """Is this time a highscore."""
         try:
             scores = [line.split(' ', 6)
-                      for line in file(score_filename, 'r')]
+                      for line in open(score_filename, 'r')]
         except IOError:
             return True  # List does not exist yet
         if len(scores) < 10:
@@ -480,7 +482,7 @@ class MainWindow:
         """
         # FIXME: use with context manager
         try:
-            config = open(config_path, 'w')
+            config = open(config_path, 'wb')
         except IOError as errnum:
             if errnum == errno.ENOENT:
                 try:
@@ -488,7 +490,7 @@ class MainWindow:
                 except IOError:
                     print(_("Cannot open score file.\n"));
                     sys.exit(1)
-                config = open(config_path, 'w')
+                config = open(config_path, 'wb')
         except:
             print(_("Cannot open score file.\n"));
             sys.exit(1)
